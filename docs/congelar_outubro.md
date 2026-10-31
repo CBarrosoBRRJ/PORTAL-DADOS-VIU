@@ -210,7 +210,15 @@ Previsão mudam ao reabrir a página.
 
 ## Passo 6: deploy
 
-Siga `docs/deploy_iniciativas.md`, com estes ajustes:
+**Atualização de 31/10/2026 (D66, PRD_V2 seção 0):** os serviços já existem (`viu-agenciamento` e
+`viu-agenciamento-restrito`). Na segunda, depois do passo 5:
+
+1. No `Dockerfile`, troque `ARG CORTE_DADOS=off` por `ARG CORTE_DADOS=2026-10-31` (o build volta a conferir a base).
+2. No PowerShell do computador, rode `tools\publicar_restrito.ps1 -Congelado` e `tools\publicar.ps1 -Congelado`.
+3. Gere de novo a cópia da VPS (`python tools/gerar_espelho.py`), envie o ramo `vps` e mande o EasyPanel publicar de novo.
+   Gere também o PDF e o PPT novos (`tools/exportar_paginas.mjs` + `tools/montar_pdf_ppt.py`).
+
+As observações abaixo continuam valendo (o roteiro antigo citava `docs/deploy_iniciativas.md`):
 
 - Antes do deploy, `app\base_congelada\` precisa ter o `manifesto.json` e a pasta `v-…` com os 10 `.parquet` (o passo 5
   deu "Tudo certo"), e `ml\saida\previsao.json` precisa ser o de 2026-10, da mesma carga. Se não estiver, o build para
