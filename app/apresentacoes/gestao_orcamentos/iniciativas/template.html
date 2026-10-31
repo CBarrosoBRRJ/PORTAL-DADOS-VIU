@@ -1,0 +1,169 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import cabecalho %}
+{% from "icones.html" import icone %}
+{# Iniciativas de automação e IA (PRD Iniciativas, @cris; redesenho de 30/10/2026). Uma coluna por fase, da mais madura
+   (Em produção) à próxima (Na esteira): no topo, o nome da fase, a frase, a contagem e o medidor de maturidade; abaixo,
+   os quadros com sigla e nome (details/summary). O detalhe do quadro aberto ocupa o painel fixo à direita (o CSS o põe
+   sobre o painel vazio); sem JS, o details abre e fecha sozinho. No estreito, o detalhe abre logo abaixo do quadro.
+   Dados no servidor (30/10/2026, noite): os quadros vêm do quadro salvo (iniciativas/repositorio.py; semente =
+   catalogo.py). Com JS e edição ligada (data-ini-edicao="on"), iniciativas.js liga arrastar, lápis, ✕, "+ Nova" e os
+   anexos, e grava pela API (/{slug}/iniciativas/api, hoje /viu-agenciamento). Sem JS: só leitura (botões hidden, pop-ups fechados;
+   as miniaturas são links para o arquivo). Galeria: miniaturas no detalhe; o JS abre o visor (pop-up grande) e o
+   "Expandir" (visão ampliada). #}
+{% macro medidor(nivel, fases) -%}
+<span class="ini-medidor" aria-hidden="true">{% for k in range(fases) %}<i{% if k < nivel %} class="aceso"{% endif %}></i>{% endfor %}</span>
+{%- endmacro %}
+{% macro miniaturas(anexos) -%}
+<div class="ini-galeria" data-ini-galeria{% if not anexos %} hidden{% endif %}>
+  <p class="ini-galeria-tit">Anexos <span class="ini-galeria-n" data-ini-galeria-n>{{ anexos|length }}</span></p>
+  <div class="ini-galeria-trilho">
+    <button type="button" class="ini-gal-seta" data-ini-gal-passo="-1" aria-label="Rolar os anexos para a esquerda" hidden>{{ icone("recolher", "icone ini-gal-seta-ic") }}</button>
+    <ul class="ini-galeria-lista" data-ini-galeria-lista>
+      {%- for a in anexos %}
+      <li><a class="ini-mini{% if not a.imagem %} ini-mini-doc{% endif %}" href="{{ a.url }}" data-ini-anexo="{{ a.id }}" data-ini-anexo-tipo="{{ a.tipo }}" data-ini-anexo-nome="{{ a.nome }}" aria-label="{{ 'Imagem' if a.imagem else 'Documento' }} {{ loop.index }} de {{ anexos|length }}: {{ a.nome }}">
+        {%- if a.imagem %}<img src="{{ a.url }}" alt="" loading="lazy" decoding="async">{% else %}{{ icone("documento", "icone ini-mini-ic") }}<span class="ini-mini-nome">{{ a.nome }}</span>{% endif -%}
+      </a></li>
+      {%- endfor %}
+    </ul>
+    <button type="button" class="ini-gal-seta" data-ini-gal-passo="1" aria-label="Rolar os anexos para a direita" hidden>{{ icone("avancar", "icone ini-gal-seta-ic") }}</button>
+  </div>
+</div>
+{%- endmacro %}
+{% block slides %}
+{% set ini = iniciativas %}
+<section class="slide" aria-roledescription="slide" aria-labelledby="s-iniciativas" data-nivel="gerencial">
+<div class="lamina">
+  {{ cabecalho(apresentacao, secao_atual) }}
+  <div class="sobretitulo"><span class="nivel">Gerencial</span></div>
+  <h2 class="slide-titulo" id="s-iniciativas">{{ secao_atual.pergunta }}</h2>
+  <div class="slide-corpo ini" data-iniciativas data-ini-api="/{{ apresentacao.slug }}/iniciativas/api" data-ini-edicao="{{ 'on' if ini.edicao else 'off' }}" data-ini-semente="{{ '1' if ini.na_semente else '0' }}" data-ini-max-mb="{{ ini.max_mb }}">
+    <div class="ini-raias">
+      {% for g in ini.grupos %}
+      <section class="ini-raia ini-{{ g.chave }}" aria-labelledby="ini-t-{{ g.chave }}" data-ini-fase="{{ g.chave }}">
+        <div class="ini-raia-topo">
+          <h3 class="ini-fase-nome" id="ini-t-{{ g.chave }}">{{ g.titulo }}</h3>
+          <p class="ini-fase-sub">{{ g.sub }}</p>
+          <p class="ini-conta"><span class="ini-num">{{ g.itens|length }}</span><span class="so-leitor"> {{ "iniciativa" if g.itens|length == 1 else "iniciativas" }}</span>{{ medidor(g.nivel, ini.fases) }}</p>
+        </div>
+        <ul class="ini-lista" data-densidade="{{ g.densidade }}">
+          {% for i in g.itens %}
+          <li class="ini-item" data-ini-id="{{ i.id }}" data-ini-sigla="{{ i.sigla }}" data-ini-nome="{{ i.nome }}" data-ini-resp="{{ i.responsavel }}" data-ini-status="{{ i.status }}" data-ini-prox="{{ i.proximo }}">
+            <details class="ini-quadro">
+              <summary><span class="ini-sigla">{{ i.titulo }}</span>{% if i.sigla %}<span class="ini-nome">{{ i.nome }}</span>{% endif %}
+                <svg class="ini-seta" aria-hidden="true" viewBox="0 0 16 16"><path d="M6 3.5 10.5 8 6 12.5"/></svg></summary>
+              <div class="ini-caixa" role="group" aria-label="Descrição: {{ i.titulo }}">
+                <p class="ini-caixa-fase">{{ medidor(g.nivel, ini.fases) }}<span>{{ g.titulo }}</span></p>
+                <p class="ini-caixa-sigla">{{ i.titulo }}</p>
+                {% if i.sigla %}<p class="ini-caixa-nome">{{ i.nome }}</p>{% endif %}
+                <p class="ini-caixa-desc">{{ i.texto or "Sem descrição." }}</p>
+                <dl class="ini-caixa-meta">
+                  <div><dt>Responsável</dt><dd>{{ i.responsavel or "a definir" }}</dd></div>
+                  {%- if i.status %}<div><dt>Status</dt><dd>{{ i.status }}</dd></div>{% endif %}
+                  {%- if i.proximo %}<div><dt>Próximo passo</dt><dd>{{ i.proximo }}</dd></div>{% endif %}
+                </dl>
+                <p class="ini-caixa-acoes">
+                  {%- if i.link %}<a class="ini-botao ini-botao-forte" href="{{ i.link.href }}"><span>{{ i.link.rotulo }}</span>{{ icone("avancar", "icone ini-botao-ic") }}</a>{% endif -%}
+                  <button type="button" class="ini-botao" data-ini-expandir aria-haspopup="dialog" hidden>{{ icone("abrir-tela", "icone ini-botao-ic") }}<span>Expandir</span></button>
+                  <button type="button" class="ini-botao ini-fechar" data-ini-fechar hidden>{{ icone("fechar", "icone ini-botao-ic") }}<span>Fechar</span></button>
+                </p>
+                {{ miniaturas(i.anexos) }}
+              </div>
+            </details>
+            <div class="ini-ferramentas" data-ini-ferramentas hidden><button type="button" class="ini-acao" data-ini-editar aria-label="Editar iniciativa: {{ i.titulo }}" title="Editar">{{ icone("lapis", "icone ini-acao-ic") }}</button><button type="button" class="ini-acao ini-acao-excluir" data-ini-excluir aria-label="Excluir do quadro: {{ i.titulo }}" title="Excluir do quadro">{{ icone("fechar", "icone ini-acao-ic") }}</button></div>
+          </li>
+          {% endfor %}
+        </ul>
+        <button type="button" class="ini-nova" data-ini-nova hidden aria-label="Nova iniciativa em {{ g.titulo }}">+ Nova iniciativa</button>
+      </section>
+      {% endfor %}
+    </div>
+    <div class="ini-painel">
+      {{ icone("faisca", "icone ini-painel-ic") }}
+      <p class="ini-painel-total"><span class="ini-painel-num">{{ ini.total }}</span> iniciativas</p>
+      <p class="ini-painel-dica">Clique em uma iniciativa para ver o que ela faz.</p>
+      {% if ini.aviso %}<p class="ini-painel-aviso" role="status">{{ icone("alerta", "icone ini-aviso-ic") }}<span>{{ ini.aviso }}</span></p>{% endif %}
+      <p class="ini-importar" data-ini-importar hidden><span>Este navegador guardou alterações da versão anterior do quadro.</span><button type="button" class="ini-d-link" data-ini-importar-botao>Importar alterações deste navegador</button></p>
+    </div>
+    <p class="so-leitor" aria-live="polite" data-ini-anuncio></p>
+    {# estado das gravações (Salvando… / Salvo / erro): aviso flutuante, lido pelo leitor de tela #}
+    <p class="ini-estado" data-ini-estado aria-live="polite" hidden></p>
+
+    {# pop-up de edição e inclusão: só o JS abre (showModal); sem JS fica fechado e invisível #}
+    <dialog class="ini-dialogo" data-ini-dialogo aria-labelledby="ini-d-titulo">
+      <form class="ini-d-form" data-ini-form novalidate>
+        <h3 class="ini-d-titulo" id="ini-d-titulo">Editar iniciativa</h3>
+        <p class="ini-d-aviso">Salvo no servidor: vale para todos que abrirem o portal.</p>
+        <div class="ini-d-grade">
+          <p class="ini-d-campo"><label for="ini-d-sigla">Sigla</label><input id="ini-d-sigla" name="sigla" type="text" maxlength="40" autocomplete="off"></p>
+          <p class="ini-d-campo"><label for="ini-d-fase">Fase</label><select id="ini-d-fase" name="fase">{% for g in ini.grupos %}<option value="{{ g.chave }}">{{ g.titulo }}</option>{% endfor %}</select></p>
+          <p class="ini-d-campo ini-d-largo"><label for="ini-d-nome">Nome / título</label><input id="ini-d-nome" name="nome" type="text" maxlength="120" autocomplete="off"></p>
+          <p class="ini-d-erro ini-d-largo" id="ini-d-erro" hidden>Preencha a sigla ou o nome.</p>
+          <p class="ini-d-campo ini-d-largo"><label for="ini-d-resp">Responsável</label><input id="ini-d-resp" name="resp" type="text" maxlength="80" autocomplete="off" placeholder="Pessoa ou área"></p>
+          <p class="ini-d-campo ini-d-largo"><label for="ini-d-desc">Descrição <span class="ini-d-dica">(aparece no detalhe; Shift + Enter quebra a linha)</span></label><textarea id="ini-d-desc" name="desc" rows="3" maxlength="400"></textarea></p>
+          <p class="ini-d-campo"><label for="ini-d-status">Status / observação <span class="ini-d-dica">(opcional)</span></label><input id="ini-d-status" name="status" type="text" maxlength="120" autocomplete="off"></p>
+          <p class="ini-d-campo"><label for="ini-d-prox">Próximo passo <span class="ini-d-dica">(opcional)</span></label><input id="ini-d-prox" name="prox" type="text" maxlength="120" autocomplete="off"></p>
+        </div>
+        <fieldset class="ini-d-anexos" data-ini-d-anexos>
+          <legend>Anexos</legend>
+          <p class="ini-d-anexos-nova" data-ini-d-anexos-nova>Salve a iniciativa para anexar imagens e documentos.</p>
+          <ul class="ini-d-anexos-lista" data-ini-d-anexos-lista></ul>
+          <p class="ini-d-anexar" data-ini-d-anexar>
+            <input class="ini-d-arquivo" id="ini-d-arquivo" type="file" accept=".png,.jpg,.jpeg,.webp,.gif,.pdf" multiple aria-describedby="ini-d-arquivo-dica">
+            <label class="ini-botao ini-d-arquivo-rotulo" for="ini-d-arquivo">{{ icone("clipe", "icone ini-botao-ic") }}<span>Anexar imagem ou PDF</span></label>
+            <span class="ini-d-dica" id="ini-d-arquivo-dica">PNG, JPEG, WebP, GIF ou PDF, até {{ ini.max_mb }} MB cada. Envia na hora.</span>
+          </p>
+          <p class="ini-d-erro" id="ini-d-arquivo-erro" data-ini-d-arquivo-erro role="alert" hidden></p>
+        </fieldset>
+        <p class="ini-d-erro ini-d-falha" data-ini-d-falha role="alert" hidden></p>
+        <p class="ini-d-acoes"><button type="button" class="ini-botao ini-d-excluir" data-ini-d-excluir>Excluir</button><span class="ini-d-dir"><button type="button" class="ini-botao" data-ini-d-cancelar>Cancelar</button><button type="submit" class="ini-botao ini-botao-forte">Salvar</button></span></p>
+      </form>
+    </dialog>
+
+    {# visão ampliada (botão "Expandir"): descrição, responsável, status, próximo passo e a galeria grande #}
+    <dialog class="ini-ampliado" data-ini-ampliado aria-labelledby="ini-a-titulo">
+      <div class="ini-a-caixa">
+        <div class="ini-a-topo">
+          <div class="ini-a-cabeca">
+            <p class="ini-a-fase" data-ini-a-fase></p>
+            <h3 class="ini-a-titulo" id="ini-a-titulo" data-ini-a-titulo></h3>
+            <p class="ini-a-nome" data-ini-a-nome></p>
+          </div>
+          <button type="button" class="ini-botao" data-ini-a-fechar>{{ icone("fechar", "icone ini-botao-ic") }}<span>Fechar</span></button>
+        </div>
+        <div class="ini-a-corpo">
+          <div class="ini-a-texto">
+            <p class="ini-a-desc" data-ini-a-desc></p>
+            <dl class="ini-caixa-meta ini-a-meta" data-ini-a-meta></dl>
+            <p class="ini-a-acoes" data-ini-a-acoes></p>
+          </div>
+          <div class="ini-a-galeria">
+            <p class="ini-galeria-tit">Anexos <span class="ini-galeria-n" data-ini-a-n></span></p>
+            <ul class="ini-a-lista" data-ini-a-lista></ul>
+            <p class="ini-a-vazio" data-ini-a-vazio hidden>Nenhum anexo ainda.</p>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    {# visor: imagem grande ou PDF, com anterior/próximo, contador e legenda; ← → navegam, Esc fecha #}
+    <dialog class="ini-visor" data-ini-visor aria-labelledby="ini-v-legenda">
+      <div class="ini-v-caixa">
+        <div class="ini-v-topo">
+          <p class="ini-v-conta" data-ini-v-conta aria-live="polite"></p>
+          <p class="ini-v-legenda" id="ini-v-legenda" data-ini-v-legenda></p>
+          <a class="ini-botao ini-v-abrir" data-ini-v-abrir href="#" target="_blank" rel="noopener">{{ icone("abrir-tela", "icone ini-botao-ic") }}<span>Abrir em nova aba</span><span class="so-leitor"> (abre em nova aba)</span></a>
+          <button type="button" class="ini-botao" data-ini-v-fechar>{{ icone("fechar", "icone ini-botao-ic") }}<span>Fechar</span></button>
+        </div>
+        <div class="ini-v-palco">
+          <button type="button" class="ini-v-seta" data-ini-v-passo="-1" aria-label="Anexo anterior">{{ icone("recolher", "icone ini-v-seta-ic") }}</button>
+          <div class="ini-v-midia" data-ini-v-midia></div>
+          <button type="button" class="ini-v-seta" data-ini-v-passo="1" aria-label="Próximo anexo">{{ icone("avancar", "icone ini-v-seta-ic") }}</button>
+        </div>
+      </div>
+    </dialog>
+    {% if ini.referencia %}<p class="ini-referencia">{{ ini.referencia }}</p>{% endif %}
+  </div>
+</div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="/static/iniciativas.js?v={{ v() }}"></script>{% endblock %}

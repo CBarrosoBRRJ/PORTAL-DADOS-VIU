@@ -1,0 +1,81 @@
+{
+  "data": "2026-10-28T11:32:19.736908-03:00",
+  "projeto": "gglobo-viu-dados-hdg-prd",
+  "cargas": {
+    "sla": "2026-10-28 12:03:54.379250+00:00",
+    "entrada": "2026-10-28 12:04:07.123542+00:00",
+    "fluxo": "2026-10-28 12:05:21.731618+00:00"
+  },
+  "inicio_q1": {
+    "fim": "2026-10-27",
+    "total_ano": 5624,
+    "nao_seguiu_sem_data_ano": 10
+  },
+  "resultado": "tudo certo",
+  "itens": [
+    {
+      "resultado": "OK",
+      "item": "identidade caio.barroso@viu.com.br · projeto gglobo-viu-dados-hdg-prd"
+    },
+    {
+      "resultado": "OK",
+      "item": "golds no mesmo dia de carga: {'sla': datetime.date(2026, 10, 28), 'entrada': datetime.date(2026, 10, 28), 'fluxo': datetime.date(2026, 10, 28)}"
+    },
+    {
+      "resultado": "OK",
+      "item": "site com todas as tabelas carregadas (/saude dados_prontos)"
+    },
+    {
+      "resultado": "OK",
+      "item": "site sem aviso de atraso ou falha: {'sla': 'em_dia', 'sla_entregas': 'em_dia', 'sla_entregas_status': 'em_dia', 'entrada': 'em_dia', 'fluxo': 'em_dia', 'fila': 'em_dia', 'atendimento': 'em_dia', 'talentos': 'em_dia', 'talentos_top': 'em_dia', 'saidas_status': 'em_dia'}"
+    },
+    {
+      "resultado": "OK",
+      "item": "site × banco na mesma carga (sla): site 2026-10-28T09:03:54.379250-03:00 · banco 2026-10-28 12:03:54.379250+00:00"
+    },
+    {
+      "resultado": "OK",
+      "item": "site × banco na mesma carga (entrada): site 2026-10-28T09:04:07.123542-03:00 · banco 2026-10-28 12:04:07.123542+00:00"
+    },
+    {
+      "resultado": "OK",
+      "item": "site × banco na mesma carga (fluxo): site 2026-10-28T09:05:21.731618-03:00 · banco 2026-10-28 12:05:21.731618+00:00"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q1 ok_mesma_carga=True, ok_fim_e_vespera=True, ok_sem_data_futura=True"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q1 linhas_tipo_fora_lista = 0"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q1 linhas_situacao_nao_fecha = 0"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q1 meses_safra_divergente = 0"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q1 eventos_antes_da_entrada = 0"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q2 ok_fecha em 6 meses"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q2 ok_encadeia (fora de janeiro)"
+    },
+    {
+      "resultado": "OK",
+      "item": "previsão (acompanhamento) na mesma carga da gold de entradas: previsão 2026-10-28 · gold 2026-10-28"
+    },
+    {
+      "resultado": "OK",
+      "item": "retrato da previsão = último mês fechado: 2026-09 · esperado 2026-09"
+    }
+  ]
+}

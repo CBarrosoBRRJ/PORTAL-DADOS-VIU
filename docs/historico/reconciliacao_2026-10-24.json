@@ -1,0 +1,102 @@
+{
+  "entradas": 5520,
+  "saidas_da_fila": 5360,
+  "fila": 160,
+  "saidas_sem_data": 10,
+  "talentos_total": 5520,
+  "talentos_grupos": [
+    {
+      "nome": "Exclusivos",
+      "classe": "exclusivo",
+      "n": 3435,
+      "pct": 62,
+      "largura": 62.228
+    },
+    {
+      "nome": "Não exclusivos",
+      "classe": "nao-exclusivo",
+      "n": 1955,
+      "pct": 36,
+      "largura": 35.417
+    },
+    {
+      "nome": "Talento não informado",
+      "classe": "sem-talento",
+      "n": 130,
+      "pct": 2,
+      "largura": 2.355
+    }
+  ],
+  "ranking": {
+    "exclusivo": {
+      "n": 1802,
+      "pct": 52
+    },
+    "nao-exclusivo": {
+      "n": 221,
+      "pct": 11
+    }
+  },
+  "meses": [
+    {
+      "mes": "2026-01",
+      "entradas": 374,
+      "saidas": 287,
+      "fila": 87
+    },
+    {
+      "mes": "2026-02",
+      "entradas": 341,
+      "saidas": 343,
+      "fila": 85
+    },
+    {
+      "mes": "2026-03",
+      "entradas": 485,
+      "saidas": 433,
+      "fila": 137
+    },
+    {
+      "mes": "2026-04",
+      "entradas": 472,
+      "saidas": 475,
+      "fila": 134
+    },
+    {
+      "mes": "2026-05",
+      "entradas": 629,
+      "saidas": 615,
+      "fila": 148
+    },
+    {
+      "mes": "2026-06",
+      "entradas": 569,
+      "saidas": 576,
+      "fila": 141
+    },
+    {
+      "mes": "2026-07",
+      "entradas": 765,
+      "saidas": 788,
+      "fila": 118
+    },
+    {
+      "mes": "2026-08",
+      "entradas": 644,
+      "saidas": 661,
+      "fila": 101
+    },
+    {
+      "mes": "2026-09",
+      "entradas": 733,
+      "saidas": 661,
+      "fila": 173
+    },
+    {
+      "mes": "2026-10",
+      "entradas": 508,
+      "saidas": 521,
+      "fila": 160
+    }
+  ]
+}

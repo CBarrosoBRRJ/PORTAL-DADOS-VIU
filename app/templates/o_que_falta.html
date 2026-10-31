@@ -1,0 +1,55 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import cabecalho %}
+{% from "icones.html" import icone %}
+{# "O que falta" (D30): fecho da área. Slide 1: estado de cada seção e os pedidos de decisão. Slide 2: os dados que
+   faltam, por tela (pendencias.py, a mesma fonte das máscaras e do prompt para a gold). Estado = ícone + texto. #}
+{% set estados = {"pronta": ("ok", "Pronta"), "parcial": ("alerta", "Parcial"), "pendente": ("relogio", "Aguardando dados")} %}
+{% block slides %}
+<section class="slide" aria-roledescription="slide" aria-labelledby="s-falta">
+<div class="lamina">
+  {{ cabecalho(apresentacao, "o-que-falta") }}
+  <div class="sobretitulo"><span class="nivel">Gerencial</span></div>
+  <h2 class="slide-titulo" id="s-falta">O que ainda precisamos para completar a área?</h2>
+  <div class="slide-corpo falta-grade">
+    <div class="falta-bloco entra">
+      <h3 class="falta-subtitulo">Onde estamos</h3>
+      <ol class="falta-secoes">
+        <li class="falta-estado-pronta"><a href="/{{ apresentacao.slug }}">{{ apresentacao.rotulo_inicio }}</a><span class="falta-pergunta">{{ apresentacao.pergunta_inicio }}</span><span class="falta-estado">{{ icone("ok") }}Pronta</span></li>
+        {# D59: a lista mostra também as seções ocultas da navegação (Resultado, Qualidade): o que falta nelas continua valendo #}
+        {% for s in apresentacao.disponiveis() %}{% set e = estados[s.estado] %}
+        <li class="falta-estado-{{ s.estado }}"><a href="/{{ apresentacao.slug }}/{{ s.slug }}#1">{{ s.curto }}</a><span class="falta-pergunta">{{ s.pergunta }}</span><span class="falta-estado">{{ icone(e[0]) }}{{ e[1] }}{% if s.nota_estado %} · {{ s.nota_estado }}{% endif %}</span></li>
+        {% endfor %}
+      </ol>
+    </div>
+    <div class="falta-bloco entra">
+      <h3 class="falta-subtitulo">O que pedimos hoje</h3>
+      <ol class="falta-pedidos">
+        {% for o_que, porque, quem in apresentacao.pedidos %}
+        <li><span class="falta-pedido">{{ o_que }}</span><span class="falta-porque">{{ porque }}</span><span class="falta-quem">{{ quem }}</span></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+</div>
+</section>
+<section class="slide" aria-roledescription="slide" aria-labelledby="s-dados-faltam">
+<div class="lamina">
+  {{ cabecalho(apresentacao, "o-que-falta") }}
+  <div class="sobretitulo"><span class="nivel">Operacional</span></div>
+  <h2 class="slide-titulo" id="s-dados-faltam">Que dados faltam, e quem tem a resposta?</h2>
+  <div class="slide-corpo">
+    <table class="falta-tabela entra">
+      <caption class="so-leitor">Dados que faltam por tela: o dado, onde buscar e quem responde</caption>
+      <thead><tr><th scope="col">Tela</th><th scope="col">Dado que falta</th><th scope="col">Onde buscar</th><th scope="col">Quem responde</th></tr></thead>
+      <tbody>
+        {% set nomes = {"fora": "Fora da área por ora"} %}
+        {% for s in apresentacao.secoes %}{% set _ = nomes.update({s.slug: s.curto}) %}{% endfor %}
+        {% for p in apresentacao.pendencias %}
+        <tr id="{{ p.codigo }}"><td class="falta-tela">{{ nomes.get(p.secao, p.secao) }}</td><td><span class="falta-dado">{{ p.dado }}</span><span class="falta-como">{{ p.como }}</span></td><td class="falta-onde">{{ p.onde }}</td><td class="falta-quem">{{ p.quem }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+{% endblock %}

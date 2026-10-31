@@ -1,0 +1,111 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import cabecalho, lamina_pendente %}
+{# Talentos (D30, D31, D50; T1–T10). D50 (26/10/2026): seletor Todos / Exclusivos / Não exclusivos (o mesmo do SLA,
+   ?talentos=) filtrando a página inteira; à esquerda a resposta composta como no SLA (T8); à direita, em cima, a barra
+   fina da divisão do ano (contexto, grupo do recorte destacado, T9) e, embaixo, o mapa de calor dos 10 talentos mais
+   pedidos × jan–dez (T10). Larguras da barra pelo <style> com o nonce da página (a CSP proíbe style=""); tons do mapa
+   por classe (hm-n0…hm-n6), com o número escrito em cada célula. O mapa é uma <table> de verdade (leitor de tela lê
+   talento, mês e pedidos). D51 (26/10/2026): ao abrir, a barra cresce e os números contam (top 10 parado); a "corrida
+   do ano" só roda no botão play (apresentacao.js); sem JS ou com movimento reduzido, a tela é este HTML, já no estado final. O que falta (PD01–PD03) fica só na página "O que falta". #}
+{% block slides %}
+{% set t = talentos %}
+{% if not t %}
+{{ lamina_pendente(apresentacao, secao_atual, "Gerencial", "A divisão por talento ainda não carregou",
+   "A contagem por talento está indisponível ou ainda não concilia com o período do Início.",
+   "Aqui entram os pedidos do ano por grupo de talento: exclusivos, não exclusivos e sem talento.") }}
+{% else %}
+{% set h = heroi %}{% set mp = mapa %}
+<section class="slide" aria-roledescription="slide" aria-labelledby="s-talentos" data-nivel="gerencial">
+<div class="lamina">
+  {{ cabecalho(apresentacao, secao_atual) }}
+  <div class="sobretitulo"><span class="nivel">Gerencial</span></div>
+  <h2 class="slide-titulo" id="s-talentos">{{ secao_atual.pergunta }}</h2>
+  <div class="slide-corpo duas-colunas talentos-corpo">
+    {# T7: o mesmo seletor do SLA (pílula, data-navegador); cada botão mostra os pedidos do ano do recorte #}
+    <nav class="grupos talentos-grupos" aria-labelledby="rotulo-grupos" data-navegador data-chave="talentos">
+      <span class="navegador-reflexo" aria-hidden="true"></span>
+      <span class="navegador-pilula" aria-hidden="true"></span>
+      <span class="grupos-rotulo" id="rotulo-grupos">Talentos</span>
+      {% for g in seletor %}
+      <a href="?talentos={{ g.chave }}#1" class="grupo"{% if g.atual %} aria-current="true"{% endif %}>
+        <span class="grupo-nome">{{ g.rotulo }}</span>
+        <span class="grupo-valor">{{ g.n | inteiro }}<span class="so-leitor"> pedidos no ano</span></span>
+      </a>
+      {% endfor %}
+    </nav>
+    <div class="destaque talentos-destaque">
+      {# T8: a resposta do recorte, composta como a do SLA; a frase segue na ordem de leitura para o leitor de tela #}
+      {% if h.pct is not none %}
+      <p class="frase talentos-frase">
+        <span class="f-levamos">{{ h.antes }}</span>
+        <span class="f-linha"><span class="hero-numero f-numero">{{ h.pct }}%</span>
+          <span class="f-trabalho"><span>{{ h.meio[0] }}</span> <span>{{ h.meio[1] }}</span></span></span>
+        <span class="f-orcamento">{{ h.fim }}</span>
+      </p>
+      <p class="f-apoio"><span class="secundario-numero">{{ h.apoio_num }}</span> {{ h.apoio_txt }}{% if h.apoio_ex %}<span class="f-apoio-ex">{{ h.apoio_ex }}</span>{% endif %}</p>
+      {% else %}
+      <p class="hero"><span class="hero-numero">—</span>
+        <span class="hero-texto">{{ h.antes }} {{ h.apoio_txt }}.</span></p>
+      {% endif %}
+      {# decisão 10 (25/10/2026, D30-b/T5): bases divergentes mostram os números com o aviso da diferença, sem bloquear #}
+      {% if em_atualizacao %}<p class="hero-base" role="status">A divisão por talento está sendo atualizada: {% if t.diferenca %}a base de talentos soma {{ t.total | inteiro }} pedidos e o Início, {{ t.total_inicio | inteiro }}{% else %}a base de talentos ainda usa outro dia de corte{% endif %}. As bases atualizaram em horários diferentes; tente de novo em alguns minutos.</p>{% endif %}
+    </div>
+    <div class="talentos-direita">
+      <figure class="talentos-figura">
+        <figcaption class="talentos-legenda-barra so-leitor">Divisão dos pedidos do ano por vínculo do talento</figcaption>
+        <style nonce="{{ request.state.nonce }}">{% for g in barra %}#dv-{{ loop.index0 }} { --w: {{ g.largura }}; --i: {{ loop.index0 }}; }{% endfor %}</style>
+        <div class="divisao-barra{% if filtro != 'todos' %} divisao-filtrada{% endif %}" aria-hidden="true">
+          {% for g in barra %}<span class="divisao-parte talentos-{{ g.classe }}{% if g.destaque %} divisao-destaque{% endif %}{% if g.apagado %} divisao-apagada{% endif %}" id="dv-{{ loop.index0 }}"><span class="divisao-pct">{{ g.pct }}%</span><span class="divisao-n">{{ g.n | inteiro }}{% if g.pct >= 8 %}<span class="divisao-palavra"> pedidos</span>{% endif %}</span></span>{% endfor %}
+        </div>
+        <ul class="so-leitor">{% for g in barra %}<li>{{ g.nome }}: {{ g.n | inteiro }} pedidos, {{ g.pct }}%{% if g.destaque %} (recorte escolhido){% endif %}</li>{% endfor %}</ul>
+        <div class="talentos-legenda-linha">
+          <ul class="talentos-lista talentos-legenda" aria-hidden="true">
+            {% for g in barra %}<li class="talentos-{{ g.classe }}{% if g.apagado %} legenda-apagada{% endif %}"><span class="talentos-chave"></span><span class="talentos-nome">{{ g.nome }}</span></li>
+            {% endfor %}
+          </ul>
+          {# D51 (revista 26/10/2026): play só com ícone, na linha da legenda, alinhado à direita acima do cartão do mapa.
+             Só com JS (sem JS fica escondido); durante a corrida vira ■ "Parar" (vai ao final) e volta a ▶ #}
+          {% if mapa %}<button type="button" class="corrida-play" data-corrida-play hidden aria-label="Ver a subida e descida das posições ao longo do ano" title="Ver a subida e descida das posições ao longo do ano" aria-describedby="corrida-ajuda"><span class="corrida-icone" aria-hidden="true">▶</span></button><span class="so-leitor" id="corrida-ajuda">Animação opcional; a tabela do mapa já mostra o resultado do ano.</span>{% endif %}
+        </div>
+      </figure>
+      {# T10: mapa de calor dos 10 talentos do recorte × meses do ano #}
+      {% if mp %}
+      <figure class="talentos-mapa">
+        <figcaption>
+          <span class="colunas-titulo so-leitor">Os {{ mp.linhas | length }} talentos com mais pedidos, mês a mês</span>
+          {# D51: o mês da corrida, grande e discreto no canto do quadro (crossfade; decorativo) #}
+          <span class="corrida-rotulo" aria-hidden="true"></span>
+          <span class="mapa-legenda" aria-hidden="true"><span>menos</span>{% for k in range(1, 7) %}<span class="mapa-chave hm-n{{ k }}"></span>{% endfor %}<span>mais pedidos no mês</span></span>
+        </figcaption>
+        <div class="mapa-rolagem">
+        {# D51 (26/10/2026): a contagem de abertura e a "corrida do ano" do botão play (apresentacao.js) leem
+           data-corrida-meses (meses com dado), data-corrida-maior (maior mês, para os tons), data-corrida-extras (quem
+           passou pelos 10 do acumulado sem fechar o ano entre eles: nome, lugar no ano, pedidos de jan até o corte) e,
+           em cada linha, data-corrida-pedidos; o HTML já é o estado final. mapa-nomes-N: N = caracteres do maior nome
+           do recorte (largura da coluna dos nomes, sem reticências) #}
+        <table class="mapa-tabela mapa-nomes-{{ mp.nome_ch }}" data-corrida data-corrida-meses="{{ mp.colunas | rejectattr('futuro') | list | length }}" data-corrida-maior="{{ mp.maior }}" data-corrida-extras='{{ mp.extras | tojson }}'>
+          <caption class="so-leitor">Pedidos por mês dos {{ mp.linhas | length }} talentos com mais pedidos em {{ t.ano }}{% if filtro != "todos" %}, {{ {"exclusivos": "exclusivos", "nao-exclusivos": "não exclusivos"}[filtro] }}{% endif %}; dados até {{ mp.ate }}. Meses depois disso ainda não aconteceram.</caption>
+          <thead><tr>
+            <th scope="col" class="mapa-nome-cab">Talento</th>
+            {% for c in mp.colunas %}<th scope="col" class="mapa-mes{% if c.futuro %} mapa-futuro{% endif %}{% if c.parcial %} mapa-parcial{% endif %}"><abbr title="{{ c.extenso }}">{{ c.rotulo }}</abbr>{% if c.parcial %}<span class="mapa-ate">até {{ mp.ate_dia }}</span>{% endif %}{% if c.futuro %}<span class="so-leitor"> (mês futuro)</span>{% elif c.parcial %}<span class="so-leitor"> (mês em andamento)</span>{% endif %}</th>{% endfor %}
+            <th scope="col" class="mapa-total-cab">Ano</th>
+          </tr></thead>
+          <tbody>
+          {% for r in mp.linhas %}<tr data-corrida-pedidos="{{ r.celulas | rejectattr('futuro') | map(attribute='n') | join(',') }}">
+            <th scope="row" class="mapa-nome"><span class="mapa-pos" aria-hidden="true">{{ r.posicao }}</span><span class="mapa-talento" title="{{ r.talento }}">{{ r.talento }}</span></th>
+            {% for c in r.celulas %}<td class="hm hm-c{{ loop.index0 }} hm-n{{ c.nivel }}{% if c.futuro %} hm-futuro{% endif %}{% if c.parcial %} hm-parcial{% endif %}">{% if c.futuro %}<span class="so-leitor">sem dado</span>{% else %}<span class="hm-num">{{ c.n | inteiro }}</span>{% endif %}</td>{% endfor %}
+            <td class="mapa-total">{{ r.n | inteiro }}</td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        </div>
+        <p class="mapa-nota so-leitor">Juntos, {{ mp.n | inteiro }} pedidos: {{ mp.pct }}% {{ {"todos": "da demanda do ano", "exclusivos": "dos exclusivos", "nao-exclusivos": "dos não exclusivos"}[filtro] }}{% if mp.empate %} · 10º lugar empatado com mais {{ mp.empate.fora }} {{ "talento" if mp.empate.fora == 1 else "talentos" }} ({{ mp.empate.n | inteiro }} pedidos cada){% endif %}{% if filtro == "todos" %} · Squad de Talentos (grupo) fora{% endif %}</p>
+      </figure>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,378 @@
+C:\Users\CCMB\.venvs\ppd-agenciamento-sla\Lib\site-packages\google\auth\_default.py:113: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. See the following page for troubleshooting: https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds. 
+  warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+snapshot gravado: carga 2026-10-23 20:23:49.578448+00:00 · dados até 2026-10-22
+tipo     Inbound  Mercado
+mes                      
+2024-10       31       37
+2024-11       54       76
+2024-12       47       58
+2025-01       77       67
+2025-02       70       98
+2025-03       59       62
+2025-04      108      151
+2025-05      137       81
+2025-06      105       93
+2025-07      124       63
+2025-08       95      140
+2025-09       94      227
+2025-10      123      237
+2025-11       72      163
+2025-12       50      105
+2026-01      132      125
+2026-02       88      187
+2026-03      144      252
+2026-04       99      228
+2026-05      169      336
+2026-06      112      339
+2026-07      165      404
+2026-08      156      322
+2026-09      129      477
+2026-10      128      275
+    mes    tipo  exclusivos  nao_exclusivos  sem_talento  total                    processado_em  dados_ate
+2026-01 Inbound         124               7            1    132 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-02 Inbound          77              11            0     88 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-03 Inbound         139               5            0    144 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-04 Inbound          93               6            0     99 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-05 Inbound         150              19            0    169 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-06 Inbound         100              12            0    112 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-07 Inbound         151              14            0    165 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-08 Inbound         153               3            0    156 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-09 Inbound         128               1            0    129 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-10 Inbound         107              18            3    128 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-01 Mercado          62              60            3    125 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-02 Mercado          81             106            0    187 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-03 Mercado          81             163            7    251 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-04 Mercado         134              94            1    229 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-05 Mercado         164             170            2    336 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-06 Mercado         177             155            7    339 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-07 Mercado         186             213            5    404 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-08 Mercado         154             158           10    322 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-09 Mercado         194             272           11    477 2026-10-23 20:23:49.578448+00:00 2026-10-22
+2026-10 Mercado          77             161           37    275 2026-10-23 20:23:49.578448+00:00 2026-10-22
+arima_011                        Inbound WAPE h1 jun–set 18.6%  Mercado WAPE h1 jun–set 29.6%
+arimax_011                       Inbound WAPE h1 jun–set 13.5%  Mercado WAPE h1 jun–set 39.2%
+arima_110                        Inbound WAPE h1 jun–set 16.4%  Mercado WAPE h1 jun–set 22.8%
+arimax_110                       Inbound WAPE h1 jun–set 14.2%  Mercado WAPE h1 jun–set 20.3%
+arima_011_t                      Inbound WAPE h1 jun–set 22.9%  Mercado WAPE h1 jun–set 34.5%
+arimax_011_t                     Inbound WAPE h1 jun–set 36.5%  Mercado WAPE h1 jun–set 29.8%
+arima_100_ct                     Inbound WAPE h1 jun–set 16.5%  Mercado WAPE h1 jun–set 16.5%
+arimax_100_ct                    Inbound WAPE h1 jun–set 15.1%  Mercado WAPE h1 jun–set 40.4%
+arimax_100_ct_fimdeano           Inbound WAPE h1 jun–set 15.1%  Mercado WAPE h1 jun–set 16.5%
+arima_auto                       Inbound WAPE h1 jun–set 17.0%  Mercado WAPE h1 jun–set 19.9%
+arimax_auto                      Inbound WAPE h1 jun–set 15.1%  Mercado WAPE h1 jun–set 15.3%
+boost_lgbm                       Inbound WAPE h1 jun–set 28.0%  Mercado WAPE h1 jun–set 20.9%
+boost_xgb                        Inbound WAPE h1 jun–set 22.9%  Mercado WAPE h1 jun–set 24.8%
+boost_lgbm_n1                    Inbound WAPE h1 jun–set 33.7%  Mercado WAPE h1 jun–set 32.3%
+boost_auto                       Inbound WAPE h1 jun–set 23.6%  Mercado WAPE h1 jun–set 17.6%
+cls_ets_aicc                     Inbound WAPE h1 jun–set 22.6%  Mercado WAPE h1 jun–set 19.8%
+cls_holt_amortecido              Inbound WAPE h1 jun–set 16.3%  Mercado WAPE h1 jun–set 17.5%
+cls_arima_aicc                   Inbound WAPE h1 jun–set 24.6%  Mercado WAPE h1 jun–set 19.8%
+cls_theta                        Inbound WAPE h1 jun–set 16.5%  Mercado WAPE h1 jun–set 19.6%
+cls_combinado                    Inbound WAPE h1 jun–set 22.6%  Mercado WAPE h1 jun–set 19.8%
+cls_validado                     Inbound WAPE h1 jun–set 16.6%  Mercado WAPE h1 jun–set 18.0%
+cls_arima_aicc_faixa_erros       Inbound WAPE h1 jun–set 24.6%  Mercado WAPE h1 jun–set 19.8%
+cls_holt_amortecido_faixa_erros  Inbound WAPE h1 jun–set 16.3%  Mercado WAPE h1 jun–set 17.5%
+comb_ses                         Inbound WAPE h1 jun–set 16.3%  Mercado WAPE h1 jun–set 19.5%
+comb_holt_amort                  Inbound WAPE h1 jun–set 16.3%  Mercado WAPE h1 jun–set 19.3%
+comb_theta                       Inbound WAPE h1 jun–set 15.1%  Mercado WAPE h1 jun–set 19.0%
+comb_drift                       Inbound WAPE h1 jun–set 29.3%  Mercado WAPE h1 jun–set 20.2%
+comb_sazonal                     não se aplica: o efeito do mesmo mês do ano anterior precisa de 15 meses (12 + os 3 que antecedem); a janela tem 12
+comb_mediana                     Inbound WAPE h1 jun–set 18.0%  Mercado WAPE h1 jun–set 19.0%
+comb_media                       Inbound WAPE h1 jun–set 15.2%  Mercado WAPE h1 jun–set 19.2%
+comb_selecao                     Inbound WAPE h1 jun–set 14.3%  Mercado WAPE h1 jun–set 20.5%
+comb_ponderada                   Inbound WAPE h1 jun–set 17.4%  Mercado WAPE h1 jun–set 19.2%
+comb_drift_log                   Inbound WAPE h1 jun–set 19.7%  Mercado WAPE h1 jun–set 13.9%
+comb_holt_amort_log              Inbound WAPE h1 jun–set 20.4%  Mercado WAPE h1 jun–set 25.3%
+comb_mediana_mult                Inbound WAPE h1 jun–set 15.8%  Mercado WAPE h1 jun–set 19.4%
+comb_mediana_corr                Inbound WAPE h1 jun–set 24.6%  Mercado WAPE h1 jun–set 28.7%
+comb_theta_corr                  Inbound WAPE h1 jun–set 18.6%  Mercado WAPE h1 jun–set 28.8%
+mlp_1                            Inbound WAPE h1 jun–set 26.8%  Mercado WAPE h1 jun–set 12.6%
+mlp_2                            Inbound WAPE h1 jun–set 27.3%  Mercado WAPE h1 jun–set 12.9%
+mlp_3                            Inbound WAPE h1 jun–set 27.3%  Mercado WAPE h1 jun–set 12.9%
+mlp_4                            Inbound WAPE h1 jun–set 27.4%  Mercado WAPE h1 jun–set 13.0%
+mlp_5                            Inbound WAPE h1 jun–set 27.3%  Mercado WAPE h1 jun–set 12.9%
+mlp_8                            Inbound WAPE h1 jun–set 27.1%  Mercado WAPE h1 jun–set 12.8%
+mlp_12                           Inbound WAPE h1 jun–set 27.2%  Mercado WAPE h1 jun–set 12.8%
+mlp_16                           Inbound WAPE h1 jun–set 27.2%  Mercado WAPE h1 jun–set 12.8%
+mlp_4x2                          Inbound WAPE h1 jun–set 26.7%  Mercado WAPE h1 jun–set 12.6%
+mlp_8x4                          Inbound WAPE h1 jun–set 26.8%  Mercado WAPE h1 jun–set 12.7%
+mlp_auto                         Inbound WAPE h1 jun–set 26.9%  Mercado WAPE h1 jun–set 12.8%
+prophet_log                      não se aplica: a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12
+prophet_natural                  não se aplica: a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12
+Importing plotly failed. Interactive plots will not work.
+01:18:50 - cmdstanpy - INFO - Chain [1] start processing
+01:18:50 - cmdstanpy - INFO - Chain [1] done processing
+prophet_log_sem_sazonal          Inbound WAPE h1 jun–set 17.1%  Mercado WAPE h1 jun–set 16.3%
+prophet_log_degrau2026           não se aplica: a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12
+prophet_auto                     Inbound WAPE h1 jun–set 23.3%  Mercado WAPE h1 jun–set 21.6%
+ref_ultimo_mes                   Inbound WAPE h1 jun–set 26.0%  Mercado WAPE h1 jun–set 19.8%
+ref_media_3m                     Inbound WAPE h1 jun–set 15.4%  Mercado WAPE h1 jun–set 21.4%
+ref_media_6m                     Inbound WAPE h1 jun–set 14.4%  Mercado WAPE h1 jun–set 31.6%
+ref_mesmo_mes_ano_anterior       Inbound WAPE h1 jun–set 25.6%  Mercado WAPE h1 jun–set 66.1%
+ref_tendencia_6m                 Inbound WAPE h1 jun–set 23.0%  Mercado WAPE h1 jun–set 14.2%
+gravado G:\Meu Drive\Workspace\globo\scripts\PPD-AGENCIAMENTO-SLA\ml\saida\filtros.json
+gravado G:\Meu Drive\Workspace\globo\scripts\PPD-AGENCIAMENTO-SLA\ml\saida\previsao.json (retrato de 2026-09)
+retrato
+C:\Users\CCMB\.venvs\ppd-agenciamento-sla\Lib\site-packages\google\auth\_default.py:113: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. See the following page for troubleshooting: https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds. 
+  warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+snapshot gravado: carga 2026-10-26 12:01:46.659042+00:00 · dados até 2026-10-24
+tipo     Inbound  Mercado
+mes                      
+2024-10       31       37
+2024-11       54       76
+2024-12       47       58
+2025-01       77       67
+2025-02       70       98
+2025-03       59       62
+2025-04      108      151
+2025-05      137       81
+2025-06      105       93
+2025-07      124       63
+2025-08       95      140
+2025-09       94      227
+2025-10      123      237
+2025-11       72      163
+2025-12       50      105
+2026-01      132      125
+2026-02       88      187
+2026-03      144      252
+2026-04       99      228
+2026-05      169      336
+2026-06      112      339
+2026-07      165      404
+2026-08      156      322
+2026-09      129      477
+2026-10      133      304
+    mes    tipo  exclusivos  nao_exclusivos  sem_talento  total                    processado_em  dados_ate
+2026-01 Inbound         124               7            1    132 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-02 Inbound          77              11            0     88 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-03 Inbound         139               5            0    144 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-04 Inbound          93               6            0     99 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-05 Inbound         150              19            0    169 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-06 Inbound         100              12            0    112 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-07 Inbound         151              14            0    165 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-08 Inbound         153               3            0    156 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-09 Inbound         128               1            0    129 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-10 Inbound         111              19            3    133 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-01 Mercado          62              60            3    125 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-02 Mercado          81             106            0    187 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-03 Mercado          81             163            7    251 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-04 Mercado         134              94            1    229 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-05 Mercado         164             170            2    336 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-06 Mercado         177             155            7    339 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-07 Mercado         186             213            5    404 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-08 Mercado         154             158           10    322 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-09 Mercado         194             272           11    477 2026-10-26 12:01:46.659042+00:00 2026-10-24
+2026-10 Mercado          87             185           32    304 2026-10-26 12:01:46.659042+00:00 2026-10-24
+C:\Users\CCMB\.venvs\ppd-agenciamento-sla\Lib\site-packages\google\auth\_default.py:113: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. See the following page for troubleshooting: https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds. 
+  warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+aviso (gold × silver): Mercado 2026-03: gold 252 × silver 251
+aviso (gold × silver): Mercado 2026-04: gold 228 × silver 229
+snapshot gravado: carga 2026-10-26 12:01:46.659042+00:00 · dados até 2026-10-25
+tipo     Inbound  Mercado
+mes                      
+2024-10       31       37
+2024-11       54       76
+2024-12       47       58
+2025-01       77       67
+2025-02       70       98
+2025-03       59       62
+2025-04      108      151
+2025-05      137       81
+2025-06      105       93
+2025-07      124       63
+2025-08       95      140
+2025-09       94      227
+2025-10      123      237
+2025-11       72      163
+2025-12       50      105
+2026-01      132      125
+2026-02       88      187
+2026-03      144      252
+2026-04       99      228
+2026-05      169      336
+2026-06      112      339
+2026-07      165      404
+2026-08      156      322
+2026-09      129      477
+2026-10      133      304
+    mes    tipo  exclusivos  nao_exclusivos  sem_talento  total                    processado_em  dados_ate
+2026-01 Inbound         124               7            1    132 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-02 Inbound          77              11            0     88 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-03 Inbound         139               5            0    144 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-04 Inbound          93               6            0     99 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-05 Inbound         150              19            0    169 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-06 Inbound         100              12            0    112 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-07 Inbound         151              14            0    165 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-08 Inbound         153               3            0    156 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-09 Inbound         128               1            0    129 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-10 Inbound         111              19            3    133 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-01 Mercado          62              60            3    125 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-02 Mercado          81             106            0    187 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-03 Mercado          81             163            7    251 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-04 Mercado         134              94            1    229 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-05 Mercado         164             170            2    336 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-06 Mercado         177             155            7    339 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-07 Mercado         186             213            5    404 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-08 Mercado         154             158           10    322 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-09 Mercado         194             272           11    477 2026-10-26 12:01:46.659042+00:00 2026-10-25
+2026-10 Mercado          87             185           32    304 2026-10-26 12:01:46.659042+00:00 2026-10-25
+retrato de 2026-09 já existe: só o acompanhamento foi atualizado
+acompanhamento
+C:\Users\CCMB\.venvs\ppd-agenciamento-sla\Lib\site-packages\google\auth\_default.py:113: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. See the following page for troubleshooting: https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds. 
+  warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+aviso (gold × silver): Mercado 2026-03: gold 252 × silver 251
+aviso (gold × silver): Mercado 2026-04: gold 228 × silver 229
+snapshot gravado: carga 2026-10-27 12:01:17.610949+00:00 · dados até 2026-10-26
+tipo     Inbound  Mercado
+mes                      
+2024-10       31       37
+2024-11       54       76
+2024-12       47       58
+2025-01       77       67
+2025-02       70       98
+2025-03       59       62
+2025-04      108      151
+2025-05      137       81
+2025-06      105       93
+2025-07      124       63
+2025-08       95      140
+2025-09       94      227
+2025-10      123      237
+2025-11       72      163
+2025-12       50      105
+2026-01      132      125
+2026-02       88      187
+2026-03      144      252
+2026-04       99      228
+2026-05      169      336
+2026-06      112      339
+2026-07      165      404
+2026-08      156      322
+2026-09      129      477
+2026-10      139      335
+    mes    tipo  exclusivos  nao_exclusivos  sem_talento  total                    processado_em  dados_ate
+2026-01 Inbound         124               7            1    132 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-02 Inbound          77              11            0     88 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-03 Inbound         139               5            0    144 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-04 Inbound          93               6            0     99 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-05 Inbound         150              19            0    169 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-06 Inbound         100              12            0    112 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-07 Inbound         151              14            0    165 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-08 Inbound         153               3            0    156 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-09 Inbound         128               1            0    129 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-10 Inbound         114              21            4    139 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-01 Mercado          62              60            3    125 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-02 Mercado          81             106            0    187 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-03 Mercado          81             163            7    251 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-04 Mercado         134              94            1    229 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-05 Mercado         164             170            2    336 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-06 Mercado         177             155            7    339 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-07 Mercado         186             213            5    404 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-08 Mercado         154             158           10    322 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-09 Mercado         194             272           11    477 2026-10-27 12:01:17.610949+00:00 2026-10-26
+2026-10 Mercado          91             187           57    335 2026-10-27 12:01:17.610949+00:00 2026-10-26
+C:\Users\CCMB\.venvs\ppd-agenciamento-sla\Lib\site-packages\google\auth\_default.py:113: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. See the following page for troubleshooting: https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds. 
+  warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+aviso (gold × silver): Mercado 2026-03: gold 252 × silver 251
+aviso (gold × silver): Mercado 2026-04: gold 228 × silver 229
+snapshot gravado: carga 2026-10-27 14:09:27.582009+00:00 · dados até 2026-10-26
+tipo     Inbound  Mercado
+mes                      
+2024-10       31       37
+2024-11       54       76
+2024-12       47       58
+2025-01       77       67
+2025-02       70       98
+2025-03       59       62
+2025-04      108      151
+2025-05      137       81
+2025-06      105       93
+2025-07      124       63
+2025-08       95      140
+2025-09       94      227
+2025-10      123      237
+2025-11       72      163
+2025-12       50      105
+2026-01      132      125
+2026-02       88      187
+2026-03      144      252
+2026-04       99      228
+2026-05      169      336
+2026-06      112      339
+2026-07      165      404
+2026-08      156      322
+2026-09      129      477
+2026-10      139      335
+    mes    tipo  exclusivos  nao_exclusivos  sem_talento  total                    processado_em  dados_ate
+2026-01 Inbound         124               7            1    132 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-02 Inbound          77              11            0     88 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-03 Inbound         139               5            0    144 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-04 Inbound          93               6            0     99 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-05 Inbound         150              19            0    169 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-06 Inbound         100              12            0    112 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-07 Inbound         151              14            0    165 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-08 Inbound         153               3            0    156 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-09 Inbound         128               1            0    129 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-10 Inbound         114              21            4    139 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-01 Mercado          62              60            3    125 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-02 Mercado          81             106            0    187 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-03 Mercado          81             163            7    251 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-04 Mercado         134              94            1    229 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-05 Mercado         164             170            2    336 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-06 Mercado         177             155            7    339 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-07 Mercado         186             213            5    404 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-08 Mercado         154             158           10    322 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-09 Mercado         194             272           11    477 2026-10-27 14:09:27.582009+00:00 2026-10-26
+2026-10 Mercado          91             187           57    335 2026-10-27 14:09:27.582009+00:00 2026-10-26
+C:\Users\CCMB\.venvs\ppd-agenciamento-sla\Lib\site-packages\google\auth\_default.py:113: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. See the following page for troubleshooting: https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds. 
+  warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+snapshot gravado: carga 2026-10-28 12:04:07.123542+00:00 · dados até 2026-10-27
+tipo     Inbound  Mercado
+mes                      
+2024-10       31       37
+2024-11       54       76
+2024-12       47       58
+2025-01       77       67
+2025-02       70       98
+2025-03       59       62
+2025-04      108      151
+2025-05      137       81
+2025-06      105       93
+2025-07      124       63
+2025-08       95      140
+2025-09       94      227
+2025-10      123      237
+2025-11       72      163
+2025-12       50      105
+2026-01      132      125
+2026-02       88      187
+2026-03      144      252
+2026-04       99      228
+2026-05      169      336
+2026-06      112      339
+2026-07      165      404
+2026-08      156      322
+2026-09      129      477
+2026-10      146      351
+    mes    tipo  exclusivos  nao_exclusivos  sem_talento  total                    processado_em  dados_ate
+2026-01 Inbound         124               7            1    132 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-02 Inbound          77              11            0     88 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-03 Inbound         139               5            0    144 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-04 Inbound          93               6            0     99 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-05 Inbound         150              19            0    169 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-06 Inbound         100              12            0    112 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-07 Inbound         151              14            0    165 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-08 Inbound         153               3            0    156 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-09 Inbound         128               1            0    129 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-10 Inbound         121              21            4    146 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-01 Mercado          62              60            3    125 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-02 Mercado          81             106            0    187 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-03 Mercado          82             163            7    252 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-04 Mercado         133              94            1    228 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-05 Mercado         164             170            2    336 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-06 Mercado         177             155            7    339 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-07 Mercado         186             213            5    404 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-08 Mercado         154             158           10    322 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-09 Mercado         194             272           11    477 2026-10-28 12:04:07.123542+00:00 2026-10-27
+2026-10 Mercado          92             212           47    351 2026-10-28 12:04:07.123542+00:00 2026-10-27

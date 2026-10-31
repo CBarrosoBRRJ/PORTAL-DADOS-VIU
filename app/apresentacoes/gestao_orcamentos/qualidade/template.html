@@ -1,0 +1,9 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import lamina_pendente %}
+{# Qualidade dos dados (D21, D30). As verificações (Q1–Q6, A1–A5) estão prontas em qualidade/calculos.py; entram na
+   tela depois de conferidas no BigQuery. Até lá, a máscara com o que falta (PD12, PD13). #}
+{% block slides %}
+{{ lamina_pendente(apresentacao, secao_atual, "Operacional", "As verificações estão sendo conferidas",
+   "Em preparação nesta semana: verificações da base e pendências de preenchimento.",
+   "Aqui entram as verificações da base e a evolução das pendências de preenchimento.") }}
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import cabecalho, lamina_pendente %}
+{% block slides %}
+{% set a = atendimento %}
+{% if not a %}
+{{ lamina_pendente(apresentacao, secao_atual, "Gerencial", "Bases em atualização", "Entradas e fluxo ainda não representam a mesma fotografia.", "A análise volta quando as bases estiverem conciliadas.") }}
+{% else %}
+{% set l = a.leitura %}{% set m = l.atual %}
+<section class="slide" aria-roledescription="slide" aria-labelledby="s-atendimento" data-nivel="gerencial">
+<div class="lamina atendimento-executivo">
+{{ cabecalho(apresentacao, secao_atual) }}
+<div class="sobretitulo">
+  <span class="nivel">Gerencial</span>
+  <span class="ae-recorte">{{ a.total.entradas | inteiro }} pedidos recebidos em {{ a.ano }} · {{ a.periodo }}</span>
+</div>
+<header class="ae-abertura">
+  <h2 class="slide-titulo" id="s-atendimento">A equipe está dando conta da demanda?</h2>
+  <p class="ae-conclusao entra">{% if m %}{% if m.entregues_ano < m.entradas and m.saldo > 0 %}Em {{ m.extenso }}{% if m.parcial %} (parcial){% endif %}, as entregas ficaram abaixo das entradas. <strong>As saídas sem entrega reduziram a fila.</strong>{% else %}A fila {{ 'recua' if m.saldo > 0 else 'cresce' if m.saldo < 0 else 'se mantém' }} em {{ m.extenso }}{% if m.parcial %}, ainda parcial{% endif %}. <strong>{{ l.fila | inteiro }} pedidos seguem em andamento.</strong>{% endif %}{% else %}Ainda não há movimento no período.{% endif %}</p>
+</header>
+<div class="ae-resumo entra" aria-label="Destino dos pedidos recebidos no ano">
+  <div class="ae-card ae-card-entregue">
+    <span class="ae-metrica-titulo"><i class="ae-chave ae-entregue" aria-hidden="true"></i>Entregues ao cliente</span>
+    <div class="ae-metrica-valor"><strong>{{ l.entregues | inteiro }}</strong><span class="ae-pct">{{ (l.pct_entregues|string).replace('.', ',') if l.pct_entregues is not none else '—' }}%</span></div>
+    <small>1ª entrega enviada para avaliação</small>
+  </div>
+  <div class="ae-card ae-card-sem">
+    <span class="ae-metrica-titulo"><i class="ae-chave ae-sem" aria-hidden="true"></i>Saíram sem entrega</span>
+    <div class="ae-metrica-valor"><strong>{{ l.sem_entrega | inteiro }}</strong><span class="ae-pct">{{ (l.pct_sem_entrega|string).replace('.', ',') if l.pct_sem_entrega is not none else '—' }}%</span></div>
+    <small>declinados, standby ou encerrados</small>
+  </div>
+  <div class="ae-card ae-card-fila">
+    <span class="ae-metrica-titulo"><i class="ae-chave ae-fila" aria-hidden="true"></i>Em andamento</span>
+    <div class="ae-metrica-valor"><strong>{{ l.fila | inteiro }}</strong><span class="ae-pct">{{ (l.pct_fila|string).replace('.', ',') if l.pct_fila is not none else '—' }}%</span></div>
+    <small>fila aberta de pedidos de {{ a.ano }}</small>
+  </div>
+</div>
+<div class="ae-analise entra">
+  <section class="ae-principal" aria-labelledby="ae-fluxo">
+    <div class="ae-titulo-grafico">
+      <h3 id="ae-fluxo">Entradas e saídas por mês</h3>
+      <div class="ae-legenda"><span><i class="ae-chave ae-entrada" aria-hidden="true"></i>Entradas</span><span><i class="ae-chave ae-entregue" aria-hidden="true"></i>Entregas</span><span><i class="ae-chave ae-sem" aria-hidden="true"></i>Saídas sem entrega</span></div>
+    </div>
+    <svg class="ae-grafico" viewBox="0 0 760 220" role="img" aria-labelledby="ae-chart-title ae-chart-desc">
+      <title id="ae-chart-title">Entradas comparadas às saídas da fila</title>
+      <desc id="ae-chart-desc">Cada mês tem duas colunas: entradas e saídas. As saídas se dividem em entregas e saídas sem entrega. Valores completos disponíveis na tabela de leitura abaixo.</desc>
+      {% set escala = [100, (((a.escala_fluxo * 1.14 / 100)|round(0, "ceil")) * 100)]|max %}
+      {% for frac in [0, 0.5, 1] %}{% set y = 178 - frac * 150 %}<line x1="36" x2="754" y1="{{ y }}" y2="{{ y }}" class="ae-grade"/><text x="28" y="{{ y + 4 }}" text-anchor="end" class="ae-eixo">{{ (frac * escala)|round|int | inteiro }}</text>{% endfor %}
+      {% for mm in l.meses %}{% set x = 48 + loop.index0 * (696 / ([l.meses|length, 1]|max)) %}{% set passo = 696 / ([l.meses|length, 1]|max) %}{% set b = [passo * 0.28, 21]|min %}
+      <g><title>{{ mm.extenso }}{% if mm.parcial %} parcial{% endif %}: {{ mm.entradas | inteiro }} entradas, {{ mm.entregues_ano | inteiro }} entregas, {{ mm.sem_entrega_ano | inteiro }} saídas sem entrega; fila {{ mm.fila | inteiro }}.</title>
+      <rect x="{{ x }}" y="{{ 178 - mm.entradas / escala * 150 }}" width="{{ b }}" height="{{ mm.entradas / escala * 150 }}" rx="2.5" class="ae-bar-entrada"/>
+      <rect x="{{ x+b+4 }}" y="{{ 178 - mm.entregues_ano / escala * 150 }}" width="{{ b }}" height="{{ mm.entregues_ano / escala * 150 }}" class="ae-bar-entregue"/>
+      <rect x="{{ x+b+4 }}" y="{{ 178 - mm.resp_ano / escala * 150 }}" width="{{ b }}" height="{{ mm.sem_entrega_ano / escala * 150 }}" rx="2.5" class="ae-bar-sem"/>
+      <text x="{{ x+b+4+b/2 }}" y="{{ 171 - mm.resp_ano / escala * 150 }}" text-anchor="middle" class="ae-valor">{{ mm.resp_ano | inteiro }}</text>
+      <text x="{{ x+b+2 }}" y="197" text-anchor="middle" class="ae-mes">{{ mm.rotulo }}</text>
+      {% if mm.parcial %}<text x="{{ x+b+2 }}" y="211" text-anchor="middle" class="ae-parcial">parcial</text>{% endif %}
+      </g>{% endfor %}
+    </svg>
+    <div class="ae-rodape-grafico">
+      <div class="ae-leitura-fechados">
+        {% if l.fechados %}<strong>{{ l.fechados[0].rotulo }}–{{ l.fechados[-1].rotulo }} · {{ l.fechados|length }} {{ 'meses fechados' if l.fechados|length > 1 else 'mês fechado' }}</strong>
+        <p>A fila {{ 'cresceu' if l.saldo_fechados < 0 else 'diminuiu' if l.saldo_fechados > 0 else 'ficou estável' }}{% if l.saldo_fechados %} <b>{{ l.saldo_fechados | abs | inteiro }} pedidos</b>{% endif %} <span class="ae-fechados-base">({{ l.entradas_fechados | inteiro }} entradas · {{ l.saidas_fechados | inteiro }} saídas)</span></p>{% else %}<p>A leitura de tendência começa após o primeiro mês completo.</p>{% endif %}
+      </div>
+      <p class="ae-instrucao">Coluna da direita = entregas + saídas sem entrega.</p>
+    </div>
+  </section>
+  <aside class="ae-foco" aria-labelledby="ae-fila">
+    <div class="ae-foco-topo">
+      <h3 id="ae-fila">Evolução dos pedidos em aberto</h3>
+      {% if m %}<span class="ae-selo-saldo {{ 'ae-saldo-reduz' if m.saldo > 0 else 'ae-saldo-cresce' if m.saldo < 0 else '' }}">{{ m.rotulo }}{% if m.parcial %}*{% endif %}: {{ '−' if m.saldo > 0 else '+' if m.saldo < 0 else '' }}{{ m.saldo | abs | inteiro }} na fila</span>{% endif %}
+    </div>
+    <svg class="ae-spark" viewBox="0 0 300 94" role="img" aria-label="Fila reconstruída ao fim de cada mês; atualmente {{ l.fila | inteiro }} pedidos">
+      <line x1="14" x2="286" y1="74" y2="74" class="ae-grade"/>
+      <polyline fill="none" class="ae-curva" points="{% for mm in l.meses %}{{ 14+loop.index0 * (272/([l.meses|length-1,1]|max)) }},{{ 74 - mm.fila / a.escala_fila * 50 }} {% endfor %}"/>
+      {% for mm in l.meses %}{% set x=14+loop.index0 * (272/([l.meses|length-1,1]|max)) %}{% set y=74-mm.fila/a.escala_fila*50 %}<circle cx="{{ x }}" cy="{{ y }}" r="{{ 4 if loop.last else 2.2 }}" class="ae-ponto"/><title>{{ mm.extenso }}: {{ mm.fila | inteiro }} pedidos</title>{% if loop.first or loop.last %}<text x="{{ x }}" y="{{ y-8 }}" text-anchor="{{ 'start' if loop.first else 'end' }}" class="ae-valor">{{ mm.fila | inteiro }}</text><text x="{{ x }}" y="90" text-anchor="{{ 'start' if loop.first else 'end' }}" class="ae-eixo">{{ mm.rotulo }}</text>{% endif %}{% endfor %}
+    </svg>
+    {% if m %}<div class="ae-mes-foco"><strong>{{ m.extenso | capitalize }}{% if m.parcial %} <span>parcial</span>{% endif %}</strong><b>{{ '−' if m.saldo > 0 else '+' if m.saldo < 0 else '' }}{{ m.saldo | abs | inteiro }} <small>na fila</small></b></div>
+    <div class="ae-balanco">
+      <p><span>Entradas no mês</span><strong>{{ m.entradas | inteiro }}</strong></p>
+      <p><span>Entregues ao cliente</span><strong>{{ m.entregues_ano | inteiro }}</strong></p>
+      <p><span>Saíram sem entrega</span><strong>{{ m.sem_entrega_ano | inteiro }}</strong></p>
+    </div>{% endif %}
+  </aside>
+</div>
+<div class="ae-base"><span>Leitura da fila: pedidos recebidos no ano, reconstruída com a situação atual.{% if a.saidas_sem_data %} {{ a.saidas_sem_data | inteiro }} saídas sem data atribuídas ao mês de entrada.{% endif %}</span>
+<details class="ae-detalhes"><summary>Dados mensais e critérios</summary><div class="ae-tabela-wrap"><p>Saídas sem entrega: declinado, standby ou encerrado. Fila reconstruída; não é uma fotografia histórica congelada.{% if a.saidas_sem_data %} {{ a.saidas_sem_data | inteiro }} saídas sem data foram atribuídas ao mês de entrada.{% endif %}</p><table><caption>Pedidos do ano · valores por mês</caption><thead><tr><th scope="col">Mês</th><th scope="col">Entradas</th><th scope="col">Entregas</th><th scope="col">Sem entrega</th><th scope="col">Fila</th></tr></thead><tbody>{% for mm in l.meses %}<tr><th scope="row">{{ mm.rotulo }}{% if mm.parcial %} (parcial){% endif %}</th><td>{{ mm.entradas | inteiro }}</td><td>{{ mm.entregues_ano | inteiro }}</td><td>{{ mm.sem_entrega_ano | inteiro }}</td><td>{{ mm.fila | inteiro }}</td></tr>{% endfor %}</tbody></table></div></details></div>
+</div></section>
+{% endif %}
+{% endblock %}

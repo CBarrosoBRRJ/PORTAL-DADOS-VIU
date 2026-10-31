@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roadmap · protótipo A</title>
+<link rel="icon" href="/static/viu_logo.jpg">
+<link rel="stylesheet" href="a.css">
+<script src="a.js" defer></script>
+</head>
+<body>
+<main class="lamina" aria-labelledby="rm-titulo">
+  <div class="fundo" aria-hidden="true"><span class="mancha m1"></span><span class="mancha m2"></span><span class="mancha m3"></span><span class="mancha m4"></span><span class="aro a1"></span><span class="aro a2"></span></div>
+
+  <header class="topo">
+    <h1 id="rm-titulo">Como chegamos até aqui?</h1>
+    <p class="sub">Do dado espalhado ao portal: o que já fizemos e o que vem a seguir.</p>
+  </header>
+
+  <!-- trilhos: só desenho; o conteúdo está nas etapas abaixo -->
+  <svg class="trilhos" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="g-tronco" x1="0" x2="1600" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#2400ff" stop-opacity="0"/>
+        <stop offset=".07" stop-color="#6b5cff"/>
+        <stop offset=".77" stop-color="#2400ff"/>
+      </linearGradient>
+    </defs>
+    <path class="t t-tronco" d="M 0 400 H 552"/>
+    <path class="t t-tronco" d="M 787 400 H 1230"/>
+    <path class="t t-espera" d="M 552 400 H 787"/>
+    <path class="t t-paralelo" d="M 455 400 C 515 400, 515 580, 575 580 H 765 C 825 580, 825 400, 885 400"/>
+    <path class="t t-futuro" d="M 1230 400 H 1600"/>
+    <path class="cometa cometa-espera" pathLength="1000" d="M 0 400 H 1230"/>
+    <path class="cometa cometa-paralelo" pathLength="1000" d="M 0 400 H 455 C 515 400, 515 580, 575 580 H 765 C 825 580, 825 400, 885 400 H 1230"/>
+    <circle class="junta" cx="455" cy="400" r="6"/>
+    <circle class="junta" cx="885" cy="400" r="6"/>
+  </svg>
+
+  <p class="legenda leg-esperando" aria-hidden="true">enquanto esperávamos…</p>
+  <p class="legenda leg-liberou" aria-hidden="true">quando liberou…</p>
+  <p class="selo-espera" aria-hidden="true"><svg class="ic ic-ampulheta" viewBox="0 0 24 24"><path d="M7 3.5h10M7 20.5h10"/><path d="M8 3.5v2.3c0 2.4 4 3.8 4 6.2 0-2.4 4-3.8 4-6.2V3.5M8 20.5v-2.3c0-2.4 4-3.8 4-6.2 0 2.4 4 3.8 4 6.2v2.3"/></svg>Ponto de espera</p>
+
+  <p class="soltos soltos-fontes" aria-hidden="true"><span>SharePoint</span><span>Excel</span><span>Monday</span><span>OneNote</span></p>
+  <p class="soltos soltos-futuro" aria-hidden="true"><span>Fechamentos</span><span>Receita</span><span>LIA</span></p>
+
+  <ol class="etapas">
+    <li class="etapa e1 sit-partida">
+      <span class="no" aria-hidden="true"><svg class="ic ic-no ic-dispersos" viewBox="0 0 24 24"><rect x="3.5" y="4" width="6" height="6" rx="1.2"/><rect class="p2" x="14" y="3.5" width="6" height="5" rx="1.2" transform="rotate(12 17 6)"/><rect class="p3" x="5" y="14.5" width="5.5" height="5.5" rx="1.2" transform="rotate(-10 7.7 17.2)"/><circle class="p4" cx="17" cy="16.5" r="3"/></svg></span>
+      <article class="cartao">
+        <p class="num">01</p>
+        <h2>Dados espalhados</h2>
+        <p class="sit"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 13.5 6.5 5.5h11l2.5 8V19H4z"/><path d="M4 13.5h4.5l1.2 2.2h4.6l1.2-2.2H20"/></svg>Ponto de partida</p>
+        <p class="txt">Vários formatos, inclusive em contas pessoais.</p>
+        <p class="risco"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4.5 3.5 19.5h17z"/><path d="M12 10v4.5M12 17.2v.1"/></svg><span><strong>Risco de perda:</strong> se a pessoa sai, a área perde o dado.</span></p>
+      </article>
+    </li>
+
+    <li class="etapa e2 sit-em-curso">
+      <span class="no" aria-hidden="true"><svg class="ic ic-no ic-fluxo" viewBox="0 0 24 24"><rect x="3.5" y="4" width="6" height="4.5" rx="1"/><rect x="14.5" y="15.5" width="6" height="4.5" rx="1"/><path class="fio" d="M6.5 8.5v3.5h11v3.5"/><path class="losango" d="m12 9.5 2.5 2.5-2.5 2.5-2.5-2.5z"/></svg></span>
+      <article class="cartao">
+        <p class="num">02</p>
+        <h2>Mapeamos e organizamos</h2>
+        <p class="sit"><svg class="ic ic-relogio" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path class="ponteiro" d="M12 7.5V12l3 2"/></svg>Em curso</p>
+        <p class="txt">O processo de ponta a ponta.</p>
+        <ul class="itens"><li>OneNote vira tabela no Monday.</li><li>Planilhas no SharePoint da companhia.</li></ul>
+        <a class="mini mini-fluxo" href="/static/roadmap/fluxo-processo.webp" data-alta="/static/roadmap/fluxo-processo-alta.webp" data-titulo="Fluxo ponta a ponta" data-legenda="Do pedido à proposta, à execução, ao contrato e ao pagamento, com os pontos de atenção marcados." data-alt="Fluxo da área em raias: entrada do pedido e orçamento, execução, pagamento, contratos e aquisição de talentos">
+          <img src="/static/roadmap/fluxo-processo-mini.webp" width="440" height="210" alt="">
+          <span class="mini-nome"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5M10.5 8v5M8 10.5h5"/></svg>Ver o fluxo</span>
+        </a>
+      </article>
+    </li>
+
+    <li class="etapa e3">
+      <h2 class="so-leitor">03. A infraestrutura, em dois ramos</h2>
+      <div class="ramo ramo-espera">
+        <p class="so-leitor">Ramo da espera:</p>
+        <div class="sub-etapa e3a sit-feito">
+          <span class="no" aria-hidden="true"><svg class="ic ic-no ic-nuvem" viewBox="0 0 24 24"><path d="M7.5 18.5h9.5a3.5 3.5 0 0 0 .4-7 5 5 0 0 0-9.7-1.3A3.9 3.9 0 0 0 7.5 18.5z"/></svg></span>
+          <article class="cartao cartao-curto">
+            <p class="num">03</p>
+            <h3>Pedimos a infraestrutura à tecnologia</h3>
+            <p class="txt">Um projeto no GCP para o BigQuery.</p>
+            <p class="sit"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Feito</p>
+          </article>
+        </div>
+        <p class="so-leitor">Ponto de espera.</p>
+        <div class="sub-etapa e3c sit-feito">
+          <span class="no no-pequeno" aria-hidden="true"><svg class="ic ic-no" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+          <article class="cartao cartao-curto">
+            <h3>Infraestrutura liberada</h3>
+            <p class="txt">A etapa mais longa: a espera.</p>
+            <p class="sit"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Feito</p>
+          </article>
+        </div>
+      </div>
+      <div class="ramo ramo-paralelo">
+        <p class="so-leitor">Ramo paralelo, enquanto esperávamos:</p>
+        <div class="sub-etapa e3b sit-feito">
+          <span class="no" aria-hidden="true"><svg class="ic ic-no ic-tendencia" viewBox="0 0 24 24"><path class="linha-t" d="M4 17.5 9.5 12l3.5 3 7-7.5"/><path d="M15 7.5h5v5"/></svg></span>
+          <article class="cartao cartao-largo">
+            <div class="largo-texto">
+              <p class="num">Em paralelo</p>
+              <h3>Dashboards com o que já tínhamos</h3>
+              <p class="sit"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Feito</p>
+              <p class="txt">Pagamentos, contratos e as primeiras análises, com os dados disponíveis, sem a base central.</p>
+            </div>
+            <div class="largo-minis">
+              <a class="mini" href="/static/roadmap/dashboard-pagamento.webp" data-titulo="Controle do processo de pagamento" data-legenda="Volume de pagamentos, notas fiscais e SLA, e a matriz de risco financeiro. Nomes e valores por linha desfocados." data-alt="Painel de controle do processo de pagamento">
+                <img src="/static/roadmap/dashboard-pagamento-mini.webp" width="440" height="304" alt="">
+                <span class="mini-nome"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5M10.5 8v5M8 10.5h5"/></svg>Pagamentos</span>
+              </a>
+              <a class="mini" href="/static/roadmap/dashboard-contratos.webp" data-titulo="Contratos e bloqueios" data-legenda="Contratos vigentes, renovações e a linha do tempo dos contratos. Nomes e datas por linha desfocados." data-alt="Painel de contratos e bloqueios dos talentos">
+                <img src="/static/roadmap/dashboard-contratos-mini.webp" width="440" height="324" alt="">
+                <span class="mini-nome"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5M10.5 8v5M8 10.5h5"/></svg>Contratos</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </li>
+
+    <li class="etapa e4 sit-em-curso">
+      <span class="no" aria-hidden="true"><svg class="ic ic-no ic-banco" viewBox="0 0 24 24"><ellipse class="tampa" cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6"/><path class="camada" d="M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/></svg></span>
+      <article class="cartao">
+        <p class="num">04</p>
+        <h2>Centralizando tudo no BigQuery</h2>
+        <p class="sit"><svg class="ic ic-relogio" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path class="ponteiro" d="M12 7.5V12l3 2"/></svg>Em curso</p>
+        <dl class="camadas">
+          <div class="cam cam-bronze"><dt>Bronze</dt><dd>como chegam das fontes</dd></div>
+          <div class="cam cam-prata"><dt>Prata</dt><dd>limpos, num padrão só</dd></div>
+          <div class="cam cam-ouro"><dt>Ouro</dt><dd>com as regras de negócio</dd></div>
+        </dl>
+        <a class="mini mini-bq" href="/static/roadmap/bigquery.webp" data-titulo="Camada ouro no BigQuery" data-legenda="O dataset gold_monday: as tabelas e views da camada ouro que este portal lê." data-alt="Camada ouro no BigQuery: tabelas e views do dataset gold_monday">
+          <img src="/static/roadmap/bigquery-mini.webp" width="440" height="380" alt="">
+          <span class="mini-nome"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5M10.5 8v5M8 10.5h5"/></svg>Camada ouro</span>
+        </a>
+      </article>
+    </li>
+
+    <li class="etapa e5 sit-em-curso etapa-aqui">
+      <p class="aqui">Você está aqui</p>
+      <span class="no" aria-hidden="true"><span class="onda"></span><span class="onda onda-2"></span><svg class="ic ic-no ic-grafico" viewBox="0 0 24 24"><path class="b1" d="M5 20V11"/><path class="b2" d="M12 20V5"/><path class="b3" d="M19 20v-7"/></svg></span>
+      <article class="cartao cartao-aqui">
+        <p class="num">05</p>
+        <h2>Estudos e análises</h2>
+        <p class="sit"><svg class="ic ic-relogio" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path class="ponteiro" d="M12 7.5V12l3 2"/></svg>Em curso</p>
+        <p class="txt">Novas análises a partir da base central. O portal lê só a camada ouro.</p>
+        <nav class="acoes" aria-label="Estudos no portal">
+          <a class="botao" href="/gestao-orcamentos">Demanda</a>
+          <a class="botao" href="/gestao-orcamentos/talentos#1">Talentos</a>
+          <a class="botao" href="/gestao-orcamentos/sla#1">SLA</a>
+          <a class="botao" href="/gestao-orcamentos/lia#1">Projeto LIA</a>
+        </nav>
+      </article>
+    </li>
+
+    <li class="etapa e6 sit-proximo">
+      <span class="no" aria-hidden="true"><svg class="ic ic-no ic-chegada" viewBox="0 0 24 24"><path d="M6 20.5V4"/><path class="bandeira" d="M6 4.5h11.5l-2.3 3.8 2.3 3.7H6"/></svg></span>
+      <article class="cartao">
+        <p class="num">06</p>
+        <h2>Próximos passos</h2>
+        <p class="sit"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="m9.5 7 5 5-5 5"/></svg>Próximo</p>
+        <ul class="itens"><li>Fechamentos, receita e LIA na camada ouro.</li><li>Qualidade dos dados.</li><li>Meta do SLA oficializada.</li><li>Portal publicado.</li><li>Previsão todo mês.</li></ul>
+        <nav class="acoes acoes-linha" aria-label="Próximos passos no portal">
+          <a class="botao" href="/gestao-orcamentos/iniciativas#1">Iniciativas</a>
+          <a class="botao" href="/gestao-orcamentos/previsao#1">Previsão</a>
+        </nav>
+      </article>
+    </li>
+  </ol>
+
+  <footer class="pe">
+    <img class="logo" src="/static/viu_logo.jpg" width="200" height="200" alt="VIU">
+    <span>Gestão de orçamentos</span>
+  </footer>
+</main>
+
+<dialog class="amplia" aria-labelledby="amplia-titulo">
+  <figure>
+    <img class="amplia-img" alt="">
+    <figcaption><strong id="amplia-titulo"></strong> <span class="amplia-legenda"></span></figcaption>
+  </figure>
+  <div class="amplia-acoes">
+    <a class="botao botao-claro amplia-alta" href="#" target="_blank" rel="noopener">Abrir em tamanho real</a>
+    <button class="botao amplia-fechar" type="button">Fechar</button>
+  </div>
+</dialog>
+</body>
+</html>

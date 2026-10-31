@@ -1,0 +1,2497 @@
+{
+ "modulo": "automatico",
+ "carga": {
+  "processado_em": "2026-10-26 12:01:46.659042+00:00",
+  "dados_ate": "2026-10-25",
+  "parcial": {
+   "Inbound": {
+    "mes": "2026-10",
+    "pedidos_ate_agora": 133.0
+   },
+   "Mercado": {
+    "mes": "2026-10",
+    "pedidos_ate_agora": 304.0
+   }
+  },
+  "mes_fechado": "2026-09"
+ },
+ "protocolo": "D48",
+ "modelos": {
+  "autots_1": {
+   "descricao": "AutoTS: o 1º colocado da busca automática em cada janela de 12 meses",
+   "series": {
+    "Inbound": {
+     "metricas": {
+      "1": {
+       "n": 4,
+       "wape": 0.15035997048726918,
+       "mae": 21.12557585346132,
+       "vies": -0.14475266812072907,
+       "cobertura_80": 0.75,
+       "n_faixa": 4,
+       "largura": 0.3152085040293018
+      },
+      "2": {
+       "n": 4,
+       "wape": 0.20601520850280516,
+       "mae": 28.945136794644124,
+       "vies": -0.16837943638537536,
+       "cobertura_80": 0.5,
+       "n_faixa": 4,
+       "largura": 0.33915689626485945
+      },
+      "3": {
+       "n": 4,
+       "wape": 0.29609754288318363,
+       "mae": 41.6017047750873,
+       "vies": -0.1623763615130848,
+       "cobertura_80": 0.25,
+       "n_faixa": 4,
+       "largura": 0.39066201936706685
+      },
+      "todos": {
+       "n": 12,
+       "wape": 0.21749090729108597,
+       "mae": 30.55747247439758,
+       "vies": -0.1585028220063964,
+       "cobertura_80": 0.5,
+       "n_faixa": 12,
+       "largura": 0.3483424732204094
+      },
+      "verificacao": {
+       "n": 5,
+       "wape": 0.37897634393831436,
+       "mae": 47.90260987380294,
+       "vies": -0.15797776998573626,
+       "cobertura_80": 0.4,
+       "n_faixa": 5,
+       "largura": 0.6587756637247162
+      }
+     },
+     "backtest": [
+      {
+       "alvo": "2026-01",
+       "horizonte": 1,
+       "origem": "2026-01",
+       "trecho": "verificacao",
+       "real": 132.0,
+       "valor": 43.0,
+       "p10": 6.0,
+       "p90": 81.39
+      },
+      {
+       "alvo": "2026-02",
+       "horizonte": 1,
+       "origem": "2026-02",
+       "trecho": "verificacao",
+       "real": 88.0,
+       "valor": 121.0,
+       "p10": 74.45,
+       "p90": 172.64
+      },
+      {
+       "alvo": "2026-03",
+       "horizonte": 1,
+       "origem": "2026-03",
+       "trecho": "verificacao",
+       "real": 144.0,
+       "valor": 98.82,
+       "p10": 62.71,
+       "p90": 134.93
+      },
+      {
+       "alvo": "2026-04",
+       "horizonte": 1,
+       "origem": "2026-04",
+       "trecho": "verificacao",
+       "real": 99.0,
+       "valor": 135.84,
+       "p10": 96.8,
+       "p90": 164.21
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 3,
+       "origem": "2026-04",
+       "trecho": "teste",
+       "real": 112.0,
+       "valor": 105.97,
+       "p10": 71.92,
+       "p90": 139.32
+      },
+      {
+       "alvo": "2026-05",
+       "horizonte": 1,
+       "origem": "2026-05",
+       "trecho": "verificacao",
+       "real": 169.0,
+       "valor": 133.5,
+       "p10": 92.92,
+       "p90": 164.66
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 2,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 112.0,
+       "valor": 85.5,
+       "p10": 52.92,
+       "p90": 124.66
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 3,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 165.0,
+       "valor": 97.0,
+       "p10": 62.5,
+       "p90": 134.25
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 1,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 112.0,
+       "valor": 101.2,
+       "p10": 91.88,
+       "p90": 120.89
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 2,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 165.0,
+       "valor": 101.2,
+       "p10": 91.88,
+       "p90": 120.89
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 3,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 156.0,
+       "valor": 101.2,
+       "p10": 91.88,
+       "p90": 120.89
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 1,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 165.0,
+       "valor": 166.58,
+       "p10": 159.8,
+       "p90": 203.67
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 2,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 156.0,
+       "valor": 166.58,
+       "p10": 159.8,
+       "p90": 203.67
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 3,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 129.0,
+       "valor": 166.58,
+       "p10": 159.8,
+       "p90": 203.67
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 1,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 156.0,
+       "valor": 114.1,
+       "p10": 98.97,
+       "p90": 132.39
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 2,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 129.0,
+       "valor": 114.1,
+       "p10": 98.97,
+       "p90": 132.39
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 1,
+       "origem": "2026-09",
+       "trecho": "teste",
+       "real": 129.0,
+       "valor": 98.78,
+       "p10": 69.47,
+       "p90": 136.77
+      }
+     ]
+    },
+    "Mercado": {
+     "metricas": {
+      "1": {
+       "n": 4,
+       "wape": 0.29510136348727567,
+       "mae": 113.76157562434477,
+       "vies": -0.062286836898430016,
+       "cobertura_80": 0.5,
+       "n_faixa": 4,
+       "largura": 0.4380179033846857
+      },
+      "2": {
+       "n": 4,
+       "wape": 0.19937309281557353,
+       "mae": 76.8583272804036,
+       "vies": -0.06261780094163075,
+       "cobertura_80": 0.5,
+       "n_faixa": 4,
+       "largura": 0.5029974257026768
+      },
+      "3": {
+       "n": 4,
+       "wape": 0.23541222986659752,
+       "mae": 90.75141461357335,
+       "vies": -0.12928126039985677,
+       "cobertura_80": 0.75,
+       "n_faixa": 4,
+       "largura": 0.6549740312469178
+      },
+      "todos": {
+       "n": 12,
+       "wape": 0.24329556205648223,
+       "mae": 93.7904391727739,
+       "vies": -0.08472863274663918,
+       "cobertura_80": 0.5833333333333334,
+       "n_faixa": 12,
+       "largura": 0.5319964534447602
+      },
+      "verificacao": {
+       "n": 5,
+       "wape": 0.3130202201805327,
+       "mae": 70.61736167272818,
+       "vies": -0.18337604549754702,
+       "cobertura_80": 0.2,
+       "n_faixa": 5,
+       "largura": 0.46952104181435417
+      }
+     },
+     "backtest": [
+      {
+       "alvo": "2026-01",
+       "horizonte": 1,
+       "origem": "2026-01",
+       "trecho": "verificacao",
+       "real": 125.0,
+       "valor": 105.0,
+       "p10": 105.0,
+       "p90": 105.0
+      },
+      {
+       "alvo": "2026-02",
+       "horizonte": 1,
+       "origem": "2026-02",
+       "trecho": "verificacao",
+       "real": 187.0,
+       "valor": 143.5,
+       "p10": 81.5,
+       "p90": 245.5
+      },
+      {
+       "alvo": "2026-03",
+       "horizonte": 1,
+       "origem": "2026-03",
+       "trecho": "verificacao",
+       "real": 252.0,
+       "valor": 136.31,
+       "p10": 60.16,
+       "p90": 212.41
+      },
+      {
+       "alvo": "2026-04",
+       "horizonte": 1,
+       "origem": "2026-04",
+       "trecho": "verificacao",
+       "real": 228.0,
+       "valor": 301.12,
+       "p10": 229.61,
+       "p90": 372.64
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 3,
+       "origem": "2026-04",
+       "trecho": "teste",
+       "real": 339.0,
+       "valor": 420.83,
+       "p10": 206.3,
+       "p90": 635.38
+      },
+      {
+       "alvo": "2026-05",
+       "horizonte": 1,
+       "origem": "2026-05",
+       "trecho": "verificacao",
+       "real": 336.0,
+       "valor": 235.22,
+       "p10": 196.34,
+       "p90": 276.69
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 2,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 339.0,
+       "valor": 247.32,
+       "p10": 208.44,
+       "p90": 288.79
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 3,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 404.0,
+       "valor": 259.02,
+       "p10": 220.14,
+       "p90": 300.49
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 1,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 339.0,
+       "valor": 278.48,
+       "p10": 160.42,
+       "p90": 363.61
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 2,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 404.0,
+       "valor": 293.69,
+       "p10": 173.09,
+       "p90": 376.28
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 3,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 322.0,
+       "valor": 308.89,
+       "p10": 185.76,
+       "p90": 388.95
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 1,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 404.0,
+       "valor": 343.97,
+       "p10": 271.77,
+       "p90": 416.17
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 2,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 322.0,
+       "valor": 348.94,
+       "p10": 246.84,
+       "p90": 451.04
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 3,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 477.0,
+       "valor": 353.91,
+       "p10": 228.86,
+       "p90": 478.95
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 1,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 322.0,
+       "valor": 501.5,
+       "p10": 414.06,
+       "p90": 566.19
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 2,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 477.0,
+       "valor": 555.5,
+       "p10": 387.86,
+       "p90": 692.14
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 1,
+       "origem": "2026-09",
+       "trecho": "teste",
+       "real": 477.0,
+       "valor": 322.0,
+       "p10": 245.0,
+       "p90": 399.0
+      }
+     ]
+    }
+   },
+   "futuro": {
+    "Inbound": [
+     {
+      "mes": "2026-10",
+      "valor": 159.16,
+      "p10": 120.35,
+      "p90": 197.97
+     },
+     {
+      "mes": "2026-11",
+      "valor": 162.18,
+      "p10": 94.96,
+      "p90": 229.39
+     },
+     {
+      "mes": "2026-12",
+      "valor": 165.19,
+      "p10": 78.42,
+      "p90": 251.97
+     }
+    ],
+    "Mercado": [
+     {
+      "mes": "2026-10",
+      "valor": 0.0,
+      "p10": 0.0,
+      "p90": 0.0
+     },
+     {
+      "mes": "2026-11",
+      "valor": 0.0,
+      "p10": 0.0,
+      "p90": 0.0
+     },
+     {
+      "mes": "2026-12",
+      "valor": 0.0,
+      "p10": 0.0,
+      "p90": 0.0
+     }
+    ]
+   },
+   "modulo": "automatico",
+   "detalhe": {
+    "config": {
+     "lista": [
+      "ConstantNaive",
+      "LastValueNaive",
+      "AverageValueNaive",
+      "SeasonalNaive",
+      "GLM",
+      "GLS",
+      "ETS",
+      "ARIMA",
+      "UnobservedComponents",
+      "KalmanStateSpace",
+      "Theta",
+      "ARDL",
+      "BasicLinearModel",
+      "UnivariateMotif",
+      "MetricMotif",
+      "SeasonalityMotif",
+      "FFT",
+      "WindowRegression",
+      "DatepartRegression"
+     ],
+     "transformacoes": "superfast",
+     "profundidade": 3,
+     "validacoes": 2,
+     "revalidados": 0.35,
+     "metrica": "mae",
+     "geracoes": 0,
+     "semente": 2026,
+     "intervalo": 0.8
+    },
+    "escolhas": [
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-01",
+      "treino_fim": "2025-12",
+      "n_meses": 12,
+      "modelo": "DatepartRegression",
+      "transformacoes": [
+       "ClipOutliers",
+       "DifferencedTransformer"
+      ],
+      "posicao": 1,
+      "nota": 10.113865663805948,
+      "segundos": 12.3,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-02",
+      "treino_fim": "2026-01",
+      "n_meses": 12,
+      "modelo": "DatepartRegression",
+      "transformacoes": [
+       "ClipOutliers",
+       "DifferencedTransformer"
+      ],
+      "posicao": 1,
+      "nota": 2.497036097897855,
+      "segundos": 13.4,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-03",
+      "treino_fim": "2026-02",
+      "n_meses": 12,
+      "modelo": "GLS",
+      "transformacoes": [
+       "ClipOutliers",
+       "RobustScaler",
+       "Round"
+      ],
+      "posicao": 1,
+      "nota": 49.60713480585025,
+      "segundos": 14.2,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-04",
+      "treino_fim": "2026-03",
+      "n_meses": 12,
+      "modelo": "FFT",
+      "transformacoes": [
+       "bkfilter",
+       "StandardScaler"
+      ],
+      "posicao": 1,
+      "nota": 19.94518312300491,
+      "segundos": 17.4,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-05",
+      "treino_fim": "2026-04",
+      "n_meses": 12,
+      "modelo": "SeasonalNaive",
+      "transformacoes": [
+       "ClipOutliers"
+      ],
+      "posicao": 1,
+      "nota": 338.845221546584,
+      "segundos": 22.6,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-06",
+      "treino_fim": "2026-05",
+      "n_meses": 12,
+      "modelo": "LastValueNaive",
+      "transformacoes": [
+       "PositiveShift",
+       "bkfilter"
+      ],
+      "posicao": 1,
+      "nota": 14.156044185011156,
+      "segundos": 23.2,
+      "n_familias": 16
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-07",
+      "treino_fim": "2026-06",
+      "n_meses": 12,
+      "modelo": "LastValueNaive",
+      "transformacoes": [
+       "PositiveShift",
+       "bkfilter"
+      ],
+      "posicao": 1,
+      "nota": 52.02645952764482,
+      "segundos": 21.8,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-08",
+      "treino_fim": "2026-07",
+      "n_meses": 12,
+      "modelo": "LastValueNaive",
+      "transformacoes": [
+       "PositiveShift",
+       "bkfilter"
+      ],
+      "posicao": 1,
+      "nota": 43.67600111167746,
+      "segundos": 22.0,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-09",
+      "treino_fim": "2026-08",
+      "n_meses": 12,
+      "modelo": "WindowRegression",
+      "transformacoes": [
+       "bkfilter",
+       "MaxAbsScaler"
+      ],
+      "posicao": 1,
+      "nota": 8.68167857327823,
+      "segundos": 16.9,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-01",
+      "treino_fim": "2025-12",
+      "n_meses": 12,
+      "modelo": "ConstantNaive",
+      "transformacoes": [
+       "DifferencedTransformer"
+      ],
+      "posicao": 1,
+      "nota": 10.743791343184803,
+      "segundos": 24.4,
+      "n_familias": 14
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-02",
+      "treino_fim": "2026-01",
+      "n_meses": 12,
+      "modelo": "Theta",
+      "transformacoes": [
+       "AlignLastValue",
+       "MinMaxScaler",
+       "HistoricValues"
+      ],
+      "posicao": 1,
+      "nota": 6.766666666666667,
+      "segundos": 21.1,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-03",
+      "treino_fim": "2026-02",
+      "n_meses": 12,
+      "modelo": "GLS",
+      "transformacoes": [
+       "MaxAbsScaler",
+       "ShiftFirstValue"
+      ],
+      "posicao": 1,
+      "nota": 10.340358530347856,
+      "segundos": 18.9,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-04",
+      "treino_fim": "2026-03",
+      "n_meses": 12,
+      "modelo": "GLS",
+      "transformacoes": [
+       "DifferencedTransformer",
+       "Detrend"
+      ],
+      "posicao": 1,
+      "nota": 45.13354631081222,
+      "segundos": 20.1,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-05",
+      "treino_fim": "2026-04",
+      "n_meses": 12,
+      "modelo": "UnobservedComponents",
+      "transformacoes": [
+       "ClipOutliers",
+       "Detrend",
+       "RobustScaler"
+      ],
+      "posicao": 1,
+      "nota": 17.429838022791298,
+      "segundos": 13.9,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-06",
+      "treino_fim": "2026-05",
+      "n_meses": 12,
+      "modelo": "ETS",
+      "transformacoes": [
+       "ClipOutliers"
+      ],
+      "posicao": 1,
+      "nota": 38.53048467146062,
+      "segundos": 16.5,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-07",
+      "treino_fim": "2026-06",
+      "n_meses": 12,
+      "modelo": "Theta",
+      "transformacoes": [
+       "MinMaxScaler"
+      ],
+      "posicao": 1,
+      "nota": 44.34763251841692,
+      "segundos": 20.6,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-08",
+      "treino_fim": "2026-07",
+      "n_meses": 12,
+      "modelo": "DatepartRegression",
+      "transformacoes": [
+       "ClipOutliers",
+       "DifferencedTransformer"
+      ],
+      "posicao": 1,
+      "nota": 142.41858927114967,
+      "segundos": 13.5,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-09",
+      "treino_fim": "2026-08",
+      "n_meses": 12,
+      "modelo": "ARIMA",
+      "transformacoes": [
+       "StandardScaler"
+      ],
+      "posicao": 1,
+      "nota": 16.666666666666668,
+      "segundos": 16.8,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-10",
+      "treino_fim": "2026-09",
+      "n_meses": 12,
+      "modelo": "Theta",
+      "transformacoes": [
+       "ShiftFirstValue",
+       "MaxAbsScaler"
+      ],
+      "posicao": 1,
+      "nota": 70.01024596684728,
+      "segundos": 17.2,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-10",
+      "treino_fim": "2026-09",
+      "n_meses": 12,
+      "modelo": "ARIMA",
+      "transformacoes": [
+       "bkfilter"
+      ],
+      "posicao": 1,
+      "nota": 24.66453080589169,
+      "segundos": 18.7,
+      "n_familias": 17
+     }
+    ]
+   },
+   "segundos": 438.0,
+   "carga": "2026-10-26 12:01:46.659042+00:00"
+  },
+  "autots_2": {
+   "descricao": "AutoTS: o 2º colocado da busca automática em cada janela de 12 meses",
+   "series": {
+    "Inbound": {
+     "metricas": {
+      "1": {
+       "n": 4,
+       "wape": 0.25612118204166195,
+       "mae": 35.98502607685351,
+       "vies": -0.11348695290308963,
+       "cobertura_80": 0.5,
+       "n_faixa": 4,
+       "largura": 0.48077291610407247
+      },
+      "2": {
+       "n": 4,
+       "wape": 0.32029561227792536,
+       "mae": 45.001533525048515,
+       "vies": -0.13699976138755504,
+       "cobertura_80": 0.0,
+       "n_faixa": 4,
+       "largura": 0.4485907766340819
+      },
+      "3": {
+       "n": 4,
+       "wape": 0.24275449255380424,
+       "mae": 34.1070062038095,
+       "vies": -0.24275449255380424,
+       "cobertura_80": 0.5,
+       "n_faixa": 4,
+       "largura": 0.533950976610965
+      },
+      "todos": {
+       "n": 12,
+       "wape": 0.27305709562446384,
+       "mae": 38.36452193523717,
+       "vies": -0.16441373561481631,
+       "cobertura_80": 0.3333333333333333,
+       "n_faixa": 12,
+       "largura": 0.48777155644970643
+      },
+      "verificacao": {
+       "n": 5,
+       "wape": 0.27135072757783923,
+       "mae": 34.29873196583888,
+       "vies": -0.27135072757783923,
+       "cobertura_80": 0.2,
+       "n_faixa": 5,
+       "largura": 0.47099061880889515
+      }
+     },
+     "backtest": [
+      {
+       "alvo": "2026-01",
+       "horizonte": 1,
+       "origem": "2026-01",
+       "trecho": "verificacao",
+       "real": 132.0,
+       "valor": 69.92,
+       "p10": 41.84,
+       "p90": 106.07
+      },
+      {
+       "alvo": "2026-02",
+       "horizonte": 1,
+       "origem": "2026-02",
+       "trecho": "verificacao",
+       "real": 88.0,
+       "valor": 58.59,
+       "p10": 31.8,
+       "p90": 85.39
+      },
+      {
+       "alvo": "2026-03",
+       "horizonte": 1,
+       "origem": "2026-03",
+       "trecho": "verificacao",
+       "real": 144.0,
+       "valor": 98.92,
+       "p10": 74.12,
+       "p90": 122.72
+      },
+      {
+       "alvo": "2026-04",
+       "horizonte": 1,
+       "origem": "2026-04",
+       "trecho": "verificacao",
+       "real": 99.0,
+       "valor": 91.0,
+       "p10": 57.74,
+       "p90": 129.26
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 3,
+       "origem": "2026-04",
+       "trecho": "teste",
+       "real": 112.0,
+       "valor": 80.0,
+       "p10": 48.58,
+       "p90": 120.09
+      },
+      {
+       "alvo": "2026-05",
+       "horizonte": 1,
+       "origem": "2026-05",
+       "trecho": "verificacao",
+       "real": 169.0,
+       "valor": 142.07,
+       "p10": 128.45,
+       "p90": 162.16
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 2,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 112.0,
+       "valor": 142.07,
+       "p10": 128.45,
+       "p90": 162.16
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 3,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 165.0,
+       "valor": 142.07,
+       "p10": 128.45,
+       "p90": 162.16
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 1,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 112.0,
+       "valor": 85.5,
+       "p10": 47.64,
+       "p90": 130.83
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 2,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 165.0,
+       "valor": 109.5,
+       "p10": 67.64,
+       "p90": 150.83
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 3,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 156.0,
+       "valor": 115.5,
+       "p10": 72.64,
+       "p90": 155.83
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 1,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 165.0,
+       "valor": 99.0,
+       "p10": 50.0,
+       "p90": 99.0
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 2,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 156.0,
+       "valor": 83.0,
+       "p10": 34.0,
+       "p90": 132.0
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 3,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 129.0,
+       "valor": 88.0,
+       "p10": 39.0,
+       "p90": 137.0
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 1,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 156.0,
+       "valor": 144.64,
+       "p10": 127.19,
+       "p90": 173.76
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 2,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 129.0,
+       "valor": 150.43,
+       "p10": 132.98,
+       "p90": 179.55
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 1,
+       "origem": "2026-09",
+       "trecho": "teste",
+       "real": 129.0,
+       "valor": 169.08,
+       "p10": 129.87,
+       "p90": 205.31
+      }
+     ]
+    },
+    "Mercado": {
+     "metricas": {
+      "1": {
+       "n": 4,
+       "wape": 0.2929142727284317,
+       "mae": 112.91845213681042,
+       "vies": 0.007570563260208601,
+       "cobertura_80": 0.25,
+       "n_faixa": 4,
+       "largura": 0.25052638112639913
+      },
+      "2": {
+       "n": 4,
+       "wape": 0.17827287215567403,
+       "mae": 68.72419221601234,
+       "vies": 0.059268190435643214,
+       "cobertura_80": 0.5,
+       "n_faixa": 4,
+       "largura": 0.420331573283523
+      },
+      "3": {
+       "n": 4,
+       "wape": 0.5149578973284602,
+       "mae": 198.5162694201214,
+       "vies": -0.07527153913869508,
+       "cobertura_80": 0.25,
+       "n_faixa": 4,
+       "largura": 0.42880540311288995
+      },
+      "todos": {
+       "n": 12,
+       "wape": 0.3287150140708553,
+       "mae": 126.71963792431472,
+       "vies": -0.002810928480947749,
+       "cobertura_80": 0.3333333333333333,
+       "n_faixa": 12,
+       "largura": 0.36655445250760393
+      },
+      "verificacao": {
+       "n": 5,
+       "wape": 0.25478511167596235,
+       "mae": 57.4795211940971,
+       "vies": -0.20016045485043815,
+       "cobertura_80": 0.4,
+       "n_faixa": 5,
+       "largura": 0.6561284460559839
+      }
+     },
+     "backtest": [
+      {
+       "alvo": "2026-01",
+       "horizonte": 1,
+       "origem": "2026-01",
+       "trecho": "verificacao",
+       "real": 125.0,
+       "valor": 105.0,
+       "p10": 17.42,
+       "p90": 173.03
+      },
+      {
+       "alvo": "2026-02",
+       "horizonte": 1,
+       "origem": "2026-02",
+       "trecho": "verificacao",
+       "real": 187.0,
+       "valor": 128.75,
+       "p10": 97.15,
+       "p90": 174.35
+      },
+      {
+       "alvo": "2026-03",
+       "horizonte": 1,
+       "origem": "2026-03",
+       "trecho": "verificacao",
+       "real": 252.0,
+       "valor": 174.5,
+       "p10": 92.5,
+       "p90": 224.5
+      },
+      {
+       "alvo": "2026-04",
+       "horizonte": 1,
+       "origem": "2026-04",
+       "trecho": "verificacao",
+       "real": 228.0,
+       "valor": 258.81,
+       "p10": 160.21,
+       "p90": 321.8
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 3,
+       "origem": "2026-04",
+       "trecho": "teste",
+       "real": 339.0,
+       "valor": 166.99,
+       "p10": 83.69,
+       "p90": 245.29
+      },
+      {
+       "alvo": "2026-05",
+       "horizonte": 1,
+       "origem": "2026-05",
+       "trecho": "verificacao",
+       "real": 336.0,
+       "valor": 235.16,
+       "p10": 169.58,
+       "p90": 300.75
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 2,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 339.0,
+       "valor": 247.25,
+       "p10": 181.67,
+       "p90": 312.83
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 3,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 404.0,
+       "valor": 258.94,
+       "p10": 193.36,
+       "p90": 324.53
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 1,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 339.0,
+       "valor": 444.5,
+       "p10": 406.05,
+       "p90": 513.27
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 2,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 404.0,
+       "valor": 552.5,
+       "p10": 514.05,
+       "p90": 621.27
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 3,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 322.0,
+       "valor": 661.0,
+       "p10": 622.55,
+       "p90": 729.77
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 1,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 404.0,
+       "valor": 339.0,
+       "p10": 259.01,
+       "p90": 418.99
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 2,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 322.0,
+       "valor": 339.0,
+       "p10": 225.88,
+       "p90": 452.12
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 3,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 477.0,
+       "valor": 339.0,
+       "p10": 200.46,
+       "p90": 477.54
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 1,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 322.0,
+       "valor": 448.17,
+       "p10": 401.51,
+       "p90": 494.84
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 2,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 477.0,
+       "valor": 494.65,
+       "p10": 416.8,
+       "p90": 572.49
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 1,
+       "origem": "2026-09",
+       "trecho": "teste",
+       "real": 477.0,
+       "valor": 322.0,
+       "p10": 322.0,
+       "p90": 322.0
+      }
+     ]
+    }
+   },
+   "futuro": {
+    "Inbound": [
+     {
+      "mes": "2026-10",
+      "valor": 159.12,
+      "p10": 123.32,
+      "p90": 186.72
+     },
+     {
+      "mes": "2026-11",
+      "valor": 165.15,
+      "p10": 129.35,
+      "p90": 192.75
+     },
+     {
+      "mes": "2026-12",
+      "valor": 171.18,
+      "p10": 135.38,
+      "p90": 198.78
+     }
+    ],
+    "Mercado": [
+     {
+      "mes": "2026-10",
+      "valor": 326.52,
+      "p10": 257.13,
+      "p90": 409.41
+     },
+     {
+      "mes": "2026-11",
+      "valor": 326.52,
+      "p10": 257.13,
+      "p90": 409.41
+     },
+     {
+      "mes": "2026-12",
+      "valor": 326.52,
+      "p10": 257.13,
+      "p90": 409.41
+     }
+    ]
+   },
+   "modulo": "automatico",
+   "detalhe": {
+    "config": {
+     "lista": [
+      "ConstantNaive",
+      "LastValueNaive",
+      "AverageValueNaive",
+      "SeasonalNaive",
+      "GLM",
+      "GLS",
+      "ETS",
+      "ARIMA",
+      "UnobservedComponents",
+      "KalmanStateSpace",
+      "Theta",
+      "ARDL",
+      "BasicLinearModel",
+      "UnivariateMotif",
+      "MetricMotif",
+      "SeasonalityMotif",
+      "FFT",
+      "WindowRegression",
+      "DatepartRegression"
+     ],
+     "transformacoes": "superfast",
+     "profundidade": 3,
+     "validacoes": 2,
+     "revalidados": 0.35,
+     "metrica": "mae",
+     "geracoes": 0,
+     "semente": 2026,
+     "intervalo": 0.8
+    },
+    "escolhas": [
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-01",
+      "treino_fim": "2025-12",
+      "n_meses": 12,
+      "modelo": "FFT",
+      "transformacoes": [
+       "bkfilter",
+       "StandardScaler"
+      ],
+      "posicao": 2,
+      "nota": 12.052574499330708,
+      "segundos": 12.3,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-02",
+      "treino_fim": "2026-01",
+      "n_meses": 12,
+      "modelo": "ARDL",
+      "transformacoes": [
+       "bkfilter",
+       "bkfilter",
+       "RobustScaler"
+      ],
+      "posicao": 2,
+      "nota": 3.0131558006313086,
+      "segundos": 13.4,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-03",
+      "treino_fim": "2026-02",
+      "n_meses": 12,
+      "modelo": "AverageValueNaive",
+      "transformacoes": [
+       "StandardScaler"
+      ],
+      "posicao": 2,
+      "nota": 49.71397929742437,
+      "segundos": 14.2,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-04",
+      "treino_fim": "2026-03",
+      "n_meses": 12,
+      "modelo": "SeasonalNaive",
+      "transformacoes": [
+       "ClipOutliers"
+      ],
+      "posicao": 2,
+      "nota": 25.0,
+      "segundos": 17.4,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-05",
+      "treino_fim": "2026-04",
+      "n_meses": 12,
+      "modelo": "LastValueNaive",
+      "transformacoes": [
+       "PositiveShift",
+       "bkfilter"
+      ],
+      "posicao": 2,
+      "nota": 510.50704456360626,
+      "segundos": 22.6,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-06",
+      "treino_fim": "2026-05",
+      "n_meses": 12,
+      "modelo": "SeasonalNaive",
+      "transformacoes": [
+       "ClipOutliers"
+      ],
+      "posicao": 2,
+      "nota": 20.774631909244864,
+      "segundos": 23.2,
+      "n_familias": 16
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-07",
+      "treino_fim": "2026-06",
+      "n_meses": 12,
+      "modelo": "SeasonalNaive",
+      "transformacoes": [
+       "SeasonalDifference",
+       "MaxAbsScaler",
+       "Round"
+      ],
+      "posicao": 2,
+      "nota": 62.222222222222804,
+      "segundos": 21.8,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-08",
+      "treino_fim": "2026-07",
+      "n_meses": 12,
+      "modelo": "UnobservedComponents",
+      "transformacoes": [
+       "ClipOutliers",
+       "Detrend",
+       "bkfilter"
+      ],
+      "posicao": 2,
+      "nota": 107.91665588327142,
+      "segundos": 22.0,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-09",
+      "treino_fim": "2026-08",
+      "n_meses": 12,
+      "modelo": "DatepartRegression",
+      "transformacoes": [
+       "Detrend",
+       "RobustScaler"
+      ],
+      "posicao": 2,
+      "nota": 14.646416985229147,
+      "segundos": 16.9,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-01",
+      "treino_fim": "2025-12",
+      "n_meses": 12,
+      "modelo": "FFT",
+      "transformacoes": [
+       "AlignLastValue",
+       "ClipOutliers"
+      ],
+      "posicao": 2,
+      "nota": 10.743791343184803,
+      "segundos": 24.4,
+      "n_familias": 14
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-02",
+      "treino_fim": "2026-01",
+      "n_meses": 12,
+      "modelo": "AverageValueNaive",
+      "transformacoes": [
+       "StandardScaler"
+      ],
+      "posicao": 2,
+      "nota": 7.287878787878789,
+      "segundos": 21.1,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-03",
+      "treino_fim": "2026-02",
+      "n_meses": 12,
+      "modelo": "Theta",
+      "transformacoes": [
+       "AlignLastValue",
+       "MinMaxScaler",
+       "HistoricValues"
+      ],
+      "posicao": 2,
+      "nota": 10.788888888888886,
+      "segundos": 18.9,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-04",
+      "treino_fim": "2026-03",
+      "n_meses": 12,
+      "modelo": "FFT",
+      "transformacoes": [
+       "ClipOutliers"
+      ],
+      "posicao": 2,
+      "nota": 45.49537937725216,
+      "segundos": 20.1,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-05",
+      "treino_fim": "2026-04",
+      "n_meses": 12,
+      "modelo": "GLS",
+      "transformacoes": [
+       "ClipOutliers",
+       "Detrend"
+      ],
+      "posicao": 2,
+      "nota": 25.05278117873363,
+      "segundos": 13.9,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-06",
+      "treino_fim": "2026-05",
+      "n_meses": 12,
+      "modelo": "UnobservedComponents",
+      "transformacoes": [
+       "ClipOutliers",
+       "Detrend",
+       "RobustScaler"
+      ],
+      "posicao": 2,
+      "nota": 39.02240911049709,
+      "segundos": 16.5,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-07",
+      "treino_fim": "2026-06",
+      "n_meses": 12,
+      "modelo": "ARIMA",
+      "transformacoes": [
+       "StandardScaler"
+      ],
+      "posicao": 2,
+      "nota": 45.0,
+      "segundos": 20.6,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-08",
+      "treino_fim": "2026-07",
+      "n_meses": 12,
+      "modelo": "KalmanStateSpace",
+      "transformacoes": [
+       "Slice",
+       "StandardScaler",
+       "Detrend"
+      ],
+      "posicao": 2,
+      "nota": 147.09650538247473,
+      "segundos": 13.5,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-09",
+      "treino_fim": "2026-08",
+      "n_meses": 12,
+      "modelo": "ConstantNaive",
+      "transformacoes": [
+       "DifferencedTransformer"
+      ],
+      "posicao": 2,
+      "nota": 16.666666666666668,
+      "segundos": 16.8,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-10",
+      "treino_fim": "2026-09",
+      "n_meses": 12,
+      "modelo": "UnobservedComponents",
+      "transformacoes": [
+       "RobustScaler"
+      ],
+      "posicao": 2,
+      "nota": 75.92272235237735,
+      "segundos": 17.2,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-10",
+      "treino_fim": "2026-09",
+      "n_meses": 12,
+      "modelo": "LastValueNaive",
+      "transformacoes": [
+       "PositiveShift",
+       "bkfilter"
+      ],
+      "posicao": 2,
+      "nota": 32.18397543348336,
+      "segundos": 18.7,
+      "n_familias": 17
+     }
+    ]
+   },
+   "segundos": 0.1,
+   "carga": "2026-10-26 12:01:46.659042+00:00"
+  },
+  "autots_3": {
+   "descricao": "AutoTS: o 3º colocado da busca automática em cada janela de 12 meses",
+   "series": {
+    "Inbound": {
+     "metricas": {
+      "1": {
+       "n": 4,
+       "wape": 0.1628544816522054,
+       "mae": 22.88105467213486,
+       "vies": -0.002308522776846027,
+       "cobertura_80": 1.0,
+       "n_faixa": 4,
+       "largura": 0.42343538706662276
+      },
+      "2": {
+       "n": 4,
+       "wape": 0.15780393767298267,
+       "mae": 22.171453243054067,
+       "vies": -0.11961965133299596,
+       "cobertura_80": 0.75,
+       "n_faixa": 4,
+       "largura": 0.45174026333477657
+      },
+      "3": {
+       "n": 4,
+       "wape": 0.25155996307800454,
+       "mae": 35.34417481245964,
+       "vies": -0.23070796559081497,
+       "cobertura_80": 0.25,
+       "n_faixa": 4,
+       "largura": 0.31435371555806507
+      },
+      "todos": {
+       "n": 12,
+       "wape": 0.19073946080106421,
+       "mae": 26.798894242549522,
+       "vies": -0.117545379900219,
+       "cobertura_80": 0.6666666666666666,
+       "n_faixa": 12,
+       "largura": 0.39650978865315484
+      },
+      "verificacao": {
+       "n": 5,
+       "wape": 0.3163152087676355,
+       "mae": 39.98224238822913,
+       "vies": -0.2878341961094077,
+       "cobertura_80": 0.2,
+       "n_faixa": 5,
+       "largura": 0.3565395513201537
+      }
+     },
+     "backtest": [
+      {
+       "alvo": "2026-01",
+       "horizonte": 1,
+       "origem": "2026-01",
+       "trecho": "verificacao",
+       "real": 132.0,
+       "valor": 77.0,
+       "p10": 75.72,
+       "p90": 78.28
+      },
+      {
+       "alvo": "2026-02",
+       "horizonte": 1,
+       "origem": "2026-02",
+       "trecho": "verificacao",
+       "real": 88.0,
+       "valor": 60.15,
+       "p10": 26.92,
+       "p90": 103.35
+      },
+      {
+       "alvo": "2026-03",
+       "horizonte": 1,
+       "origem": "2026-03",
+       "trecho": "verificacao",
+       "real": 144.0,
+       "valor": 107.62,
+       "p10": 75.5,
+       "p90": 139.3
+      },
+      {
+       "alvo": "2026-04",
+       "horizonte": 1,
+       "origem": "2026-04",
+       "trecho": "verificacao",
+       "real": 99.0,
+       "valor": 108.0,
+       "p10": 106.72,
+       "p90": 109.28
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 3,
+       "origem": "2026-04",
+       "trecho": "teste",
+       "real": 112.0,
+       "valor": 105.0,
+       "p10": 103.72,
+       "p90": 106.28
+      },
+      {
+       "alvo": "2026-05",
+       "horizonte": 1,
+       "origem": "2026-05",
+       "trecho": "verificacao",
+       "real": 169.0,
+       "valor": 97.33,
+       "p10": 62.83,
+       "p90": 134.8
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 2,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 112.0,
+       "valor": 97.1,
+       "p10": 62.67,
+       "p90": 134.64
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 3,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 165.0,
+       "valor": 96.95,
+       "p10": 62.57,
+       "p90": 134.54
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 1,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 112.0,
+       "valor": 123.08,
+       "p10": 87.08,
+       "p90": 152.68
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 2,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 165.0,
+       "valor": 123.08,
+       "p10": 87.08,
+       "p90": 152.68
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 3,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 156.0,
+       "valor": 95.53,
+       "p10": 64.12,
+       "p90": 129.72
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 1,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 165.0,
+       "valor": 134.86,
+       "p10": 127.34,
+       "p90": 176.07
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 2,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 156.0,
+       "valor": 134.86,
+       "p10": 127.34,
+       "p90": 176.07
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 3,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 129.0,
+       "valor": 134.86,
+       "p10": 127.34,
+       "p90": 176.07
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 1,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 156.0,
+       "valor": 139.73,
+       "p10": 105.66,
+       "p90": 164.27
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 2,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 129.0,
+       "valor": 139.73,
+       "p10": 105.66,
+       "p90": 164.27
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 1,
+       "origem": "2026-09",
+       "trecho": "teste",
+       "real": 129.0,
+       "valor": 163.03,
+       "p10": 120.54,
+       "p90": 176.89
+      }
+     ]
+    },
+    "Mercado": {
+     "metricas": {
+      "1": {
+       "n": 4,
+       "wape": 0.26673808012033556,
+       "mae": 102.82752988638936,
+       "vies": -0.12244495430970002,
+       "cobertura_80": 0.0,
+       "n_faixa": 4,
+       "largura": 0.28593238460220916
+      },
+      "2": {
+       "n": 4,
+       "wape": 0.17415737577839382,
+       "mae": 67.13766836257082,
+       "vies": -0.15210808913766752,
+       "cobertura_80": 0.25,
+       "n_faixa": 4,
+       "largura": 0.2730957814187014
+      },
+      "3": {
+       "n": 4,
+       "wape": 0.3053315605297098,
+       "mae": 117.70531658420312,
+       "vies": -0.14424436376084246,
+       "cobertura_80": 0.25,
+       "n_faixa": 4,
+       "largura": 0.6388226040800604
+      },
+      "todos": {
+       "n": 12,
+       "wape": 0.24874233880947977,
+       "mae": 95.89017161105444,
+       "vies": -0.13959913573607,
+       "cobertura_80": 0.16666666666666666,
+       "n_faixa": 12,
+       "largura": 0.39928359003365704
+      },
+      "verificacao": {
+       "n": 5,
+       "wape": 0.3319912591686814,
+       "mae": 74.89722806845452,
+       "vies": -0.16940318858825387,
+       "cobertura_80": 0.4,
+       "n_faixa": 5,
+       "largura": 0.6081454628847286
+      }
+     },
+     "backtest": [
+      {
+       "alvo": "2026-01",
+       "horizonte": 1,
+       "origem": "2026-01",
+       "trecho": "verificacao",
+       "real": 125.0,
+       "valor": 105.0,
+       "p10": 76.47,
+       "p90": 158.19
+      },
+      {
+       "alvo": "2026-02",
+       "horizonte": 1,
+       "origem": "2026-02",
+       "trecho": "verificacao",
+       "real": 187.0,
+       "valor": 129.08,
+       "p10": 54.84,
+       "p90": 203.32
+      },
+      {
+       "alvo": "2026-03",
+       "horizonte": 1,
+       "origem": "2026-03",
+       "trecho": "verificacao",
+       "real": 252.0,
+       "valor": 147.96,
+       "p10": 79.66,
+       "p90": 213.01
+      },
+      {
+       "alvo": "2026-04",
+       "horizonte": 1,
+       "origem": "2026-04",
+       "trecho": "verificacao",
+       "real": 228.0,
+       "valor": 319.7,
+       "p10": 242.93,
+       "p90": 396.47
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 3,
+       "origem": "2026-04",
+       "trecho": "teste",
+       "real": 339.0,
+       "valor": 463.2,
+       "p10": 144.9,
+       "p90": 781.5
+      },
+      {
+       "alvo": "2026-05",
+       "horizonte": 1,
+       "origem": "2026-05",
+       "trecho": "verificacao",
+       "real": 336.0,
+       "valor": 235.17,
+       "p10": 169.58,
+       "p90": 300.75
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 2,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 339.0,
+       "valor": 247.01,
+       "p10": 181.43,
+       "p90": 312.59
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 3,
+       "origem": "2026-05",
+       "trecho": "teste",
+       "real": 404.0,
+       "valor": 258.44,
+       "p10": 192.85,
+       "p90": 324.02
+      },
+      {
+       "alvo": "2026-06",
+       "horizonte": 1,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 339.0,
+       "valor": 258.94,
+       "p10": 199.54,
+       "p90": 313.12
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 2,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 404.0,
+       "valor": 258.94,
+       "p10": 199.54,
+       "p90": 313.12
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 3,
+       "origem": "2026-06",
+       "trecho": "teste",
+       "real": 322.0,
+       "valor": 258.94,
+       "p10": 199.54,
+       "p90": 313.12
+      },
+      {
+       "alvo": "2026-07",
+       "horizonte": 1,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 404.0,
+       "valor": 339.0,
+       "p10": 339.0,
+       "p90": 339.0
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 2,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 322.0,
+       "valor": 339.0,
+       "p10": 339.0,
+       "p90": 339.0
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 3,
+       "origem": "2026-07",
+       "trecho": "teste",
+       "real": 477.0,
+       "valor": 339.0,
+       "p10": 339.0,
+       "p90": 339.0
+      },
+      {
+       "alvo": "2026-08",
+       "horizonte": 1,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 322.0,
+       "valor": 433.25,
+       "p10": 373.65,
+       "p90": 474.85
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 2,
+       "origem": "2026-08",
+       "trecho": "teste",
+       "real": 477.0,
+       "valor": 462.5,
+       "p10": 343.3,
+       "p90": 545.7
+      },
+      {
+       "alvo": "2026-09",
+       "horizonte": 1,
+       "origem": "2026-09",
+       "trecho": "teste",
+       "real": 477.0,
+       "valor": 322.0,
+       "p10": 169.75,
+       "p90": 405.58
+      }
+     ]
+    }
+   },
+   "futuro": {
+    "Inbound": [
+     {
+      "mes": "2026-10",
+      "valor": 157.79,
+      "p10": 104.4,
+      "p90": 198.94
+     },
+     {
+      "mes": "2026-11",
+      "valor": 163.22,
+      "p10": 108.96,
+      "p90": 203.5
+     },
+     {
+      "mes": "2026-12",
+      "valor": 168.57,
+      "p10": 113.45,
+      "p90": 207.98
+     }
+    ],
+    "Mercado": [
+     {
+      "mes": "2026-10",
+      "valor": 438.61,
+      "p10": 263.97,
+      "p90": 555.23
+     },
+     {
+      "mes": "2026-11",
+      "valor": 465.38,
+      "p10": 286.29,
+      "p90": 577.54
+     },
+     {
+      "mes": "2026-12",
+      "valor": 492.15,
+      "p10": 308.6,
+      "p90": 599.85
+     }
+    ]
+   },
+   "modulo": "automatico",
+   "detalhe": {
+    "config": {
+     "lista": [
+      "ConstantNaive",
+      "LastValueNaive",
+      "AverageValueNaive",
+      "SeasonalNaive",
+      "GLM",
+      "GLS",
+      "ETS",
+      "ARIMA",
+      "UnobservedComponents",
+      "KalmanStateSpace",
+      "Theta",
+      "ARDL",
+      "BasicLinearModel",
+      "UnivariateMotif",
+      "MetricMotif",
+      "SeasonalityMotif",
+      "FFT",
+      "WindowRegression",
+      "DatepartRegression"
+     ],
+     "transformacoes": "superfast",
+     "profundidade": 3,
+     "validacoes": 2,
+     "revalidados": 0.35,
+     "metrica": "mae",
+     "geracoes": 0,
+     "semente": 2026,
+     "intervalo": 0.8
+    },
+    "escolhas": [
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-01",
+      "treino_fim": "2025-12",
+      "n_meses": 12,
+      "modelo": "ETS",
+      "transformacoes": [
+       "SeasonalDifference",
+       "AlignLastValue",
+       "MinMaxScaler"
+      ],
+      "posicao": 3,
+      "nota": 12.521928917093078,
+      "segundos": 12.3,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-02",
+      "treino_fim": "2026-01",
+      "n_meses": 12,
+      "modelo": "FFT",
+      "transformacoes": [
+       "bkfilter",
+       "StandardScaler"
+      ],
+      "posicao": 3,
+      "nota": 3.083663432211097,
+      "segundos": 13.4,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-03",
+      "treino_fim": "2026-02",
+      "n_meses": 12,
+      "modelo": "FFT",
+      "transformacoes": [
+       "bkfilter",
+       "StandardScaler"
+      ],
+      "posicao": 3,
+      "nota": 50.97829181827862,
+      "segundos": 14.2,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-04",
+      "treino_fim": "2026-03",
+      "n_meses": 12,
+      "modelo": "ETS",
+      "transformacoes": [
+       "SeasonalDifference",
+       "AlignLastValue",
+       "MinMaxScaler"
+      ],
+      "posicao": 3,
+      "nota": 26.666666666666668,
+      "segundos": 17.4,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-05",
+      "treino_fim": "2026-04",
+      "n_meses": 12,
+      "modelo": "ETS",
+      "transformacoes": [
+       "ClipOutliers",
+       "Detrend",
+       "MinMaxScaler"
+      ],
+      "posicao": 3,
+      "nota": 517.182797108933,
+      "segundos": 22.6,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-06",
+      "treino_fim": "2026-05",
+      "n_meses": 12,
+      "modelo": "FFT",
+      "transformacoes": [
+       "bkfilter",
+       "StandardScaler"
+      ],
+      "posicao": 4,
+      "nota": 25.52368160767486,
+      "segundos": 23.2,
+      "n_familias": 16
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-07",
+      "treino_fim": "2026-06",
+      "n_meses": 12,
+      "modelo": "WindowRegression",
+      "transformacoes": [
+       "bkfilter",
+       "MaxAbsScaler"
+      ],
+      "posicao": 3,
+      "nota": 71.12391792047761,
+      "segundos": 21.8,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-08",
+      "treino_fim": "2026-07",
+      "n_meses": 12,
+      "modelo": "ETS",
+      "transformacoes": [
+       "RollingMeanTransformer"
+      ],
+      "posicao": 3,
+      "nota": 109.73350914795567,
+      "segundos": 22.0,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-09",
+      "treino_fim": "2026-08",
+      "n_meses": 12,
+      "modelo": "UnobservedComponents",
+      "transformacoes": [
+       "ClipOutliers",
+       "Detrend",
+       "bkfilter"
+      ],
+      "posicao": 3,
+      "nota": 14.755851166773382,
+      "segundos": 16.9,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-01",
+      "treino_fim": "2025-12",
+      "n_meses": 12,
+      "modelo": "LastValueNaive",
+      "transformacoes": [
+       "Round"
+      ],
+      "posicao": 3,
+      "nota": 10.743791343184803,
+      "segundos": 24.4,
+      "n_familias": 14
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-02",
+      "treino_fim": "2026-01",
+      "n_meses": 12,
+      "modelo": "GLS",
+      "transformacoes": [
+       "ClipOutliers",
+       "RobustScaler",
+       "Round"
+      ],
+      "posicao": 3,
+      "nota": 7.291111111111111,
+      "segundos": 21.1,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-03",
+      "treino_fim": "2026-02",
+      "n_meses": 12,
+      "modelo": "FFT",
+      "transformacoes": [
+       "bkfilter",
+       "StandardScaler"
+      ],
+      "posicao": 3,
+      "nota": 11.662754735288402,
+      "segundos": 18.9,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-04",
+      "treino_fim": "2026-03",
+      "n_meses": 12,
+      "modelo": "Theta",
+      "transformacoes": [
+       "DifferencedTransformer",
+       "MinMaxScaler"
+      ],
+      "posicao": 3,
+      "nota": 54.45714784871169,
+      "segundos": 20.1,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-05",
+      "treino_fim": "2026-04",
+      "n_meses": 12,
+      "modelo": "ETS",
+      "transformacoes": [
+       "ClipOutliers",
+       "Detrend"
+      ],
+      "posicao": 3,
+      "nota": 25.066513048109613,
+      "segundos": 13.9,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-06",
+      "treino_fim": "2026-05",
+      "n_meses": 12,
+      "modelo": "LastValueNaive",
+      "transformacoes": [
+       "ClipOutliers"
+      ],
+      "posicao": 3,
+      "nota": 58.962210113420554,
+      "segundos": 16.5,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-07",
+      "treino_fim": "2026-06",
+      "n_meses": 12,
+      "modelo": "ConstantNaive",
+      "transformacoes": [
+       "DifferencedTransformer"
+      ],
+      "posicao": 3,
+      "nota": 45.0,
+      "segundos": 20.6,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-08",
+      "treino_fim": "2026-07",
+      "n_meses": 12,
+      "modelo": "AverageValueNaive",
+      "transformacoes": [
+       "DifferencedTransformer"
+      ],
+      "posicao": 3,
+      "nota": 150.1342936860694,
+      "segundos": 13.5,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-09",
+      "treino_fim": "2026-08",
+      "n_meses": 12,
+      "modelo": "FFT",
+      "transformacoes": [
+       "AlignLastValue",
+       "ClipOutliers"
+      ],
+      "posicao": 3,
+      "nota": 16.666666666666668,
+      "segundos": 16.8,
+      "n_familias": 17
+     },
+     {
+      "serie": "Inbound",
+      "treino_inicio": "2025-10",
+      "treino_fim": "2026-09",
+      "n_meses": 12,
+      "modelo": "ETS",
+      "transformacoes": [
+       "ClipOutliers",
+       "Detrend",
+       "MinMaxScaler"
+      ],
+      "posicao": 3,
+      "nota": 76.2418572797735,
+      "segundos": 17.2,
+      "n_familias": 17
+     },
+     {
+      "serie": "Mercado",
+      "treino_inicio": "2025-10",
+      "treino_fim": "2026-09",
+      "n_meses": 12,
+      "modelo": "ETS",
+      "transformacoes": [
+       "ClipOutliers"
+      ],
+      "posicao": 3,
+      "nota": 33.30870558547673,
+      "segundos": 18.7,
+      "n_familias": 17
+     }
+    ]
+   },
+   "segundos": 0.1,
+   "carga": "2026-10-26 12:01:46.659042+00:00"
+  }
+ }
+}

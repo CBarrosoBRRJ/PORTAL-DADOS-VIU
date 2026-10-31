@@ -1,0 +1,81 @@
+{
+  "data": "2026-10-26T11:54:34.038137-03:00",
+  "projeto": "gglobo-viu-dados-hdg-prd",
+  "cargas": {
+    "sla": "2026-10-26 12:01:34.624989+00:00",
+    "entrada": "2026-10-26 12:01:46.659042+00:00",
+    "fluxo": "2026-10-26 12:02:47.695095+00:00"
+  },
+  "inicio_q1": {
+    "fim": "2026-10-25",
+    "total_ano": 5556,
+    "nao_seguiu_sem_data_ano": 10
+  },
+  "resultado": "tudo certo",
+  "itens": [
+    {
+      "resultado": "OK",
+      "item": "identidade caio.barroso@viu.com.br · projeto gglobo-viu-dados-hdg-prd"
+    },
+    {
+      "resultado": "OK",
+      "item": "golds no mesmo dia de carga: {'sla': datetime.date(2026, 10, 26), 'entrada': datetime.date(2026, 10, 26), 'fluxo': datetime.date(2026, 10, 26)}"
+    },
+    {
+      "resultado": "OK",
+      "item": "site com todas as tabelas carregadas (/saude dados_prontos)"
+    },
+    {
+      "resultado": "OK",
+      "item": "site sem aviso de atraso ou falha: {'sla': 'em_dia', 'entrada': 'em_dia', 'fluxo': 'em_dia', 'talentos': 'em_dia', 'talentos_top': 'em_dia'}"
+    },
+    {
+      "resultado": "OK",
+      "item": "site × banco na mesma carga (sla): site 2026-10-26T09:01:34.624989-03:00 · banco 2026-10-26 12:01:34.624989+00:00"
+    },
+    {
+      "resultado": "OK",
+      "item": "site × banco na mesma carga (entrada): site 2026-10-26T09:01:46.659042-03:00 · banco 2026-10-26 12:01:46.659042+00:00"
+    },
+    {
+      "resultado": "OK",
+      "item": "site × banco na mesma carga (fluxo): site 2026-10-26T09:02:47.695095-03:00 · banco 2026-10-26 12:02:47.695095+00:00"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q1 ok_mesma_carga=True, ok_fim_e_vespera=True, ok_sem_data_futura=True"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q1 linhas_tipo_fora_lista = 0"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q1 linhas_situacao_nao_fecha = 0"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q1 meses_safra_divergente = 0"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q1 eventos_antes_da_entrada = 0"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q2 ok_fecha em 6 meses"
+    },
+    {
+      "resultado": "OK",
+      "item": "Q2 ok_encadeia (fora de janeiro)"
+    },
+    {
+      "resultado": "OK",
+      "item": "previsão (acompanhamento) na mesma carga da gold de entradas: previsão 2026-10-26 · gold 2026-10-26"
+    },
+    {
+      "resultado": "OK",
+      "item": "retrato da previsão = último mês fechado: 2026-09 · esperado 2026-09"
+    }
+  ]
+}

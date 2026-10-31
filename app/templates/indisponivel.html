@@ -1,0 +1,17 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import cabecalho %}
+{# 503: o BigQuery não respondeu e não há carga válida em memória. Nunca mostra números inventados. #}
+{% block slides %}
+<section class="slide" aria-roledescription="slide" aria-label="Dados indisponíveis">
+<div class="lamina">
+  {{ cabecalho(apresentacao, secao_atual) }}
+  <div class="slide-corpo aviso-corpo" role="alert">
+    <h2 class="slide-titulo">Os dados não estão disponíveis agora</h2>
+    <p class="aviso-texto">A base no BigQuery não respondeu e ainda não há uma carga anterior guardada nesta instância.
+      O site tenta de novo sozinho em alguns minutos. Se o aviso continuar, fale com o responsável pelos relatórios.</p>
+    <a class="voltar" href="/{{ apresentacao.slug }}{% if secao_atual %}/{{ secao_atual.slug }}{% endif %}#1">
+      <svg aria-hidden="true" viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg>Tentar de novo</a>
+  </div>
+</div>
+</section>
+{% endblock %}

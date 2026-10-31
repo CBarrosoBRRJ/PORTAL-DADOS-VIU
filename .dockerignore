@@ -1,0 +1,42 @@
+# Enviado ao Cloud Build no "gcloud run deploy --source .": só o necessário para a imagem.
+.env
+.git/
+.gitignore
+.gcloudignore
+.dockerignore
+.markdownlint.json
+.playwright-mcp/
+docs/
+tests/
+tools/
+README.md
+CLAUDE.md
+requirements-dev.txt
+__pycache__/
+*.pyc
+*.zip
+_descartados/
+# Iniciativas: banco local e anexos nunca vão para a imagem (no Cloud Run: Firestore + bucket)
+dados/
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+.ppd-agenciamento-v2/
+anexos/
+.taste-skill/
+# F17/A33 (auditoria de 31/10/2026): fora do pacote, mas mantidos no disco (nada se apaga)
+_congelado/
+.vscode/
+# protótipos do Roadmap: não referenciados pelo portal
+app/static/roadmap_proto/
+# ml/: a imagem só precisa do retrato da Previsão (o Dockerfile copia ml/saida/previsao.json); código, modelos e
+# backtests do job de ML ficam fora (o job não roda no Cloud Run)
+ml/*
+!ml/saida/
+ml/saida/*
+!ml/saida/previsao.json
+.pytest_cache/
+.venv/
+venv/
+*.log

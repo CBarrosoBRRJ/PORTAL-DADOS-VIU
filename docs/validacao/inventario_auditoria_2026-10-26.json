@@ -1,0 +1,3352 @@
+{
+  "arquivos": [
+    {
+      "arquivo": ".dockerignore",
+      "bytes": 279,
+      "sha256": "b2ea141c200adb77fd4f2de9664ffdb358f235e76b47dbe771e2f5dd105199e5",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": ".gcloudignore",
+      "bytes": 279,
+      "sha256": "b2ea141c200adb77fd4f2de9664ffdb358f235e76b47dbe771e2f5dd105199e5",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": ".gitignore",
+      "bytes": 74,
+      "sha256": "8f94f4e4b7fa8c5979fe281725ec54f2ae80348804bb095f726ddf62b3d20c5a",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": ".markdownlint.json",
+      "bytes": 39,
+      "sha256": "c0dbf05e4436e578d364d97521eacf5ef426b05a14edb3770ad36324e37452d1",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/LEIAME.md",
+      "bytes": 3703,
+      "sha256": "9a34adf8f2ef8f7cc261b52df5facef4a5aff224ad7909470254f767bae563d6",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/tools/conferir_entrega.py",
+      "bytes": 744,
+      "sha256": "70df4eb355abb9dd9a4b7b9ac124f6def0ef5cb66f112dcee8a2f27161bdf2cf",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "APOSENTADO em 26/10/2026 (batalha 2, G1-engenharia-1).",
+      "definicoes": []
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/CLAUDE.md",
+      "bytes": 17729,
+      "sha256": "4c799f2fac30f9df053fbc9664e09c453bf1a618aa245904e47a3debea10ed65",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/docs/paginas/atendimento.md",
+      "bytes": 37535,
+      "sha256": "e7d53ac45d02f32a86dc0b04dafe847cba7d474fe4bf64841778ffe78c0a1077",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/docs/paginas/demais.md",
+      "bytes": 4559,
+      "sha256": "6659c654390ba5836de6d9abe1aacf56f1c8685404aab9a241ece0e1f1eb57f9",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/docs/paginas/inicio.md",
+      "bytes": 52871,
+      "sha256": "f2cfb1584cfb6548964ce8ee7fff5aedbc2fb52a7b7efe9a98c24cd23f3a10af",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/docs/paginas/o_que_falta.md",
+      "bytes": 8756,
+      "sha256": "556273aaeffc757cc1c46f9091d7174b6ce381e526f1ee6ede7f883a8130201e",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/docs/paginas/previsao.md",
+      "bytes": 30091,
+      "sha256": "2623cc8008092d44812ffe1edb34b02ca433b6ca281ceae97b62c6e9e02f125d",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/docs/paginas/README.md",
+      "bytes": 6097,
+      "sha256": "0d7dec48b7d4c95d05a7d30cfb186fd54ba6020a402ba228eab10c2d5551a832",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/docs/paginas/sla.md",
+      "bytes": 231796,
+      "sha256": "5aa01cdc36936948f1bab0dbe9c3d9df547a53394f29a2fe9eb58e5996822414",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/docs/paginas/talentos.md",
+      "bytes": 31272,
+      "sha256": "8b3eb79f425dce73728d61ddfa811c0e968a117f1522d3b126723d3ca54bd5d3",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/docs/PRD.md",
+      "bytes": 219633,
+      "sha256": "f8c52152629a5ee76e5c0311c0395c3cb462cdada8f38be3800de86fe8ed4b01",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/pendencias.py",
+      "bytes": 8430,
+      "sha256": "d18d4e428b4b13944bdd7e7064ee0fac2f58a02049fc449c9134eac5d87a1194",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "O que falta para completar a área (D30): fonte única das máscaras das telas e da página \"O que falta\".",
+      "definicoes": [
+        "Pendencia",
+        "da_secao"
+      ]
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/README.md",
+      "bytes": 8546,
+      "sha256": "e06d7fb3ceda4008321d54dc6949b76816cd5f9e2f41b637d9ec58a67958b4d2",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "_descartados/2026-10-26/versoes_anteriores/sla_calculos.py",
+      "bytes": 139158,
+      "sha256": "26842ea19217f6dc1bf8c547d18e631f095271f7f96e3e62434b7a42f1354d63",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Regras de cálculo da apresentação SLA — definidas com o Caio uma a uma (PRD, seção 9.1; ficha docs/paginas/sla.md).",
+      "definicoes": [
+        "_fora_da_equipe",
+        "entregas",
+        "horas_por_status",
+        "_pontos",
+        "_faixas",
+        "_h_meta",
+        "_br1",
+        "meta_tipico",
+        "_mediana",
+        "_completos",
+        "entrega",
+        "_pcts",
+        "_indicadores",
+        "leituras",
+        "cobertura",
+        "_etapa",
+        "_arred",
+        "_fmt_min",
+        "_duracao",
+        "_minutos_etapas",
+        "_dias",
+        "_dias_trabalho",
+        "_quando",
+        "_caminho",
+        "_hoje",
+        "exemplo",
+        "_exemplo_de",
+        "_montar_exemplo",
+        "_br",
+        "_h",
+        "_larg",
+        "_universo_df",
+        "_universo",
+        "_boxplot",
+        "_assimetria",
+        "_regua",
+        "_pct_de",
+        "_orcamentos",
+        "_pct",
+        "_frases",
+        "_insight_p1",
+        "_insight_p2",
+        "_rotulo_livre",
+        "_influencia",
+        "kde_silverman",
+        "_caixa",
+        "_qq",
+        "_marca_p90",
+        "_espelho",
+        "exploracao",
+        "_dias_meio",
+        "recorte",
+        "_periodo",
+        "_afasta",
+        "_cem_textos",
+        "_cem_pcts",
+        "cem_pedidos",
+        "_cem",
+        "_de",
+        "_fracao",
+        "_parte",
+        "_tempo_textos",
+        "tempo_cem",
+        "_tempo",
+        "_sorteio",
+        "_faixa_txt",
+        "_lista",
+        "_destoam",
+        "_curto",
+        "_mes_textos",
+        "meses_estudo",
+        "_meses",
+        "_etapa_ciclo",
+        "_nome_status",
+        "_h1",
+        "travas",
+        "_pct_txt",
+        "_travas",
+        "_trava_nome",
+        "_trava_textos",
+        "_tipo_nome",
+        "_pct1",
+        "tipos_pedido",
+        "_onde_trava",
+        "_tipos",
+        "_pergunta",
+        "_status_txt",
+        "conclusao",
+        "_conclusao"
+      ]
+    },
+    {
+      "arquivo": "app/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "",
+      "definicoes": []
+    },
+    {
+      "arquivo": "app/apresentacoes/__init__.py",
+      "bytes": 5308,
+      "sha256": "1ee1b9a89e57a8ee2ac4ef42175e44d1255e345460566c3198f729ab9231306f",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Apresentações como módulos (D11, D13, D17).",
+      "definicoes": [
+        "Secao",
+        "Apresentacao",
+        "descobrir"
+      ]
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "",
+      "definicoes": []
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/apresentacao.py",
+      "bytes": 16376,
+      "sha256": "47dffc0aeef335a5192bf6e067ab43a2aa6b8f7e2f21035361d38909deedafb5",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Gestão de orçamentos: apresentação com seções no navegador do topo.",
+      "definicoes": [
+        "montar_sla",
+        "_estudo_slides",
+        "_aquecer_estudo",
+        "montar_estudo_sla",
+        "montar_inicio",
+        "montar_atendimento",
+        "_mesma_fotografia",
+        "montar_talentos",
+        "montar_negocios_fechados",
+        "montar_previsao",
+        "montar_qualidade"
+      ]
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/atendimento/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "",
+      "definicoes": []
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/atendimento/calculos.py",
+      "bytes": 56342,
+      "sha256": "bc3eb435497a99005d31d78e8fcb475429f121275fba9a7bd85cb5ce6cab68ba",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Atendimento: quanto da demanda a equipe atende, em quantidade e em proporção (D27; PRD seção 9.2).",
+      "definicoes": [
+        "_taxa",
+        "_numeros",
+        "_contra",
+        "atendimento",
+        "_pcts_decimos",
+        "leitura_executiva",
+        "_faixa",
+        "_empilhar",
+        "externas_por_mes",
+        "fluxo_mes",
+        "_faixa_ano",
+        "pct_meio",
+        "_arredondar_acima",
+        "analise_ritmo",
+        "status_sem_entrega"
+      ]
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/atendimento/template.html",
+      "bytes": 15617,
+      "sha256": "2d8b408ad1d15c2d5cce68ae0c90aed29806311242345c666f83701d1596799e",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/entrada/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "",
+      "definicoes": []
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/entrada/calculos.py",
+      "bytes": 20886,
+      "sha256": "8d9ae58b731a2798ede37e18a8090849a60982b8d06aad0f19ec48cde8582529",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Entrada de pedidos: cards criados por mês e grupo de input (página inicial da área; D23, D25, D26).",
+      "definicoes": [
+        "_base",
+        "_pct",
+        "_pcts",
+        "_situacao",
+        "variar",
+        "_comparacao",
+        "ultimo_dia",
+        "meses_extrato",
+        "regua_anterior",
+        "entrada",
+        "_nome_mes",
+        "_por_mes",
+        "extrato"
+      ]
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/inicio.html",
+      "bytes": 22219,
+      "sha256": "4d001eea1f5ffda4abcc0e0ac5262f9f0739047e6e22792a51cfdbdb6af2bddc",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/negocios_fechados/template.html",
+      "bytes": 709,
+      "sha256": "d799f4072e89d25cbbc173f88a838931e50ee0b19090b88a81fe8149f7f2a836",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/pendencias.py",
+      "bytes": 9552,
+      "sha256": "66fc0756968c8d9d0eb8f36b69e29c6a29364bad6a98f14b81855643d6849bbe",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "O que falta para completar a área (D30): fonte única das máscaras das telas e da página \"O que falta\".",
+      "definicoes": [
+        "Pendencia",
+        "da_secao"
+      ]
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/previsao/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "",
+      "definicoes": []
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/previsao/calculos.py",
+      "bytes": 23920,
+      "sha256": "e8816f554d2c5ed7578e76ac66810aa9f64777df07c8f3bdd01b93670949bf58",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": true,
+      "sintaxe": "válida",
+      "objetivo": "Previsão de demanda (D56, 26/10/2026; revisa a D48 e a D55): quantos pedidos (cards) devem entrar por mês — uma série e",
+      "definicoes": [
+        "_valido",
+        "ler",
+        "_per",
+        "_ano",
+        "_mes_nome",
+        "_curto",
+        "chave_css",
+        "teste_h1",
+        "metricas",
+        "mes_vigente",
+        "meses_dos_cartoes",
+        "situacao",
+        "_teto",
+        "grafico",
+        "_cartoes_mes",
+        "_por_que",
+        "_coluna",
+        "motivo_curto",
+        "dialogo",
+        "tela"
+      ]
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/previsao/job.py",
+      "bytes": 7149,
+      "sha256": "3fb6953c691b704d0c138acdbff73e2b374182312a4ffb2dd41368d935e47626",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Job da previsão no computador (D48, 26/10/2026; revisa a D47): execução MENSAL.",
+      "definicoes": [
+        "_pasta_ml",
+        "disponivel",
+        "em_andamento",
+        "mesma_carga",
+        "mes_fechado",
+        "acao",
+        "disparar",
+        "da_carga",
+        "ultima_tentativa",
+        "falhou",
+        "ao_carregar_entrada"
+      ]
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/previsao/template.html",
+      "bytes": 16773,
+      "sha256": "0392690cf453766e7477a6373433d3f3d98bf09baa3a0a1dae9c9600d7cc2277",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/qualidade/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "",
+      "definicoes": []
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/qualidade/calculos.py",
+      "bytes": 5873,
+      "sha256": "e355073bb842e63fe273623da2ad92d353e5d166a5f1268a866835c1f7ff79c5",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Qualidade dos dados da área de orçamentos: verificações sobre a tabela gold de SLA (D21).",
+      "definicoes": [
+        "_integridade",
+        "_atencao",
+        "qualidade"
+      ]
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/qualidade/template.html",
+      "bytes": 628,
+      "sha256": "9ae1433b14105f0e374793f45665d47a02fa9e6377dff72d785ba6d32df47978",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/sla/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "",
+      "definicoes": []
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/sla/calculos.py",
+      "bytes": 141247,
+      "sha256": "84edd7c74016de0e0099d974fb13076935ff9b61150c708249c4d15e330c6019",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Regras de cálculo da apresentação SLA — definidas com o Caio uma a uma (PRD, seção 9.1; ficha docs/paginas/sla.md).",
+      "definicoes": [
+        "_fora_da_equipe",
+        "entregas",
+        "horas_por_status",
+        "_pontos",
+        "_faixas",
+        "_h_meta",
+        "_br1",
+        "meta_tipico",
+        "_mediana",
+        "_completos",
+        "entrega",
+        "_pcts",
+        "_indicadores",
+        "leituras",
+        "cobertura",
+        "_etapa",
+        "_arred",
+        "_fmt_min",
+        "_duracao",
+        "_minutos_etapas",
+        "_dias",
+        "_dias_uteis_txt",
+        "dias_uteis_cliente",
+        "_dias_trabalho",
+        "_quando",
+        "_caminho",
+        "_hoje",
+        "exemplo",
+        "_exemplo_de",
+        "_montar_exemplo",
+        "_br",
+        "_h",
+        "_larg",
+        "_universo_df",
+        "_universo",
+        "_boxplot",
+        "_assimetria",
+        "_regua",
+        "_pct_de",
+        "_orcamentos",
+        "_pct",
+        "_frases",
+        "_insight_p1",
+        "_insight_p2",
+        "_rotulo_livre",
+        "_influencia",
+        "kde_silverman",
+        "_caixa",
+        "_qq",
+        "_marca_p90",
+        "_espelho",
+        "exploracao",
+        "_dias_meio",
+        "recorte",
+        "_periodo",
+        "_afasta",
+        "_cem_textos",
+        "_cem_pcts",
+        "cem_pedidos",
+        "_cem",
+        "_de",
+        "_fracao",
+        "_parte",
+        "_tempo_textos",
+        "tempo_cem",
+        "_tempo",
+        "_sorteio",
+        "_faixa_txt",
+        "_lista",
+        "_destoam",
+        "_curto",
+        "_mes_textos",
+        "meses_estudo",
+        "_meses",
+        "_etapa_ciclo",
+        "_nome_status",
+        "_h1",
+        "travas",
+        "_pct_txt",
+        "_travas",
+        "_trava_nome",
+        "_trava_textos",
+        "_tipo_nome",
+        "_pct1",
+        "tipos_pedido",
+        "_onde_trava",
+        "_tipos",
+        "_pergunta",
+        "_status_txt",
+        "conclusao",
+        "_conclusao"
+      ]
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/sla/template.html",
+      "bytes": 13186,
+      "sha256": "38694862b1d936987640ef9429f3820457afacc58462406b5543f818f986d676",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/talentos/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "",
+      "definicoes": []
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/talentos/calculos.py",
+      "bytes": 13433,
+      "sha256": "0642ff6f03af7039e1e038e88066e8ec0a912d692daba8910bb722270ae34df8",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Talentos (D30, D31, D50): como a demanda do ano se divide entre talentos exclusivos e não exclusivos.",
+      "definicoes": [
+        "divisao",
+        "top_por_grupo",
+        "seletor",
+        "heroi",
+        "_curto",
+        "barra",
+        "mapa",
+        "largura_nomes"
+      ]
+    },
+    {
+      "arquivo": "app/apresentacoes/gestao_orcamentos/talentos/template.html",
+      "bytes": 10019,
+      "sha256": "a40451729b2fad9decf2bb25ee15e750c6c14d531cf869fe376bf79275073a60",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/config.py",
+      "bytes": 4155,
+      "sha256": "4bd652dbb1451456d983330cc2e3763914bf7532dffc03817ec85645c2e9f19b",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Configuração do site, lida do ambiente (no computador, também do .env da raiz).",
+      "definicoes": []
+    },
+    {
+      "arquivo": "app/corte.py",
+      "bytes": 2387,
+      "sha256": "2943214902282ca00c58f97b483fe34488147a919239de56f7b0da94913ed8b8",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Data de corte única do portal (regra E3), usada pelo site, pelo job da previsão e pelo ML (batalha 2, G4-N10/G1-N11).",
+      "definicoes": [
+        "dia_da_carga",
+        "fim",
+        "mes_fechado"
+      ]
+    },
+    {
+      "arquivo": "app/dados.py",
+      "bytes": 19570,
+      "sha256": "ce98310973e0a736300c6bd5ecb0e5463eeedcece201cb4eb5037b19e4507665",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": true,
+      "sintaxe": "válida",
+      "objetivo": "Tabelas gold em memória (D7), recarregadas só quando o metadado `modified` muda (D6).",
+      "definicoes": [
+        "cliente",
+        "log",
+        "data_carga",
+        "DadosIndisponiveis",
+        "atualizacao_esperada",
+        "Tabela",
+        "Consulta",
+        "_fim_da_entrada",
+        "versao_de"
+      ]
+    },
+    {
+      "arquivo": "app/estatistica.py",
+      "bytes": 1742,
+      "sha256": "9aa7b3f0d0c0251607d69ef82655d71f8c73df8e2d96c3d591644ea8ea6cada5",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Comparação de proporções entre dois períodos (D27, regra A8 do PRD).",
+      "definicoes": [
+        "pontos_tela",
+        "diferenca"
+      ]
+    },
+    {
+      "arquivo": "app/expediente.py",
+      "bytes": 4547,
+      "sha256": "079f69c48954b63b6734ed114842d5b95b4fcdeb25fd0ca045835e0cc003d421",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Horas úteis com expediente configurável, sobre o mesmo calendário de dias sem expediente da gold (R14).",
+      "definicoes": [
+        "_pascoa",
+        "sem_expediente",
+        "microssegundos_uteis",
+        "horas_uteis",
+        "_util",
+        "dias_uteis_entre",
+        "dias_uteis_fracao"
+      ]
+    },
+    {
+      "arquivo": "app/formato.py",
+      "bytes": 4265,
+      "sha256": "6c36dc3749ac8afe9d0a3b70fb2ae01a8b5b24e1624af2b0923db9b1be85b00e",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Números e datas em pt-BR (filtros do Jinja e textos das páginas).",
+      "definicoes": [
+        "inteiro",
+        "decimal",
+        "pct",
+        "_pct_inteiro",
+        "variacao",
+        "sentido",
+        "dias_uteis",
+        "data_hora",
+        "atualizado",
+        "recorte",
+        "quando",
+        "parcela",
+        "mes"
+      ]
+    },
+    {
+      "arquivo": "app/main.py",
+      "bytes": 12335,
+      "sha256": "532798e7acc0eadc64372ac4a179ddddac0e9a276b2881fa8beab6e454024f5f",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Site de relatórios do Agenciamento (FastAPI). Rodar no computador: ver README.",
+      "definicoes": [
+        "_hash_estaticos",
+        "versao_estaticos",
+        "ao_iniciar",
+        "cabecalhos",
+        "_contexto",
+        "inicio",
+        "especulacao",
+        "saude",
+        "endereco_antigo",
+        "sla_antigo",
+        "apresentacao",
+        "o_que_falta",
+        "como_medimos",
+        "regras",
+        "secao"
+      ]
+    },
+    {
+      "arquivo": "app/sla.py",
+      "bytes": 5563,
+      "sha256": "9a84b743edb3d921f803914bc38da9fd1e3d43aa6bde95d42c520435497e25d4",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Leitura comum da tabela SLA para as páginas: visão por projeto, filtros e opções.",
+      "definicoes": [
+        "situacao",
+        "_por_projeto",
+        "Recorte",
+        "_base",
+        "mes_parcial",
+        "data_corte",
+        "_opcoes",
+        "recorte"
+      ]
+    },
+    {
+      "arquivo": "app/sql/saidas_status.sql",
+      "bytes": 4168,
+      "sha256": "5de5cf690889ef937f9f5d2ea561ea94798de061d8cadac059c5fe3d9c4dc282",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/sql/talentos_ano.sql",
+      "bytes": 3277,
+      "sha256": "10ea2b438e694fa2941f58b61af4b476165b2046655fcc949f7ec0775828f22b",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/sql/talentos_top.sql",
+      "bytes": 6032,
+      "sha256": "8ee57d93635fc3192d6170d341aa30b92f00cb49ccb6364a2a21422f275afa08",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/static/apresentacao.js",
+      "bytes": 61352,
+      "sha256": "d1416b805946e948a69010521badb50f4f78d7cf893a822f8985587f3e4a5102",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": true
+    },
+    {
+      "arquivo": "app/static/estilo.css",
+      "bytes": 303336,
+      "sha256": "fea877a8b182e2759ff621182fa74bb4b9bbcf57e8e8e7b58bead3595b2c7abd",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": true
+    },
+    {
+      "arquivo": "app/static/fontes/ibm-plex-sans-latin-wght-normal.woff2",
+      "bytes": 45712,
+      "sha256": "e2291e842cf5af167122a22881a740c7f2dda7716f1e8cd76680264f4a859470",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/static/fontes/playfair-display-latin-wght-normal.woff2",
+      "bytes": 38404,
+      "sha256": "e0c764a8e9e1cce92163c55bac4b2ad6cd4cf8c696ce2289ab5c41565e65b7e2",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/static/inicio.js",
+      "bytes": 665,
+      "sha256": "a33fe6f424cbc3fa299daac9a635bbea28f143e03c02a2a7fbec447a3ed92d03",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/static/viu_logo.jpg",
+      "bytes": 5156,
+      "sha256": "5f8065e482d9c3e9e398bc4ea1180ce27dd6825660cc9e861636091f5be06b3f",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/templates/apresentacao.html",
+      "bytes": 9343,
+      "sha256": "583700ea1c6413ef51867c7c34fdd19c59c35c5c01d00a0116919f3d0aeb45bc",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/templates/como_medimos.html",
+      "bytes": 57565,
+      "sha256": "30dbfce544a1ad023d832e417c35e4c4b26d7ead6c26db6a072f0516f16b8831",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/templates/icones.html",
+      "bytes": 1899,
+      "sha256": "85fdcfded2fd3b5eb3610d3ffe8ad804308d32c9ffc74e221bedfea4567ab6d1",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/templates/indisponivel.html",
+      "bytes": 999,
+      "sha256": "1ea159440e0f493e4d0e809a0cccaa3ca886a835316c05163c5cc21310a3a28b",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/templates/macros.html",
+      "bytes": 7938,
+      "sha256": "09f4f5258f3c03f28496fa33436036b73294c35c32ffb4c5e77b8c9965acc21e",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "app/templates/o_que_falta.html",
+      "bytes": 3247,
+      "sha256": "e40074059bcc857c4d88cc5d206fdb6a324c1f092585757177cc9b65e99073e4",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "CLAUDE.md",
+      "bytes": 9804,
+      "sha256": "0a214abfd921e15fffa73efee3121d681ea2520fe00bd4bd4051c58039c94a00",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "Dockerfile",
+      "bytes": 750,
+      "sha256": "56ddccdf3e42a9d13fb857ceefde1dd6353847c4b32bfc74faf0e5eabaf8293f",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/AUDITORIA_TECNICA_2026-10-26.md",
+      "bytes": 16162,
+      "sha256": "6730b4448bd5415fd458e6753501861a83238c88f9a033b74f31709e66ecba26",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-23/extrato-setembro-1261x638.png",
+      "bytes": 99600,
+      "sha256": "ca5d07f5c34ab569c4100d85a8a998f69e6dd19a9fc85b25a81e4e7893d31228",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-23/extrato-status-outubro.png",
+      "bytes": 101914,
+      "sha256": "3f99148ca2e05a794752442865d6461a1bfe17a894ec0566bfd9466115fc7e96",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-23/inicio-legenda-cinza.png",
+      "bytes": 76393,
+      "sha256": "3ac4774102248ba2e4099939267ff76e9634089a80fa82720235fc54f0727f1c",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-23/inicio-outubro-desktop.png",
+      "bytes": 113662,
+      "sha256": "5d738faa02c8417af39c41eaf121dc6db86a0a6c35f789936eafc5f025580182",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-24/atendimento-redesenhado-mobile.png",
+      "bytes": 59305,
+      "sha256": "b74495d843940a9ebe5bb0cc9e840ae288231d27ee7250be9d7cd46977f284b7",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-24/atendimento-redesenhado-telacheia.png",
+      "bytes": 165550,
+      "sha256": "dbdf36805fc3ae07d9fb8b06e8a76741e8e760b96908fd94a687410dec891e54",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-24/atendimento-redesenhado.png",
+      "bytes": 161306,
+      "sha256": "ca25ce2a51c834b944338e4f0b229389e7238debbd3c010db5305e81b6dc3aac",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-24/atendimento.png",
+      "bytes": 126189,
+      "sha256": "5fde419fa3e4784cbdb867bebf3577da1c7c11fc0b4bb09230523d0709f987a2",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-24/inicio.png",
+      "bytes": 114731,
+      "sha256": "54ee9f547306b6e30bfbcfcb491161f0a1f54344a613f35635395cd7d60d1997",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-24/talentos-mobile.png",
+      "bytes": 65601,
+      "sha256": "f3177f58a2f97a4e887f9934a8038d95e809cbcb7e8cdd8db7a3f220d562e0da",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-24/talentos.png",
+      "bytes": 102071,
+      "sha256": "9a95437d76fa3fa445765e669c2aba6e66d09c31ae5ba16ce1523bfa55553f76",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/2026-10-24/verificacoes.json",
+      "bytes": 892,
+      "sha256": "5d2aa6a129ceb6bcab6a830b35e8527216a5aba2f736cd7ed6c7c6a3e3fbe4b1",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/evidencias/atendimento_template_2026-10-24_antes_de_apagar.html",
+      "bytes": 9482,
+      "sha256": "eead8727ce3909d1853498b589dc2eba80b79940b651d418628477e375658be6",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/HISTORICO_2026-10.md",
+      "bytes": 8022,
+      "sha256": "04e8cc261860b3a538b8f0b5ee82ed993ea9fac9973a3d28f736fcb92ae88827",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/lembretes_gold.md",
+      "bytes": 13095,
+      "sha256": "56bff5c93beeaeaa024153e1e5d993df04588883e36ba182a6be13b86d865673",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/paginas/atendimento.md",
+      "bytes": 50365,
+      "sha256": "012916de220f80b969b8ab6b7479e4a37314f989f3ab5e48d82084cacd1ad4a9",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/paginas/demais.md",
+      "bytes": 5401,
+      "sha256": "9ea00f029cf78826b8d84f494f661cdb3fbf2095a73e534d7b3a886905f2b684",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/paginas/inicio.md",
+      "bytes": 57487,
+      "sha256": "d7aed227f886b1ef11ae12e5dd0c537d9d4cd206b3a5762c088d355f4df9c5a4",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/paginas/o_que_falta.md",
+      "bytes": 12196,
+      "sha256": "d78325b54c6a5104b3c1f2676697d931d023445a745d59830528f0c48f3635bc",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/paginas/previsao.md",
+      "bytes": 77608,
+      "sha256": "3ad99208d48ef5e72af525ec30f491a9fa01a2b8dc4482c2b31c532a2cd7c789",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/paginas/README.md",
+      "bytes": 6817,
+      "sha256": "49b4a5bcf629bf07fff84db570fb12d1e5e8f8606c26f3a8fba300c013acf660",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/paginas/sla.md",
+      "bytes": 249417,
+      "sha256": "c5bd82124a91769a7992e1be0076a71e1883fe63c1c7b233d227bac59f304ff0",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/paginas/talentos.md",
+      "bytes": 62986,
+      "sha256": "fa69e2b42c71052a7f91e05de69e225a7a7cddf2b7a3cae75210d78e632f14d9",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/pauta_equipe_volta_para_entrada.docx",
+      "bytes": 39015,
+      "sha256": "935f3b39d66acf2032fc4a6407830bbd57f3f45f5be7ca03c4b9f8d7ba2f6c06",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/PLANO_GOLD_POR_VISUAL.md",
+      "bytes": 18106,
+      "sha256": "aa5b39a4ebd443eaf32495de45a7ea0422c5673f0429df2e2f646e2bf6163df1",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/PRD.md",
+      "bytes": 256837,
+      "sha256": "15c7c3126395d114cf6e166b508d26336d6acb8b8711bd35fa84904d922800d4",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/prompt_dados_pendentes.md",
+      "bytes": 18071,
+      "sha256": "d97b276417f909bf4ab503a605be246d4472fbcf4a79b7fce1dc15961b8ee822",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/prompt_revisao_codex.md",
+      "bytes": 6754,
+      "sha256": "48c63dff7354d6d3fe215608d54c7b0633c8e7f99bd446cf9e39edae51405d33",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/PROPOSTA_PREVISAO_EXECUTIVA.md",
+      "bytes": 5896,
+      "sha256": "bbc278d4a27d603e7476873b7e27f951fd8336dab79a79c150056981d1d2817e",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/reconciliacao_2026-10-24.json",
+      "bytes": 1791,
+      "sha256": "2a5ce4477dfbc895094cb900a0706943f51f74423fa1f5e36baaa5cb9012aa94",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/REVISAO_2026-10-23.md",
+      "bytes": 6798,
+      "sha256": "fb46fbd34b48e59d8bddb90ca04f9d71647c28476d7892b44bbb7537c1901d6d",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/REVISAO_2026-10-24.md",
+      "bytes": 12749,
+      "sha256": "ad1e273aacd5caffc32fbf619c32befc4d72fb99bd4e3b8fa2960f7a09db16c8",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/REVISAO_MOVIMENTO_2026-10-26.md",
+      "bytes": 4964,
+      "sha256": "657af131d4a02a7d4d44ebefc8e7ab97f697274a9bb2b213719192274e09c65b",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/00_criar_estruturas.sql",
+      "bytes": 29717,
+      "sha256": "464d2e5ca73f8901642ef2134d88abfe91795ab67fef0f63b31175d858fc182e",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/01_inicio_diario.select.sql",
+      "bytes": 253,
+      "sha256": "9198bd57906c1f5980f6a3b73faadd58b558c3f87989c8c4b0b29f6f7fbb1aa2",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/02_atendimento_fluxo.select.sql",
+      "bytes": 179,
+      "sha256": "6e0e7759f041138e59ad9da689630b9d66cd89f6cd732f123bd7693ef1db8bc5",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/03_talentos_ano.select.sql",
+      "bytes": 3328,
+      "sha256": "608ebac54c3095d076aa0d0f7efd9300f1378f3d6d0165fa897829255ee89901",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/04_talentos_ranking.select.sql",
+      "bytes": 6083,
+      "sha256": "0ece845f3e78cf5b99677de9f4eb31fa0ab671d06b967584da2234e1051baf39",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/05_atendimento_status.select.sql",
+      "bytes": 4403,
+      "sha256": "86b59d5192de767f4e682fb7f36e7093e5900ebae8a201340c5f8b2b195365b9",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/06_sla_movimentos_v2.select.sql",
+      "bytes": 5165,
+      "sha256": "5e5e104e360f373a586e4bcc51234a5c4e182888d773d6ef3fe5feb839f4dff7",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/07_previsao_mensal.select.sql",
+      "bytes": 815,
+      "sha256": "ddf080dbd5844afb275d47d0ae87191710abf54d072f61c7e06d2542fa7a52ef",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/08_previsao_exclusividade.select.sql",
+      "bytes": 2709,
+      "sha256": "bd007c443aeb0fbf3955fbb9a497fa4a834a42229ce5621ecd93c4dfc562e983",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/09_previsao_lotes.select.sql",
+      "bytes": 3346,
+      "sha256": "183fe1f7036e643d9cf89a86cc253faf644c4c15d405b6efa05401174f06d3bd",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/10_atualizar_atomicamente.sql",
+      "bytes": 32370,
+      "sha256": "3596e38d39c908716eec829bd115beb455ca9cfb1f2ab930276dd1d9205a90ab",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/sql/gold_relatorio/20_estruturas_ml.sql",
+      "bytes": 1425,
+      "sha256": "7a4631769aead6b8f4806497bf1b25f0293d8d1e0c4b5b5e0abc56306875fbdb",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/auditoria_fontes_2026-10-26.json",
+      "bytes": 59442,
+      "sha256": "00a42851a97df1a174291be29841861989f82a6e38c9792baf9f9c9dfdc35b19",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/auditoria_modelos_2026-10-26.json",
+      "bytes": 12683,
+      "sha256": "f3584362eadcea5b55d272d0c62fdd23195ee9251f8f19095321334470d53c1b",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/auditoria_sla_2026-10-26.json",
+      "bytes": 5610,
+      "sha256": "ba44541e51c3328d6a13aef789e6791c737e05bb90d3b81a4789b505e1d48c71",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/estudo_2026-10-26.json",
+      "bytes": 5610,
+      "sha256": "885d8bb5c7f19cfce07fbcb74a012460028c40f70ec6e8b53fcb9f4a67276ec2",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/gold_selects_2026-10-26.json",
+      "bytes": 1255,
+      "sha256": "83f7e568608851c61612eed4ecd0e8d1d2dcaba65a6a5794072e9be4b66d8cd8",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/mlp_univariado_2026-10-26.json",
+      "bytes": 7818,
+      "sha256": "2ffceb22fc1f12a3334e46afb0342ac7866994d4c7fab4b1ac484ae8baea33e7",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/movimento_2026-10-26.json",
+      "bytes": 7257,
+      "sha256": "c5fcbe2c61d29c2f941652710f868b6b7ed16bf191374e27b5f962ad16cd8a2d",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/navegador_auditoria_2026-10-26.json",
+      "bytes": 1387,
+      "sha256": "af80d2363e076771d8cd105c1f1fb344fc3cfff203c9586fbcd78adc041a84e9",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/reconciliacao_auditoria_2026-10-26.json",
+      "bytes": 600,
+      "sha256": "7bb2435018803e2aa7445c9f61c81b088d43db6fb9daeef863c7ae1fb063ef71",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/reuniao_2026-10-26.json",
+      "bytes": 2546,
+      "sha256": "c1e20df533a759a009d691320a11cb0982088d0979d89d57c0d53d111641e37c",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/testes_auditoria_2026-10-26.xml",
+      "bytes": 53023,
+      "sha256": "9ab84f235f45394fad53fabf2f1ca7526b2885521b45d8d2ca41f2256720ce8c",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao/testes_movimento_2026-10-26.xml",
+      "bytes": 53024,
+      "sha256": "3d86e82560278455d421e9160d41d62dde3d994231c1dd0e6403e5011c539c0e",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao_2026-10-23.json",
+      "bytes": 28786,
+      "sha256": "96bdbd831761b6454ef5f7443253e31566f8331e379843c9fda31372524ef457",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao_2026-10-24-pos.json",
+      "bytes": 25303,
+      "sha256": "b51fa194ae4a8839d03ee7f4fc29116d6d5a199e5c8a12e44fa351cb9c33908e",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "docs/validacao_2026-10-24.json",
+      "bytes": 25020,
+      "sha256": "b763066fd12ffcb9be6dc419de2a4a2a65d5c290e4365ba677db1a39480b16ef",
+      "classe": "evidência/documentação",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/__init__.py",
+      "bytes": 102,
+      "sha256": "381c1e8ebabce4c21e401ccb155cb556d47a8dbd81782cfe8c08595ba48fdba4",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Laboratório de previsão de demanda (fora do site). Ver ml/LEIAME no docstring de ml/regua.py.",
+      "definicoes": []
+    },
+    {
+      "arquivo": "ml/calendario.py",
+      "bytes": 1072,
+      "sha256": "2b3f34f8b5c612352ee76239a65d1b8818959065b2f59d64143bb490d6ad4ad5",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Variáveis de calendário conhecidas de antemão (servem de exógenas para ARIMAX/ML sem \"colar\" do futuro).",
+      "definicoes": [
+        "dias_uteis",
+        "exogenas"
+      ]
+    },
+    {
+      "arquivo": "ml/dados/exclusividade.csv",
+      "bytes": 1556,
+      "sha256": "18c5fd11218cbcaec0a52f09ffa901498191bcb76460983a91086d8368b45091",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/dados/exclusividade_2025.csv",
+      "bytes": 1837,
+      "sha256": "734f40f03a4395ee58ebdd2a1f659c39ad5d13a9839b4d4bccfcac4d3a14af0c",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/dados/lotes_vigente.csv",
+      "bytes": 1692,
+      "sha256": "3facda2f2b7a6310491e103ac6997b26b139720c90b624029525892a80cd6de5",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/dados/serie_inbound.csv",
+      "bytes": 3266,
+      "sha256": "160220924f1f7b0d67a807d7b3158600e4abdba3db4c61b591ceae7a32f3dfdc",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/dados/serie_mensal.csv",
+      "bytes": 3658,
+      "sha256": "3c027a84f9786dff2ea7f98c21407ed35b4904349f88d0e74e1f7b25c000eb20",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/dados/serie_mercado.csv",
+      "bytes": 3269,
+      "sha256": "63855d836caef4f5fcdccb4ff8e4d152ee9c68296dc3c4f45dba59bbb6777fa5",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/dados/serie_mercado_exclusivos.csv",
+      "bytes": 1419,
+      "sha256": "dbd51b42ce921542945e26f1e5709e0791fc9344c7c68215c3aef38547d51e1c",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/dados/serie_mercado_exclusivos_2025.csv",
+      "bytes": 2872,
+      "sha256": "455e4ac88ec0555dbe3302f3b6a38eecba264973611b3909bf577d280d75cdf1",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/dados/serie_mercado_nao_exclusivos.csv",
+      "bytes": 1471,
+      "sha256": "4f628c9662d8e534d3962adf03df8a6702ad48f3d2a26941b942cd47d3463f2c",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/dados/serie_mercado_nao_exclusivos_2025.csv",
+      "bytes": 2926,
+      "sha256": "c84cf68b7695f2cd08ef59619984d82ff7577fca43d857daf67e778cdd0b4954",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/dados.py",
+      "bytes": 18721,
+      "sha256": "03b38df75a2efc19c5871ab6afe7cce7cd6f3075630e8849c98c248472ee13b6",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Extrai do BigQuery (somente SELECT) o snapshot congelado que TODOS os especialistas usam.",
+      "definicoes": [
+        "SnapshotInvalido",
+        "validar",
+        "_gravar_csv",
+        "_cabeca_talentos",
+        "_sql_exclusividade",
+        "_sql_lotes",
+        "extrair",
+        "_completo",
+        "montar_recortes",
+        "montar_sensibilidade",
+        "gravar_recortes",
+        "gravar",
+        "carregar_snapshot",
+        "carregar_exclusividade",
+        "carregar_recorte",
+        "carregar_lotes"
+      ]
+    },
+    {
+      "arquivo": "ml/modelos/__init__.py",
+      "bytes": 103,
+      "sha256": "545d40851b6570ed24c53277d17f2f752b8f3c20719d25a3188211047699945a",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Cada módulo aqui expõe MODELOS = [instâncias]; o runner (ml/rodar.py) descobre todos sozinho.",
+      "definicoes": []
+    },
+    {
+      "arquivo": "ml/modelos/arimax.py",
+      "bytes": 7452,
+      "sha256": "b3aae64cdeb97ed5eb700ea856851da387c29ba7c8265763acfbdbf2fdf95d7c",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "ARIMAX (regressão com erros ARIMA, statsmodels SARIMAX) contra o ARIMA de mesma ordem sem exógenas.",
+      "definicoes": [
+        "_rotulo",
+        "_matriz",
+        "_ajustar_prever",
+        "_wape_interno",
+        "Arimax",
+        "_par"
+      ]
+    },
+    {
+      "arquivo": "ml/modelos/automatico.py",
+      "bytes": 11820,
+      "sha256": "a42526564845abd883a3b5abef8ed428497a527d900b180cbc9b7b108b3c2e6d",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Comparação automática com o AutoTS (D55, 26/10/2026): uma biblioteca que treina muitos modelos e devolve o melhor.",
+      "definicoes": [
+        "_semear",
+        "_tabela",
+        "_transformacoes",
+        "buscar",
+        "_buscar_isolado",
+        "busca_da_janela",
+        "prever_template",
+        "AutoTSPosicao",
+        "detalhe"
+      ]
+    },
+    {
+      "arquivo": "ml/modelos/boosting.py",
+      "bytes": 9130,
+      "sha256": "bf8d9d4d9e24311a372e5fd7ef5d68265612dba38f3a465387d4d1281fddd1cf",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Gradient boosting (LightGBM / XGBoost) para pedidos por mês — especialista de ML.",
+      "definicoes": [
+        "_nivel",
+        "_log_razao",
+        "_features",
+        "_tabela",
+        "_lgbm",
+        "_xgb",
+        "prever_boost",
+        "_prever_boost",
+        "escolher_motor",
+        "Boost",
+        "BoostAuto"
+      ]
+    },
+    {
+      "arquivo": "ml/modelos/classico.py",
+      "bytes": 8315,
+      "sha256": "cd295a80820f1367d72a1903748047164e3b4240dd66975578baefbcae76b086",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Séries temporais clássicas (ETS / Holt amortecido, ARIMA, Theta) para pedidos por mês.",
+      "definicoes": [
+        "_silencio",
+        "_ets",
+        "_arima",
+        "_theta",
+        "_arima_candidatos",
+        "ets_aicc",
+        "arima_aicc",
+        "holt_amortecido",
+        "theta",
+        "combinado",
+        "_validar",
+        "Classico",
+        "ClassicoFaixaErros"
+      ]
+    },
+    {
+      "arquivo": "ml/modelos/combinacao.py",
+      "bytes": 11470,
+      "sha256": "1f22f112951723bfd394228861a01d62339d567ff570daf09c242aea4e2db9cf",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Referências bem ajustadas e combinações de métodos simples e clássicos (especialista \"combinação\").",
+      "definicoes": [
+        "_ses_ajuste",
+        "ses",
+        "holt_amort",
+        "holt_amort_log",
+        "_holt_bruto",
+        "theta",
+        "drift",
+        "sazonal",
+        "drift_log",
+        "media3",
+        "ultimo",
+        "_wape_interno",
+        "Componente",
+        "Combinacao",
+        "_fator_vies",
+        "Corrigido",
+        "_ponto"
+      ]
+    },
+    {
+      "arquivo": "ml/modelos/neural.py",
+      "bytes": 9213,
+      "sha256": "48c1e6e8d6f195b64fe1942ecbda490a4fd2fa403cf0feb038a7b11e07ce0851",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Rede neural pequena (sklearn MLPRegressor) para pedidos por mês, com varredura do nº de neurônios.",
+      "definicoes": [
+        "rotulo",
+        "_snapshot",
+        "outras_series",
+        "_exog",
+        "_entrada",
+        "_exemplos",
+        "RedeNeural",
+        "RedeNeuralAuto"
+      ]
+    },
+    {
+      "arquivo": "ml/modelos/prophet.py",
+      "bytes": 7770,
+      "sha256": "7cab4ae80526aae36122d838ff74d3faedfd5cc946beaaee1eaabad0d488b65f",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Especialista Prophet: tendência por partes (changepoints) + sazonalidade anual fraca, faixa do próprio Prophet.",
+      "definicoes": [
+        "_ds",
+        "ProphetMensal",
+        "ProphetAuto"
+      ]
+    },
+    {
+      "arquivo": "ml/modelos/referencia.py",
+      "bytes": 1620,
+      "sha256": "5117907cb9ad9a783da6174c92343f6aae9a219f883eb2f7748252c0bbfbc5ec",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Referências simples (baseline oficial, D20): ML só fica se vencer a melhor destas no backtest.",
+      "definicoes": [
+        "UltimoMes",
+        "Media",
+        "MesmoMesAnoAnterior",
+        "TendenciaLinear"
+      ]
+    },
+    {
+      "arquivo": "ml/previsao.py",
+      "bytes": 30662,
+      "sha256": "1b588775907adbc69e4a5134a8a2e54fa365e7dd9d9bc9d913272e40f85baa27",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Contrato com a página \"Previsão de demanda\" (v3, D56 — 26/10/2026; revisa a D48 e a D55): monta ml/saida/previsao.json",
+      "definicoes": [
+        "complexidade",
+        "rotulo",
+        "_met",
+        "_num",
+        "_wape1",
+        "escolher",
+        "_motivo",
+        "robustez",
+        "comparados",
+        "_lotes",
+        "_acompanhamento",
+        "_exclusividade",
+        "qualidade",
+        "comparacao_automatica",
+        "montar",
+        "_limpo",
+        "_gravar_json",
+        "gravar",
+        "ler",
+        "retrato_existe",
+        "atualizar_acompanhamento",
+        "linhas_do_historico",
+        "registrar"
+      ]
+    },
+    {
+      "arquivo": "ml/regua.py",
+      "bytes": 20480,
+      "sha256": "ed6567f07cbae974be92295f4bd8fa98b2ea5224f70306d23e104efbcf7357fd",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": true,
+      "sintaxe": "válida",
+      "objetivo": "Régua única de backtest para a previsão de pedidos por mês (Inbound, Mercado) — protocolo D48 (26/10/2026).",
+      "definicoes": [
+        "NaoSeAplica",
+        "minimo",
+        "_curto_demais",
+        "_meses",
+        "pares_d48",
+        "pares_d47",
+        "carregar_series",
+        "carregar_recortes",
+        "carregar_sensibilidade",
+        "_normalizar",
+        "treino_de",
+        "verificar_aplica",
+        "prever_de",
+        "backtest",
+        "metricas",
+        "metricas_d48",
+        "avaliar",
+        "prever_futuro",
+        "ModeloPontual"
+      ]
+    },
+    {
+      "arquivo": "ml/rodar.py",
+      "bytes": 15043,
+      "sha256": "3a707c781e850496d29cd3208687b2253fe59721ae19f1e3bf0dc7d717afe2ce",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": true,
+      "sintaxe": "válida",
+      "objetivo": "Roda os modelos registrados em ml/modelos/*.py na régua única (protocolo D48 + R7 da D56) e grava os resultados.",
+      "definicoes": [
+        "_limpo",
+        "avaliar_modelo",
+        "rodar_modulo",
+        "juntar",
+        "_previsao",
+        "todos_os_modulos",
+        "rotina",
+        "sensibilidade",
+        "acompanhamento",
+        "_estado",
+        "_registrado",
+        "main"
+      ]
+    },
+    {
+      "arquivo": "ml/saida/d47/historico_previsoes.jsonl",
+      "bytes": 782,
+      "sha256": "f6dbff704ce09ce37ab547d7d432cfe4b8890988a817f1b17fb0c1443fb7d5bc",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d47/modelos/arimax.json",
+      "bytes": 148292,
+      "sha256": "8079a9a075f3d880f5d8c1bd274b10b312ffa41ba18c82db7fa0ef8c44aa2f82",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d47/modelos/boosting.json",
+      "bytes": 54387,
+      "sha256": "2ab00be02e139fbf89591b6706023dd428c3484f73b2eab803aeb583c27ee9cd",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d47/modelos/classico.json",
+      "bytes": 107684,
+      "sha256": "9c9447d3ac1734a1cb269252dcd4b119afe0f5bf655d3bc74895653d16b2120f",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d47/modelos/combinacao.json",
+      "bytes": 188414,
+      "sha256": "b257ee71b48cc1bb10dad870af7fb379eb0636473e0c742a9c0ccf9207878b48",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d47/modelos/neural.json",
+      "bytes": 148454,
+      "sha256": "4899945ca427927efaee84628ff73b6c2b7cf80663b7e6239432b14f2f1d1b3d",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d47/modelos/prophet.json",
+      "bytes": 67766,
+      "sha256": "201c26a1ef865cc47a2bb71d5311c8dc2fae1196930674dab65a69a37ceac273",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d47/modelos/referencia.json",
+      "bytes": 67122,
+      "sha256": "be56b746e1dbb97d9302a8b25c98f8c229516d1c4fa46cacfd8b93738b075851",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d47/previsao.json",
+      "bytes": 140504,
+      "sha256": "dfe3ade709b87706554a0e0522ecc2aa3c73e60cdbcef77d9a7e787617475b18",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d47/resultados.json",
+      "bytes": 782137,
+      "sha256": "14c3ff0bef05e83231b576d1ff5cbeaf89aae00517ee7743d1db1ac0067e1253",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/filtros.json",
+      "bytes": 265599,
+      "sha256": "abeecf3a0ee637e02751ab63a29e640cf25223f6b6530fde4278b14212b053ac",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/historico_previsoes.jsonl",
+      "bytes": 2491,
+      "sha256": "38996d1523a23028c197a86fa947b5272f2ac379d6b04e5de2ab77816cbc132b",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/modelos/arimax.json",
+      "bytes": 121624,
+      "sha256": "afbb2e2b48740888806f308d384c1f21a3146bf0251913dad8222ed0aa9d5cdb",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/modelos/automatico.json",
+      "bytes": 56525,
+      "sha256": "a087928b27cea489804d835e7af7545b8b76584e362127b3bb6544ccbd05cf47",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/modelos/boosting.json",
+      "bytes": 44800,
+      "sha256": "36658d37e6dd13714d16c7ab491f993c92315186fa55c2488ea7ab18489b274b",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/modelos/classico.json",
+      "bytes": 87866,
+      "sha256": "b1183465024704441f04954d0904c1bb69a593c4d53121a7d84690594885fa33",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/modelos/combinacao.json",
+      "bytes": 143988,
+      "sha256": "4f473c14f94ca71cdc2c26222c325da607ddf4d6ce7c56f578f948e6f687c8c0",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/modelos/neural.json",
+      "bytes": 122010,
+      "sha256": "c07d13b262d0a564e331c2cdb83de261a772b9e2b07d8c88d15455144c6e508b",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/modelos/prophet.json",
+      "bytes": 23434,
+      "sha256": "1f61c6621fe1d7b957a1b30de0dcb36987f74a6f94a16f036cf8c2c0314ed965",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/modelos/referencia.json",
+      "bytes": 54641,
+      "sha256": "46becbf408d9c2db898d78038ac9cabf42d743833ead928d22ad26c6eb022a70",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/previsao.json",
+      "bytes": 234503,
+      "sha256": "c4d620b84f65035353392585b6e616d86fe90616cfec8765e5980b0e6fa87c6e",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/d55/resultados.json",
+      "bytes": 654397,
+      "sha256": "b1919db4ec515e7ce400e63a9872204ca91d753a3fbf0e386e0cd5fff96d9cb3",
+      "classe": "arquivo histórico preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/historico_previsoes.jsonl",
+      "bytes": 3993,
+      "sha256": "0cc898592c16aa5d6dccd39d887ec6b5f7c3941157ab3020b4d0ca3a00032ad6",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/modelos/arimax.json",
+      "bytes": 126994,
+      "sha256": "d5fbffb78b559af4d41bb705a01d1ac81d8d7dc44fac89a089581af2feabca86",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/modelos/automatico.json",
+      "bytes": 59038,
+      "sha256": "983ea67fdcbf25332412abba94298d5bcc3a09e23b3223e609409a9702f205dc",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/modelos/boosting.json",
+      "bytes": 47678,
+      "sha256": "be9182f29423260f9e7101a432d1bffd90e0feea84163eae843090481ba1022c",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/modelos/classico.json",
+      "bytes": 92167,
+      "sha256": "23128e4670c68f83bfc805c9f3896f35b0c31cd1f9827feaf8756f2535eade79",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/modelos/combinacao.json",
+      "bytes": 211974,
+      "sha256": "52028246e849f5f1ae94bb11a2734a64b0a112d9fe41ec9ae4165c55ea41be70",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/modelos/neural.json",
+      "bytes": 127379,
+      "sha256": "2c84866d4c5b7409d8253bc054802cc187c104abb97eb1225f26ad42fb71dfcf",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/modelos/prophet.json",
+      "bytes": 25675,
+      "sha256": "9f436e146673520fc7de0cacaf0181b23195dcabb1ae3daae3c9cb18485e5197",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/modelos/referencia.json",
+      "bytes": 76512,
+      "sha256": "9b082cfa32d1d79c269dfc266672651037c80779f6b4aaa5c5f085da9c6f68dd",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/previsao.json",
+      "bytes": 335272,
+      "sha256": "412ae4283dd63204d279a379e85481f4cc5755d58f0cb7033d649379c36e7469",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/resultados.json",
+      "bytes": 758369,
+      "sha256": "dd585b929adab83038b84a0abf4cab584a806e9c36b158e285c969927609f73c",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/retratos/2026-09.json",
+      "bytes": 335272,
+      "sha256": "412ae4283dd63204d279a379e85481f4cc5755d58f0cb7033d649379c36e7469",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/rotina.log",
+      "bytes": 17129,
+      "sha256": "78f64d253ed4559cfbf6bc3746e73a97a4e3ed5738e9e267e9259aced524cece",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/rotina_estado.json",
+      "bytes": 108,
+      "sha256": "3abb672d622c946b4d65dd13a654081605bd37644a04be50cadf6750c29cdf46",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "ml/saida/sensibilidade_2025.json",
+      "bytes": 631473,
+      "sha256": "77c4cb88a6e0103d24a480e7ca626d4e6a4d8f8e2d3bac7a586ac6d00b4a44c1",
+      "classe": "snapshot/modelo preservado",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "README.md",
+      "bytes": 11845,
+      "sha256": "7f4ca6e403352d955e6835e8511e8903d4ddf117be4845b21a7d0eacd7beb0f9",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": true
+    },
+    {
+      "arquivo": "requirements-dev.txt",
+      "bytes": 78,
+      "sha256": "670e181ae78d6adae038820858868c5394ec894c746a1dde71b6b70b5205bcd7",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "requirements-ml.txt",
+      "bytes": 644,
+      "sha256": "571bdeabadf6f96b95d6b01c20fc7e9febfe9dc7e303fbe56f6d568a5dbac2c8",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "requirements.txt",
+      "bytes": 452,
+      "sha256": "2a856548eb78b60d2a97076eece3f4ae26c03df43dcc276888530acbf4ad4ef8",
+      "classe": "código/configuração/ativo",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "tests/conftest.py",
+      "bytes": 18763,
+      "sha256": "8831013b08d648d252c6a216083a68ea900f061c65355ef2c848d760fc33e31d",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Dados sintéticos para os testes: 6 projetos na forma da gold (uma linha por passagem por status).",
+      "definicoes": [
+        "_passos",
+        "movimentos",
+        "entrada_diaria",
+        "com_dias",
+        "fluxo_mensal",
+        "sem_bigquery",
+        "base_um",
+        "series_sinteticas",
+        "previsao_sintetica",
+        "arquivo_previsao"
+      ]
+    },
+    {
+      "arquivo": "tests/test_atendimento.py",
+      "bytes": 4917,
+      "sha256": "7525b29772d5ded2b401734f77147ca8d0e5d13467f5f4d31d64b8b3683a28a6",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Aba Atendimento (A1–A8), composição contra o ano anterior (E9) e o teste de duas proporções (app/estatistica.py).",
+      "definicoes": [
+        "limpa_cache",
+        "test_diferenca_de_proporcoes",
+        "test_atendimento_quantidades_e_taxas",
+        "test_atendimento_por_mes",
+        "test_composicao_contra_ano_anterior",
+        "test_variacao_exige_base_minima"
+      ]
+    },
+    {
+      "arquivo": "tests/test_atendimento_d53.py",
+      "bytes": 7874,
+      "sha256": "7fff9800f602ad7a42ff7e18328da4c7ec9dbce936569b0266159e1001e7021c",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "D53 (26/10/2026, Caio): Atendimento com resolvido = entregue ao cliente (A15b), extrato em três blocos com uma linha",
+      "definicoes": [
+        "cliente",
+        "test_faixa_do_ano_pelo_maior_resto",
+        "test_quadro_em_tres_blocos_e_uma_linha_de_pct",
+        "test_capacidade_desconta_so_decisoes_de_fora",
+        "test_status_sem_entrega_so_quando_bate",
+        "test_pagina_atendimento_d53",
+        "test_proxima_pergunta_fora_da_tela_em_todas",
+        "test_sql_status_sem_placeholders"
+      ]
+    },
+    {
+      "arquivo": "tests/test_atendimento_executivo.py",
+      "bytes": 1886,
+      "sha256": "1fd747a3f8c87166da5d5c06e28ea69de3b9693abf40df0a212e6ede30cd740f",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "A14: tendência descritiva separa mês parcial e categorias de saída.",
+      "definicoes": [
+        "mes",
+        "test_tendencia_exclui_parcial_e_preserva_ponte_da_fila",
+        "test_leitura_sem_base_nao_inventa_percentual_ou_tendencia",
+        "test_ano_fechado_inclui_ultimo_mes_e_ignora_futuros",
+        "test_virada_de_mes_sem_movimento_mantem_ultimo_mes_com_dados_no_foco",
+        "test_percentuais_da_leitura_somam_cem_pelo_maior_resto"
+      ]
+    },
+    {
+      "arquivo": "tests/test_auditoria_integridade.py",
+      "bytes": 3380,
+      "sha256": "a39887568206202af15962f67f99c73de4b9ab52479b00395357252a41e44b98",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Regressões da auditoria de 26/10: sem rede, produção ou mudanças de interface.",
+      "definicoes": [
+        "test_cache_consulta_depende_tambem_do_log",
+        "test_segundo_job_nao_apaga_trava_do_primeiro",
+        "test_publicacao_com_falha_nao_registra_sucesso",
+        "test_resultados_de_cargas_diferentes_nao_sao_publicados",
+        "test_previsoes_invalidas_nao_entram_na_comparacao",
+        "test_acompanhamento_recusado_registra_falha"
+      ]
+    },
+    {
+      "arquivo": "tests/test_batalha2_interface.py",
+      "bytes": 6871,
+      "sha256": "4b03d532e8b2d8f745c98868498081211de3a090a424c4aeb93abc9e0f82c67f",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Batalha 2, 2ª leva (interface, layout, animação; 26/10/2026): base congelada sem aviso de atraso, rodapé datado em",
+      "definicoes": [
+        "cliente",
+        "test_base_congelada_nao_acende_atraso",
+        "test_pagina_congelada_sem_aviso_amarelo",
+        "test_rodape_datado_em_toda_rota",
+        "test_menu_e_rodape_com_o_mesmo_horario",
+        "test_mascara_da_qualidade_sem_nota_interna",
+        "test_nenhuma_rota_regras_responde",
+        "test_regras_html_retirado",
+        "test_reuniao_previsao_leva_a_qualidade_e_modo_no_html",
+        "test_links_com_filtro_de_talentos",
+        "test_previsao_duas_medidas"
+      ]
+    },
+    {
+      "arquivo": "tests/test_batalha2_textos.py",
+      "bytes": 13024,
+      "sha256": "44481666750ac3f0daa3abe2e5cbd935e44e30d35d5e2684af7e4e92a324a1f4",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": true,
+      "sintaxe": "válida",
+      "objetivo": "Batalha 2, 1ª leva (26/10/2026): dados, cálculos e textos.",
+      "definicoes": [
+        "_texto_visivel",
+        "_pagina",
+        "test_h_meta_uma_casa_perto_da_meta",
+        "test_mes_com_tipico_de_16_4_h_nao_aparece_como_16_h",
+        "test_sla_um_so_vocabulario",
+        "test_regras_do_sla_pelo_mes_da_entrega",
+        "test_pedidos_sem_marcador_provisorio",
+        "test_o_que_falta_estado_com_nota",
+        "test_resultado_fora_da_reuniao_e_regras_sem_conteudo_voltam",
+        "test_corte_e3_unico",
+        "test_ml_snapshot_usa_e3",
+        "test_job_nao_dispara_congelado",
+        "test_falha_do_job_aparece_na_pagina",
+        "test_rodar_grava_estado_e_trava",
+        "_snapshot",
+        "test_snapshot_valido_e_divergente",
+        "test_snapshot_invalido_nao_grava",
+        "test_historico_exige_retrato_e_protocolo",
+        "test_mes_de_outro_ano_leva_o_ano"
+      ]
+    },
+    {
+      "arquivo": "tests/test_calculos.py",
+      "bytes": 4400,
+      "sha256": "da50857974c1b713bb0f28d8487e12e0f488068a942a9a16be9556fe87d6b85f",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Regras do slide 1 (C1–C11) sobre os dados sintéticos de conftest.py, e os invariantes de arredondamento.",
+      "definicoes": [
+        "test_entregas_segue_c1_c2_c3_c4_c9",
+        "test_entrega_todos",
+        "test_grupos_de_talento_c10",
+        "test_faixas_sempre_somam_o_total_c8",
+        "test_faixas_na_fronteira_e_sem_faixa_do_meio",
+        "test_cliente_no_passo_1_e_descartado",
+        "test_arredondamento_meio_para_cima"
+      ]
+    },
+    {
+      "arquivo": "tests/test_dados.py",
+      "bytes": 7014,
+      "sha256": "7edd039ce342c5f6a94b477b5910d4c5c1b17d1b3ab55c091a02b609c5714163",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Política de carga e falha de app/dados.py, com um BigQuery falso: nada aqui sai do computador.",
+      "definicoes": [
+        "_Job",
+        "_Tabela",
+        "ClienteFalso",
+        "ambiente",
+        "test_agenda_da_gold_e_estado",
+        "test_metadado_inalterado_nao_recarrega",
+        "test_metadado_alterado_recarrega_e_sobe_a_versao",
+        "test_falha_com_carga_anterior_serve_a_anterior_e_marca_atraso",
+        "test_falha_sem_carga_anterior_e_indisponivel",
+        "test_primeira_falha_nao_repete_consulta_a_cada_acesso",
+        "test_contrato_rejeita_historico_descontinuo",
+        "test_contrato_rejeita_situacoes_que_nao_fecham",
+        "test_contrato_rejeita_carga_invalida_e_mantem_a_anterior",
+        "test_le_so_as_colunas_do_contrato",
+        "test_sem_storage_api_cai_para_leitura_comum",
+        "test_aquecimento_roda_antes_da_troca",
+        "test_em_fundo_responde_na_hora_e_troca_depois",
+        "test_falha_espera_o_intervalo_antes_de_tentar_de_novo"
+      ]
+    },
+    {
+      "arquivo": "tests/test_documentacao.py",
+      "bytes": 1240,
+      "sha256": "cdcfa827617fb652eb2d43e1a2bd90bb60f0f52cb56ed1e2b613874770fcd58b",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Rastreabilidade da documentação (batalha 2, G4-N14 item 4, 26/10/2026).",
+      "definicoes": [
+        "_secao",
+        "test_o_que_falta_md_igual_a_pendencias",
+        "test_o_que_falta_md_com_os_pedidos_do_codigo"
+      ]
+    },
+    {
+      "arquivo": "tests/test_expediente.py",
+      "bytes": 3485,
+      "sha256": "55b903d009f25feeb629d9202763714e5cd51c9cc03100af02700b9da6540f33",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Calendário e horas úteis (app/expediente.py) — a mesma R14 da gold, com e sem almoço.",
+      "definicoes": [
+        "test_pascoa_meeus",
+        "test_feriados_fixos_e_moveis_de_2026",
+        "test_almoco_descontado_so_no_expediente_sem_almoco",
+        "test_fim_de_semana_e_noite_nao_contam",
+        "test_feriado_no_meio_nao_conta",
+        "test_virada_de_ano_exclui_31_12_01_01_e_fim_de_semana",
+        "test_intervalo_invertido_ou_vazio_da_zero",
+        "test_limite_de_16h_preserva_microssegundos",
+        "test_dias_uteis_entre"
+      ]
+    },
+    {
+      "arquivo": "tests/test_exploracao.py",
+      "bytes": 10081,
+      "sha256": "7bae82783497b8fb9778ba5d9414c84c248d0d5d6f40ae0cc1d05dd2c176d80b",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Estudo \"Como medimos\", slide 2 (X1–X9, refeito pela referência do Caio em 25/10/2026): histograma, assimetria,",
+      "definicoes": [
+        "_mov",
+        "test_exploracao_numeros",
+        "test_exploracao_poucos_dados_e_grupo",
+        "test_kde_silverman_x5",
+        "test_qq_x5",
+        "test_caixa_linear_x6",
+        "test_tela_dos_quadros_pela_referencia",
+        "test_espelho_x5b"
+      ]
+    },
+    {
+      "arquivo": "tests/test_formato_variacao.py",
+      "bytes": 1641,
+      "sha256": "e385c79bdb27cd91c22490d08f27578c493cdde71acffad88ad76e54b1c53f13",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Textos de variação para relatório vivo (E8, E9, A7): sinal e frase saem do percentual já arredondado.",
+      "definicoes": [
+        "test_variacao_e_sentido",
+        "test_variacao_sem_sinal",
+        "test_frase_de_queda_e_igual"
+      ]
+    },
+    {
+      "arquivo": "tests/test_inicio_d52.py",
+      "bytes": 3560,
+      "sha256": "8a75775454c8a115ed98f463c12e7841afae9fc0eac1614d2bf2bb29b75454b0",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "D52 (26/10/2026, Caio): Início em dois quadrantes — resposta composta como nuvem de palavras (padrão do SLA) em cima,",
+      "definicoes": [
+        "cliente",
+        "_frase",
+        "test_nuvem_com_numeros_dinamicos",
+        "test_extrato_no_mesmo_lugar",
+        "test_css_quadrantes_e_cartao"
+      ]
+    },
+    {
+      "arquivo": "tests/test_inicio_revisao.py",
+      "bytes": 7411,
+      "sha256": "42d565db6b3cfc219b895d68f854a61c57b141421cf3f9f061d021216ba87b9b",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Página Início: correções da validação final de 23/10/2026 (B1, B2, B3, B5, B6, B7, B8), com dados sintéticos.",
+      "definicoes": [
+        "limpa_cache",
+        "cliente",
+        "test_b1_tipos_no_ano_fecham_em_100_nos_dois_anos",
+        "test_b2_situacao_fecha_em_100",
+        "test_b2_todos_os_meses_e_o_ano_fecham",
+        "_fluxo",
+        "test_b3_extrato_sem_percentual_por_diferenca",
+        "test_b5_mes_vazio_nao_ocupa_vaga",
+        "test_b6_lista_de_meses_atravessa_o_ano_sem_mudar_a_tela",
+        "test_b7_cargas_de_dias_diferentes_escondem_o_extrato",
+        "test_b8_periodo_na_virada_do_ano"
+      ]
+    },
+    {
+      "arquivo": "tests/test_ml_arimax.py",
+      "bytes": 3405,
+      "sha256": "c6fbfe410eb3a7c67210dcbd18042655c25bc2825fa998b372607f66c4853706",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "ARIMAX x ARIMA (ml/modelos/arimax.py) com séries sintéticas, sem BigQuery.",
+      "definicoes": [
+        "_serie",
+        "test_predict_contrato_e_faixa",
+        "test_tendencia_em_log_acompanha_crescimento",
+        "test_ax1_exogena_sem_informacao_sai",
+        "test_exogena_conhecida_e_usada_no_futuro",
+        "test_sem_vazamento_e_deterministico",
+        "test_auto_escolhe_dentro_do_treino",
+        "test_nomes_unicos_e_pares_mesma_ordem"
+      ]
+    },
+    {
+      "arquivo": "tests/test_ml_automatico.py",
+      "bytes": 5836,
+      "sha256": "dcb22de7b5a611eac3d5a7e2a157f4d5b9d0d61c3eb53870f1fbf6f079db8130",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Comparação automática com o AutoTS (D55, 26/10/2026; ml/modelos/automatico.py, regras AT1–AT7).",
+      "definicoes": [
+        "_serie",
+        "Stub",
+        "test_autots_so_ve_a_janela_de_12_meses_antes_da_origem",
+        "test_autots_k_usa_o_k_esimo_colocado_e_falha_sem_ele",
+        "test_autots_conta_como_o_mais_complexo_no_desempate",
+        "test_comparacao_automatica_no_contrato"
+      ]
+    },
+    {
+      "arquivo": "tests/test_ml_boosting.py",
+      "bytes": 2318,
+      "sha256": "4a526f830f109432ab667b0082e13414c0122509715e0937473e4328984a802e",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Teste rápido do especialista de gradient boosting (ml/modelos/boosting.py) com dados sintéticos.",
+      "definicoes": [
+        "_serie",
+        "test_interface_e_faixa",
+        "test_extrapola_crescimento_acima_do_maximo",
+        "test_deterministico_e_sem_futuro",
+        "test_auto_escolhe_dentro_do_treino"
+      ]
+    },
+    {
+      "arquivo": "tests/test_ml_classico.py",
+      "bytes": 2504,
+      "sha256": "b5192dee3985c0d37fc0b35d9cf0f79ee6bc3d7391676170e2f453bbfc3e2722",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Modelos clássicos (ml/modelos/classico.py) com séries sintéticas, sem BigQuery.",
+      "definicoes": [
+        "_serie",
+        "test_contrato_e_faixa",
+        "test_segue_crescimento_e_serie_plana",
+        "test_treino_curto_13_meses",
+        "test_validado_escolhe_so_com_o_treino",
+        "test_ordens_arima_respeitam_amostra_pequena"
+      ]
+    },
+    {
+      "arquivo": "tests/test_ml_combinacao.py",
+      "bytes": 3736,
+      "sha256": "a7c240bb8caaa242f99ba052ebc27136f6c0804aba330d0d5dd46c1ab312b6f1",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Especialista de combinação (ml/modelos/combinacao.py) com séries sintéticas, sem BigQuery.",
+      "definicoes": [
+        "_serie",
+        "test_componentes_constante_preveem_a_constante",
+        "test_tendencia_capturada_por_drift_e_holt",
+        "test_sazonal_ajusta_indice_do_ano_anterior_ao_patamar",
+        "test_combinacoes_e_selecao",
+        "test_fator_de_vies_so_usa_o_passado",
+        "test_modelos_na_regua",
+        "test_nomes_unicos_e_deterministico"
+      ]
+    },
+    {
+      "arquivo": "tests/test_ml_neural.py",
+      "bytes": 2475,
+      "sha256": "4aa9e13f807372dbac6f5d03917d812bd80370e3ebdd6488133fe547c1ab5e19",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Rede neural da previsão (ml/modelos/neural.py) com séries sintéticas, sem BigQuery.",
+      "definicoes": [
+        "_serie",
+        "test_varredura_registra_um_nome_por_tamanho",
+        "test_previsao_reprodutivel_e_com_faixa",
+        "test_serie_sintetica_nao_usa_snapshot",
+        "test_serie_constante_preve_perto_do_nivel",
+        "test_auto_escolhe_so_com_o_treino",
+        "test_outra_serie_cortada_na_origem"
+      ]
+    },
+    {
+      "arquivo": "tests/test_ml_prophet.py",
+      "bytes": 2069,
+      "sha256": "b760fdf30b5c6d2c0837153e79add354637ad8b8ea9f71f027651c63b91366a8",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Especialista Prophet (ml/modelos/prophet.py) com séries sintéticas, sem BigQuery.",
+      "definicoes": [
+        "_serie",
+        "test_contrato_faixa_ordenada_e_nao_negativa",
+        "test_acompanha_mudanca_de_patamar",
+        "test_reproduzivel_com_semente",
+        "test_auto_escolhe_so_com_o_treino",
+        "test_nomes_unicos"
+      ]
+    },
+    {
+      "arquivo": "tests/test_ml_regua.py",
+      "bytes": 9178,
+      "sha256": "a114f6a18c5b84f5a15fc2967e8a76975e1061915726584a8e482dd4fb2645f0",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Régua de backtest da previsão (ml/regua.py) com séries sintéticas, sem BigQuery.",
+      "definicoes": [
+        "_serie",
+        "Espiao",
+        "test_janela_de_12_meses_sem_vazamento",
+        "test_protocolo_antigo_acessivel",
+        "test_nao_se_aplica_com_janela_curta",
+        "test_metricas_contas",
+        "test_serie_constante_erro_zero_e_futuro",
+        "test_referencias_formato_e_valores",
+        "test_faixa_vem_do_passado_do_treino",
+        "test_mes_parcial_fora_do_treino",
+        "test_runner_grava_json",
+        "test_calendario_dias_uteis",
+        "test_series_curtas_janela_expansiva_sem_vazamento"
+      ]
+    },
+    {
+      "arquivo": "tests/test_movimento.py",
+      "bytes": 7604,
+      "sha256": "be18e0c966bf526ea7b00ae569cc000f1e3fd174f3f56a31224871b8ca736fd2",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Movimento do portal (batalha 2, 2ª leva, 26/10/2026): a D46 vale para todas as páginas, não só para o estudo.",
+      "definicoes": [
+        "_ms",
+        "_partes",
+        "_tokens",
+        "_e_tempo",
+        "_regras",
+        "test_templates_sem_contagem_e_js_sem_contar",
+        "test_sem_mola_sem_loop_no_css_todo",
+        "test_entrada_das_paginas_ate_1200ms",
+        "test_numeros_meta_e_frase_sem_estado_escondido",
+        "test_impressao_e_revisita_parados",
+        "test_navegacao_so_com_o_voo_da_pilula",
+        "test_modo_reuniao_sem_recarga_automatica"
+      ]
+    },
+    {
+      "arquivo": "tests/test_portal.py",
+      "bytes": 12136,
+      "sha256": "939511610ccf1b32063cbbb28aa8629ccd71ba4635e5407cfc81dd850e75d220",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Área como portal (D30): ordem da reunião, próxima pergunta, máscaras, \"O que falta\" e modo apresentação.",
+      "definicoes": [
+        "cliente",
+        "test_ordem_e_proxima_pergunta",
+        "test_mascara_sem_numeros_e_com_pendencias",
+        "test_o_que_falta",
+        "test_modo_apresentacao_esconde_secoes",
+        "test_talentos_divisao_sem_nomes",
+        "test_prazo_leituras_cauda_e_grupos",
+        "test_fluxo_mes_fecha_a_conta",
+        "test_analise_ritmo",
+        "test_abertos_por_mes_de_entrada",
+        "test_grafico_de_controle",
+        "test_sombra_do_mes",
+        "test_folego_do_represado",
+        "test_conta_por_tras_do_percentual",
+        "test_linhas_mes_a_mes",
+        "test_tendencias_mes_a_mes",
+        "test_quadro_da_demanda",
+        "test_percentual_sobre_a_demanda_total"
+      ]
+    },
+    {
+      "arquivo": "tests/test_previsao_pagina.py",
+      "bytes": 25112,
+      "sha256": "2876a5568116c191d7cf981b944b4e4961686828c8a9e5ac82899c5f4b742d25",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": true,
+      "sintaxe": "válida",
+      "objetivo": "Previsão de demanda (D48 → D56, 26/10/2026): contrato ml/previsao.py v3 → página (P1–P12), critério de escolha (C1),",
+      "definicoes": [
+        "cliente",
+        "p",
+        "_m",
+        "test_contrato_v3_lido_e_recusado",
+        "test_criterio_menor_erro_com_desempate_pelo_mais_simples",
+        "test_robustez_e_alternativa",
+        "test_vencedor_e_metricas_da_tela_iguais_as_do_contrato",
+        "test_series_por_recorte_sem_reparticao",
+        "test_montar_recortes_usa_a_propria_tabela",
+        "test_filtros_e_nao_exclusivos_so_mercado",
+        "test_mes_vigente_e_os_dois_seguintes_a_partir_da_carga",
+        "test_situacao_do_mes_vigente",
+        "test_por_que_do_mes_fora_da_faixa",
+        "test_eixo_so_2026_com_teste_e_previsao",
+        "test_pagina_previsao",
+        "test_dialogo_modelos_comparados_acessivel",
+        "test_sem_previsao_mostra_mascara",
+        "test_css_da_previsao_junto_e_em_crlf",
+        "test_job_decide_rotina_mensal_ou_acompanhamento",
+        "test_job_dispara_o_comando_certo",
+        "test_rotina_com_retrato_do_mes_so_atualiza_o_acompanhamento",
+        "test_acompanhamento_nao_mexe_na_previsao",
+        "test_registro_uma_vez_por_retrato_e_protocolo",
+        "test_rodar_modulo_guarda_a_carga_de_cada_modelo"
+      ]
+    },
+    {
+      "arquivo": "tests/test_qualidade_previsao.py",
+      "bytes": 11126,
+      "sha256": "32c70aaee1c90f9633daac827142a2c1d187f3ea50c6d5faf91e38148aee490a",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Qualidade dos dados (Q1–Q6, A1–A5) e entrada mensal, com dados sintéticos (a previsão de demanda, D47, está em",
+      "definicoes": [
+        "limpa_cache",
+        "com_p7",
+        "_por_id",
+        "test_integridade_ok_nos_dados_sinteticos",
+        "test_integridade_aponta_falhas",
+        "test_pontos_de_atencao",
+        "test_entrada_mensal_por_tipo",
+        "test_extratos_janela_global_de_seis_meses",
+        "test_origens_das_entregas_mantem_mes_e_ano",
+        "test_parcelas_fecham_em_100_e_base_minima",
+        "test_mes_parcial_por_tipo_ignora_dias_depois_do_limite"
+      ]
+    },
+    {
+      "arquivo": "tests/test_revisao_20261024.py",
+      "bytes": 4115,
+      "sha256": "6b4f4e971e2f552d22059a5d3e798454fc77e0d06cf8ab8c467114332353a083",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Regressões da revisão: recarga diária, cortes, filas e coerência entre fontes.",
+      "definicoes": [
+        "test_consulta_recarrega_quando_so_o_periodo_da_gold_muda",
+        "test_consulta_sem_pedidos_e_um_resultado_valido",
+        "test_atendimento_sem_data_fecha_com_extrato",
+        "test_ano_fechado_sem_pedidos_no_ano_novo",
+        "test_inicio_exclui_linhas_posteriores_ao_corte",
+        "test_talentos_sem_classificacao_e_ranking_impossivel",
+        "test_mesmo_total_nao_garante_mesma_fotografia"
+      ]
+    },
+    {
+      "arquivo": "tests/test_revisao_20261025.py",
+      "bytes": 11956,
+      "sha256": "8d2cc8f9fb00c87d4658aa5731d0678a2b60cdbab90649181269705c9ffdf52e",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Revisão de 25/10/2026 (Início, Talentos, Atendimento): itens aprovados pela auditoria e decisões 1–14, com os dados",
+      "definicoes": [
+        "cliente",
+        "fluxo_coerente",
+        "test_grafico_do_inicio_em_cartao_com_titulo",
+        "test_barras_dizem_mesmo_periodo",
+        "test_variacao_com_seta_e_motivo_do_traco",
+        "test_traco_tem_texto_para_leitor",
+        "test_parcela_menor_que_um_por_cento",
+        "test_leitor_do_mes_parcial_diz_mesmo_periodo",
+        "test_divergencia_em_safra_antiga_so_vai_ao_log",
+        "test_mes_futuro_do_inicio_em_italico",
+        "test_rodape_usa_o_processamento_da_carga",
+        "test_processado_em_da_tabela",
+        "test_nomes_do_top_so_quebram_no_palco_estreito",
+        "test_bases_divergentes_mostram_numeros_com_aviso",
+        "test_empate_no_corte_do_top10",
+        "test_sem_empate_sem_nota",
+        "test_fim_da_entrada_reusa_data_carga",
+        "test_quadro_marca_o_mes_parcial_e_textos_novos",
+        "test_percentual_meio_para_cima",
+        "test_meses_zerados_nao_quebram",
+        "test_aviso_antes_do_terceiro_mes"
+      ]
+    },
+    {
+      "arquivo": "tests/test_rotas.py",
+      "bytes": 16797,
+      "sha256": "1fefbc0e22b171e61784f2e789931bff56cf952fd3c57792494bf57c2ce68946",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Rotas do site (FastAPI) com os dados sintéticos: endereços, redirecionamentos, conteúdo e cabeçalhos.",
+      "definicoes": [
+        "cliente",
+        "test_raiz_e_area_abrem_a_pagina_inicial",
+        "test_endereco_antigo_do_sla_redireciona_com_filtro",
+        "test_slide_sla_mostra_os_numeros_do_grupo",
+        "test_regras_e_404",
+        "test_sem_dados_responde_503_sem_numeros",
+        "test_janeiro_sem_mes_completo",
+        "test_cabecalhos_de_seguranca_e_cache",
+        "test_acessibilidade_basica_do_html",
+        "test_secoes_preparadas_e_nomes_curtos",
+        "test_previsao_sem_tela_ficticia",
+        "test_qualidade",
+        "test_inicio_com_entrada_por_tipo",
+        "test_extrato_do_mes",
+        "test_mes_antigo_so_tem_fotografia",
+        "test_extrato_divergente_nao_apresenta_numeros",
+        "test_pagina_atendimento",
+        "test_comparacao_do_topo_segue_o_numero",
+        "test_dica_dos_novos_por_tipo",
+        "test_como_medimos",
+        "test_exemplo_do_dia"
+      ]
+    },
+    {
+      "arquivo": "tests/test_sla_20261025.py",
+      "bytes": 10615,
+      "sha256": "ebecdf386e61e0fa085a04a43223d216c541ff97e7e0230f663da427284c8837",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "SLA, decisões de 25/10/2026 (D-SLA-1..4) e itens aprovados da auditoria (SLA-D01, D05, D08, D09, D10/D11/D13, D12,",
+      "definicoes": [
+        "_mov",
+        "test_mes_da_primeira_entrega_d_sla_1",
+        "test_retorno_marca_fica_fora_das_horas_d_sla_2",
+        "test_meta_e_faixas_ate_2_dias_d_sla_7",
+        "test_mes_parcial_vazado_e_aguardando_a2",
+        "test_cobertura_d_sla_4",
+        "test_exemplo_fim_no_dia_de_corte_d08",
+        "test_exemplo_estavel_por_hash",
+        "test_dia_do_exemplo_no_fuso_de_sao_paulo_d05",
+        "test_etapas_somam_o_total_escrito_d01",
+        "test_arredondamento_meio_para_cima_d11",
+        "_todos_zero",
+        "test_exploracao_sem_variacao_d10",
+        "_horas",
+        "_simetrico",
+        "test_frases_condicionadas_d12",
+        "test_conta_do_limite_fecha_d09",
+        "test_tukey_linear_e_pacotes_x4_x6",
+        "test_tela_do_sla",
+        "test_tela_do_estudo",
+        "test_pendencias_dizem_sla_r16"
+      ]
+    },
+    {
+      "arquivo": "tests/test_sla_batalha.py",
+      "bytes": 7195,
+      "sha256": "acfa4987cb93ab934836a966370feceeca9044a13b2a7a85f4327a9a3889100c",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Batalha de agentes (25/10/2026): correções aprovadas no estudo \"Como medimos\" — típico perto da meta (C6) no slide 8,",
+      "definicoes": [
+        "test_z1_tipico_logo_acima_da_meta_nao_vira_16_h",
+        "test_numero_do_slide_8_igual_ao_texto_do_slide_de_origem",
+        "test_base_do_tempo_travado_sobre_todas_as_horas",
+        "test_nomes_do_monday_escapados_antes_do_safe",
+        "test_recorte_visivel_igual_ao_universo",
+        "test_exemplo_fixo_so_no_computador_ou_na_reuniao",
+        "test_base_congelada_nao_recarrega_e_avisa_no_rodape",
+        "test_estudo_guardado_por_carga_e_grupo"
+      ]
+    },
+    {
+      "arquivo": "tests/test_sla_cem.py",
+      "bytes": 8075,
+      "sha256": "e86a70bf38a195ca5a326e14d21e808c34f65e5934f5b1292f4c89ee21e06279",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "D39 (25/10/2026, Caio): slide 3 do estudo \"Como medimos\" — \"De cada 100 pedidos que chegam, em quanto tempo",
+      "definicoes": [
+        "_serie",
+        "test_soma_100_e_quadrados_na_ordem",
+        "test_limites_das_faixas_inclusivos",
+        "test_maior_resto_puro_daria_outro_A_e_vale_o_da_pagina",
+        "test_A_igual_ao_da_pagina_e_ao_slide_2",
+        "test_dias_meio",
+        "test_marcos_da_curva",
+        "test_afasta_centra_o_bloco_e_respeita_as_bordas",
+        "test_textos_variantes",
+        "test_poucos_dados_sem_slide",
+        "test_slide_3_no_html_e_seletor_leva_a_3",
+        "test_slide_3_com_poucos_dados"
+      ]
+    },
+    {
+      "arquivo": "tests/test_sla_conclusao.py",
+      "bytes": 10270,
+      "sha256": "a1940dd5df3cfad3ca0688106287875c48bf0f90de5f7b94fd91d9ca79920969",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "D44 (25/10/2026, Caio): slide 8 do estudo \"Como medimos\" — \"O que os dados nos mostraram\". Seis achados tirados das",
+      "definicoes": [
+        "_mov",
+        "test_numeros_iguais_aos_slides_de_origem",
+        "_h",
+        "_tempo",
+        "test_variantes_z1_z2_z3",
+        "_meses",
+        "test_variantes_z4",
+        "_trava",
+        "test_variantes_z5_e_perguntas_z7",
+        "_linha",
+        "test_variantes_z6",
+        "test_slide_8_no_html"
+      ]
+    },
+    {
+      "arquivo": "tests/test_sla_d38.py",
+      "bytes": 13646,
+      "sha256": "6ee4f9afb617e8c52a5b2145379bb3b3fd1925d39e13db7bf634964383a37d9b",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "D38 (25/10/2026, Caio): meta sugerida = metade em até 2 dias de trabalho (16 h); indicador acima de 5 dias; frases do",
+      "definicoes": [
+        "_mov",
+        "test_meta_tipico_pelo_valor_exato",
+        "test_faixas_tres_chaves_e_acima_de_5_dias",
+        "_p3",
+        "test_insight_do_passo_3_final",
+        "test_insight_do_passo_1_quanto_leva",
+        "test_insight_do_passo_2_ritmo_regular",
+        "test_marca_da_meta_no_boxplot_dentro_do_quadro",
+        "test_dias_de_trabalho_do_exemplo",
+        "test_gancho_e_faixa_do_passo_1_condicionais",
+        "test_numeros_das_faixas_e_parcial_cabem_na_barra",
+        "test_qq_conta_orcamentos_reais_acima_do_teto",
+        "test_numeros_das_faixas_estao_no_grafico_do_passo"
+      ]
+    },
+    {
+      "arquivo": "tests/test_sla_d54.py",
+      "bytes": 5245,
+      "sha256": "08e9c4a0f5c57e2e1210af409bae10131d378685142dc7d9eb235f730c1b173a",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "D54 (26/10/2026, Caio e gerente): rótulo curto da meta numa linha e dias úteis do cliente com fração (C3c).",
+      "definicoes": [
+        "test_dias_uteis_fracao",
+        "test_fracao_coerente_com_horas_e_com_as_viradas",
+        "test_dias_uteis_cliente",
+        "test_dias_uteis_cliente_sem_dado",
+        "test_heroi_mostra_a_mediana_com_fracao",
+        "test_rotulo_da_meta_curto_numa_linha",
+        "test_css_do_rotulo_numa_linha_junto_do_sla"
+      ]
+    },
+    {
+      "arquivo": "tests/test_sla_mes.py",
+      "bytes": 14364,
+      "sha256": "33a14e4bd955fc4e4a2cbcbe394f2a61ba46c477b0519a0b6fa07d6ec176f24b",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "D41 (25/10/2026, Caio): slide 5 do estudo \"Como medimos\" — \"Foi um mês ruim, ou é sempre assim?\". Dispersão por mês",
+      "definicoes": [
+        "_d",
+        "_mov",
+        "test_quantidades_somam_n_e_pct_por_mes_igual_a_pagina",
+        "test_pct_pela_conta_da_pagina_no_meio_ponto",
+        "test_tipico_e_faixa_da_maioria",
+        "test_escala_em_dias_e_triangulos",
+        "test_posicao_horizontal_deterministica_e_dentro_da_coluna",
+        "_m",
+        "_ms",
+        "test_padrao_nenhum_mes_destoa",
+        "test_destoa_pelo_pct_ou_pelo_tipico",
+        "test_picos_um_ou_dois_meses",
+        "test_sazonal_meses_seguidos_ou_espalhados",
+        "test_raro_e_valores_iguais",
+        "test_rotulo_da_linha_de_2_dias",
+        "test_poucos_dados",
+        "test_slide_5_no_html_seletor_e_gancho_do_slide_4",
+        "test_slide_5_com_poucos_dados"
+      ]
+    },
+    {
+      "arquivo": "tests/test_sla_movimento.py",
+      "bytes": 4969,
+      "sha256": "5e882f493269a2149c080bb56c51772bd2d03e8c2edf5c6e6f5e82084877ceaf",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "D46 (25/10/2026): movimento do estudo \"Como medimos\" — regras verificáveis no CSS, no JS e no HTML.",
+      "definicoes": [
+        "_media_no_preference",
+        "test_movimento_so_com_movimento_permitido_e_js",
+        "test_impressao_sem_movimento",
+        "test_tempos_curtos_sem_mola_sem_loop",
+        "test_cascata_antiga_do_slide_1_saiu",
+        "test_slide_5_nao_mexe_em_cada_ponto",
+        "test_template_agrupa_e_desenha_sem_style",
+        "test_js_entrada_unica_troca_de_slide_e_de_grupo"
+      ]
+    },
+    {
+      "arquivo": "tests/test_sla_tempo.py",
+      "bytes": 7606,
+      "sha256": "c9b07888eae317e6d9d636e014877f8e2d15754049a0a32c12507b96542a0028",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "D40 (25/10/2026, Caio): slide 4 do estudo \"Como medimos\" — \"Para onde vai o tempo?\". Cartões \"Saem em até 2 dias\"",
+      "definicoes": [
+        "_serie",
+        "test_pedidos_iguais_ao_slide_3_e_horas_somam_100",
+        "test_pedidos_seguem_o_ajuste_do_slide_3",
+        "test_A_igual_ao_da_pagina_e_aos_slides_2_e_3",
+        "test_fracao_por_extenso",
+        "test_frase_do_cartao",
+        "test_faixa_do_pe_variantes",
+        "test_faixa_do_pe_sem_B",
+        "test_poucos_dados_ou_sem_horas",
+        "test_slide_4_no_html_seletor_e_gancho_do_slide_3",
+        "test_slide_4_com_poucos_dados"
+      ]
+    },
+    {
+      "arquivo": "tests/test_sla_tipo.py",
+      "bytes": 10103,
+      "sha256": "4d6159e885f09270a572198726f01673361b8f03f43fad423967b16c26e609e2",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "D43 (25/10/2026, Caio): slide 7 do estudo \"Como medimos\" — \"Em que tipo de pedido o tempo trava?\". Por Tipo de Input",
+      "definicoes": [
+        "_u",
+        "_ps",
+        "_base",
+        "test_contagens_grupos_e_outros",
+        "test_mesmo_a_e_tipico_dos_slides_3_e_4",
+        "test_onde_mais_trava_e_destaque_com_faixa",
+        "test_variante_parecido_aviso_de_menor_volume_e_sem_lentos",
+        "test_poucos_dados_e_sem_coluna",
+        "_mov",
+        "test_tipo_lido_da_gold_e_slide_7_no_html",
+        "test_slide_7_com_poucos_dados"
+      ]
+    },
+    {
+      "arquivo": "tests/test_sla_trava.py",
+      "bytes": 13217,
+      "sha256": "f643fb1fb5e52dc528ac51d851fe33e2111c783744b9b717364218b2d22e8d96",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "D42 (25/10/2026, Caio): slide 6 do estudo \"Como medimos\" — \"Onde o tempo trava?\". Horas da equipe abertas por",
+      "definicoes": [
+        "_mov",
+        "test_soma_por_status_igual_h_trabalho_e_retorno_marca_fora",
+        "test_travas_com_movimentos_sinteticos",
+        "_u",
+        "_ps",
+        "test_limite_de_tukey_por_status_e_tempo_travado_inteiro",
+        "test_pcts_somam_100_destaque_outros_e_menor_que_1",
+        "test_variantes_da_faixa_do_pe",
+        "test_status_visto_so_ate_um_mes_e_poucos_dados",
+        "test_mapeamento_status_etapa_e_nomes",
+        "test_slide_6_no_html_seletor_e_gancho_do_slide_5",
+        "test_slide_6_com_poucos_dados"
+      ]
+    },
+    {
+      "arquivo": "tests/test_talentos_d50.py",
+      "bytes": 9921,
+      "sha256": "bd406b1572934a575621f063602741c586de3b1aebc40fe30484ed5e00fd0e55",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Talentos D50 (26/10/2026, pedido do gerente do Caio): seletor Todos / Exclusivos / Não exclusivos filtrando a página",
+      "definicoes": [
+        "cliente",
+        "_divisao",
+        "_ranking",
+        "_doze",
+        "test_top10_por_filtro_ordenado_e_com_soma_do_recorte",
+        "test_soma_mensal_igual_ao_total_e_meses_futuros_vazios",
+        "test_mapa_some_se_os_meses_nao_fecham_com_o_total",
+        "test_heroi_por_filtro_frases_e_numeros",
+        "test_barra_destaca_o_recorte",
+        "test_seletor_tres_links_e_pagina_filtrada",
+        "test_mapa_acessivel_e_com_numero_em_cada_celula",
+        "test_abas_levam_o_filtro_e_movimento_sem_esconder_numeros"
+      ]
+    },
+    {
+      "arquivo": "tests/test_talentos_d51.py",
+      "bytes": 13299,
+      "sha256": "9a8742af38cd9199547f6b1351c26d6c3d49a38a9faf9390ddcf894dba997774",
+      "classe": "teste de regressão",
+      "decisao": "manter",
+      "alterado_desde_backup": true,
+      "sintaxe": "válida",
+      "objetivo": "Talentos D51 (26/10/2026, Caio; revista no mesmo dia): exceção à D46/D49 (números prontos desde o 1º quadro) só",
+      "definicoes": [
+        "cliente",
+        "_tabela",
+        "_num",
+        "test_dados_da_corrida_fecham_com_a_tabela_final",
+        "test_estado_final_intacto_sem_style_e_com_tons",
+        "test_botao_play_so_icone_com_nome_escondido_sem_js_e_sem_pular",
+        "test_botao_fora_do_cartao_na_linha_da_legenda",
+        "_df_corrida",
+        "_divisao",
+        "test_extras_fora_do_top_entram_so_na_corrida",
+        "test_extra_que_nao_fecha_a_soma_fica_fora_da_corrida",
+        "test_sem_coluna_pos_a_corrida_fica_so_com_os_10",
+        "test_sql_so_select_com_ranking_acumulado_e_sem_subconsulta_correlacionada",
+        "test_largura_dos_nomes_segue_o_maior_nome",
+        "test_classe_de_largura_coerente_no_html",
+        "test_coluna_dos_nomes_sem_reticencias",
+        "test_abertura_sem_troca_de_posicao_e_corrida_so_no_play",
+        "test_js_respeita_movimento_reduzido_e_acessibilidade",
+        "test_js_continuo_tempos_num_lugar_e_sem_layout_por_quadro",
+        "test_css_d51_sem_loop_e_impressao_limpa"
+      ]
+    },
+    {
+      "arquivo": "tools/auditar_modelos.py",
+      "bytes": 3865,
+      "sha256": "d142f07e8a0414ecacc9e449856ff57ab93b96effccd19604d5b4abacf887c2e",
+      "classe": "ferramenta operacional",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Recalcula métricas dos backtests salvos; não treina, publica ou acessa a rede.",
+      "definicoes": [
+        "main"
+      ]
+    },
+    {
+      "arquivo": "tools/auditar_paginas.py",
+      "bytes": 5377,
+      "sha256": "470f80830042e31b9749910b7f116ba1fdf662e0fa6924809c78fa114a951c6b",
+      "classe": "ferramenta operacional",
+      "decisao": "manter",
+      "alterado_desde_backup": true,
+      "sintaxe": "válida",
+      "objetivo": "Leitura limitada das fontes de Início/Talentos/Atendimento, com identidade, metadados e evidências.",
+      "definicoes": [
+        "main"
+      ]
+    },
+    {
+      "arquivo": "tools/auditar_relatorio.py",
+      "bytes": 7451,
+      "sha256": "cbc9c4651cec50e9a062e7440ed59f9e250d30fb25ce9571c30e0401242743ea",
+      "classe": "ferramenta operacional",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Auditoria somente leitura: gold x silver, integridade e cálculo independente do SLA.",
+      "definicoes": [
+        "feriados",
+        "nanos_uteis",
+        "conferir_sla",
+        "main"
+      ]
+    },
+    {
+      "arquivo": "tools/checar_reuniao.py",
+      "bytes": 12221,
+      "sha256": "c141bc855a07d28f7f390166fbb6169499c476e1c1941aaae51076528d91cea7",
+      "classe": "ferramenta operacional",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Checagem única antes da reunião (batalha 2, G1-engenharia-1, 26/10/2026). Somente leitura.",
+      "definicoes": [
+        "main"
+      ]
+    },
+    {
+      "arquivo": "tools/conferir_estudo.py",
+      "bytes": 14503,
+      "sha256": "2542ad303434ca3eb093f2f2e72dd885630a9c3a42534de0f73f52981a02b700",
+      "classe": "ferramenta operacional",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Conferência somente leitura do estudo \"Como medimos\" (slides 2–8) contra o BigQuery (batalha de agentes, 25/10/2026:",
+      "definicoes": [
+        "pontos",
+        "etapa_nome",
+        "referencia",
+        "comparar",
+        "leituras",
+        "main"
+      ]
+    },
+    {
+      "arquivo": "tools/conferir_expediente.py",
+      "bytes": 1081,
+      "sha256": "5a2b620500b8eb08f94d63e4209537b7eeb3e7d6afe2b091000f5bf802984c5a",
+      "classe": "ferramenta operacional",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Confere o calendário do site contra a gold: recalcula 10h–19h e compara com `sla_util_horas`, linha a linha.",
+      "definicoes": []
+    },
+    {
+      "arquivo": "tools/conferir_layout.mjs",
+      "bytes": 9727,
+      "sha256": "3954637816e0adba442cbb98f3c85a3fbe911e7a0c181b2db44e7e11965ad6c7",
+      "classe": "ferramenta operacional",
+      "decisao": "manter",
+      "alterado_desde_backup": false
+    },
+    {
+      "arquivo": "tools/inventariar_auditoria.py",
+      "bytes": 3094,
+      "sha256": "59e0d6ad31de586d894bc3d7c70c45806b8483be65078cf41d61c626df322b88",
+      "classe": "ferramenta operacional",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Inventário por arquivo e preservação da interface; não lê .env nem remove arquivos.",
+      "definicoes": [
+        "main"
+      ]
+    },
+    {
+      "arquivo": "tools/preparar_gold_relatorio.py",
+      "bytes": 4898,
+      "sha256": "bd5256efaa48219889511f990436da0f78feb31bac7f2544eaa9958dbfac85b2",
+      "classe": "ferramenta operacional",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Gera SQL para execução humana. Sem cliente GCP, rede ou alteração do aplicativo.",
+      "definicoes": [
+        "consultas",
+        "main"
+      ]
+    },
+    {
+      "arquivo": "tools/validar_selects_gold.py",
+      "bytes": 1580,
+      "sha256": "52965c3e270130cce127d7a326f15e4a3ce5cc9d1e34f29a9246f91077c024a4",
+      "classe": "ferramenta operacional",
+      "decisao": "manter",
+      "alterado_desde_backup": false,
+      "sintaxe": "válida",
+      "objetivo": "Valida somente SELECTs do plano (dry run). Nunca executa scripts de criação/publicação.",
+      "definicoes": [
+        "main"
+      ]
+    }
+  ],
+  "duplicatas_binarias": [
+    [
+      ".dockerignore",
+      ".gcloudignore"
+    ],
+    [
+      "app/__init__.py",
+      "app/apresentacoes/gestao_orcamentos/__init__.py",
+      "app/apresentacoes/gestao_orcamentos/atendimento/__init__.py",
+      "app/apresentacoes/gestao_orcamentos/entrada/__init__.py",
+      "app/apresentacoes/gestao_orcamentos/previsao/__init__.py",
+      "app/apresentacoes/gestao_orcamentos/qualidade/__init__.py",
+      "app/apresentacoes/gestao_orcamentos/sla/__init__.py",
+      "app/apresentacoes/gestao_orcamentos/talentos/__init__.py"
+    ],
+    [
+      "ml/saida/previsao.json",
+      "ml/saida/retratos/2026-09.json"
+    ]
+  ],
+  "bytecodes_orfaos_preservados": [
+    "tests/__pycache__/test_zz_sonda.cpython-312-pytest-9.1.1.pyc",
+    "ml/__pycache__/filtros.cpython-312.pyc"
+  ],
+  "interface": {
+    "arquivos": 16,
+    "alterados": [
+      "app/static/apresentacao.js",
+      "app/static/estilo.css"
+    ]
+  },
+  "limite": "Inventário e análise sintática cobrem cada arquivo; revisão semântica focada nos fluxos e cálculos. Não equivale a prova formal de cada linha."
+}

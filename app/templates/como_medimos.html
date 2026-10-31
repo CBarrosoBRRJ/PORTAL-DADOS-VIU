@@ -1,0 +1,517 @@
+{% extends "apresentacao.html" %}
+{# Estudo "Como medimos" do SLA (24/10/2026): a análise por trás da métrica, em slides de palestra (Anterior/Próximo no
+   pé e "A seguir" com o nome do próximo slide). Visual sóbrio, como a referência do Caio: fundo branco, cabeçalho claro
+   com filete, "Como medimos" + título; a linha do tempo se desenha etapa por etapa na entrada do slide.
+   Slide 1 — "Como chegamos ao tempo da equipe": um orçamento real sorteado no dia (E1), linha do tempo (E2), os três
+   números (E3) e as regras do que entra e do que fica fora (C2, C14). Regras em sla/calculos.py.
+   Slide 2 — "Exploração dos dados" ("A maioria é rápida. Poucos demoram muito."): V2 (30/10/2026, Caio) num passo
+   só, para quem não é da área: histograma com as faixas do boxplot (rápidos, comuns, demorados, fora da curva), os
+   alfinetes do típico e da média e o "Como ler" com os três números; frase do pé X10. Os três quadros (Formato, Sino,
+   Faixas) de 25/10 estão em _descartados/2026-10-30. Regras X1–X8 e X10 em sla/calculos.py; SVG com texto ≥ 11 px
+   reais (R09).
+   Slide 3 — "Quantos saem em até 2 dias, e quanto do tempo levam?" (V2, 30/10/2026: une os antigos 3, D39, e 4, D40):
+   em "T", à esquerda o waffle de 100 em dois tons (A em até 2 dias, B acima) e à direita a parte das horas da equipe e
+   o típico de cada lado; a resposta no pé liga as duas metades. Regras W2–W3, V1–V3, V9 e V10.
+   Slide 4 — "Foi um mês ruim, ou é sempre assim?" (D41, 25/10/2026; era o 5): dispersão por mês com o típico, a faixa
+   onde fica a maioria, a linha de 2 dias e o % que passa de 2 dias por mês; título e faixa do pé (sazonal × padrão)
+   por regra. Regras U1–U9.
+   Slide 5 — "Onde o tempo trava?" (D42, 25/10/2026; era o 6): uma linha por etapa do ciclo com um cartão por status
+   (parte do tempo travado, quantos travaram, típico), os 2 maiores em destaque, o Retorno da marca fora da conta e a
+   Entrega (Aguardando Feedback); faixa do pé por regra. Regras K1–K8. Último slide (V2): sai para o SLA ou para a
+   próxima página da sequência.
+   "Em que tipo de pedido o tempo trava?" (D43): fora desde a D64 (ESTUDO_TIPO); ligado, vira o 6 e o último.
+   A conclusão "O que os dados nos mostraram" (D44, era o 7 de 7) saiu do estudo em 30/10/2026 (V2, Caio); o trecho
+   está em _descartados/2026-10-30/app/templates/como_medimos_slides_3_4_8.html (cálculo Z1–Z8 mantido). #}
+{% block slides %}
+{% set volta = "/" ~ apresentacao.slug ~ "/" ~ secao_atual.slug ~ consulta ~ "#1" %}
+{# V2 (30/10/2026, Caio): fim=true no último slide — o ✕ vira o sinal de fim do estudo (fundo azul VIU, ícone branco,
+   um anel que se abre uma vez ao chegar; nome "Fim do estudo: voltar ao SLA") #}
+{% macro faixa(sobre, titulo, id, rec=none, fecho=none, fim=false) %}
+  <div class="estudo-faixa">
+    <header class="cabecalho">
+      <img class="cabecalho-logo" src="/static/viu_logo.jpg" alt="VIU" width="80" height="52">
+      <span class="cabecalho-tema">{{ apresentacao.cabecalho }}</span>
+      <a class="fechar-estudo{{ ' fechar-fim' if fim }}" href="{{ volta }}" aria-label="{{ 'Fim do estudo: voltar ao SLA' if fim else 'Fechar e voltar para ' ~ secao_atual.titulo }}" title="{{ 'Fim do estudo' if fim else 'Fechar' }}">
+        <svg aria-hidden="true" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+      </a>
+    </header>
+    <div class="estudo-linha-titulo">
+      <div>
+        <p class="estudo-sobre"><span>{{ sobre }}</span></p>
+        <h2 class="estudo-titulo" id="{{ id }}">{{ titulo }}</h2>
+      </div>
+      {# R1 (batalha de agentes, 25/10/2026): de quando e de quantos pedidos são os % deste slide, e o grupo do seletor.
+         V2 (30/10/2026, Caio: "não faz sentido ali"): sai da tela em todos os slides; fica só para o leitor de tela (o
+         grupo está no seletor, a data no rodapé e o n no texto dos gráficos) #}
+      {% if rec %}<p class="so-leitor estudo-recorte">Recorte: {{ rec.texto }}{% if fecho %} · {{ fecho }}{% endif %}</p>{% endif %}
+    </div>
+  </div>
+{% endmacro %}
+{# gancho: uma frase que lembra o que vem no próximo slide (Caio, 24/10/2026: "de gancho em gancho"); a navegação é o
+   Anterior/Próximo do pé #}
+{% macro gancho(texto) %}<p class="estudo-gancho">{{ texto }}</p>{% endmacro %}
+{# V2 (30/10/2026): saída do último slide (era a da conclusão): "Voltar ao SLA" é o link principal; ao lado, a próxima
+   página da sequência (a mesma da seta →, D62). V2, tarde (Caio): fora da tela — o ✕ destacado volta ao SLA e o
+   "Próximo"/seta → segue para a próxima; a macro fica guardada, sem chamada #}
+{% macro saida() %}<p class="explora-gancho"><a class="gancho-link" href="{{ volta }}">Voltar ao SLA <span aria-hidden="true">→</span></a>{% if proxima %}<a class="gancho-link gancho-sec" href="{{ proxima.href }}"{% if proxima.filtro %} data-filtro-talentos{% endif %}>ou seguir para a próxima: {{ proxima.rotulo }} <span aria-hidden="true">→</span></a>{% endif %}</p>{% endmacro %}
+
+{% set x = exemplo %}
+<section class="slide slide-estudo" aria-roledescription="slide" aria-labelledby="s-tempo-equipe" data-nivel="estudo">
+<div class="lamina lamina-estudo">
+  {{ faixa("Como medimos", "Como chegamos ao tempo da equipe", "s-tempo-equipe") }}
+  <div class="estudo-corpo">
+    <div class="estudo-exemplo">
+      {% if x %}
+      {# só o nome do orçamento, logo acima da linha do tempo (Caio, 24/10/2026) #}
+      <p class="exemplo-titulo"><span class="so-leitor">Orçamento de exemplo: </span>{{ x.nome }}</p>
+      {# E2: etapas da equipe (azul), a espera do cliente (tracejada, não conta) e os marcos com data e hora #}
+      <ol class="linha-tempo lt-n{{ x.etapas | length + 1 }}" aria-label="Linha do tempo do orçamento">
+        {% for t in x.etapas %}
+        <li class="lt-trecho">
+          <span class="lt-etapa"><span class="lt-nome">{{ t.nome }}</span><span class="lt-tempo">{{ t.tempo }}</span></span>
+          <span class="lt-marco lt-equipe" aria-hidden="true"></span>
+          <span class="lt-quando">{{ t.quando }}</span>
+          <span class="so-leitor">: {{ t.tempo }} de trabalho da equipe, a partir de {{ t.quando }}.</span>
+        </li>
+        {% endfor %}
+        <li class="lt-trecho lt-espera">
+          <span class="lt-etapa"><span class="lt-nome">Aguardando Feedback</span><span class="lt-tempo">{{ x.dias_decisao }}</span></span>
+          <span class="lt-marco lt-entrega" aria-hidden="true"></span>
+          <span class="lt-quando">{{ x.pronto }}<small>1ª versão ao cliente</small></span>
+          <span class="so-leitor">: {{ x.dias_decisao }} aguardando o cliente, fora do cálculo.</span>
+        </li>
+        <li class="lt-fim">
+          <span class="lt-marco {{ 'lt-aberto' if x.aberto else 'lt-fechado' }}" aria-hidden="true"></span>
+          <span class="lt-quando">{{ x.fim.quando }}<small>{{ x.fim.status }}</small></span>
+        </li>
+      </ol>
+      <p class="lt-legenda" aria-hidden="true"><span class="lt-leg-conta">trabalho da equipe: conta</span><span class="lt-leg-espera">espera do cliente: não conta</span></p>
+      {% else %}
+      <p class="exemplo-vazio">Ainda não há um orçamento entregue com o caminho completo neste ano.</p>
+      {% endif %}
+    </div>
+    {# regras C2 e C14, em linguagem simples #}
+    <aside class="estudo-regras" aria-label="Regras do cálculo">
+      <section class="regra-caixa regra-entra" aria-labelledby="r-entra">
+        <h3 id="r-entra">Entra no cálculo</h3>
+        <ul>
+          <li><strong>Entrada</strong>: o relógio começa</li>
+          <li><strong>Elaboração</strong>, todas as variações</li>
+          <li><strong>Revisão</strong>, todas as variações</li>
+          <li><strong>Validação do talento</strong>, dentro da Revisão</li>
+          <li><strong>Cotações</strong> (externa e de elenco)</li>
+        </ul>
+      </section>
+      <section class="regra-caixa regra-fora" aria-labelledby="r-fora">
+        <h3 id="r-fora">Fica fora</h3>
+        <ul>
+          <li><strong>Standby</strong></li>
+          <li><strong>Ajustes</strong> depois da 1ª versão</li>
+          <li><strong>Espera da marca</strong> (Retorno Marca/Executivo)</li>
+          <li><strong>Espera do cliente</strong> (Aguardando Feedback)</li>
+          <li><strong>Noites, fins de semana e feriados</strong></li>
+        </ul>
+        <p class="regra-nota">Expediente: seg a sex, 10h–13h e 14h–19h.</p>
+      </section>
+    </aside>
+  </div>
+  {# faixa marinho no pé (mesmo desenho da faixa do Atendimento): os três números do exemplo (E3) e o gancho #}
+  <div class="estudo-banda">
+    {% if x %}
+    <dl class="exemplo-numeros">
+      <div class="en-destaque"><dt>Trabalho da equipe</dt><dd><span class="en-valor">{{ x.trabalho }}</span><span class="en-nota">{{ x.dias_trabalho }} · {{ "dentro" if x.na_meta else "acima" }} do limite de 2 dias de trabalho (16 h)</span></dd></div>
+      <div><dt>Para o cliente receber</dt><dd><span class="en-valor">{{ x.dias_cliente }}</span><span class="en-nota">{{ x.de_ate }}</span></dd></div>
+      <div class="en-fora"><dt>Espera do cliente</dt><dd><span class="en-valor">{{ x.dias_decisao }}</span><span class="en-nota">{{ "ainda aguardando · " if x.aberto }}não conta</span></dd></div>
+    </dl>
+    {% endif %}
+    {# D38: o gancho compara o típico do grupo no ano (mediana exata, C6) com a meta de 2 dias #}
+    {% set tp = exploracao.tipico if exploracao else none %}
+    {# B-ambiente-2: o gancho diz de que grupo é o típico (o grupo vem da URL) #}
+    {% set gatual = (grupos_estudo | selectattr("atual") | first).chave if grupos_estudo else "todos" %}
+    {% set dos = {"exclusivos": " dos exclusivos", "nao-exclusivos": " dos não exclusivos"}.get(gatual, "") %}
+    {% if tp and tp.na_meta %}{{ gancho("No ano, o orçamento típico" ~ dos ~ " leva " ~ tp.mediana_txt ~ ": dentro da meta de 2 dias. Vamos ver o que demora.") }}
+    {% elif tp %}{{ gancho("No ano, o orçamento típico" ~ dos ~ " leva " ~ tp.mediana_txt ~ ", acima da meta de 2 dias. Vamos ver onde demora.") }}
+    {% else %}{{ gancho("E nos dados do ano todo? Vamos explorar melhor.") }}{% endif %}
+  </div>
+</div>
+</section>
+
+{# ---------- slide 2: exploração dos dados (V2, 30/10/2026, Caio: um passo só, para quem não é da área). O histograma com
+   as faixas do antigo passo 3 (rápidos, comuns, demorados e fora da curva, em % de todos os orçamentos do recorte) e os
+   alfinetes do típico (mediana) e da média; ao lado, "Como ler" com os três números da mensagem; a frase do pé (X10)
+   diz por que medimos pelo típico. Sem ?passo= (o endereço antigo segue abrindo, o parâmetro é ignorado). Os quadros
+   Formato e Sino e o painel de três passos estão em _descartados/2026-10-30/app/templates/como_medimos_slide2_passos.html.
+   Regras X1–X8 e X10 em sla/calculos.py ---------- #}
+{% set d = exploracao %}
+<section class="slide slide-estudo slide-explora" aria-roledescription="slide" aria-labelledby="s-exploracao" data-nivel="estudo">
+<div class="lamina lamina-estudo">
+  {{ faixa("Exploração dos dados", "A maioria é rápida. Poucos demoram muito.", "s-exploracao", recorte) }}
+  {% if d %}
+  {% set hs = d.hist %}{% set bx = d.box %}
+  <div class="explora-corpo">
+    {# C10 no estudo: o mesmo seletor de talentos da página do SLA; o clique recarrega no mesmo slide #}
+    <nav class="grupos estudo-grupos" aria-labelledby="rotulo-grupos-estudo" data-navegador data-chave="talentos-estudo">
+      <span class="navegador-reflexo" aria-hidden="true"></span>
+      <span class="navegador-pilula" aria-hidden="true"></span>
+      <span class="grupos-rotulo" id="rotulo-grupos-estudo">Talentos</span>
+      {% for g in grupos_estudo %}{% set c = d.comparacao | selectattr("chave", "equalto", g.chave) | first %}
+      <a href="?talentos={{ g.chave }}#2" class="grupo"{% if g.atual %} aria-current="true"{% endif %}>
+        <span class="grupo-nome">{{ g.rotulo }}</span>
+        {% if c %}<span class="grupo-valor">{{ c.mediana | replace(" ", " ") }}<span class="so-leitor"> de trabalho típico, {{ c.n | inteiro }} orçamentos</span></span>{% endif %}
+      </a>
+      {% endfor %}
+    </nav>
+    {# V2: gráfico e "Como ler" lado a lado numa linha flexível — o gráfico mantém a proporção pela altura que sobra e o
+       "Como ler" fica logo ao lado dele, sem buraco no meio #}
+    <div class="explora-linha">
+    <figure class="explora-hist">
+      <figcaption class="so-leitor">Histograma: orçamentos em cada faixa de 4 horas de trabalho da equipe ({{ d.n | inteiro }} no total): {{ hs.texto }}. Dos {{ d.n | inteiro }} orçamentos entregues {{ d.periodo }}: {{ bx.pcts[0] }}% rápidos, até {{ bx.q1_txt }}; {{ bx.pcts[1] }}% comuns, de {{ bx.q1_txt }} a {{ bx.q3_txt }}; {{ bx.pcts[2] }}% demorados, no padrão, até {{ bx.lim_txt }}; {{ bx.pcts[3] }}% fora da curva, acima de {{ bx.lim_txt }}, até {{ d.max_txt }}. Típico (mediana) {{ d.mediana_txt }}, média {{ d.media_txt }}.</figcaption>
+      <svg class="explora-svg" viewBox="0 0 {{ hs.w }} {{ hs.h }}" preserveAspectRatio="xMinYMax meet" aria-hidden="true" focusable="false">
+        {% for g in hs.grade %}<line class="ex-grade" x1="{{ hs.e }}" x2="{{ hs.dir }}" y1="{{ g.y }}" y2="{{ g.y }}"/>{% endfor %}
+        {% for g in hs.grade %}<text class="ex-eixo" x="{{ hs.e - 6 }}" y="{{ g.y + 4 }}" text-anchor="end">{{ g.t }}</text>{% endfor %}
+        {# faixas do topo: as zonas do boxplot (rápidos, comuns, demorados, fora da curva) #}
+        <g class="ex-camada ex-box">
+          {% for f in hs.zonas %}<rect class="ex-faixa f-{{ f.zona }}" x="{{ f.x0 }}" y="{{ hs.y_faixa }}" width="{{ f.w }}" height="{{ hs.h_faixa }}" rx="2"/>
+          {% if f.mostra_pct %}<text class="ex-faixa-txt t-{{ f.zona }}" x="{{ f.x0 + 7 }}" y="{{ hs.y_faixa + 15.5 }}"><tspan class="ex-pct">{{ f.pct }}%</tspan>{% if f.txt %}<tspan class="ex-faixa-rot" dx="5">{{ f.txt }}</tspan>{% endif %}</text>{% endif %}{% endfor %}
+          {% for gx in hs.guias_box %}<line class="ex-guia" x1="{{ gx }}" x2="{{ gx }}" y1="{{ hs.y_faixa + hs.h_faixa + 2 }}" y2="{{ hs.base }}"/>{% endfor %}
+        </g>
+        {# D46: barras e contagens em grupos (a entrada anima o grupo, não cada barra); cor pela zona do boxplot #}
+        <g class="ex-barras">{% for b in hs.barras %}<rect class="ex-barra z-{{ b.zona }} {{ b.zona_box }}" x="{{ b.x }}" y="{{ b.y }}" width="{{ b.w }}" height="{{ b.h }}" rx="1.5"/>{% if b.fora %}<rect class="ex-barra z-{{ b.zona }} box-fora" x="{{ b.x }}" y="{{ b.fora.y }}" width="{{ b.w }}" height="{{ b.fora.h }}" rx="1.5"/>{% endif %}{% endfor %}</g>
+        <g class="ex-ns">{% for b in hs.barras %}<text class="ex-n" x="{{ b.tx }}" y="{{ b.y - 5 }}" text-anchor="{{ b.ancora }}">{{ b.n }}</text>{% endfor %}</g>
+        {# típico e média (alfinetes) #}
+        <g class="ex-camada ex-alfinetes">
+          {% for p in [hs.alf_med, hs.alf_media] %}
+          <line class="{{ 'ex-alf' if loop.first else 'ex-alf ex-alf-media' }}" x1="{{ p.x }}" x2="{{ p.x }}" y1="{{ p.y1 }}" y2="{{ p.y2 }}"/><circle class="{{ 'ex-alf-p' if loop.first else 'ex-alf-p ex-alf-media-p' }}" cx="{{ p.x }}" cy="{{ p.y2 }}" r="2.4"/>
+          <text class="{{ 'ex-alf-t' if loop.first else 'ex-alf-t ex-alf-media-t' }}" x="{{ p.tx }}" y="{{ p.ty }}" text-anchor="{{ p.ancora }}">{{ p.t }}</text>
+          {% endfor %}
+        </g>
+        <line class="ex-eixo-linha" x1="{{ hs.e }}" x2="{{ hs.dir }}" y1="{{ hs.base }}" y2="{{ hs.base }}"/>
+        {% for m in hs.marcas_x %}<text class="ex-eixo" x="{{ m.x }}" y="{{ hs.base + 15 }}" text-anchor="{{ 'start' if loop.first else ('end' if loop.last else 'middle') }}">{{ m.t }}</text>{% endfor %}
+      </svg>
+    </figure>
+    {# "Como ler" (V2, 30/10/2026, Caio: "feio e simples demais"; X11): típico e média lado a lado, a régua do eixo do
+       gráfico com os dois alfinetes e o "puxão" entre eles (+N h), e os fora da curva em 100 quadrados (os vermelhos
+       no fim, como no gráfico). Cor nunca sozinha: número e texto em cada item. Escala da régua = o eixo x do
+       histograma (0 até o fim de "60 h ou mais"). #}
+    {% set r0, r1 = 6, 294 %}{% set esc = (r1 - r0) / (hs.fim - hs.e) %}
+    {% set xm = (r0 + (hs.alf_med.x - hs.e) * esc) | round(1) %}{% set xa = (r0 + (hs.alf_media.x - hs.e) * esc) | round(1) %}
+    {% set zf = hs.zonas | selectattr("zona", "equalto", "box-fora") | first %}
+    {% set nf = bx.pcts[3] %}
+    <section class="explora-ler" aria-labelledby="t-explora-ler">
+      <h3 class="explora-ler-titulo" id="t-explora-ler">Como ler</h3>
+      <dl class="explora-ler-lista el-par">
+        <div class="el-item el-tipico"><dt><span class="el-marca" aria-hidden="true"></span>Típico (mediana)</dt><dd><span class="el-valor">{{ d.mediana_txt | replace(" ", " ") }}</span><span class="el-texto">metade dos pedidos sai antes disso</span></dd></div>
+        <div class="el-item el-media"><dt><span class="el-marca" aria-hidden="true"></span>Média</dt><dd><span class="el-valor">{{ d.media_txt | replace(" ", " ") }}</span><span class="el-texto">{{ "puxada para cima pelos casos longos" if d.media_relevante else "perto do típico" }}</span></dd></div>
+      </dl>
+      <svg class="el-regua" viewBox="0 0 300 58" role="img" aria-label="Na régua das horas do gráfico, o típico fica em {{ d.mediana_txt }} e a média em {{ d.media_txt }}{% if d.media_relevante %}, {{ d.puxao_txt }} depois: os casos longos puxam a média para cima{% endif %}{% if zf %}; acima de {{ bx.lim_txt }}, fora da curva{% endif %}.">
+        <line class="rg-trilho" x1="{{ r0 }}" x2="{{ r1 }}" y1="34" y2="34"/>
+        {% if zf %}<line class="rg-fora" x1="{{ (r0 + (zf.x0 - hs.e) * esc) | round(1) }}" x2="{{ r1 }}" y1="34" y2="34"/>
+        <text class="rg-t rg-t-fora" x="{{ r1 }}" y="20" text-anchor="end">fora da curva</text>{% endif %}
+        {% if d.media_relevante %}<line class="rg-puxao" x1="{{ xm + 3 }}" x2="{{ xa - 7 }}" y1="34" y2="34"/>
+        <path class="rg-seta" d="M{{ xa - 8 }},29.5 L{{ xa - 2 }},34 L{{ xa - 8 }},38.5 Z"/>
+        <text class="rg-t rg-t-puxao" x="{{ ((xm + xa) / 2) | round(1) }}" y="20" text-anchor="middle">+{{ d.puxao_txt }}</text>{% endif %}
+        <line class="rg-alf" x1="{{ xm }}" x2="{{ xm }}" y1="25" y2="43"/>
+        <line class="rg-alf rg-alf-media" x1="{{ xa }}" x2="{{ xa }}" y1="25" y2="43"/>
+        <text class="rg-t" x="{{ xm + 3 }}" y="55" text-anchor="end">típico</text>
+        <text class="rg-t rg-t-media" x="{{ xa - 3 }}" y="55" text-anchor="start">média</text>
+      </svg>
+      <dl class="explora-ler-lista el-baixo">
+        <div class="el-item el-fora"><dt><span class="el-marca" aria-hidden="true"></span>Fora da curva</dt><dd><span class="el-valor">{{ (nf ~ "%") if nf else ("menos de 1%" if d.n_fora else "0%") }}</span><span class="el-waffle" role="img" aria-label="{{ nf }} em cada 100 pedidos fora da curva">{% for i in range(100) %}<span class="eq{{ ' eq-fora' if i >= 100 - nf else '' }}"></span>{% endfor %}</span><span class="el-texto">{% if d.n_fora %}{{ d.n_fora | inteiro }} {{ "pedido" if d.n_fora == 1 else "pedidos" }} acima de {{ bx.lim_txt | replace(" ", " ") }}: olhar caso a caso{% else %}nenhum pedido neste recorte{% endif %}</span></dd></div>
+      </dl>
+    </section>
+    </div>
+  </div>
+  {# V2 (30/10/2026, Caio): faixa de conclusão do pé fora da tela; a frase segue calculada (exploracao.insight, X10) e registrada na ficha #}
+  {# D39: o gancho leva ao slide 3 (link para #3, o mesmo grupo de talentos) #}
+  <p class="explora-gancho"><a class="gancho-link" href="#3">E se olharmos para 100 pedidos, o que vemos? <span aria-hidden="true">→</span></a></p>
+  {% else %}
+  <div class="estudo-corpo"><p class="exemplo-vazio">Ainda não há orçamentos suficientes nos meses fechados do ano para esta análise.</p></div>
+  {% endif %}
+</div>
+</section>
+
+{# ---------- slide 3 (V2, 30/10/2026, Caio): os antigos slides 3 ("De cada 100 pedidos…", D39) e 4 ("Para onde vai o
+   tempo?", D40) num só, em "T": título em cima e duas metades. À esquerda, a quantidade: o waffle de 100 em dois tons
+   (A = saem em até 2 dias, B = passam de 2 dias; os mesmos % de antes, W3/V2). À direita, o tempo: a parte das horas da
+   equipe que cada lado leva (V3, a métrica do antigo slide 4) e o típico de cada lado (V9). As linhas A e B das duas
+   metades ficam na mesma altura: lendo da esquerda para a direita, "56 saem em até 2 dias → levam 16% das horas". A
+   resposta no pé liga as duas (V10). Mesmo universo e mesmo seletor do slide 2. Versão anterior dos dois slides em
+   _descartados/2026-10-30/app/templates/como_medimos_slides_3_4_8.html ---------- #}
+{% set t = tempo %}
+<section class="slide slide-estudo slide-cem-tempo" aria-roledescription="slide" aria-labelledby="s-cem-tempo" data-nivel="estudo">
+<div class="lamina lamina-estudo">
+  {{ faixa("Exploração dos dados · de cada 100 pedidos e de cada 100 horas", "Quantos saem em até 2 dias, e quanto do tempo levam?", "s-cem-tempo", recorte) }}
+  {% if t %}
+  <div class="ct-meio">
+  <nav class="grupos estudo-grupos" aria-labelledby="rotulo-grupos-ct" data-navegador data-chave="talentos-ct">
+    <span class="navegador-reflexo" aria-hidden="true"></span>
+    <span class="navegador-pilula" aria-hidden="true"></span>
+    <span class="grupos-rotulo" id="rotulo-grupos-ct">Talentos</span>
+    {% for g in grupos_estudo %}{% set c = exploracao.comparacao | selectattr("chave", "equalto", g.chave) | first if exploracao else none %}
+    <a href="?talentos={{ g.chave }}#3" class="grupo"{% if g.atual %} aria-current="true"{% endif %}>
+      <span class="grupo-nome">{{ g.rotulo }}</span>
+      {% if c %}<span class="grupo-valor">{{ c.mediana | replace(" ", " ") }}<span class="so-leitor"> de trabalho típico, {{ c.n | inteiro }} orçamentos</span></span>{% endif %}
+    </a>
+    {% endfor %}
+  </nav>
+  <div class="ct-corpo">
+    <h3 class="ct-sobre ct-sobre-q" id="t-ct-q">Quantidade<span class="ct-sobre-sub"> · de cada 100 pedidos</span></h3>
+    <h3 class="ct-sobre ct-sobre-t" id="t-ct-t">Tempo<span class="ct-sobre-sub"> · de cada 100 horas da equipe</span></h3>
+    {# V2 (30/10/2026, Caio: "mais cheio e rico"): o waffle volta a mostrar as cinco faixas (W2, os mesmos % de W3), em
+       tons da família de cada lado (lavanda = em até 2 dias, coral = passam de 2 dias); os A/B seguem o destaque e as
+       faixas entram como detalhe (mini legenda com o número de cada uma) #}
+    <div class="ct-waffle" role="img" aria-label="Cem quadrados; cada um é 1% dos {{ t.n | inteiro }} orçamentos entregues {{ t.periodo }}: {{ t.a }} em até 2 dias de trabalho ({% for l in t.linhas[:2] %}{{ l.pedidos }} {{ l.rotulo }}{{ ", " if loop.first }}{% endfor %}) e {{ t.b }} acima disso ({% for l in t.linhas[2:] %}{{ l.pedidos }} {{ l.rotulo }}{{ ", " if not loop.last }}{% endfor %}).">{% for l in t.linhas %}{% set k = loop.index %}{% for _ in range(l.pedidos) %}<span class="cq {{ 'cq-a' if k <= 2 else 'cq-b' }} ct-sw{{ k }}"></span>{% endfor %}{% endfor %}</div>
+    {# Caio (30/10/2026): o bloco A/B espelha o lado Tempo, na mesma linha da grade (rótulo, barra de 0 a 100 em
+       segmentos das faixas com o número grande, mini legenda e, embaixo, quantos pedidos são de fato no período) #}
+    {% for k in [("a", t.a, t.linhas[:2], 0), ("b", t.b, t.linhas[2:], 2)] %}{% set npk = k[2] | sum(attribute="n") %}
+    <div class="ct-chave ct-{{ k[0] }}">
+      <p class="ct-tempo-rot">{% if k[0] == "a" %}{{ "Sai" if k[1] == 1 else "Saem" }} em até 2 dias de trabalho{% else %}{{ "Passa" if k[1] == 1 else "Passam" }} de 2 dias{% endif %}</p>
+      <p class="ct-tempo-linha">
+        <svg class="ct-trilho ct-trilho-q" viewBox="0 0 100 10" preserveAspectRatio="none" role="img" aria-label="{{ k[1] }} de cada 100 pedidos: {% for l in k[2] %}{{ l.pedidos }} {{ l.rotulo }}{{ "; " if not loop.last }}{% endfor %}"><rect class="ct-fundo" width="100" height="10"/><g class="ct-valor">{% set ns = namespace(x=0) %}{% for l in k[2] %}{% if l.pedidos %}<rect class="ct-seg ct-sw{{ k[3] + loop.index }}" x="{{ ns.x }}" width="{{ (l.pedidos - 0.4) if (l.pedidos > 1 and not loop.last) else l.pedidos }}" height="10"/>{% endif %}{% set ns.x = ns.x + l.pedidos %}{% endfor %}</g></svg>
+        <span class="ct-num" aria-hidden="true">{{ k[1] }}</span>
+      </p>
+      <ul class="ct-mini" aria-hidden="true">{% for l in k[2] %}<li><span class="ct-sw ct-sw{{ k[3] + loop.index }}"></span><span class="ct-mini-n">{{ l.pedidos }}</span> {{ l.rotulo }}</li>{% endfor %}</ul>
+      <p class="ct-tipico">de cada 100 pedidos · {{ npk | inteiro }} {{ "pedido" if npk == 1 else "pedidos" }} {{ t.periodo }}</p>
+    </div>
+    {% endfor %}
+    <span class="ct-divisor" aria-hidden="true"></span>
+    {# a barra de cada lado em segmentos: as horas (V3) de cada faixa, nos mesmos tons do waffle; o total fica no número
+       grande e cada faixa na mini legenda #}
+    {% for k in [("a", t.a, t.ha, t.tipico_a_txt, "em até 2 dias", t.linhas[:2], 0), ("b", t.b, t.hb, t.tipico_b_txt, "acima de 2 dias", t.linhas[2:], 2)] %}
+    <div class="ct-tempo ct-{{ k[0] }}">
+      <p class="ct-tempo-rot">{{ "O" if k[1] == 1 else "Os" }} {{ k[1] }}% {{ k[4] }} {{ "leva" if k[1] == 1 else "levam" }}</p>
+      <p class="ct-tempo-linha">
+        <svg class="ct-trilho" viewBox="0 0 100 10" preserveAspectRatio="none" role="img" aria-label="{{ k[2] }}% das horas de trabalho da equipe: {% for l in k[5] %}{{ l.horas }}% {{ l.rotulo }}{{ "; " if not loop.last }}{% endfor %}"><rect class="ct-fundo" width="100" height="10"/><g class="ct-valor">{% set ns = namespace(x=0) %}{% for l in k[5] %}{% if l.horas %}<rect class="ct-seg ct-sw{{ k[6] + loop.index }}" x="{{ ns.x }}" width="{{ (l.horas - 0.4) if (l.horas > 1 and not loop.last) else l.horas }}" height="10"/>{% endif %}{% set ns.x = ns.x + l.horas %}{% endfor %}</g></svg>
+        <span class="ct-num" aria-hidden="true">{{ k[2] }}<span class="ct-pc">%</span></span>
+      </p>
+      <ul class="ct-mini ct-mini-h" aria-hidden="true">{% for l in k[5] %}<li><span class="ct-sw ct-sw{{ k[6] + loop.index }}"></span><span class="ct-mini-n">{{ l.horas }}%</span> {{ l.rotulo }}</li>{% endfor %}</ul>
+      <p class="ct-tipico">das horas{% if k[3] %} · típico de {{ k[3] | replace(" ", " ") }} por pedido{% endif %}</p>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+  {# V2 (30/10/2026, Caio): faixa de conclusão do pé fora da tela; a frase segue calculada (tempo.resposta, V10) e registrada na ficha #}
+  {# o gancho leva ao slide 4 ("Foi um mês ruim…", o mesmo grupo de talentos) #}
+  <p class="explora-gancho"><a class="gancho-link" href="#4">{{ t.gancho }} <span aria-hidden="true">→</span></a></p>
+  {% else %}
+  <div class="estudo-corpo"><p class="exemplo-vazio">Ainda não há orçamentos suficientes nos meses fechados do ano para esta análise.</p></div>
+  {% endif %}
+</div>
+</section>
+
+{# ---------- slide 5 (D41, 25/10/2026, referência do Caio): "Foi um mês ruim, ou é sempre assim?". Dispersão por mês (um
+   ponto por orçamento, posição na coluna fixa pelo id), faixa onde fica a maioria (1º ao 3º quartil) e o típico de cada
+   mês ligados por uma linha, a linha de 2 dias e, abaixo do eixo, o % que passa de 2 dias e os pedidos do mês (texto
+   real, numa tabela). Eixo com os 12 meses do ano: os que ainda não fecharam ficam vazios, com o nome em cinza e
+   itálico (U2). A faixa do pé responde se a demora é sazonal ou padrão da equipe (U7, U8). Mesmo universo e mesmo
+   seletor dos slides 2–4. Regras U1–U9 em sla/calculos.py ---------- #}
+{% set u = meses_estudo %}
+<section class="slide slide-estudo slide-mes" aria-roledescription="slide" aria-labelledby="s-mes" data-nivel="estudo">
+<div class="lamina lamina-estudo">
+  {{ faixa("Exploração dos dados · foi um mês ruim, ou é sempre assim?", u.titulo if u else "Foi um mês ruim, ou é sempre assim?", "s-mes", recorte) }}
+  {% if u %}{% set gm = u.grafico %}
+  <div class="mes-meio">
+  <nav class="grupos estudo-grupos" aria-labelledby="rotulo-grupos-mes" data-navegador data-chave="talentos-mes">
+    <span class="navegador-reflexo" aria-hidden="true"></span>
+    <span class="navegador-pilula" aria-hidden="true"></span>
+    <span class="grupos-rotulo" id="rotulo-grupos-mes">Talentos</span>
+    {% for g in grupos_estudo %}{% set c = exploracao.comparacao | selectattr("chave", "equalto", g.chave) | first if exploracao else none %}
+    <a href="?talentos={{ g.chave }}#4" class="grupo"{% if g.atual %} aria-current="true"{% endif %}>
+      <span class="grupo-nome">{{ g.rotulo }}</span>
+      {% if c %}<span class="grupo-valor">{{ c.mediana | replace(" ", " ") }}<span class="so-leitor"> de trabalho típico, {{ c.n | inteiro }} orçamentos</span></span>{% endif %}
+    </a>
+    {% endfor %}
+  </nav>
+  <div class="mes-quadro">
+    <ul class="mes-legenda" aria-label="Como ler o gráfico">
+      <li><span class="ml-linha" aria-hidden="true"></span>o típico do mês</li>
+      <li><span class="ml-faixa" aria-hidden="true"></span>faixa onde fica a maioria (metade dos pedidos)</li>
+      <li><span class="ml-ponto" aria-hidden="true"></span>cada ponto é um pedido</li>
+      <li{% if gm.rot2 %} class="ml-estreito"{% endif %}><span class="ml-dois" aria-hidden="true"></span>{{ gm.rot2_txt }}</li>
+      {% if u.n_topo %}<li class="ml-dir"><svg class="ml-tri" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 5 0l5 9z"/></svg>mais de 10 dias · {{ u.n_topo | inteiro }} {{ "pedido" if u.n_topo == 1 else "pedidos" }}</li>{% endif %}
+    </ul>
+    <div class="mes-rolagem" tabindex="0" role="group" aria-label="Gráfico e números de cada mês">
+      <svg class="mes-svg" viewBox="0 0 {{ gm.w }} {{ gm.h }}" role="img" aria-label="{{ gm.texto }}">
+        {% for m in u.meses %}{% if loop.index0 is even %}<rect class="mx-col" x="{{ m.x0 }}" y="{{ gm.topo - 12 }}" width="{{ m.larg }}" height="{{ gm.base - gm.topo + 12 }}"/>{% endif %}{% endfor %}
+        {% for k in gm.marcas %}<line class="mx-grade" x1="{{ gm.e }}" x2="{{ gm.dir }}" y1="{{ k.y }}" y2="{{ k.y }}"/><text class="mx-y" x="{{ gm.e - 10 }}" y="{{ k.y + 4.5 }}" text-anchor="end">{{ k.rotulo }}</text>{% endfor %}
+        <path class="mx-p mx-ate2" d="{{ gm.pontos.ate2 }}"/>
+        <path class="mx-p mx-de2a5" d="{{ gm.pontos.de2a5 }}"/>
+        <path class="mx-p mx-mais5" d="{{ gm.pontos.mais5 }}"/>
+        {% if gm.triangulos %}<path class="mx-tri" d="{{ gm.triangulos }}"/>{% endif %}
+        {% for m in u.meses if m.n %}<rect class="mx-faixa" x="{{ m.fx }}" y="{{ m.y_q3 }}" width="{{ m.fl }}" height="{{ (m.y_q1 - m.y_q3) | round(1) }}"/>{% endfor %}
+        <line class="mx-dois" x1="{{ gm.e }}" x2="{{ gm.dir }}" y1="{{ gm.y2 }}" y2="{{ gm.y2 }}"/>
+        {% if gm.rot2 %}<text class="mx-rot2" aria-hidden="true" x="{{ gm.rot2.x }}" y="{{ gm.rot2.y }}" text-anchor="end">{{ gm.rot2_txt }}</text>{% endif %}
+        <polyline class="mx-tipico" points="{{ gm.linha }}" pathLength="1"/>
+        {% for m in u.meses if m.n %}<circle class="mx-med" cx="{{ m.cx }}" cy="{{ m.y_med }}" r="2.8"/><text class="mx-med-txt" x="{{ m.cx }}" y="{{ m.y_txt }}" text-anchor="middle">{{ m.tipico }}</text>{% endfor %}
+        <line class="mx-base" x1="{{ gm.e }}" x2="{{ gm.dir }}" y1="{{ gm.base }}" y2="{{ gm.base }}"/>
+      </svg>
+      <table class="mes-tabela">
+        <caption class="so-leitor">Por mês da entrega: % dos pedidos que passam de 2 dias de trabalho e quantidade de pedidos</caption>
+        <colgroup><col class="mt-e">{% for m in u.meses %}<col>{% endfor %}<col class="mt-d"></colgroup>
+        <thead><tr><td></td>{% for m in u.meses %}<th scope="col"{% if m.vazio %} class="mt-vazio"{% endif %}>{{ m.rotulo }}{% if m.vazio %}<span class="so-leitor">, ainda sem mês completo</span>{% endif %}</th>{% endfor %}<td></td></tr></thead>
+        <tbody>
+          <tr class="mt-b"><th scope="row">passam de 2 dias</th>{% for m in u.meses %}<td>{% if not m.vazio %}{{ (m.b ~ "%") if m.n else "—" }}{% endif %}</td>{% endfor %}<td></td></tr>
+          <tr class="mt-n"><th scope="row">pedidos</th>{% for m in u.meses %}<td>{% if not m.vazio %}{{ m.n | inteiro }}{% endif %}</td>{% endfor %}<td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+  {# V2 (30/10/2026, Caio): faixa de conclusão do pé fora da tela; a frase segue calculada (meses_estudo.rodape, U8) e registrada na ficha #}
+  {# D42: o gancho leva ao slide 5 (link para #5, o mesmo grupo de talentos; V2: era o 6) #}
+  <p class="explora-gancho"><a class="gancho-link" href="#5">{{ u.gancho }} <span aria-hidden="true">→</span></a></p>
+  {% else %}
+  <div class="estudo-corpo"><p class="exemplo-vazio">Ainda não há orçamentos suficientes nos meses fechados do ano para esta análise.</p></div>
+  {% endif %}
+</div>
+</section>
+{# ---------- slide 6 (D42, 25/10/2026, referência do Caio): "Onde o tempo trava?". Uma linha por etapa do ciclo (Entrada,
+   Elaboração, Revisão; os status vêm dos dados, K2) e, em cada uma, um cartão por status com a parte do tempo travado
+   (K4), quantos orçamentos travaram e o tempo típico; barra fina proporcional ao maior; os 2 maiores em destaque (K5).
+   Em Elaboração, o cartão tracejado do Retorno da marca (fora da conta, C2/D-SLA-2); a última linha é a Entrega
+   (Aguardando Feedback, fim do ciclo). Faixa do pé por regra (K7) e gancho (K8). Mesmo universo e mesmo seletor dos
+   slides 2–5. Regras K1–K8 em sla/calculos.py ---------- #}
+{% set v = travas %}
+<section class="slide slide-estudo slide-trava" aria-roledescription="slide" aria-labelledby="s-trava" data-nivel="estudo">
+<div class="lamina lamina-estudo">
+  {{ faixa("Exploração dos dados · o ciclo, da entrada ao Aguardando Feedback", "Onde o tempo trava?", "s-trava", recorte, fim=not mostrar_tipo) }}
+  {% if v %}
+  <div class="trava-meio">
+  <div class="trava-topo">
+  <nav class="grupos estudo-grupos" aria-labelledby="rotulo-grupos-trava" data-navegador data-chave="talentos-trava">
+    <span class="navegador-reflexo" aria-hidden="true"></span>
+    <span class="navegador-pilula" aria-hidden="true"></span>
+    <span class="grupos-rotulo" id="rotulo-grupos-trava">Talentos</span>
+    {% for g in grupos_estudo %}{% set c = exploracao.comparacao | selectattr("chave", "equalto", g.chave) | first if exploracao else none %}
+    <a href="?talentos={{ g.chave }}#5" class="grupo"{% if g.atual %} aria-current="true"{% endif %}>
+      <span class="grupo-nome">{{ g.rotulo }}</span>
+      {% if c %}<span class="grupo-valor">{{ c.mediana | replace(" ", " ") }}<span class="so-leitor"> de trabalho típico, {{ c.n | inteiro }} orçamentos</span></span>{% endif %}
+    </a>
+    {% endfor %}
+  </nav>
+  </div>
+  <ol class="trava-etapas" aria-label="Onde o tempo trava, por etapa do ciclo. {{ v.intro }}">
+    {% for e in v.etapas %}
+    <li class="trava-linha">
+      <h3 class="trava-etapa" id="t-trava-{{ e.numero }}"><span class="trava-num" aria-hidden="true">{{ e.numero }}</span><span class="so-leitor">Etapa {{ e.numero }}: </span>{{ e.nome }}</h3>
+      <ul class="trava-cartoes" aria-labelledby="t-trava-{{ e.numero }}">
+        {% for k in e.cartoes %}
+        <li class="trava-cartao{% if k.destaque %} trava-destaque{% endif %}{% if k.outros %} trava-outros{% endif %}"{% if k.outros %} title="{{ k.nomes }}"{% endif %}>
+          <span class="trava-pct" aria-hidden="true">{{ k.pct_txt }}</span>
+          <span class="trava-nome" aria-hidden="true">{{ k.nome }}</span>
+          <span class="trava-meta" aria-hidden="true">{{ k.partes | join(" · ") | replace(" h", " h") }}</span>
+          {% if k.nota %}<span class="trava-nota" aria-hidden="true">{{ k.nota }}</span>{% endif %}
+          <svg class="trava-barra" viewBox="0 0 100 4" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="trava-trilho" width="100" height="4"/><rect class="trava-valor" width="{{ k.barra }}" height="4"/></svg>
+          <span class="so-leitor">{{ k.leitor }}</span>
+        </li>
+        {% endfor %}
+        {% if e.retorno %}
+        <li class="trava-cartao trava-fora">
+          <span class="trava-nome">Retorno da marca</span><span class="trava-meta">espera da marca: fora da conta</span>
+        </li>
+        {% endif %}
+      </ul>
+    </li>
+    {% endfor %}
+    <li class="trava-linha trava-fim">
+      <h3 class="trava-etapa" id="t-trava-fim"><span class="trava-num" aria-hidden="true">{{ v.numero_entrega }}</span><span class="so-leitor">Etapa {{ v.numero_entrega }}: </span>Entrega</h3>
+      <div class="trava-entrega">
+        <p class="trava-cartao trava-cliente"><span class="trava-nome">Aguardando Feedback</span><span class="trava-meta">fim do ciclo: a 1ª versão foi para o cliente</span></p>
+        <p class="trava-depois">Daqui em diante o tempo é do cliente e não entra na conta.</p>
+      </div>
+    </li>
+  </ol>
+  </div>
+  {# V2 (30/10/2026, Caio): faixa de conclusão do pé fora da tela; a frase segue calculada (travas.rodape, K) e registrada na ficha #}
+  {# V2 (30/10/2026): sem a conclusão, este é o último slide — a saída do estudo (volta ao SLA e a próxima página da
+     sequência); com o slide de tipo de pedido ligado (ESTUDO_TIPO), o gancho leva a ele (#6) #}
+  {% if mostrar_tipo %}<p class="explora-gancho"><a class="gancho-link" href="#6">{{ v.gancho }} <span aria-hidden="true">→</span></a></p>
+  {% endif %}
+  {% else %}
+  <div class="estudo-corpo"><p class="exemplo-vazio">Ainda não há orçamentos suficientes nos meses fechados do ano para esta análise.</p></div>
+  {% endif %}
+</div>
+</section>
+{# ---------- slide 7 (D43, 25/10/2026, referência do Caio): "Em que tipo de pedido o tempo trava?". Tabela-gráfico por
+   Tipo de Input (J1): nome e pedidos, barra 100% empilhada (saem em até 2 dias × passam de 2 dias) com a linha tracejada
+   do geral, tempo típico e onde mais trava (etapa com mais horas entre os que passam de 2 dias, J5). "Todos os pedidos"
+   em cima; grupos de maior e menor volume (J3); vermelho só nos tipos claramente piores que o geral (J6). Sem nota na
+   tela (ajuste do Caio): recorte, avisos e "Outros" vão no aria-label (J8); a análise fica só na faixa do pé (J7). Mesmo universo e mesmo seletor dos slides
+   2–6. Regras J1–J9 em sla/calculos.py ---------- #}
+{% set t = tipos %}
+{% macro tq_barra(r, legenda) %}
+  <div class="tq-barra" aria-hidden="true">
+    <svg class="tq-svg" viewBox="0 0 100 10" preserveAspectRatio="none" focusable="false"><rect class="tq-ra" width="{{ r.a }}" height="10"/><rect class="tq-rb" x="{{ r.a }}" width="{{ r.b }}" height="10"/>{% if r.a and r.b %}<line class="tq-corte" x1="{{ r.a }}" x2="{{ r.a }}" y1="0" y2="10"/>{% endif %}</svg>
+    {% if r.a_dentro %}<span class="tq-pa">{{ r.a }}%</span>{% endif %}{% if r.b_dentro %}<span class="tq-pb">{{ r.b }}%</span>{% endif %}
+  </div>
+  <svg class="tq-geral" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><line x1="{{ legenda }}" x2="{{ legenda }}" y1="0" y2="100"/></svg>
+  <span class="so-leitor">{{ r.a }}% saem em até 2 dias e {{ r.b }}% passam de 2 dias{{ ", bem acima do geral" if r.vermelho }}.</span>
+{% endmacro %}
+{% if mostrar_tipo %}{# D64 (29/10/2026): fora da apresentação; ESTUDO_TIPO em apresentacao.py traz de volta #}
+<section class="slide slide-estudo slide-tipo" aria-roledescription="slide" aria-labelledby="s-tipo" data-nivel="estudo">
+<div class="lamina lamina-estudo">
+  {{ faixa("Exploração dos dados · e por tipo de pedido?", "Em que tipo de pedido o tempo trava?", "s-tipo", recorte, fim=true) }}
+  {% if t %}{% set ga = t.geral.a %}
+  <div class="tq-meio">
+  <nav class="grupos estudo-grupos" aria-labelledby="rotulo-grupos-tipo" data-navegador data-chave="talentos-tipo">
+    <span class="navegador-reflexo" aria-hidden="true"></span>
+    <span class="navegador-pilula" aria-hidden="true"></span>
+    <span class="grupos-rotulo" id="rotulo-grupos-tipo">Talentos</span>
+    {% for g in grupos_estudo %}{% set c = exploracao.comparacao | selectattr("chave", "equalto", g.chave) | first if exploracao else none %}
+    <a href="?talentos={{ g.chave }}#6" class="grupo"{% if g.atual %} aria-current="true"{% endif %}>
+      <span class="grupo-nome">{{ g.rotulo }}</span>
+      {% if c %}<span class="grupo-valor">{{ c.mediana | replace(" ", " ") }}<span class="so-leitor"> de trabalho típico, {{ c.n | inteiro }} orçamentos</span></span>{% endif %}
+    </a>
+    {% endfor %}
+  </nav>
+  <div class="tq-quadro">
+  <table class="tq-tabela">
+    <caption class="so-leitor">{{ t.texto }}</caption>
+    <colgroup><col class="tq-k-tipo"><col><col class="tq-k-tipico"><col class="tq-k-trava"></colgroup>
+    <thead>
+      <tr>
+        <th scope="col" class="tq-c-tipo">Tipo de input</th>
+        <th scope="col" class="tq-c-barra"><span class="so-leitor">Saem em até 2 dias e passam de 2 dias, em % dos pedidos</span>
+          <span class="tq-legenda" aria-hidden="true"><span class="tq-lg"><span class="tq-qa"></span>Saem em até 2 dias</span><span class="tq-lg"><span class="tq-qb"></span>Passam de 2 dias</span><span class="tq-lg"><span class="tq-qv"></span>Passam de 2 dias, bem acima do geral</span><span class="tq-lg"><span class="tq-qg"></span>{{ t.legenda_geral }}</span></span></th>
+        <th scope="col" class="tq-c-tipico">Tempo típico</th>
+        <th scope="col" class="tq-c-trava">Onde passa mais tempo<span class="tq-sub">% do tempo de quem passa de 2 dias</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="tq-linha tq-todos">
+        <th scope="row" class="tq-c-tipo"><span class="tq-nome">{{ t.geral.tipo }}</span><span class="tq-meta">{{ t.geral.n | inteiro }} pedidos · 100%</span></th>
+        <td class="tq-c-barra">{{ tq_barra(t.geral, ga) }}</td>
+        <td class="tq-c-tipico">{{ t.geral.tipico | replace(" ", " ") }}</td>
+        <td class="tq-c-trava"></td>
+      </tr>
+    </tbody>
+    {% for g in t.grupos %}
+    <tbody class="tq-grupo-{{ g.chave }}">
+      <tr class="tq-grupo">
+        <th scope="colgroup" class="tq-c-tipo">{{ g.rotulo }}</th>
+        <td class="tq-c-barra"><svg class="tq-geral" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><line x1="{{ ga }}" x2="{{ ga }}" y1="0" y2="100"/></svg></td>
+        <td class="tq-c-tipico"></td><td class="tq-c-trava"></td>
+      </tr>
+      {% for r in g.linhas %}
+      <tr class="tq-linha{% if r.vermelho %} tq-vermelho{% endif %}">
+        <th scope="row" class="tq-c-tipo"><span class="tq-nome">{{ r.tipo }}</span><span class="tq-meta">{{ r.n | inteiro }} {{ "pedido" if r.n == 1 else "pedidos" }} · {{ r.pct_txt }}</span></th>
+        <td class="tq-c-barra">{{ tq_barra(r, ga) }}</td>
+        <td class="tq-c-tipico">{{ r.tipico | replace(" ", " ") }}</td>
+        <td class="tq-c-trava">{% if r.trava %}<span class="tq-etapa">{{ r.trava.etapa }}</span> <span class="tq-p">{{ r.trava.p }}%</span><span class="so-leitor"> do tempo dos que passam de 2 dias</span>{% else %}<span class="tq-p">—<span class="so-leitor"> nenhum pedido passa de 2 dias</span></span>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    {% endfor %}
+  </table>
+  </div>
+  </div>
+  {% if t.rodape %}<div class="explora-conclusoes tq-conclusao"><p>{{ t.rodape | safe }}</p></div>{% endif %}
+  {# V2 (30/10/2026): sem a conclusão, o slide de tipo (quando ligado) é o último: a saída do estudo #}
+  {# V2 (30/10/2026): sem os links da saída; o ✕ destacado marca o fim #}
+  {% else %}
+  <div class="estudo-corpo"><p class="exemplo-vazio">Ainda não há orçamentos suficientes nos meses fechados do ano para esta análise.</p></div>
+  {% endif %}
+</div>
+</section>
+{% endif %}
+{% endblock %}

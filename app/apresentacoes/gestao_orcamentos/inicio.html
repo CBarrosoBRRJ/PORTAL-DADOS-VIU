@@ -1,0 +1,202 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import cabecalho, resposta %}
+{% from "icones.html" import icone %}
+{# Página inicial da Gestão de orçamentos: pedidos que entraram por mês e tipo de input, sempre no ano da carga (E0),
+   com a comparação ao ano anterior (E8) e o extrato dos 6 meses mais recentes (E7). D23, D25, D26. #}
+{# dica dos represados: por mês de entrada, os represados no início do mês (no próprio mês: os novos), quanto foi
+   entregue, quanto saiu sem entrega e quanto está em aberto; cada linha fecha e o total bate com a caixa #}
+{% macro tabela_fila(meses, parcial=false) %}<span class="so-leitor">Por mês de entrada, só pedidos do ano. {% for m in meses %}{{ m.nome }}{% if m.novo %} ({{ 'parcial' if parcial else 'novos' }}){% endif %}: {{ m.inicio | inteiro }} represados, {{ m.entregues | inteiro }} entregues, {{ m.nao_seguiram | inteiro }} saíram sem entrega, {{ m.seguem | inteiro }} em aberto. {% endfor %}Total: {{ meses | sum(attribute="inicio") | inteiro }} represados, {{ meses | sum(attribute="entregues") | inteiro }} entregues, {{ meses | sum(attribute="nao_seguiram") | inteiro }} saíram sem entrega, {{ meses | sum(attribute="seguem") | inteiro }} em aberto.</span>
+<span class="dica-tabela" aria-hidden="true">
+  <span class="dica-linha dica-cab"><span>Mês</span><span>Represados</span><span>Entregues</span><span>Saíram sem entrega</span><span>Em aberto</span></span>
+  {% for m in meses %}<span class="dica-linha"><span>{{ m.nome }}{% if m.novo %} <small>({{ 'parcial' if parcial else 'novos' }})</small>{% endif %}</span><span>{{ m.inicio | inteiro }}</span><span>{{ m.entregues | inteiro }}</span><span>{{ m.nao_seguiram | inteiro }}</span><strong>{{ m.seguem | inteiro }}</strong></span>
+  {% endfor %}<span class="dica-linha dica-soma"><span>Total</span><span>{{ meses | sum(attribute="inicio") | inteiro }}</span><span>{{ meses | sum(attribute="entregues") | inteiro }}</span><span>{{ meses | sum(attribute="nao_seguiram") | inteiro }}</span><strong>{{ meses | sum(attribute="seguem") | inteiro }}</strong></span>
+</span>{% endmacro %}
+{# coluna Var. da tabela de tipos (decisão 3, 25/10/2026): seta ▲/▼ pequena em tom pastel (verde na alta, vermelho na
+   queda) + o tamanho da variação; o leitor de tela ouve "alta de"/"queda de" (a seta é só visual); 0% fica sem seta;
+   "–" quando a base do ano anterior é pequena (E8b), com o motivo também para o leitor de tela (IN-A1) #}
+{% macro var_seta(v) %}{% set s = v | sentido %}{% if s == "alta" or s == "queda" %}<span class="var-seta var-{{ s }}" aria-hidden="true">{{ "▲" if s == "alta" else "▼" }}</span><span class="so-leitor">{{ s }} de </span>{{ v | variacao(false) }}{% else %}{{ v | variacao }}{% endif %}{% endmacro %}
+{% block slides %}
+{% set e = entrada %}
+{% set pagina = request.url.path %}
+{% set compara_tipos = e.grupos[0].contra_anterior is not none %}
+<section class="slide" aria-roledescription="slide" aria-labelledby="s-entrada">
+<div class="lamina lamina-entrada" data-fotografia="{{ e.fotografia }}">
+  {{ cabecalho(apresentacao, secao_atual) }}
+  <div class="sobretitulo"><span class="nivel">Gerencial</span></div>
+  {# título (relatório vivo): ano em andamento = "ao longo de AAAA até o momento"; ano fechado = "em AAAA" #}
+  <h2 class="slide-titulo titulo-longo" id="s-entrada">Quantos pedidos de orçamento chegaram {% if e.periodo.startswith("até") %}ao longo de {{ e.ano }} até o momento{% else %}em {{ e.ano }}{% endif %}?</h2>
+  <div class="slide-corpo duas-colunas entrada">
+    <div class="destaque">
+      {# D52 (26/10/2026): dois quadrantes. Em cima, a resposta do título (E1, E4) composta como nuvem de palavras, com a
+         comparação ao mesmo período do ano anterior (E8: selo + barras) como apoio; embaixo, a caixa trocável #}
+      {{ resposta(e.total, e.periodo, e.comparacao.variacao if e.comparacao else none,
+                  e.comparacao.total if e.comparacao else none, e.ano, e.ano_anterior, e.ate_curto) }}
+      {# caixa trocável: o clique no mês troca só este bloco, com efeito de virar (apresentacao.js); sem JS, o link recarrega #}
+      <div class="caixa-troca" data-caixa-troca>
+      {% if e.extrato %}
+      {% set x = e.extrato %}
+      {# extrato do mês clicado (E7): a fila do mês — represados no início + novos = demanda; saem entregues e não
+         seguiram; o resto segue represado (a conta sempre fecha). Represados com listrado + relógio (nunca só cor) #}
+      {% set q = x.fila %}
+      {% set mx = e.meses | selectattr("chave", "equalto", x.mes) | first %}{% set parcial = mx.parcial %}
+      <section class="extrato entra" aria-labelledby="extrato-titulo">
+        {# D52: o rótulo "Análise mensal" fica na mesma linha do título (o extrato cabe na altura fixa da caixa) #}
+        <div class="extrato-topo">
+          <p class="entrada-contexto">Análise mensal</p>
+          <h3 class="extrato-titulo" id="extrato-titulo">{{ x.nome }}</h3>
+          <a class="extrato-voltar" href="{{ pagina }}#1" aria-label="Fechar extrato e voltar ao ano">Fechar <span aria-hidden="true">×</span></a>
+        </div>
+        <p class="extrato-linha-forte"><strong>{{ q.demanda | inteiro }}</strong> pedidos na demanda do mês</p>
+        <div class="extrato-barra" aria-hidden="true"><span class="extrato-seg extrato-cor-represado" id="barra-dem-represados"></span><span class="extrato-seg extrato-cor-proprio" id="barra-dem-novos"></span></div>
+        <ul class="extrato-lista">
+          <li class="extrato-represado"><span class="chave extrato-cor-represado" aria-hidden="true"></span><span>{{ icone("relogio", "icone extrato-icone") }}{% if q.represados_meses %}<button type="button" class="tipo-info" aria-describedby="represados-inicio">Represados do início do mês</button>
+            <span class="dica dica-tipos" id="represados-inicio" role="tooltip"><span class="dica-titulo">Represados do início do mês</span>
+              {{ tabela_fila(q.represados_meses) }}</span>
+            {% else %}Represados do início do mês{% endif %}</span><strong>{{ q.represados | inteiro }}</strong><span class="extrato-pct">{{ q.pct_represados | parcela(q.represados) }}</span></li>
+          <li><span class="chave extrato-cor-proprio" aria-hidden="true"></span><span><button type="button" class="tipo-info" aria-describedby="novos-tipos">Novos pedidos</button>
+            {# os novos do mês por tipo de input (os mesmos números da coluna do gráfico, E1, E2) contra o mesmo mês do ano
+               anterior (E8; no parcial, até o mesmo dia): só a tabela, no desenho da tabela principal de tipos — cabeçalho em
+               dois níveis (mês/26: Pedidos | % · mês/25: Pedidos | % · Var.), números centralizados, ano anterior em cinza,
+               Var. em azul ou "–" cinza (E8b, base mínima), total com traço de soma. Grade só visual; o leitor de tela ouve
+               uma frase por linha #}
+            {% set ref = mx.anterior %}{% set m26 = mx.rotulo ~ "/" ~ (e.ano | string)[2:] %}{% set m25 = mx.rotulo ~ "/" ~ (e.ano_anterior | string)[2:] %}
+            {% set linhas = [] %}{% for g in mx.grupos if g.n or g.n_anterior %}{% set _ = linhas.append(g) %}{% endfor %}
+            {% set sem_var = ref and (linhas | selectattr("variacao_mes", "none") | list | length > 0 or ref.variacao is none) %}
+            <span class="dica dica-tipos dica-novos{% if not ref %} dica-novos-so-atual{% endif %}" id="novos-tipos" role="tooltip"><span class="dica-titulo">Novos pedidos por tipo</span>
+              <span class="so-leitor">{{ mx.extenso | capitalize }} de {{ e.ano }}{% if mx.ate %} até {{ mx.ate }}{% endif %}{% if ref %}, comparado a {{ mx.extenso }} de {{ e.ano_anterior }}{% if mx.ate %} até o mesmo dia{% endif %}{% endif %}.
+                {% for g in linhas %}{{ g.nome }}: {{ g.n | inteiro }} em {{ m26 }} ({{ g.pct | parcela(g.n) }} do mês){% if ref %}, {{ g.n_anterior | inteiro }} em {{ m25 }} ({{ g.pct_anterior | parcela(g.n_anterior) }}), {% if g.variacao_mes is not none %}variação {{ g.variacao_mes | variacao }}{% else %}sem variação: base pequena no ano anterior{% endif %}{% endif %}. {% endfor %}
+                Total: {{ mx.total | inteiro }} em {{ m26 }}{% if ref %}, {{ ref.total | inteiro }} em {{ m25 }}, {% if ref.variacao is not none %}variação {{ ref.variacao | variacao }}{% else %}sem variação: base pequena no ano anterior{% endif %}{% endif %}.</span>
+              <span class="dica-novos-visual" aria-hidden="true">
+                <span class="dica-novos-grade dica-novos-cab"><span class="dica-novos-c-tipo">Tipo</span><span class="dica-novos-ano">{{ m26 }}</span>{% if ref %}<span class="dica-novos-ano dica-novos-ano-ant">{{ m25 }}</span><span class="dica-novos-c-var">Var.</span>{% endif %}<span class="dica-novos-c2">Pedidos</span><span class="dica-novos-c3">%</span>{% if ref %}<span class="dica-novos-c5">Pedidos</span><span class="dica-novos-c6">%</span>{% endif %}</span>
+                {% for g in linhas %}<span class="dica-novos-grade dica-novos-linha"><span class="dica-novos-tipo"><span class="chave t-{{ g.classe }}"></span>{{ g.nome }}</span><span>{{ g.n | inteiro }}</span><span>{{ g.pct | parcela(g.n) }}</span>{% if ref %}<span class="dica-novos-cinza">{{ g.n_anterior | inteiro }}</span><span class="dica-novos-cinza">{{ g.pct_anterior | parcela(g.n_anterior) }}</span><span class="dica-novos-var">{% if g.variacao_mes is not none %}{{ g.variacao_mes | variacao }}{% else %}<span class="variacao-neutra">–</span>{% endif %}</span>{% endif %}</span>
+                {% endfor %}<span class="dica-novos-grade dica-novos-soma"><span class="dica-novos-tipo">Total</span><span>{{ mx.total | inteiro }}</span><span>100%</span>{% if ref %}<span class="dica-novos-cinza">{{ ref.total | inteiro }}</span><span class="dica-novos-cinza">100%</span><span class="dica-novos-var">{% if ref.variacao is not none %}{{ ref.variacao | variacao }}{% else %}<span class="variacao-neutra">–</span>{% endif %}</span>{% endif %}</span>
+              </span></span></span><strong>{{ q.novos | inteiro }}</strong><span class="extrato-pct">{{ q.pct_novos | parcela(q.novos) }}</span></li>
+        </ul>
+        <p class="extrato-linha-forte extrato-separador">O que aconteceu com a demanda</p>
+        <div class="extrato-barra" aria-hidden="true"><span class="extrato-seg extrato-cor-proprio" id="barra-sai-entregues"></span><span class="extrato-seg extrato-cor-restante" id="barra-sai-nao"></span><span class="extrato-seg extrato-cor-represado" id="barra-sai-seguem"></span></div>
+        <ul class="extrato-lista">
+          <li><span class="chave extrato-cor-proprio" aria-hidden="true"></span><span>Entregues</span><strong>{{ q.entregues | inteiro }}</strong><span class="extrato-pct">{{ q.pct_entregues | parcela(q.entregues) }}</span></li>
+          <li class="extrato-sub"><span></span><span>{{ q.entregues_novos | inteiro }} dos novos pedidos ({{ q.pct_entregues_novos | parcela(q.entregues_novos) }} deles)</span></li>
+          {% if q.represados %}<li class="extrato-sub"><span></span><span>{{ q.entregues_represados | inteiro }} dos {% if q.entregues_represados_meses %}<button type="button" class="tipo-info" aria-describedby="represados-entregues">represados</button>
+            <span class="dica dica-tipos" id="represados-entregues" role="tooltip"><span class="dica-titulo">Mês de entrada dos represados entregues</span>
+              <span class="dica-lista">{% for m in q.entregues_represados_meses %}<span><span>{{ m.nome }}</span><strong>{{ m.n | inteiro }}</strong></span>{% endfor %}</span></span>
+            {% else %}represados{% endif %} ({{ q.pct_entregues_represados | parcela(q.entregues_represados) }} deles)</span></li>{% endif %}
+          <li><span class="chave extrato-cor-restante" aria-hidden="true"></span><span><button type="button" class="tipo-info" aria-describedby="nao-seguiram-nota">Saíram sem entrega</button>
+            <span class="dica dica-tipos" id="nao-seguiram-nota" role="tooltip"><span class="dica-titulo">Saíram sem entrega</span>
+              <span class="dica-nota">O pedido foi declinado, pausado (standby) ou encerrado antes da entrega. Contados pelo mês em que o pedido entrou (no Atendimento, pelo mês em que saiu).</span></span></span><strong>{{ q.nao_seguiram | inteiro }}</strong><span class="extrato-pct">{{ q.pct_nao_seguiram | parcela(q.nao_seguiram) }}</span></li>
+          <li class="extrato-represado"><span class="chave extrato-cor-represado" aria-hidden="true"></span><span>{{ icone("relogio", "icone extrato-icone") }}{% set rotulo_fim = "Represados hoje" if parcial else "Represados no fim do mês" %}{% if q.seguem_meses %}<button type="button" class="tipo-info" aria-describedby="represados-fim">{{ rotulo_fim }}</button>
+            <span class="dica dica-tipos" id="represados-fim" role="tooltip"><span class="dica-titulo">{{ rotulo_fim }}</span>
+              {{ tabela_fila(q.seguem_meses, parcial) }}</span>
+            {% else %}{{ rotulo_fim }}{% endif %}</span><strong>{{ q.seguem | inteiro }}</strong><span class="extrato-pct">{{ q.pct_seguem | parcela(q.seguem) }}</span></li>
+        </ul>
+      </section>
+      {% else %}
+      {% if e.extrato_em_atualizacao %}<p class="aviso-texto" role="status">O extrato está sendo atualizado. Tente novamente em alguns minutos.</p>{% endif %}
+      {# legenda = tabela do ano: cor + tipo + quantidade + parcela (a cor nunca fica sozinha); o nome abre a composição #}
+      <div class="como tipos-caixa entra">
+      <table class="tipos-ano">
+        <caption class="so-leitor">Pedidos de {{ e.ano }} por tipo de input</caption>
+        {# cabeçalho em dois níveis (E9): o ano cobre suas duas colunas (pedidos e %); variação de pedidos ao lado.
+           A linha de total confere com o número do topo e com a comparação E8 #}
+        <thead class="tipos-cabecalho">
+          <tr><th scope="col" rowspan="2" class="cabecalho-tipo">Tipo de input</th>
+            <th scope="colgroup" colspan="2" class="cabecalho-ano">{{ e.ano }}</th>
+            {% if compara_tipos %}<th scope="colgroup" colspan="2" class="cabecalho-ano cabecalho-anterior">{{ e.ano_anterior }}<span class="so-leitor">, mesmo período</span></th>
+            <th scope="col" rowspan="2" class="cabecalho-var">Var.</th>{% endif %}</tr>
+          <tr><th scope="col">Pedidos</th><th scope="col">%</th>
+            {% if compara_tipos %}<th scope="col">Pedidos</th><th scope="col">%</th>{% endif %}</tr>
+        </thead>
+        <tbody>
+          {% for g in e.grupos | reverse %}
+          {# E5: dica com a composição só nos grupos que reúnem vários tipos (GRUPOS_COM_DICA, hoje Internos); os demais
+             nomes são texto simples, sem botão. A comparação com o ano anterior fica só nas colunas da tabela #}
+          <tr><th scope="row">
+            {% if g.agrupa %}<button type="button" class="tipo-info" aria-describedby="tipos-{{ g.classe }}"><span class="chave t-{{ g.classe }}" aria-hidden="true"></span>{{ g.nome }}</button>
+            <span class="dica dica-tipos" id="tipos-{{ g.classe }}" role="tooltip">
+              <span class="dica-titulo">{{ g.nome }} reúne</span>
+              {% if g.tipos %}<span class="dica-lista">{% for t in g.tipos %}<span><span>{{ t.nome }}</span><strong>{{ t.n | inteiro }}</strong></span>{% endfor %}</span>
+              {% else %}<span class="dica-nota">nenhum card em {{ e.ano }}</span>{% endif %}
+            </span>
+            {% else %}<span class="tipo-nome"><span class="chave t-{{ g.classe }}" aria-hidden="true"></span>{{ g.nome }}</span>{% endif %}</th>
+            <td>{{ g.n | inteiro }}</td><td>{{ g.pct | parcela(g.n) }}</td>
+            {% if compara_tipos %}{% set ca = g.contra_anterior %}<td class="coluna-anterior">{{ g.n_anterior | inteiro }}</td><td class="coluna-anterior">{{ g.pct_anterior | parcela(g.n_anterior) }}</td>
+            <td class="coluna-variacao">{% if g.variacao is not none %}{{ var_seta(g.variacao) }}{% else %}<span class="variacao-neutra" title="Base pequena no ano anterior: a variação em % não tem sentido">–<span class="so-leitor"> base pequena no ano anterior</span></span>{% endif %}</td>{% endif %}</tr>
+          {% endfor %}
+        </tbody>
+        <tfoot class="tipos-total"><tr><th scope="row">Total</th><td>{{ e.total | inteiro }}</td><td>100%</td>
+          {% if compara_tipos and e.comparacao %}<td>{{ e.comparacao.total | inteiro }}</td><td>100%</td><td class="coluna-variacao">{% if e.comparacao.variacao is not none %}{{ var_seta(e.comparacao.variacao) }}{% else %}<span class="variacao-neutra">–</span>{% endif %}</td>{% endif %}</tr></tfoot>
+      </table>
+      </div>
+      {% endif %}
+      </div>
+    </div>
+
+    {# gráfico em cartão flutuante, do tamanho do cartão do SLA (tokens --cartao-*, 25/10/2026); D52: centrado na altura
+       dos dois quadrantes da esquerda, sem esticar; título visível derivado do ano #}
+    {# 28/10/2026 (Caio): ao lado de cada mês, a coluna do mesmo mês do ano anterior (tracejada, cinza; no mês parcial,
+       até o mesmo dia), na mesma escala das de 2026 — os dados são os da dica (m.anterior), sem regra nova #}
+    {% set par = e.comparacao is not none and e.comparacao %}
+    {% set ns = namespace(escala=e.escala) %}{% if par %}{% for m in e.meses if m.total and m.anterior and m.anterior.total > ns.escala %}{% set ns.escala = m.anterior.total %}{% endfor %}{% endif %}
+    {% set escala = ns.escala %}
+    <figure class="colunas tipos cartao-grafico{% if par %} colunas-par{% endif %}">
+      {# 26/10/2026 (Caio): cabeçalho no padrão do cartão do SLA — título + legenda dos tipos com a parcela do ano; a área
+         das colunas fica abaixo dela. D52: é a única legenda (a de baixo, reservada para o extrato, saiu) #}
+      <figcaption><span class="colunas-titulo">Pedidos por mês em {{ e.ano }}, por tipo de input</span>
+        <span class="legenda">{% for g in e.grupos if g.n %}<span><span class="chave t-{{ g.classe }}" aria-hidden="true"></span>{{ g.nome }} <strong>{{ g.pct | parcela(g.n) }}</strong></span>{% endfor %}
+          {% if par %}<span class="legenda-anterior"><span class="chave chave-anterior" aria-hidden="true"></span>{{ e.ano_anterior }}, mesmo mês</span>{% endif %}</span>
+      </figcaption>
+      {# alturas num bloco <style> assinado pelo nonce (a CSP proíbe style="") #}
+      <style nonce="{{ request.state.nonce }}">
+        {% if e.extrato %}{% set q = e.extrato.fila %}#barra-dem-represados { flex-grow: {{ q.represados }}; } #barra-dem-novos { flex-grow: {{ q.novos }}; }
+        #barra-sai-entregues { flex-grow: {{ q.entregues }}; } #barra-sai-nao { flex-grow: {{ q.nao_seguiram }}; } #barra-sai-seguem { flex-grow: {{ q.seguem }}; }{% endif %}
+        {% for m in e.meses %}#em-{{ loop.index0 }} { --i: {{ loop.index0 }}; --total: {{ m.total / (escala * 1.08) * 100 }};{% if par and m.total and m.anterior %} --total-ant: {{ m.anterior.total / (escala * 1.08) * 100 }};{% endif %} }
+        {% endfor %}
+        {% for m in e.meses %}{% set i = loop.index0 %}{% for g in m.grupos %}{% if g.n %}#em-{{ i }} .t-{{ g.classe }} { --v: {{ g.n }}; }
+        {% endif %}{% endfor %}{% endfor %}
+      </style>
+      <div class="plot">
+        <ol class="meses">
+          {% for m in e.meses %}
+          {% set i = loop.index0 %}
+          <li id="em-{{ i }}" class="mes{% if m.parcial %} mes-parcial{% endif %}{% if m.futuro %} mes-futuro{% endif %}{% if i >= 5 %} dica-dir{% endif %}{% if e.extrato and e.extrato.mes == m.chave %} mes-selecionado{% endif %}">
+            {% if m.detalhavel %}<a class="mes-link" href="{{ pagina }}{% if not (e.extrato and e.extrato.mes == m.chave) %}?mes={{ m.chave }}{% endif %}#1"
+               aria-label="{{ 'Voltar ao ano' if e.extrato and e.extrato.mes == m.chave else 'Ver o extrato de ' ~ m.extenso }}"{% if e.extrato and e.extrato.mes == m.chave %} aria-current="true"{% endif %}><span class="mes-alvo" aria-hidden="true"></span></a>{% endif %}
+            {% if m.total and not m.detalhavel %}<button type="button" class="mes-link mes-fotografia" aria-label="Ver a situação de {{ m.extenso }}" aria-describedby="foto-{{ m.chave }}"><span class="mes-alvo" aria-hidden="true"></span></button>{% endif %}
+            <div class="mes-area">
+              {% if m.total %}
+              <span class="so-leitor" id="foto-{{ m.chave }}">{{ m.extenso }}{% if m.parcial %} (parcial){% endif %}: {{ m.total | inteiro }} pedidos
+                {%- for g in m.situacao if g.n %}, {{ g.nome | lower }} {{ g.n | inteiro }}{% endfor %}.
+                Por tipo:{% for g in m.grupos if g.n %} {{ g.nome }} {{ g.n | inteiro }}{{ "," if not loop.last else "." }}{% endfor %}
+                {% if m.anterior %}Em {{ m.extenso }} de {{ e.ano_anterior }}{% if m.parcial %}, no mesmo período{% if m.ate %} (até {{ m.ate }}){% endif %}{% endif %}: {{ m.anterior.total | inteiro }}{% if m.anterior.variacao is not none %} ({{ m.anterior.variacao | variacao }}){% endif %}.{% endif %}</span>
+              {% if par and m.anterior %}<span class="pilha-total pilha-total-anterior" aria-hidden="true">{{ m.anterior.total | inteiro }}</span>
+              <div class="pilha pilha-anterior" aria-hidden="true"></div>{% endif %}
+              <span class="pilha-total" aria-hidden="true">{{ m.total | inteiro }}</span>
+              <div class="pilha pilha-tipos" aria-hidden="true">
+                {% for g in m.grupos | reverse if g.n %}<span class="seg t-{{ g.classe }}"></span>{% endfor %}
+              </div>
+              {# dica do mês: só as 4 situações; o extrato completo abre no clique #}
+              <div class="dica" aria-hidden="true">
+                <p class="dica-titulo">{{ m.extenso | capitalize }} {{ e.ano }}{% if m.parcial %} <small>parcial</small>{% endif %}</p>
+                <p class="dica-total"><strong>{{ m.total | inteiro }}</strong> pedidos entraram</p>
+                <ul>
+                  {% for g in m.situacao | reverse if g.n %}
+                  <li><span class="chave sit-{{ g.classe }}"></span><span>{{ g.nome }}</span><strong>{{ g.n | inteiro }}</strong><span class="dica-pct">{{ g.pct | parcela(g.n) }}</span></li>
+                  {% endfor %}
+                </ul>
+                {% if m.anterior %}<p class="dica-comparacao">{{ m.extenso | capitalize }} de {{ e.ano_anterior }}{% if m.parcial %} (mesmo período){% endif %}: <strong>{{ m.anterior.total | inteiro }}</strong> {% if m.anterior.variacao is not none %}<span class="comparacao-alta">{{ m.anterior.variacao | variacao }}</span>{% endif %}</p>{% endif %}
+                {% if m.detalhavel %}<p class="dica-nota">Clique para ver o extrato do mês</p>{% endif %}
+              </div>
+              {% else %}
+              <span class="so-leitor">{{ m.extenso }}: {% if m.futuro %}mês futuro{% else %}sem pedidos{% endif %}.</span>
+              {% endif %}
+            </div>
+            <span class="mes-rotulo" aria-hidden="true">{{ m.rotulo }}{% if par and m.total and m.anterior %}<span class="mes-anos"><span>{{ (e.ano_anterior | string)[2:] }}</span><span>{{ (e.ano | string)[2:] }}</span></span>{% endif %}{% if m.parcial %}<small title="mês em andamento: o número ainda vai crescer">parcial</small>{% endif %}</span>
+          </li>
+          {% endfor %}
+        </ol>
+      </div>
+    </figure>
+  </div>
+</div>
+</section>
+{% endblock %}

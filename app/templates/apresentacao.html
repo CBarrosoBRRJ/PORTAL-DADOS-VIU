@@ -1,0 +1,153 @@
+{% from "icones.html" import icone %}
+<!doctype html>
+<html lang="pt-BR"{% if not menu_lateral %} class="sem-menu"{% endif %}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="relatorio-versao" content="{{ assinatura_dados }}">
+  {# F15: sem intervalo (base congelada ou produção), o apresentacao.js não pede a página de novo #}
+  {% if intervalo_dados %}<meta name="relatorio-intervalo" content="{{ intervalo_dados }}">{% endif %}
+  {% if modo_apresentacao %}<meta name="relatorio-modo" content="apresentacao">{% endif %}
+  {# Caio, 31/10/2026: a aba mostra só o nome da área em todas as páginas #}
+  <title>ViU Agenciamento</title>
+  <link rel="icon" href="/static/viu_logo.jpg" type="image/jpeg">
+  <link rel="preload" href="/static/fontes/playfair-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/fontes/ibm-plex-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/estilo.css?v={{ v() }}">
+  <script src="/static/inicio.js?v={{ v() }}"></script>
+  {% if anterior %}<link rel="prev" href="{{ anterior.href }}">{% endif %}
+</head>
+<body>
+<a class="pular" href="#slides">Ir para os slides</a>
+{% set fonte = fontes[0] if fontes else none %}
+{% set falhas = fontes | selectattr('estado', 'equalto', 'falha_leitura') | list %}
+{% set atrasos = fontes | selectattr('estado', 'equalto', 'base_atrasada') | list %}
+{% set fonte = falhas[0] if falhas else (atrasos[0] if atrasos else fonte) %}
+{# rodapé e menu com o MESMO momento (batalha 2, G2-5/G3-7): o processamento da carga (_processado_em, INI-D1); sem
+   ele (bases de teste), o metadado modified. O modified fica só no title do selo #}
+{% set momento = (fonte.processado_em or fonte.modificada_em) if fonte else none %}
+<div class="app">
+  {# menu lateral escuro: mapa do site (áreas → seções) e status dos dados; recolhido vira régua de ícones #}
+  <nav id="menu" class="menu" aria-label="Áreas e seções">
+    <button type="button" class="menu-fechar" data-fechar-menu aria-label="Fechar menu">{{ icone("fechar") }}</button>
+    <a class="menu-marca" href="/" title="Relatórios VIU">
+      <img src="/static/viu_logo.jpg" alt="" width="32" height="32">
+      <span class="menu-texto menu-marca-texto">Relatórios</span>
+    </a>
+    <p class="menu-rotulo menu-texto">Áreas</p>
+    <ul class="menu-areas">
+      {% for a in apresentacoes %}
+      {% set atual = a.slug == apresentacao.slug %}
+      {# árvore: o nome da área abre/fecha as páginas dela (a área atual começa aberta; a escolha fica no navegador) #}
+      <li class="menu-area-no{% if atual %} menu-area-atual{% else %} fechada{% endif %}" data-area="{{ a.slug }}">
+        <button type="button" class="menu-item menu-area" aria-expanded="{{ 'true' if atual else 'false' }}" aria-controls="secoes-{{ a.slug }}" title="{{ a.cabecalho }}" data-alternar-area>
+          {{ icone(a.icone) }}<span class="menu-texto">{{ a.titulo }}</span>{{ icone("seta", "icone menu-seta") }}
+        </button>
+        <div class="menu-secoes-caixa" id="secoes-{{ a.slug }}"{% if not atual %} inert{% endif %}>
+          <ul class="menu-secoes">
+            {% if a.capa %}<li><a class="menu-item" href="/{{ a.slug }}/capa" title="Capa"{% if atual and pagina_especial == "capa" %} aria-current="page"{% endif %}>{{ icone("casa") }}<span class="menu-texto">Capa</span></a></li>{% endif %}
+            {% for s in a.abertura() %}
+            <li><a class="menu-item" href="/{{ a.slug }}/{{ s.slug }}#1" title="{{ s.titulo }}"{% if atual and secao_atual and s.slug == secao_atual.slug %} aria-current="page"{% endif %}{% if s.filtro_talentos %} data-filtro-talentos{% endif %}>{{ icone(s.icone) }}<span class="menu-texto">{{ s.titulo }}</span></a></li>
+            {% endfor %}
+            <li><a class="menu-item" href="/{{ a.slug }}" title="{{ a.rotulo_inicio }}"{% if atual and not secao_atual and not titulo_pagina and not pagina_especial %} aria-current="page"{% endif %}>{{ icone("entrada" if a.capa else "casa") }}<span class="menu-texto">{{ a.rotulo_inicio }}</span></a></li>
+            {% for s in a.analises() %}
+            <li><a class="menu-item" href="/{{ a.slug }}/{{ s.slug }}#1" title="{{ s.titulo }}"{% if atual and secao_atual and s.slug == secao_atual.slug %} aria-current="page"{% endif %}{% if s.filtro_talentos %} data-filtro-talentos{% endif %}>{{ icone(s.icone) }}<span class="menu-texto">{{ s.titulo }}</span></a></li>
+            {% endfor %}
+            {% if a.encerramento %}<li><a class="menu-item" href="/{{ a.slug }}/encerramento" title="Encerramento"{% if atual and pagina_especial == "encerramento" %} aria-current="page"{% endif %}>{{ icone("chegada") }}<span class="menu-texto">Encerramento</span></a></li>{% endif %}
+            <li><a class="menu-item" href="/{{ a.slug }}/o-que-falta" title="O que falta"{% if atual and titulo_pagina == "O que falta" %} aria-current="page"{% endif %}>{{ icone("lista") }}<span class="menu-texto">O que falta</span></a></li>
+          </ul>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="menu-rodape">
+      {% if fonte %}
+      {% set estado = fonte.estado %}
+      <div class="menu-status estado-{{ estado }}" title="Tabela {{ fonte.tabela.split('.')[-1] }} · metadado da tabela: {{ fonte.modificada_em | atualizado }}">
+        <span class="status-ponto" aria-hidden="true"></span>
+        <span class="menu-texto">
+          <strong>Dados de {{ momento | quando }}</strong>
+          <span>{% if estado == "em_dia" %}conferido {{ fonte.verificada_em | quando }}{% elif estado == "congelada" %}base congelada para a apresentação{% elif estado == "base_atrasada" %}a base não atualizou no horário{% else %}falha ao ler o BigQuery{% endif %}</span>
+        </span>
+      </div>
+      {% endif %}
+      <button type="button" class="menu-recolher" data-recolher aria-label="Recolher menu" title="Recolher menu">{{ icone("recolher") }}</button>
+    </div>
+  </nav>
+
+  <main class="palco">
+    <h1 class="so-leitor">{{ apresentacao.cabecalho }}{% if secao_atual %}: {{ secao_atual.titulo }}{% endif %}</h1>
+    {# G1-engenharia-1: com a base congelada (CONGELAR) não há aviso de atraso; o rodapé diz "base congelada" #}
+    {% if fonte and fonte.estado in ("base_atrasada", "falha_leitura") %}
+    <p class="aviso-atraso" role="status">
+      {% if fonte.estado == "base_atrasada" %}A base da gold não atualizou no horário previsto (seg–sex 09:00). Mostrando os dados de {{ fonte.modificada_em | quando }}.
+      {% else %}Não foi possível ler o BigQuery agora. Mostrando os dados de {{ fonte.modificada_em | quando }}; o site tenta de novo sozinho.{% endif %}
+    </p>
+    {% endif %}
+    <div id="slides" class="slides" data-slides tabindex="-1">
+      {% block slides %}{% endblock %}
+    </div>
+    {# próxima pergunta na ordem da reunião (D30): Início → seções → "O que falta"; o passador (PageDown) segue o mesmo link #}
+    {# D53 (26/10/2026, Caio): o link "Próxima pergunta" sai da tela em TODAS as páginas (antes só Início e Talentos);
+       fica para o leitor de tela e para o passador (PageDown), que seguem o mesmo link #}
+    {# D59 (Caio, 27/10/2026): volta à tela como GANCHO para a próxima página (a pergunta dela, em itálico, como os ganchos
+       do estudo); a sequência termina na Previsão. O rótulo "Próxima pergunta" fica só para o leitor de tela #}
+    {# D61: na capa o "Começar" faz o papel do gancho (o link fica para o leitor de tela e para as setas) #}
+    {% if proxima %}<nav class="proxima proxima-gancho{% if pagina_especial or gancho_oculto %} so-leitor{% endif %}" aria-label="Sequência das perguntas">
+      <a href="{{ proxima.href }}" rel="next" data-proxima-secao{% if proxima.filtro %} data-filtro-talentos{% endif %}><span class="proxima-rotulo so-leitor">{{ "Para encerrar" if proxima.slug == "encerramento" else "Para fechar" if proxima.slug == "o-que-falta" else "Próxima pergunta" }}</span>
+        <span class="proxima-texto">{{ proxima.pergunta }}</span><span class="proxima-curto" aria-hidden="true">{{ proxima.rotulo }}</span>
+        <svg aria-hidden="true" viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a>
+    </nav>{% endif %}
+    {# rodapé de todas as páginas: até que dia vão os números e quando a base foi atualizada (recorte datado) #}
+    {# INI-D1 (25/10/2026): o horário é o do processamento da carga (_processado_em), o mesmo que fixa o fim dos números
+       (E3); sem ele (bases de teste), o metadado modified da tabela #}
+    {# F10 (auditoria de 31/10/2026): página que não mostra a gold (LIA, Roadmap, Iniciativas, vídeo) leva o rodapé
+       próprio (rodape_texto: a data da sua fonte ou "conteúdo editorial"); a regra 9 continua: toda página tem rodapé.
+       F03: a Previsão acrescenta a data própria do acompanhamento (rodape_extra) e, se o retrato ou o acompanhamento
+       forem de outra carga, um aviso discreto com ícone e texto (rodape_aviso) #}
+    {% if rodape_texto %}<p class="rodape-dados">{{ rodape_texto }}</p>
+    {% elif momento %}<p class="rodape-dados">Dados até {{ momento | recorte }} · atualizados em {{ momento | atualizado }}{% if base_congelada %} · base congelada para a apresentação{% endif %}{% if rodape_extra %} · {{ rodape_extra }}{% endif %}{% if rodape_aviso %} · <span class="rodape-aviso">{{ icone("alerta", "icone rodape-aviso-icone") }}{{ rodape_aviso }}</span>{% endif %}</p>{% endif %}
+
+    {% if not sem_controles %}
+    <nav class="controles" aria-label="Navegação dos slides"{% if controles_sempre %} data-sempre{% endif %}>
+      <div class="progresso" aria-hidden="true"><span data-progresso></span></div>
+      <div class="controles-centro">
+        <button type="button" class="botao" data-anterior>Anterior</button>
+        <span class="posicao" data-posicao aria-live="polite"></span>
+        <button type="button" class="botao" data-proximo>Próximo</button>
+      </div>
+    </nav>
+    {% endif %}
+
+    {# celular: barra inferior fixa com 4 itens, seja qual for o número de seções (D30): "Áreas" abre a gaveta com todas
+       as seções; Anterior e Próxima seguem a ordem da reunião #}
+    <nav class="barra-mobile" aria-label="Navegação da área">
+      <button type="button" class="barra-item" aria-controls="menu" aria-expanded="false" data-abrir-menu>{{ icone("menu") }}<span>Áreas</span></button>
+      <a class="barra-item" href="/{{ apresentacao.slug }}/capa"{% if pagina_especial == "capa" %} aria-current="page"{% endif %}>{{ icone("casa") }}<span>Capa</span></a>
+      {# D59: data-pagina-* = destino das setas do teclado (apresentacao.js), já com o filtro de talentos da página #}
+      {% if anterior %}<a class="barra-item" href="{{ anterior.href }}" aria-label="Anterior: {{ anterior.rotulo }}" data-pagina-anterior{% if anterior.filtro %} data-filtro-talentos{% endif %}>{{ icone("recolher") }}<span>Anterior</span></a>
+      {% else %}<span class="barra-item barra-vazia" aria-hidden="true">{{ icone("recolher") }}<span>Anterior</span></span>{% endif %}
+      {% if proxima %}<a class="barra-item" href="{{ proxima.href }}" aria-label="Próxima: {{ proxima.rotulo }}" data-pagina-proxima{% if proxima.filtro %} data-filtro-talentos{% endif %}>{{ icone("avancar") }}<span>Próxima</span></a>
+      {% else %}<span class="barra-item barra-vazia" aria-hidden="true">{{ icone("avancar") }}<span>Próxima</span></span>{% endif %}
+    </nav>
+  </main>
+</div>
+{# D61 (Caio, 27/10/2026): capa da próxima seção, entre uma página e outra. Só aparece pelas setas do teclado
+   (apresentacao.js): → mostra a capa, → de novo entra na página, ← ou Esc voltam. Clique, abas e gancho vão direto #}
+{% if proxima and proxima.capa_secao %}{% set cs = proxima.capa_secao %}
+<section class="capa-secao" data-capa-secao hidden tabindex="-1" aria-labelledby="capa-secao-t">
+  <div class="capa-secao-corpo">
+    <p class="capa-secao-sobre">Parte {{ cs.parte }} · {{ proxima.rotulo }}</p>
+    <h2 class="capa-secao-titulo" id="capa-secao-t">{{ cs.titulo }}</h2>
+    <p class="capa-secao-sub">{{ cs.sub }}</p>
+    <p class="capa-secao-pergunta">{{ proxima.pergunta }}</p>
+  </div>
+  <p class="capa-secao-n" aria-hidden="true">{{ "%02d" | format(cs.parte) }}</p>
+  <p class="so-leitor">Seta para a direita entra na página; seta para a esquerda volta.</p>
+</section>
+{% endif %}
+<script src="/static/apresentacao.js?v={{ v() }}"></script>
+{% if sinc %}<script src="/static/sinc.js?v={{ v() }}"></script>{% endif %}
+{% block scripts %}{% endblock %}
+</body>
+</html>

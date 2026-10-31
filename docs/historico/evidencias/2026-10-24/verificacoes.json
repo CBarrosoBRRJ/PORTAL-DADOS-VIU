@@ -1,0 +1,41 @@
+{
+  "data": "2026-10-24",
+  "ambiente": "preview local de snapshots reais, porta 8890",
+  "paginas": [
+    "inicio",
+    "talentos",
+    "atendimento"
+  ],
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      1261,
+      768
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "overflow_horizontal": false,
+  "polling_sem_mudanca_mantem_pagina": true,
+  "polling_resposta_simulada_com_nova_assinatura_recarrega": true,
+  "talentos_hover_conteudo_persistente": true,
+  "talentos_escape_mouse_fecha": true,
+  "talentos_escape_teclado_fecha": true,
+  "talentos_mobile_tooltip": {
+    "x": 15.390625,
+    "y": 158.421875,
+    "width": 358,
+    "height": 390.25
+  },
+  "testes_python": 96,
+  "limites": [
+    "Não aguardada próxima carga diária",
+    "Não realizado teste de concorrência",
+    "Autenticação e produção não homologadas"
+  ]
+}

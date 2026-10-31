@@ -1,0 +1,1152 @@
+{
+  "data": "2026-10-24T01:24:24.863779-03:00",
+  "fontes": {
+    "entrada": {
+      "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_entrada_diaria",
+      "modified": "2026-10-23T20:24:55.253000+00:00",
+      "linhas_origem": 2336,
+      "bytes_origem": 301996,
+      "linhas_lidas": 2336,
+      "processado": "2026-10-23 20:23:49.578448+00:00"
+    },
+    "fluxo": {
+      "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_fluxo_mensal",
+      "modified": "2026-10-23T20:24:55.253000+00:00",
+      "linhas_origem": 622,
+      "bytes_origem": 43820,
+      "linhas_lidas": 622,
+      "processado": "2026-10-23 20:24:38.900283+00:00"
+    },
+    "talentos": {
+      "tabela": "gglobo-viu-dados-hdg-prd.silver_monday.slv_agenciamento_2026_itens",
+      "modified": "2026-10-23T11:34:25.066000+00:00",
+      "linhas_origem": 5555,
+      "bytes_origem": 5307374,
+      "linhas_lidas": 3
+    },
+    "talentos_top": {
+      "tabela": "gglobo-viu-dados-hdg-prd.silver_monday.slv_agenciamento_2026_itens",
+      "modified": "2026-10-23T11:34:25.066000+00:00",
+      "linhas_origem": 5555,
+      "bytes_origem": 5307374,
+      "linhas_lidas": 20
+    }
+  },
+  "jobs": [
+    {
+      "id": "9b6a88b2-5e33-49d6-a107-40668d9e14e7",
+      "dry_bytes": 234240,
+      "processed_bytes": 0,
+      "billed_bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "85751abb-b99f-4ee8-93d5-c63920fa37a2",
+      "dry_bytes": 43820,
+      "processed_bytes": 0,
+      "billed_bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "80106673-e4d7-4d2b-b7f6-8348c664d9d9",
+      "dry_bytes": 328273,
+      "processed_bytes": 0,
+      "billed_bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "36574678-1345-4893-aad3-e9cc6cbaa99a",
+      "dry_bytes": 328273,
+      "processed_bytes": 0,
+      "billed_bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "6ba9fd7f-f9b9-408b-9f5c-6933bc2c71b7",
+      "dry_bytes": 149504,
+      "processed_bytes": 149504,
+      "billed_bytes": 10485760,
+      "cache": false
+    },
+    {
+      "id": "0609a4ee-aa7c-48ad-b2fd-540d86aaba04",
+      "dry_bytes": 20896,
+      "processed_bytes": 20896,
+      "billed_bytes": 10485760,
+      "cache": false
+    }
+  ],
+  "conta": "caio.barroso@viu.com.br",
+  "projeto": "gglobo-viu-dados-hdg-prd",
+  "entrada_mensal": [
+    {
+      "mes": "2024-10",
+      "entradas": 74,
+      "saidas": 37,
+      "proprio": 36,
+      "depois": 10,
+      "nao_seguiu": 25,
+      "andamento": 3
+    },
+    {
+      "mes": "2024-11",
+      "entradas": 143,
+      "saidas": 76,
+      "proprio": 66,
+      "depois": 11,
+      "nao_seguiu": 59,
+      "andamento": 7
+    },
+    {
+      "mes": "2024-12",
+      "entradas": 111,
+      "saidas": 91,
+      "proprio": 80,
+      "depois": 9,
+      "nao_seguiu": 21,
+      "andamento": 1
+    },
+    {
+      "mes": "2025-01",
+      "entradas": 177,
+      "saidas": 102,
+      "proprio": 92,
+      "depois": 38,
+      "nao_seguiu": 45,
+      "andamento": 2
+    },
+    {
+      "mes": "2025-02",
+      "entradas": 197,
+      "saidas": 142,
+      "proprio": 107,
+      "depois": 35,
+      "nao_seguiu": 55,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-03",
+      "entradas": 166,
+      "saidas": 125,
+      "proprio": 95,
+      "depois": 44,
+      "nao_seguiu": 27,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-04",
+      "entradas": 329,
+      "saidas": 216,
+      "proprio": 177,
+      "depois": 78,
+      "nao_seguiu": 74,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-05",
+      "entradas": 312,
+      "saidas": 264,
+      "proprio": 182,
+      "depois": 83,
+      "nao_seguiu": 47,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-06",
+      "entradas": 268,
+      "saidas": 270,
+      "proprio": 183,
+      "depois": 65,
+      "nao_seguiu": 20,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-07",
+      "entradas": 275,
+      "saidas": 241,
+      "proprio": 190,
+      "depois": 44,
+      "nao_seguiu": 41,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-08",
+      "entradas": 474,
+      "saidas": 291,
+      "proprio": 235,
+      "depois": 166,
+      "nao_seguiu": 73,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-09",
+      "entradas": 395,
+      "saidas": 311,
+      "proprio": 244,
+      "depois": 96,
+      "nao_seguiu": 55,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-10",
+      "entradas": 459,
+      "saidas": 528,
+      "proprio": 327,
+      "depois": 58,
+      "nao_seguiu": 74,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-11",
+      "entradas": 346,
+      "saidas": 289,
+      "proprio": 232,
+      "depois": 71,
+      "nao_seguiu": 43,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-12",
+      "entradas": 188,
+      "saidas": 241,
+      "proprio": 167,
+      "depois": 3,
+      "nao_seguiu": 18,
+      "andamento": 0
+    },
+    {
+      "mes": "2026-01",
+      "entradas": 374,
+      "saidas": 244,
+      "proprio": 241,
+      "depois": 72,
+      "nao_seguiu": 60,
+      "andamento": 1
+    },
+    {
+      "mes": "2026-02",
+      "entradas": 341,
+      "saidas": 269,
+      "proprio": 220,
+      "depois": 42,
+      "nao_seguiu": 79,
+      "andamento": 0
+    },
+    {
+      "mes": "2026-03",
+      "entradas": 485,
+      "saidas": 338,
+      "proprio": 287,
+      "depois": 91,
+      "nao_seguiu": 106,
+      "andamento": 1
+    },
+    {
+      "mes": "2026-04",
+      "entradas": 472,
+      "saidas": 386,
+      "proprio": 292,
+      "depois": 95,
+      "nao_seguiu": 85,
+      "andamento": 0
+    },
+    {
+      "mes": "2026-05",
+      "entradas": 629,
+      "saidas": 504,
+      "proprio": 449,
+      "depois": 67,
+      "nao_seguiu": 113,
+      "andamento": 0
+    },
+    {
+      "mes": "2026-06",
+      "entradas": 569,
+      "saidas": 479,
+      "proprio": 411,
+      "depois": 53,
+      "nao_seguiu": 104,
+      "andamento": 1
+    },
+    {
+      "mes": "2026-07",
+      "entradas": 765,
+      "saidas": 672,
+      "proprio": 575,
+      "depois": 76,
+      "nao_seguiu": 112,
+      "andamento": 2
+    },
+    {
+      "mes": "2026-08",
+      "entradas": 644,
+      "saidas": 565,
+      "proprio": 489,
+      "depois": 51,
+      "nao_seguiu": 101,
+      "andamento": 3
+    },
+    {
+      "mes": "2026-09",
+      "entradas": 733,
+      "saidas": 515,
+      "proprio": 460,
+      "depois": 131,
+      "nao_seguiu": 138,
+      "andamento": 4
+    },
+    {
+      "mes": "2026-10",
+      "entradas": 508,
+      "saidas": 419,
+      "proprio": 286,
+      "depois": 0,
+      "nao_seguiu": 74,
+      "andamento": 148
+    }
+  ],
+  "fluxo_mensal": [
+    {
+      "mes_entrada": "2024-10-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2024-10-01",
+      "evento": "entregue",
+      "mes_evento": "2024-10-01",
+      "n": 36
+    },
+    {
+      "mes_entrada": "2024-10-01",
+      "evento": "entregue",
+      "mes_evento": "2024-11-01",
+      "n": 8
+    },
+    {
+      "mes_entrada": "2024-10-01",
+      "evento": "entregue",
+      "mes_evento": "2024-12-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2024-10-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 25
+    },
+    {
+      "mes_entrada": "2024-11-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 7
+    },
+    {
+      "mes_entrada": "2024-11-01",
+      "evento": "entregue",
+      "mes_evento": "2024-11-01",
+      "n": 66
+    },
+    {
+      "mes_entrada": "2024-11-01",
+      "evento": "entregue",
+      "mes_evento": "2024-12-01",
+      "n": 9
+    },
+    {
+      "mes_entrada": "2024-11-01",
+      "evento": "entregue",
+      "mes_evento": "2025-01-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2024-11-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 59
+    },
+    {
+      "mes_entrada": "2024-12-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2024-12-01",
+      "evento": "entregue",
+      "mes_evento": "2024-12-01",
+      "n": 80
+    },
+    {
+      "mes_entrada": "2024-12-01",
+      "evento": "entregue",
+      "mes_evento": "2025-01-01",
+      "n": 8
+    },
+    {
+      "mes_entrada": "2024-12-01",
+      "evento": "entregue",
+      "mes_evento": "2025-04-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2024-12-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 21
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "entregue",
+      "mes_evento": "2025-01-01",
+      "n": 92
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "entregue",
+      "mes_evento": "2025-02-01",
+      "n": 35
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "entregue",
+      "mes_evento": "2025-03-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "entregue",
+      "mes_evento": "2025-04-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 45
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "entregue",
+      "mes_evento": "2025-02-01",
+      "n": 107
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "entregue",
+      "mes_evento": "2025-03-01",
+      "n": 29
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "entregue",
+      "mes_evento": "2025-04-01",
+      "n": 4
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "entregue",
+      "mes_evento": "2025-05-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "entregue",
+      "mes_evento": "2025-06-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 55
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "entregue",
+      "mes_evento": "2025-03-01",
+      "n": 95
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "entregue",
+      "mes_evento": "2025-04-01",
+      "n": 32
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "entregue",
+      "mes_evento": "2025-05-01",
+      "n": 9
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "entregue",
+      "mes_evento": "2025-06-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 27
+    },
+    {
+      "mes_entrada": "2025-04-01",
+      "evento": "entregue",
+      "mes_evento": "2025-04-01",
+      "n": 177
+    },
+    {
+      "mes_entrada": "2025-04-01",
+      "evento": "entregue",
+      "mes_evento": "2025-05-01",
+      "n": 72
+    },
+    {
+      "mes_entrada": "2025-04-01",
+      "evento": "entregue",
+      "mes_evento": "2025-06-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2025-04-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2025-04-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 74
+    },
+    {
+      "mes_entrada": "2025-05-01",
+      "evento": "entregue",
+      "mes_evento": "2025-05-01",
+      "n": 182
+    },
+    {
+      "mes_entrada": "2025-05-01",
+      "evento": "entregue",
+      "mes_evento": "2025-06-01",
+      "n": 81
+    },
+    {
+      "mes_entrada": "2025-05-01",
+      "evento": "entregue",
+      "mes_evento": "2025-07-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-05-01",
+      "evento": "entregue",
+      "mes_evento": "2025-08-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-05-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 47
+    },
+    {
+      "mes_entrada": "2025-06-01",
+      "evento": "entregue",
+      "mes_evento": "2025-06-01",
+      "n": 183
+    },
+    {
+      "mes_entrada": "2025-06-01",
+      "evento": "entregue",
+      "mes_evento": "2025-07-01",
+      "n": 50
+    },
+    {
+      "mes_entrada": "2025-06-01",
+      "evento": "entregue",
+      "mes_evento": "2025-08-01",
+      "n": 14
+    },
+    {
+      "mes_entrada": "2025-06-01",
+      "evento": "entregue",
+      "mes_evento": "2025-09-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-06-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 20
+    },
+    {
+      "mes_entrada": "2025-07-01",
+      "evento": "entregue",
+      "mes_evento": "2025-07-01",
+      "n": 190
+    },
+    {
+      "mes_entrada": "2025-07-01",
+      "evento": "entregue",
+      "mes_evento": "2025-08-01",
+      "n": 41
+    },
+    {
+      "mes_entrada": "2025-07-01",
+      "evento": "entregue",
+      "mes_evento": "2025-09-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-07-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2025-07-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 41
+    },
+    {
+      "mes_entrada": "2025-08-01",
+      "evento": "entregue",
+      "mes_evento": "2025-08-01",
+      "n": 235
+    },
+    {
+      "mes_entrada": "2025-08-01",
+      "evento": "entregue",
+      "mes_evento": "2025-09-01",
+      "n": 65
+    },
+    {
+      "mes_entrada": "2025-08-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 100
+    },
+    {
+      "mes_entrada": "2025-08-01",
+      "evento": "entregue",
+      "mes_evento": "2025-12-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-08-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 73
+    },
+    {
+      "mes_entrada": "2025-09-01",
+      "evento": "entregue",
+      "mes_evento": "2025-09-01",
+      "n": 244
+    },
+    {
+      "mes_entrada": "2025-09-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 95
+    },
+    {
+      "mes_entrada": "2025-09-01",
+      "evento": "entregue",
+      "mes_evento": "2025-12-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-09-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 55
+    },
+    {
+      "mes_entrada": "2025-10-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 327
+    },
+    {
+      "mes_entrada": "2025-10-01",
+      "evento": "entregue",
+      "mes_evento": "2025-11-01",
+      "n": 57
+    },
+    {
+      "mes_entrada": "2025-10-01",
+      "evento": "entregue",
+      "mes_evento": "2025-12-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-10-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 74
+    },
+    {
+      "mes_entrada": "2025-11-01",
+      "evento": "entregue",
+      "mes_evento": "2025-11-01",
+      "n": 232
+    },
+    {
+      "mes_entrada": "2025-11-01",
+      "evento": "entregue",
+      "mes_evento": "2025-12-01",
+      "n": 71
+    },
+    {
+      "mes_entrada": "2025-11-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 43
+    },
+    {
+      "mes_entrada": "2025-12-01",
+      "evento": "entregue",
+      "mes_evento": "2025-12-01",
+      "n": 167
+    },
+    {
+      "mes_entrada": "2025-12-01",
+      "evento": "entregue",
+      "mes_evento": "2026-01-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2025-12-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 18
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-01-01",
+      "n": 241
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-02-01",
+      "n": 49
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-03-01",
+      "n": 11
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-04-01",
+      "n": 6
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-05-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-07-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-09-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-01-01",
+      "n": 46
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-02-01",
+      "n": 13
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-03-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "entregue",
+      "mes_evento": "2026-02-01",
+      "n": 220
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "entregue",
+      "mes_evento": "2026-03-01",
+      "n": 40
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "entregue",
+      "mes_evento": "2026-09-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-02-01",
+      "n": 61
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-03-01",
+      "n": 15
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-05-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-10-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "entregue",
+      "mes_evento": "2026-03-01",
+      "n": 287
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "entregue",
+      "mes_evento": "2026-04-01",
+      "n": 88
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "entregue",
+      "mes_evento": "2026-05-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "entregue",
+      "mes_evento": "2026-07-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "entregue",
+      "mes_evento": "2026-10-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-03-01",
+      "n": 79
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-04-01",
+      "n": 21
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-05-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-10-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "entregue",
+      "mes_evento": "2026-04-01",
+      "n": 292
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "entregue",
+      "mes_evento": "2026-05-01",
+      "n": 53
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "entregue",
+      "mes_evento": "2026-06-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "entregue",
+      "mes_evento": "2026-07-01",
+      "n": 40
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-04-01",
+      "n": 68
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-05-01",
+      "n": 14
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-07-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-05-01",
+      "evento": "entregue",
+      "mes_evento": "2026-05-01",
+      "n": 449
+    },
+    {
+      "mes_entrada": "2026-05-01",
+      "evento": "entregue",
+      "mes_evento": "2026-06-01",
+      "n": 66
+    },
+    {
+      "mes_entrada": "2026-05-01",
+      "evento": "entregue",
+      "mes_evento": "2026-09-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-05-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-05-01",
+      "n": 92
+    },
+    {
+      "mes_entrada": "2026-05-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-06-01",
+      "n": 21
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "entregue",
+      "mes_evento": "2026-06-01",
+      "n": 411
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "entregue",
+      "mes_evento": "2026-07-01",
+      "n": 53
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-06-01",
+      "n": 76
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-07-01",
+      "n": 26
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-09-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "entregue",
+      "mes_evento": "2026-07-01",
+      "n": 575
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "entregue",
+      "mes_evento": "2026-08-01",
+      "n": 76
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-07-01",
+      "n": 87
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-08-01",
+      "n": 24
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-09-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "entregue",
+      "mes_evento": "2026-08-01",
+      "n": 489
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "entregue",
+      "mes_evento": "2026-09-01",
+      "n": 50
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "entregue",
+      "mes_evento": "2026-10-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-08-01",
+      "n": 72
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-09-01",
+      "n": 26
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-10-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-09-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 4
+    },
+    {
+      "mes_entrada": "2026-09-01",
+      "evento": "entregue",
+      "mes_evento": "2026-09-01",
+      "n": 460
+    },
+    {
+      "mes_entrada": "2026-09-01",
+      "evento": "entregue",
+      "mes_evento": "2026-10-01",
+      "n": 131
+    },
+    {
+      "mes_entrada": "2026-09-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-09-01",
+      "n": 117
+    },
+    {
+      "mes_entrada": "2026-09-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-10-01",
+      "n": 21
+    },
+    {
+      "mes_entrada": "2026-10-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 148
+    },
+    {
+      "mes_entrada": "2026-10-01",
+      "evento": "entregue",
+      "mes_evento": "2026-10-01",
+      "n": 286
+    },
+    {
+      "mes_entrada": "2026-10-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 10
+    },
+    {
+      "mes_entrada": "2026-10-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-10-01",
+      "n": 64
+    }
+  ],
+  "bytes_processados": 170400,
+  "bytes_faturaveis": 20971520
+}

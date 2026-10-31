@@ -1,0 +1,187 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import cabecalho, lamina_pendente %}
+{% from "icones.html" import icone %}
+{# LIA (V2, D-LIA-2 a D-LIA-4, 30/10/2026): o que a LIA leu e como os e-mails se dividem. À esquerda, o bloco do período
+   (o total lido é o maior número; os 87% que a LIA resolveu sozinha; a barra de fração não lead, lead, validação; tudo
+   alinhado ao topo dos números da direita) ou o
+   (o extrato de cada semana ao clicar foi retirado por decisão do Caio, 30/10/2026; ?semana= é ignorado). À direita,
+   embaixo, os dois números de apoio e o mapa dia × período; à direita, só as semanas ISO em colunas empilhadas (Caio, 30/10/2026:
+   frase do período, legendas da fração, nota de 12/10, leituras e nota do gráfico fora da tela; registradas na ficha). Larguras e
+   alturas pelo <style> com o nonce da página (a CSP proíbe style=""); dica da semana só com CSS (mouse ou foco).
+   O botão "Ver a LIA na prática" abre o vídeo num pop-up (<dialog>); sem JS, leva à página antiga do vídeo.
+   Cálculos em lia/__init__.py; regras na ficha docs/paginas/lia.md. #}
+{% macro barra(id, fracao) %}<div class="lia-fr-barra" aria-hidden="true">{% for f in fracao %}<span class="lia-fr-parte lia-c-{{ f.chave }}" id="{{ id }}-{{ f.chave }}"></span>{% endfor %}</div>{% endmacro %}
+{% block slides %}
+{# F05 (auditoria do Codex, 31/10/2026): retrato ausente ou fora do contrato = lâmina de indisponível, sem erro 500 #}
+{% if not lia %}
+{{ lamina_pendente(apresentacao, secao_atual, "Gerencial", "Os números da LIA estão indisponíveis agora",
+   "O retrato da LIA (lia/retrato.json) está ausente ou fora do formato esperado. Gere de novo com tools/extrair_lia.py.",
+   "Aqui entram os e-mails que a LIA leu e filtrou, semana a semana.") }}
+{% else %}
+{% set e = lia %}
+{# cores do portal (Caio, 30/10/2026): as mesmas classes de Demanda e Talentos — não lead pastel, lead escuro, validação médio #}
+{# validação hachurada no padrão do ano anterior da Demanda (.chave-anterior), Caio, 30/10/2026 #}
+{% set cor = {"nao_lead": "t-sem-tipo", "lead": "t-mercado", "validacao": "chave-anterior"} %}
+<section class="slide" aria-roledescription="slide" aria-labelledby="s-lia" data-nivel="gerencial">
+<div class="lamina lia">
+  {{ cabecalho(apresentacao, secao_atual) }}
+  <div class="sobretitulo"><span class="nivel">Gerencial</span></div>
+  <h2 class="slide-titulo" id="s-lia">{{ secao_atual.pergunta }}</h2>
+  <style nonce="{{ request.state.nonce }}">{% for f in e.fracao %}#lia-fr-{{ f.chave }} { --w: {{ f.largura }}%; }{% endfor %}#lia-sem-col { --n: {{ e.semanas | length }}; }{% set rd = e.recebimento.dia %}{% set qd = rd.quadrantes %}{% if qd %}.lia-q { --esq: {{ qd.esq }}%; --dir: {{ qd.dir }}%; }{% for l in qd.linhas %}{% for g in l.dentro + l.fora %}#{{ g.id }} { --w: {{ g.w }}%; }{% endfor %}{% endfor %}{% endif %}{% for d in e.recebimento.dias %}#lia-dia-{{ d.k }} { --w: {{ d.largura }}%; }{% endfor %}{% for s in e.semanas %}#lia-s-{{ s.iso }} { --h: {{ s.h_total }}%; --i: {{ s.i }}; }{% for p in s.partes %}#lia-s-{{ s.iso }} .lia-p-{{ p.chave }} { --a: {{ p.altura }}%; }{% endfor %}{% endfor %}</style>
+  <div class="slide-corpo lia-corpo">
+    <div class="lia-esq" id="lia-esq">
+      <div class="lia-destaque lia-painel" data-lia-painel="periodo">
+        <p class="lia-heroi">
+          {# Caio, 30/10/2026: a frase "De … a …, a LIA leu" saiu da tela; o período foi para o título do gráfico e o leitor de tela mantém o contexto #}
+          <span class="so-leitor">De {{ e.inicio }} a {{ e.fim }}, a LIA leu</span>
+          <span class="lia-heroi-linha"><span class="lia-heroi-n">{{ e.total }}</span> <span class="lia-heroi-uni">e-mails.</span></span>
+        </p>
+        {# Caio, 30/10/2026: a linha "87% a LIA resolveu sozinha" saiu da tela (a barra de fração já mostra os 86,8%); registro na ficha #}
+        <figure class="lia-fracao" aria-labelledby="lia-fr-tit">
+          <figcaption class="so-leitor" id="lia-fr-tit">Como os {{ e.total }} e-mails se dividem</figcaption>
+          {{ barra("lia-fr", e.fracao) }}
+          <ul class="lia-fr-legenda">
+            {% for f in e.fracao %}<li class="lia-c-{{ f.chave }}"><span class="chave {{ cor[f.chave] }}" aria-hidden="true"></span><span class="lia-fr-nome">{{ f.nome }}</span> <span class="lia-fr-n">{{ f.n }}</span> <span class="lia-fr-pct">{{ f.pct }}</span></li>{% endfor %}
+          </ul>
+        </figure>
+        {# Caio, 30/10/2026 (4ª e 6ª rodadas): embaixo, o ganho para a equipe (números inteiros com legenda curta) e quando o
+           inbound chega (e-mails por período do dia numa barra de 100%; média inteira por dia útil, maior em destaque, sem
+           frase de padrão; a ressalva do teste fica na ficha). Sem médias decimais na tela. Extrato da semana retirado (Caio, 30/10/2026) #}
+        {% set pd = e.padroes %}
+        <div class="lia-suporte">
+          {# 6ª rodada (Caio, 30/10/2026): dois assuntos, dois visuais — o ganho num painel de fundo lavanda; o comportamento
+             do inbound num cartão flutuante (tokens --cartao-*) #}
+          <section class="lia-bloco lia-bloco-ganho" aria-labelledby="lia-ganho-tit">
+            <h3 class="lia-bloco-tit" id="lia-ganho-tit">O ganho para a equipe</h3>
+            <dl class="lia-kpis">
+              <div class="lia-kpi">
+                <dt>de triagem que saíram da rotina</dt>
+                <dd class="lia-kpi-n">{{ icone("relogio", "icone lia-kpi-ic") }}≈ {{ e.horas }} h</dd>
+                <dd class="lia-kpi-sub">≈ {{ e.horas_semana }} h por semana</dd>
+              </div>
+              <div class="lia-kpi">
+                <dt><span class="lia-sem-quebra">e-mails</span> descartados sem a equipe abrir</dt>
+                <dd class="lia-kpi-n">{{ icone("envelope", "icone lia-kpi-ic") }}{{ e.nao_lead }}</dd>
+                <dd class="lia-kpi-sub">{{ e.pct_filtrados }} do total</dd>
+              </div>
+              <div class="lia-kpi">
+                <dt>lidos fora do expediente</dt>
+                <dd class="lia-kpi-n"><svg class="icone lia-kpi-ic" aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M19.5 14.2A7.8 7.8 0 1 1 9.8 4.5a6.3 6.3 0 0 0 9.7 9.7z"/></svg>{{ e.pct_fora }}</dd>
+                <dd class="lia-kpi-sub">antes das 10h, noite e fim de semana</dd>
+              </div>
+            </dl>
+          </section>
+          <section class="lia-bloco lia-bloco-inbound" aria-labelledby="lia-quando-tit">
+            <h3 class="lia-bloco-tit" id="lia-quando-tit">Quando o inbound chega</h3>
+            {# Caio, 30/10/2026: base = os e-mails do período (somam o total); turnos alinhados ao expediente do SLA; "fora" é
+               a mesma regra dos 54% acima. Dia da semana: média inteira por dia (barra e destaque) e o total do período ao
+               lado; sem frase de padrão #}
+            {% set rc = e.recebimento %}{% set fora = rc.turnos | selectattr("chave", "equalto", "fora") | first %}
+            <div class="lia-quando">
+              {% set dd = rc.dia %}
+              {% set dl = dd.leads %}{% set dn = dd.nao_leads %}{% set qd = dd.quadrantes %}
+              <figure class="lia-per">
+                <figcaption class="so-leitor">Leads, não leads e validações por faixa do dia, separados em dentro e fora do expediente: {% for l in qd.linhas %}{{ l.rot }} ({{ l.total_txt }}), {{ l.dentro_pct }} dentro e {{ l.fora_pct }} fora{{ "; " if not loop.last else "." }}{% endfor %}</figcaption>
+                {# dois quadrantes com escala comum (Caio, 30/10/2026): à esquerda só o expediente, encostado no divisor; à direita só
+                   o fora, saindo do divisor; o divisor é a mesma linha nas três barras e na legenda; % de cada categoria #}
+                <div class="lia-q">
+                  <span></span><span class="lia-q-tit lia-q-tit-esq">Dentro do expediente</span><span class="lia-q-tit lia-q-tit-dir">Fora do expediente</span>
+                  {% for l in qd.linhas %}
+                  <span class="lia-per-rot">{{ l.rot }}</span>
+                  <span class="lia-q-esq{% if l.val %} lia-per-barra-val{% endif %}" aria-hidden="true"><span class="lia-q-tot">{{ l.dentro_pct }}</span>{% for g in l.dentro %}<span class="lia-per-parte {{ g.cor }}" id="{{ g.id }}" title="{{ g.curto }}: {{ g.n_txt }} ({{ g.pct }} dos {{ l.rot | lower }})">{% if g.rotulo %}<span>{{ g.pct }}</span>{% endif %}</span>{% endfor %}</span>
+                  <span class="lia-q-dir{% if l.val %} lia-per-barra-val{% endif %}" aria-hidden="true">{% for g in l.fora %}<span class="lia-per-parte {{ g.cor }}" id="{{ g.id }}" title="{{ g.curto }}: {{ g.n_txt }} ({{ g.pct }} dos {{ l.rot | lower }})">{% if g.rotulo %}<span>{{ g.pct }}</span>{% endif %}</span>{% endfor %}<span class="lia-q-tot">{{ l.fora_pct }}</span></span>
+                  {% endfor %}
+                  <span></span>
+                  <ul class="lia-q-leg lia-q-leg-esq" aria-hidden="true">{% for g in qd.leg_dentro %}<li><span class="chave {{ g.cor }}"></span>{{ g.curto }}</li>{% endfor %}</ul>
+                  <ul class="lia-q-leg lia-q-leg-dir" aria-hidden="true">{% for g in qd.leg_fora %}<li><span class="chave {{ g.cor }}"></span>{{ g.curto }}</li>{% endfor %}</ul>
+                </div>
+                <ul class="so-leitor">
+                  {% for p in dd.barra %}<li>{{ p.nome }} ({{ p.faixa }}, {{ "no expediente" if p.expediente else "fora do expediente" }}): {{ p.leads_txt }} leads ({{ p.pct_leads }}), {{ p.nl_txt }} não leads ({{ p.pct_nl }}), {{ p.v_txt }} validações ({{ p.pct_v }}); taxa de lead {{ p.taxa }}</li>{% endfor %}
+                </ul>
+              </figure>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="lia-direita">
+      {# Caio, 30/10/2026: prévia do vídeo (miniatura 16:9 de player) acima do cartão do gráfico, à direita; o título e a linha
+         de apoio ao lado. Usa o pôster do vídeo quando existir; sem ele, um fundo marinho em degradê com uma composição
+         abstrata. Ao passar o mouse ou focar, a miniatura cresce 3%, o play cresce e ganha halo e a sombra aumenta. É um link
+         (sem JS leva à página antiga do vídeo); com JS abre o pop-up, que cresce a partir da miniatura (lia_video.js) #}
+      <a class="lia-vc" href="/{{ apresentacao.slug }}/lia-na-pratica#1" data-lia-video aria-haspopup="dialog">
+        <span class="lia-vc-txt"><span class="lia-vc-tit">A LIA na prática</span></span>
+        <span class="lia-vc-tela" aria-hidden="true">
+          {% if e.video.capa %}<img class="lia-vc-poster" src="{{ e.video.capa }}" alt="">{% else %}<span class="lia-vc-fundo"></span>{% endif %}
+          <span class="lia-vc-play"><svg viewBox="0 0 48 48" focusable="false"><circle cx="24" cy="24" r="23" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/><path d="M19.5 15.6v16.8c0 1.2 1.3 1.9 2.3 1.3l13-8.4c.9-.6.9-2 0-2.6l-13-8.4c-1-.6-2.3.1-2.3 1.3z" fill="#fff"/></svg></span>
+        </span>
+      </a>
+      {# Caio, 30/10/2026: cartão no padrão dos gráficos de Demanda e SLA (classes colunas cartao-grafico, colunas-titulo,
+         legenda e chave); o título fica sozinho, com a legenda embaixo #}
+      <figure class="lia-cartao lia-semanas colunas cartao-grafico" role="region" aria-labelledby="lia-sem-tit" aria-describedby="lia-sem-ajuda" data-lia-grafico>
+        <figcaption class="lia-sem-topo">
+          <span class="colunas-titulo" id="lia-sem-tit">E-mails por semana, {{ e.inicio }} a {{ e.fim }}</span>
+          <span class="legenda" aria-hidden="true">{% for f in e.fracao %}<span><span class="chave {{ cor[f.chave] }}"></span>{{ f.nome }} <strong>{{ f.pct }}</strong></span>{% endfor %}</span>
+        </figcaption>
+        <p class="so-leitor" id="lia-sem-ajuda">Cada semana mostra, ao focar ou passar o mouse, quantos e-mails a LIA leu e como eles se dividem.</p>
+        <ol class="lia-sem-colunas" id="lia-sem-col">
+          {% for s in e.semanas %}
+          <li>
+            <span class="lia-sem{% if s.parcial %} lia-sem-parcial{% endif %}" id="lia-s-{{ s.iso }}" tabindex="0">
+              <span class="so-leitor">{{ s.texto }}.</span>
+              <span class="lia-sem-area" aria-hidden="true">
+                <span class="lia-sem-pilha">
+                  <span class="lia-sem-total">{{ s.total }}</span>
+                  {% for p in s.partes %}<span class="lia-sem-parte lia-p-{{ p.chave }} lia-c-{{ p.chave }}">{% if p.chave == "lead" and p.rotulo %}<span class="lia-sem-n">{{ p.n }}</span>{% endif %}</span>{% endfor %}
+                  <span class="lia-sem-dica {{ 'dica-dir' if s.i < (e.semanas | length) / 2 else 'dica-esq' }}"><span class="lia-dica-tit">Semana {{ s.iso }}, {{ s.periodo }}{% if s.parcial %} <small>parcial</small>{% endif %}</span><span class="lia-dica-tot">{{ s.total }} e-mails</span>{% for p in s.partes %}<span class="lia-dica-l lia-c-{{ p.chave }}"><span class="lia-chave"></span>{{ p.nome }} {{ p.n }} ({{ p.pct }})</span>{% endfor %}</span>
+                </span>
+              </span>
+              <span class="lia-sem-rot" aria-hidden="true">Semana {{ s.iso }}<small>{{ s.periodo }}{% if s.parcial %}, parcial{% endif %}</small></span>
+            </span>
+          </li>
+          {% endfor %}
+        </ol>
+        {# Caio, 30/10/2026: as leituras de dia da semana e período e a nota (semana ISO, hora do processamento, extração) saíram da tela; ficam na ficha #}
+      </figure>
+    </div>
+  </div>
+{% set f = e.video %}
+<dialog id="lia-video" class="lia-dlg" aria-labelledby="lia-dlg-tit">
+  <div class="lia-dlg-caixa">
+    <div class="lia-dlg-topo">
+      <h3 class="lia-dlg-titulo" id="lia-dlg-tit">A LIA na prática: do e-mail à carta orçamento</h3>
+      <button type="button" class="lia-botao" data-lia-fechar>{{ icone("fechar", "icone lia-botao-ic") }}<span>Fechar</span></button>
+    </div>
+    <div class="lia-dlg-corpo">
+      <div class="fn-video lia-dlg-video">
+        {% if f.arquivo %}
+        <video class="fn-player" controls preload="metadata" aria-label="Vídeo: a LIA trabalhando, do e-mail à carta orçamento"{% if f.capa %} poster="{{ f.capa }}"{% endif %}>
+          <source src="{{ f.arquivo }}" type="video/mp4">
+          {% if f.legendas %}<track kind="subtitles" src="{{ f.legendas }}" srclang="pt-BR" label="Português" default>{% endif %}
+          Seu navegador não reproduz este vídeo.
+        </video>
+        {% else %}
+        <div class="fn-reservado" role="img" aria-label="Espaço reservado para o vídeo: a LIA trabalhando, do e-mail à carta orçamento. Vídeo a incluir.">
+          {{ icone("video", "icone fn-reservado-ic") }}
+          <p class="fn-reservado-tit">Vídeo a incluir</p>
+          <p class="fn-reservado-sub">A LIA trabalhando, do e-mail à carta orçamento</p>
+        </div>
+        {% endif %}
+      </div>
+      <div class="fn-etapas lia-dlg-etapas">
+        <p class="fn-etapas-tit">O que o vídeo mostra</p>
+        <ol>
+          {% for et in f.etapas %}
+          <li><span class="fn-n" aria-hidden="true">{{ loop.index }}</span><span class="fn-tit">{{ et.titulo }}</span><span class="fn-txt">{{ et.texto }} <span class="fn-sigla">{{ et.sigla }}{% if et.fase %}, {{ et.fase | lower }}{% endif %}</span></span></li>
+          {% endfor %}
+        </ol>
+      </div>
+    </div>
+  </div>
+</dialog>
+</div>
+</section>
+{% endif %}
+{% endblock %}
+{% block scripts %}<script src="/static/lia_video.js?v={{ v() }}"></script><script src="/static/lia_dica.js?v={{ v() }}"></script>{% endblock %}

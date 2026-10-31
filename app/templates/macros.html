@@ -1,0 +1,130 @@
+{% from "icones.html" import icone %}
+{% macro link_externo(href, texto) %}
+<a href="{{ href }}" target="_blank" rel="noopener">{{ texto }}<span class="so-leitor"> (abre o monday em nova aba)</span></a>
+{% endmacro %}
+
+{# Selo da comparação com o mesmo período do ano anterior (E8 no Início, A6 no Atendimento). Relatório vivo: a frase
+   segue o percentual arredondado ("a mais" / "a menos" / "igual"), seta + texto (nunca só cor); sem variação (base do
+   ano anterior abaixo do mínimo) o selo fica tracejado e mostra só o número de referência. #}
+{% macro comparacao_ano(variacao, total_anterior, ano_anterior) %}
+{% set s = variacao | sentido %}
+<p class="variacao{% if s %} variacao-{{ s }}{% else %} variacao-sem-base{% endif %}">
+  {%- if s == "alta" or s == "queda" %}<span class="variacao-seta" aria-hidden="true">{{ "▲" if s == "alta" else "▼" }}</span><span><strong class="variacao-pct">{{ variacao | variacao(false) }}</strong> {{ "a mais" if s == "alta" else "a menos" }} que em {{ ano_anterior }}</span>
+  {%- elif s == "igual" %}<span class="variacao-seta" aria-hidden="true">=</span><span>{{ "igual a" if variacao == 0 else "praticamente igual a" }} {{ ano_anterior }}</span>
+  {%- else %}<span>Em {{ ano_anterior }}: {{ total_anterior | inteiro }} no mesmo período</span>{% endif -%}
+</p>
+{% endmacro %}
+
+{# Resposta do título do Início (D52, 26/10/2026, Caio): composta como nuvem de palavras, no padrão da frase do SLA —
+   Playfair grande para o que pesa (o total, em azul), itálico serifado para "pedidos de orçamento", Plex leve para os
+   conectivos e o período. A frase segue na ordem de leitura para o leitor de tela ("Chegaram 5.556 pedidos de orçamento
+   em 2026, até 25 de outubro"). Abaixo, como apoio (traço azul do .f-apoio), o selo da variação e duas barras finas
+   proporcionais do mesmo período (base zero; a maior ocupa a trilha; SVG com largura como atributo: a CSP proíbe
+   style=""). Sem base no ano anterior, só a referência no selo. Tudo vem dos dados (E1, E4, E8). #}
+{# ate_curto (25/10/2026, decisão 2): com o ano em andamento, uma linha sob as barras diz que 2025 é o mesmo período
+   ("mesmo período: até 22/out"), para 2.890 não ser lido como o ano inteiro #}
+{% macro resposta(total, periodo, variacao, anterior, ano, ano_anterior, ate_curto=none) %}
+<div class="inicio-cima">
+  <p class="frase inicio-frase">
+    <span class="f-levamos">Chegaram</span>
+    <span class="f-linha"><span class="hero-numero f-numero">{{ total | inteiro }}</span>
+      <span class="f-trabalho"><span>pedidos</span> <span>de orçamento</span></span></span>
+    <span class="f-quando">em {{ ano }}, {{ periodo }}</span>
+  </p>
+  {% if anterior is not none %}{% set maior = [total, anterior, 1] | max %}
+  <div class="f-apoio inicio-apoio entra">
+    {{ comparacao_ano(variacao, anterior, ano_anterior) }}
+    <div class="inicio-barras">
+      <ul class="barras" aria-label="Mesmo período: {% if periodo.startswith('até') %}1º de janeiro {{ periodo }}{% else %}{{ periodo }}{% endif %}">
+        {% for rotulo, valor, classe in [(ano, total, "atual"), (ano_anterior, anterior, "anterior")] %}
+        <li class="barras-linha barras-{{ classe }}"><span class="barras-ano">{{ rotulo }}</span><svg class="barras-trilha" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="barras-fundo" width="100" height="6" rx="3"/><rect class="barras-barra" width="{{ '%.2f' | format(valor / maior * 100) }}" height="6" rx="3"/></svg><span class="barras-valor">{{ valor | inteiro }}</span></li>
+        {% endfor %}
+      </ul>
+      {% if ate_curto %}<p class="barras-periodo">mesmo período: até {{ ate_curto }}</p>{% endif %}
+    </div>
+  </div>{% endif %}
+</div>
+{% endmacro %}
+
+{# Topo de cada lâmina: logo VIU + tema da apresentação + navegador das seções (escala junto com o slide). #}
+{% macro cabecalho(apresentacao, secao_atual) %}
+<header class="cabecalho">
+  {# D59: o logo leva à capa da reunião (quando a área tem capa) #}
+  {% if apresentacao.capa %}<a class="cabecalho-logo-link" href="/{{ apresentacao.slug }}/capa" title="Capa"><img class="cabecalho-logo" src="/static/viu_logo.jpg" alt="VIU, ir para a capa" width="80" height="52"></a>
+  {% else %}<img class="cabecalho-logo" src="/static/viu_logo.jpg" alt="VIU" width="80" height="52">{% endif %}
+  <span class="cabecalho-tema">{{ apresentacao.cabecalho }}</span>
+  {# navegador: abas com ícone; a pílula clara segue o mouse/foco e o traço azul marca (e desliza até) a aba atual.
+     D59: a página inicial é a 1ª análise ("Demanda"); a capa fica no logo; o encerramento não tem aba (só pelas setas) #}
+  {# V2 (Caio, 30/10/2026): nas páginas já entregues (Demanda, Talentos, SLA, LIA, Iniciativas e Previsão) as abas saem; ficam ‹ › ✕ (Roadmap = navegação) #}
+  {% set sem_abas = not secao_atual or secao_atual.slug in ("talentos", "sla", "iniciativas", "previsao", "lia", "roadmap") %}
+  <nav class="navegador{% if sem_abas %} navegador-oculto{% endif %}" aria-label="Seções de {{ apresentacao.cabecalho }}" data-navegador{% if sem_abas %} hidden{% endif %}>
+    <span class="navegador-reflexo" aria-hidden="true"></span>
+    <span class="navegador-pilula" aria-hidden="true"></span>
+    {# V2 (Caio, 30/10/2026): botão "Capa" na navegação, para voltar à capa num clique (o logo também leva) #}
+    {% if apresentacao.capa %}<a href="/{{ apresentacao.slug }}/capa" class="navegador-capa">{{ icone("casa") }}<span>Capa</span></a>{% endif %}
+    {% for s in apresentacao.abertura() %}
+    <a href="/{{ apresentacao.slug }}/{{ s.slug }}#1"{% if secao_atual and s.slug == secao_atual.slug %} aria-current="page"{% endif %}{% if s.rotulo %} title="{{ s.titulo }}"{% endif %}{% if s.filtro_talentos %} data-filtro-talentos{% endif %}>{{ icone(s.icone) }}<span>{{ s.curto }}</span></a>
+    {% endfor %}
+    <a href="/{{ apresentacao.slug }}"{% if not secao_atual %} aria-current="page"{% endif %}>{{ icone("entrada" if apresentacao.capa else "casa") }}<span>{{ apresentacao.rotulo_inicio }}</span></a>
+    {% for s in apresentacao.analises() %}
+    <a href="/{{ apresentacao.slug }}/{{ s.slug }}#1"{% if secao_atual and s.slug == secao_atual.slug %} aria-current="page"{% endif %}{% if s.rotulo %} title="{{ s.titulo }}"{% endif %}{% if s.filtro_talentos %} data-filtro-talentos{% endif %}>{{ icone(s.icone) }}<span>{{ s.curto }}</span></a>
+    {% endfor %}
+    {# Caio, 27/10/2026: capa e encerramento sem aba; chega-se a eles pelas setas, pelo gancho e pelo logo (capa) #}
+  </nav>
+  {# V2 (Caio, 30/10/2026): o Roadmap é a navegação; em cada página, ‹ › seguem a sequência e ✕ volta ao Roadmap
+     (no próprio Roadmap o grupo não aparece; no celular, a barra de baixo já tem Anterior/Próxima) #}
+  {% if apresentacao.secao("roadmap") %}{% set no_roadmap = secao_atual and secao_atual.slug == "roadmap" %}
+  {% set ant, prox = apresentacao.vizinhas(secao_atual) %}
+  <nav class="cab-passos" aria-label="Navegação da apresentação">
+    {% if ant %}<a class="cab-passo" href="{{ ant.href }}" aria-label="Anterior: {{ ant.rotulo }}" title="Anterior: {{ ant.rotulo }}"{% if ant.filtro %} data-filtro-talentos{% endif %}>{{ icone("recolher", "icone") }}</a>{% endif %}
+    {% if prox %}<a class="cab-passo" href="{{ prox.href }}" aria-label="Próxima: {{ prox.rotulo }}" title="Próxima: {{ prox.rotulo }}"{% if prox.filtro %} data-filtro-talentos{% endif %}>{{ icone("avancar", "icone") }}</a>{% endif %}
+    {# Caio, 31/10/2026: no próprio Roadmap o ✕ leva à capa; nas demais páginas, ao Roadmap #}
+    {% if no_roadmap %}<a class="cab-passo cab-passo-fechar" href="/{{ apresentacao.slug }}/capa" aria-label="Fechar e voltar à capa" title="Voltar à capa">{% else %}<a class="cab-passo cab-passo-fechar" href="/{{ apresentacao.slug }}/roadmap#1" aria-label="Fechar e voltar ao Roadmap" title="Voltar ao Roadmap">{% endif %}{{ icone("fechar", "icone") }}</a>
+  </nav>
+  {% endif %}
+  <button type="button" class="tela-cheia-botao" data-tela-cheia hidden aria-label="Tela cheia" title="Tela cheia">
+    {{ icone("abrir-tela", "icone icone-abrir") }}{{ icone("sair-tela", "icone icone-fechar") }}
+  </button>
+</header>
+{% endmacro %}
+
+{# Máscara (D30): a pergunta fica pronta, a resposta espera o dado. Sem número nem forma inventados; tracejado = sem
+   base (a mesma linguagem do selo sem variação; hachura quer dizer "em andamento" e não entra aqui). O selo tem ícone
+   + texto, e a lista diz o que falta, onde buscar e quem responde (pendencias.py, a mesma fonte da página
+   "O que falta"). `compacto` = bloco dentro de uma tela que já tem dados. #}
+{% macro pendente(apresentacao, pendencias, titulo, motivo, compacto=false, id="pendente") %}
+<section class="pendente{% if compacto %} pendente-compacto{% endif %} entra" aria-labelledby="{{ id }}-t">
+  <p class="selo-pendente">{{ icone("relogio") }}<span>Aguardando dados</span></p>
+  <h3 class="pendente-titulo" id="{{ id }}-t">{{ titulo }}</h3>
+  {% if motivo %}<p class="pendente-motivo">{{ motivo }}</p>{% endif %}
+  {% if pendencias %}
+  <ul class="pendente-faltas" aria-label="O que falta para responder">
+    {% for p in pendencias %}<li><span class="pendente-dado">{{ p.dado }}</span><span class="pendente-onde">{{ p.onde }}</span><span class="pendente-quem">{{ p.quem }}</span></li>{% endfor %}
+  </ul>{% endif %}
+  <a class="como-link" href="/{{ apresentacao.slug }}/o-que-falta#{{ pendencias[0].codigo if pendencias else 'secoes' }}">Ver o plano completo
+    <svg aria-hidden="true" viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a>
+</section>
+{% endmacro %}
+
+{# Lugar do gráfico numa tela sem dado: só o eixo dos meses (decorativo) e a frase do que vai aparecer ali #}
+{% macro grafico_pendente(frase) %}
+<figure class="grafico-pendente">
+  <figcaption>{{ frase }}</figcaption>
+  <ol class="grafico-pendente-meses" aria-hidden="true">{% for m in ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"] %}<li>{{ m }}</li>{% endfor %}</ol>
+</figure>
+{% endmacro %}
+
+{# Tela inteira em máscara: pergunta da seção como título, máscara à esquerda e o lugar do gráfico à direita #}
+{% macro lamina_pendente(apresentacao, secao, nivel, titulo, motivo, frase) %}
+<section class="slide" aria-roledescription="slide" aria-labelledby="s-{{ secao.slug }}">
+<div class="lamina">
+  {{ cabecalho(apresentacao, secao) }}
+  <div class="sobretitulo"><span class="nivel">{{ nivel }}</span></div>
+  <h2 class="slide-titulo" id="s-{{ secao.slug }}">{{ secao.pergunta }}</h2>
+  <div class="slide-corpo duas-colunas">
+    <div class="destaque">{{ pendente(apresentacao, apresentacao.pendencias_de(secao.slug), titulo, motivo, id="p-" ~ secao.slug) }}</div>
+    {{ grafico_pendente(frase) }}
+  </div>
+</div>
+</section>
+{% endmacro %}

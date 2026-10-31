@@ -1,0 +1,82 @@
+[
+  {
+    "path": "",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "errors": [],
+    "scroll": 390
+  },
+  {
+    "path": "/talentos?talentos=exclusivos",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "errors": [],
+    "scroll": 390
+  },
+  {
+    "path": "/sla?talentos=nao-exclusivos",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "errors": [],
+    "scroll": 390
+  },
+  {
+    "path": "/previsao?talentos=nao-exclusivos",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "errors": [],
+    "scroll": 390
+  },
+  {
+    "path": "/atendimento",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "errors": [],
+    "scroll": 390
+  },
+  {
+    "path": "",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "errors": [],
+    "scroll": 1440
+  },
+  {
+    "path": "/talentos?talentos=exclusivos",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "errors": [],
+    "scroll": 1440
+  },
+  {
+    "path": "/sla?talentos=nao-exclusivos",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "errors": [],
+    "scroll": 1440
+  },
+  {
+    "path": "/previsao?talentos=nao-exclusivos",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "errors": [],
+    "scroll": 1440
+  },
+  {
+    "path": "/atendimento",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "errors": [],
+    "scroll": 1440
+  }
+]

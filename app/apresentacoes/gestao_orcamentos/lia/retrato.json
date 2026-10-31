@@ -1,0 +1,1359 @@
+{
+ "fonte": "gs://gglobo-viu-lia-dados-prd/data/ (extracted_emails_*, revisao_manual.json)",
+ "extraido_em": "2026-10-30 20:49",
+ "inicio": "2026-09-21",
+ "fim": "2026-10-29",
+ "corte_revisao": "2026-10-12",
+ "itens_com_revisao": 459,
+ "periodos": [
+  {
+   "rotulo": "revisado",
+   "inicio": "2026-09-21",
+   "fim": "2026-10-12",
+   "revisado": true,
+   "nao_lead": 946,
+   "lead": 112,
+   "validacao": 43
+  },
+  {
+   "rotulo": "sem revisão",
+   "inicio": "2026-10-13",
+   "fim": "2026-10-29",
+   "revisado": false,
+   "nao_lead": 831,
+   "lead": 81,
+   "validacao": 34
+  }
+ ],
+ "dias": [
+  {
+   "data": "2026-09-21",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 58,
+   "lead": 10,
+   "validacao": 4,
+   "fora": 29,
+   "periodos": {
+    "manha": {
+     "nao_lead": 27,
+     "lead": 3,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 13,
+     "lead": 5,
+     "validacao": 2
+    },
+    "noite": {
+     "nao_lead": 18,
+     "lead": 2,
+     "validacao": 1
+    }
+   }
+  },
+  {
+   "data": "2026-09-22",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 56,
+   "lead": 11,
+   "validacao": 2,
+   "fora": 21,
+   "periodos": {
+    "manha": {
+     "nao_lead": 20,
+     "lead": 4,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 21,
+     "lead": 7,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 15,
+     "lead": 0,
+     "validacao": 1
+    }
+   }
+  },
+  {
+   "data": "2026-09-23",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 44,
+   "lead": 6,
+   "validacao": 5,
+   "fora": 20,
+   "periodos": {
+    "manha": {
+     "nao_lead": 13,
+     "lead": 4,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 20,
+     "lead": 1,
+     "validacao": 4
+    },
+    "noite": {
+     "nao_lead": 11,
+     "lead": 1,
+     "validacao": 1
+    }
+   }
+  },
+  {
+   "data": "2026-09-24",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 61,
+   "lead": 3,
+   "validacao": 1,
+   "fora": 30,
+   "periodos": {
+    "manha": {
+     "nao_lead": 20,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 23,
+     "lead": 3,
+     "validacao": 1
+    },
+    "noite": {
+     "nao_lead": 18,
+     "lead": 0,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-09-25",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 45,
+   "lead": 5,
+   "validacao": 0,
+   "fora": 25,
+   "periodos": {
+    "manha": {
+     "nao_lead": 18,
+     "lead": 1,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 16,
+     "lead": 4,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 11,
+     "lead": 0,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-09-26",
+   "feriado": "",
+   "fim_de_semana": true,
+   "nao_lead": 36,
+   "lead": 1,
+   "validacao": 0,
+   "fora": 37,
+   "periodos": {
+    "manha": {
+     "nao_lead": 12,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 9,
+     "lead": 0,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 15,
+     "lead": 1,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-09-27",
+   "feriado": "",
+   "fim_de_semana": true,
+   "nao_lead": 28,
+   "lead": 1,
+   "validacao": 0,
+   "fora": 29,
+   "periodos": {
+    "manha": {
+     "nao_lead": 9,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 8,
+     "lead": 1,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 11,
+     "lead": 0,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-09-28",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 57,
+   "lead": 9,
+   "validacao": 1,
+   "fora": 27,
+   "periodos": {
+    "manha": {
+     "nao_lead": 29,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 12,
+     "lead": 7,
+     "validacao": 1
+    },
+    "noite": {
+     "nao_lead": 16,
+     "lead": 2,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-09-29",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 58,
+   "lead": 7,
+   "validacao": 4,
+   "fora": 30,
+   "periodos": {
+    "manha": {
+     "nao_lead": 19,
+     "lead": 2,
+     "validacao": 3
+    },
+    "tarde": {
+     "nao_lead": 24,
+     "lead": 3,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 15,
+     "lead": 2,
+     "validacao": 1
+    }
+   }
+  },
+  {
+   "data": "2026-09-30",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 40,
+   "lead": 6,
+   "validacao": 3,
+   "fora": 19,
+   "periodos": {
+    "manha": {
+     "nao_lead": 11,
+     "lead": 1,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 17,
+     "lead": 5,
+     "validacao": 2
+    },
+    "noite": {
+     "nao_lead": 12,
+     "lead": 0,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-01",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 49,
+   "lead": 3,
+   "validacao": 4,
+   "fora": 33,
+   "periodos": {
+    "manha": {
+     "nao_lead": 13,
+     "lead": 1,
+     "validacao": 2
+    },
+    "tarde": {
+     "nao_lead": 11,
+     "lead": 2,
+     "validacao": 2
+    },
+    "noite": {
+     "nao_lead": 25,
+     "lead": 0,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-02",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 46,
+   "lead": 7,
+   "validacao": 4,
+   "fora": 26,
+   "periodos": {
+    "manha": {
+     "nao_lead": 13,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 15,
+     "lead": 5,
+     "validacao": 4
+    },
+    "noite": {
+     "nao_lead": 18,
+     "lead": 2,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-03",
+   "feriado": "",
+   "fim_de_semana": true,
+   "nao_lead": 24,
+   "lead": 2,
+   "validacao": 1,
+   "fora": 27,
+   "periodos": {
+    "manha": {
+     "nao_lead": 5,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 6,
+     "lead": 2,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 13,
+     "lead": 0,
+     "validacao": 1
+    }
+   }
+  },
+  {
+   "data": "2026-10-04",
+   "feriado": "",
+   "fim_de_semana": true,
+   "nao_lead": 13,
+   "lead": 1,
+   "validacao": 0,
+   "fora": 14,
+   "periodos": {
+    "manha": {
+     "nao_lead": 2,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 3,
+     "lead": 0,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 8,
+     "lead": 1,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-05",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 34,
+   "lead": 9,
+   "validacao": 1,
+   "fora": 12,
+   "periodos": {
+    "manha": {
+     "nao_lead": 7,
+     "lead": 2,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 22,
+     "lead": 6,
+     "validacao": 1
+    },
+    "noite": {
+     "nao_lead": 5,
+     "lead": 1,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-06",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 42,
+   "lead": 10,
+   "validacao": 1,
+   "fora": 20,
+   "periodos": {
+    "manha": {
+     "nao_lead": 14,
+     "lead": 3,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 17,
+     "lead": 4,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 11,
+     "lead": 3,
+     "validacao": 1
+    }
+   }
+  },
+  {
+   "data": "2026-10-07",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 67,
+   "lead": 6,
+   "validacao": 3,
+   "fora": 38,
+   "periodos": {
+    "manha": {
+     "nao_lead": 26,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 24,
+     "lead": 4,
+     "validacao": 2
+    },
+    "noite": {
+     "nao_lead": 17,
+     "lead": 2,
+     "validacao": 1
+    }
+   }
+  },
+  {
+   "data": "2026-10-08",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 53,
+   "lead": 11,
+   "validacao": 1,
+   "fora": 35,
+   "periodos": {
+    "manha": {
+     "nao_lead": 11,
+     "lead": 1,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 17,
+     "lead": 7,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 25,
+     "lead": 3,
+     "validacao": 1
+    }
+   }
+  },
+  {
+   "data": "2026-10-09",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 50,
+   "lead": 1,
+   "validacao": 5,
+   "fora": 30,
+   "periodos": {
+    "manha": {
+     "nao_lead": 12,
+     "lead": 0,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 22,
+     "lead": 1,
+     "validacao": 1
+    },
+    "noite": {
+     "nao_lead": 16,
+     "lead": 0,
+     "validacao": 3
+    }
+   }
+  },
+  {
+   "data": "2026-10-10",
+   "feriado": "",
+   "fim_de_semana": true,
+   "nao_lead": 29,
+   "lead": 0,
+   "validacao": 1,
+   "fora": 30,
+   "periodos": {
+    "manha": {
+     "nao_lead": 6,
+     "lead": 0,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 12,
+     "lead": 0,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 11,
+     "lead": 0,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-11",
+   "feriado": "",
+   "fim_de_semana": true,
+   "nao_lead": 13,
+   "lead": 2,
+   "validacao": 1,
+   "fora": 16,
+   "periodos": {
+    "manha": {
+     "nao_lead": 2,
+     "lead": 1,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 6,
+     "lead": 0,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 5,
+     "lead": 1,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-12",
+   "feriado": "Nossa Senhora Aparecida",
+   "fim_de_semana": false,
+   "nao_lead": 43,
+   "lead": 1,
+   "validacao": 1,
+   "fora": 45,
+   "periodos": {
+    "manha": {
+     "nao_lead": 4,
+     "lead": 0,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 8,
+     "lead": 0,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 31,
+     "lead": 1,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-13",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 54,
+   "lead": 5,
+   "validacao": 3,
+   "fora": 30,
+   "periodos": {
+    "manha": {
+     "nao_lead": 19,
+     "lead": 2,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 17,
+     "lead": 3,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 18,
+     "lead": 0,
+     "validacao": 2
+    }
+   }
+  },
+  {
+   "data": "2026-10-14",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 46,
+   "lead": 7,
+   "validacao": 1,
+   "fora": 20,
+   "periodos": {
+    "manha": {
+     "nao_lead": 16,
+     "lead": 1,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 20,
+     "lead": 4,
+     "validacao": 1
+    },
+    "noite": {
+     "nao_lead": 10,
+     "lead": 2,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-15",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 73,
+   "lead": 6,
+   "validacao": 1,
+   "fora": 46,
+   "periodos": {
+    "manha": {
+     "nao_lead": 12,
+     "lead": 4,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 25,
+     "lead": 2,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 36,
+     "lead": 0,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-16",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 45,
+   "lead": 6,
+   "validacao": 4,
+   "fora": 28,
+   "periodos": {
+    "manha": {
+     "nao_lead": 15,
+     "lead": 2,
+     "validacao": 3
+    },
+    "tarde": {
+     "nao_lead": 19,
+     "lead": 2,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 11,
+     "lead": 2,
+     "validacao": 1
+    }
+   }
+  },
+  {
+   "data": "2026-10-17",
+   "feriado": "",
+   "fim_de_semana": true,
+   "nao_lead": 26,
+   "lead": 0,
+   "validacao": 2,
+   "fora": 28,
+   "periodos": {
+    "manha": {
+     "nao_lead": 2,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 8,
+     "lead": 0,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 16,
+     "lead": 0,
+     "validacao": 2
+    }
+   }
+  },
+  {
+   "data": "2026-10-18",
+   "feriado": "",
+   "fim_de_semana": true,
+   "nao_lead": 24,
+   "lead": 0,
+   "validacao": 0,
+   "fora": 24,
+   "periodos": {
+    "manha": {
+     "nao_lead": 2,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 19,
+     "lead": 0,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 3,
+     "lead": 0,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-19",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 47,
+   "lead": 9,
+   "validacao": 1,
+   "fora": 30,
+   "periodos": {
+    "manha": {
+     "nao_lead": 11,
+     "lead": 1,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 16,
+     "lead": 4,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 20,
+     "lead": 4,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-20",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 51,
+   "lead": 6,
+   "validacao": 2,
+   "fora": 28,
+   "periodos": {
+    "manha": {
+     "nao_lead": 18,
+     "lead": 6,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 20,
+     "lead": 0,
+     "validacao": 2
+    },
+    "noite": {
+     "nao_lead": 13,
+     "lead": 0,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-21",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 43,
+   "lead": 9,
+   "validacao": 2,
+   "fora": 23,
+   "periodos": {
+    "manha": {
+     "nao_lead": 14,
+     "lead": 1,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 19,
+     "lead": 6,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 10,
+     "lead": 2,
+     "validacao": 1
+    }
+   }
+  },
+  {
+   "data": "2026-10-22",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 48,
+   "lead": 10,
+   "validacao": 1,
+   "fora": 22,
+   "periodos": {
+    "manha": {
+     "nao_lead": 16,
+     "lead": 1,
+     "validacao": 1
+    },
+    "tarde": {
+     "nao_lead": 20,
+     "lead": 8,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 12,
+     "lead": 1,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-23",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 53,
+   "lead": 3,
+   "validacao": 3,
+   "fora": 28,
+   "periodos": {
+    "manha": {
+     "nao_lead": 14,
+     "lead": 1,
+     "validacao": 2
+    },
+    "tarde": {
+     "nao_lead": 19,
+     "lead": 1,
+     "validacao": 1
+    },
+    "noite": {
+     "nao_lead": 20,
+     "lead": 1,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-24",
+   "feriado": "",
+   "fim_de_semana": true,
+   "nao_lead": 36,
+   "lead": 1,
+   "validacao": 0,
+   "fora": 37,
+   "periodos": {
+    "manha": {
+     "nao_lead": 6,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 8,
+     "lead": 0,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 22,
+     "lead": 1,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-25",
+   "feriado": "",
+   "fim_de_semana": true,
+   "nao_lead": 28,
+   "lead": 0,
+   "validacao": 0,
+   "fora": 28,
+   "periodos": {
+    "manha": {
+     "nao_lead": 1,
+     "lead": 0,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 10,
+     "lead": 0,
+     "validacao": 0
+    },
+    "noite": {
+     "nao_lead": 17,
+     "lead": 0,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-26",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 63,
+   "lead": 2,
+   "validacao": 5,
+   "fora": 38,
+   "periodos": {
+    "manha": {
+     "nao_lead": 13,
+     "lead": 2,
+     "validacao": 4
+    },
+    "tarde": {
+     "nao_lead": 21,
+     "lead": 0,
+     "validacao": 1
+    },
+    "noite": {
+     "nao_lead": 29,
+     "lead": 0,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-27",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 60,
+   "lead": 5,
+   "validacao": 3,
+   "fora": 33,
+   "periodos": {
+    "manha": {
+     "nao_lead": 18,
+     "lead": 3,
+     "validacao": 2
+    },
+    "tarde": {
+     "nao_lead": 21,
+     "lead": 1,
+     "validacao": 1
+    },
+    "noite": {
+     "nao_lead": 21,
+     "lead": 1,
+     "validacao": 0
+    }
+   }
+  },
+  {
+   "data": "2026-10-28",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 71,
+   "lead": 6,
+   "validacao": 2,
+   "fora": 44,
+   "periodos": {
+    "manha": {
+     "nao_lead": 29,
+     "lead": 2,
+     "validacao": 0
+    },
+    "tarde": {
+     "nao_lead": 20,
+     "lead": 3,
+     "validacao": 1
+    },
+    "noite": {
+     "nao_lead": 22,
+     "lead": 1,
+     "validacao": 1
+    }
+   }
+  },
+  {
+   "data": "2026-10-29",
+   "feriado": "",
+   "fim_de_semana": false,
+   "nao_lead": 63,
+   "lead": 6,
+   "validacao": 4,
+   "fora": 32,
+   "periodos": {
+    "manha": {
+     "nao_lead": 21,
+     "lead": 5,
+     "validacao": 3
+    },
+    "tarde": {
+     "nao_lead": 24,
+     "lead": 0,
+     "validacao": 1
+    },
+    "noite": {
+     "nao_lead": 18,
+     "lead": 1,
+     "validacao": 0
+    }
+   }
+  }
+ ],
+ "fim_de_semana": 270,
+ "semanas": [
+  {
+   "inicio": "2026-09-21",
+   "fim": "2026-09-27",
+   "nao_lead": 328,
+   "lead": 37,
+   "validacao": 12,
+   "fora": 191
+  },
+  {
+   "inicio": "2026-09-28",
+   "fim": "2026-10-04",
+   "nao_lead": 287,
+   "lead": 35,
+   "validacao": 17,
+   "fora": 176
+  },
+  {
+   "inicio": "2026-10-05",
+   "fim": "2026-10-11",
+   "nao_lead": 288,
+   "lead": 39,
+   "validacao": 13,
+   "fora": 181
+  },
+  {
+   "inicio": "2026-10-12",
+   "fim": "2026-10-18",
+   "nao_lead": 311,
+   "lead": 25,
+   "validacao": 12,
+   "fora": 221
+  },
+  {
+   "inicio": "2026-10-19",
+   "fim": "2026-10-25",
+   "nao_lead": 306,
+   "lead": 38,
+   "validacao": 9,
+   "fora": 196
+  },
+  {
+   "inicio": "2026-10-26",
+   "fim": "2026-10-29",
+   "nao_lead": 257,
+   "lead": 19,
+   "validacao": 14,
+   "fora": 147
+  }
+ ],
+ "faixas": {
+  "expediente": 935,
+  "almoco": 92,
+  "noite": 705,
+  "fim_de_semana": 270,
+  "feriado": 45
+ },
+ "turnos": {
+  "manha": {
+   "nao_lead": 348,
+   "lead": 43,
+   "validacao": 18
+  },
+  "tarde": {
+   "nao_lead": 414,
+   "lead": 88,
+   "validacao": 24
+  },
+  "fora": {
+   "nao_lead": 1015,
+   "lead": 62,
+   "validacao": 35
+  }
+ },
+ "horas": {
+  "util": [
+   35,
+   18,
+   12,
+   49,
+   15,
+   23,
+   35,
+   32,
+   64,
+   120,
+   153,
+   146,
+   110,
+   92,
+   125,
+   116,
+   124,
+   94,
+   67,
+   64,
+   66,
+   65,
+   57,
+   50
+  ],
+  "fim_de_semana": [
+   10,
+   11,
+   1,
+   25,
+   2,
+   4,
+   0,
+   8,
+   6,
+   20,
+   10,
+   6,
+   28,
+   19,
+   11,
+   14,
+   10,
+   10,
+   5,
+   6,
+   23,
+   14,
+   18,
+   9
+  ],
+  "feriado": [
+   3,
+   6,
+   0,
+   3,
+   0,
+   2,
+   0,
+   0,
+   2,
+   0,
+   1,
+   2,
+   1,
+   0,
+   2,
+   1,
+   0,
+   4,
+   0,
+   4,
+   3,
+   3,
+   3,
+   5
+  ]
+ },
+ "horas_lead": {
+  "util": [
+   1,
+   0,
+   1,
+   1,
+   0,
+   1,
+   4,
+   3,
+   2,
+   11,
+   18,
+   15,
+   10,
+   10,
+   19,
+   12,
+   28,
+   19,
+   10,
+   12,
+   2,
+   4,
+   1,
+   0
+  ],
+  "fim_de_semana": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   1,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   1,
+   1,
+   1,
+   0,
+   0,
+   1,
+   1,
+   1,
+   1
+  ],
+  "feriado": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   1,
+   0
+  ]
+ },
+ "horas_nao_lead": {
+  "util": [
+   33,
+   17,
+   11,
+   47,
+   13,
+   21,
+   29,
+   25,
+   58,
+   103,
+   126,
+   128,
+   94,
+   80,
+   98,
+   98,
+   93,
+   72,
+   53,
+   51,
+   64,
+   59,
+   55,
+   49
+  ],
+  "fim_de_semana": [
+   10,
+   11,
+   1,
+   25,
+   2,
+   4,
+   0,
+   5,
+   6,
+   20,
+   10,
+   6,
+   28,
+   19,
+   11,
+   13,
+   9,
+   9,
+   5,
+   5,
+   21,
+   13,
+   16,
+   8
+  ],
+  "feriado": [
+   3,
+   6,
+   0,
+   3,
+   0,
+   2,
+   0,
+   0,
+   1,
+   0,
+   1,
+   2,
+   1,
+   0,
+   2,
+   1,
+   0,
+   4,
+   0,
+   4,
+   3,
+   3,
+   2,
+   5
+  ]
+ }
+}

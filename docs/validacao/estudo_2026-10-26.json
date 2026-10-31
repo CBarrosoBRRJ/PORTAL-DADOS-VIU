@@ -1,0 +1,107 @@
+{
+  "data": "2026-10-26T11:33:04.304287-03:00",
+  "identidade": "caio.barroso@viu.com.br",
+  "projeto": "gglobo-viu-dados-hdg-prd",
+  "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_2026_sla_movimentos",
+  "processado_em": "2026-10-26 12:01:34.624989+00:00",
+  "mes_parcial": "2026-10",
+  "feriados": [
+    "2026-01-01",
+    "2026-01-20",
+    "2026-01-25",
+    "2026-02-16",
+    "2026-02-17",
+    "2026-02-18",
+    "2026-04-03",
+    "2026-04-21",
+    "2026-04-23",
+    "2026-05-01",
+    "2026-06-04",
+    "2026-07-09",
+    "2026-09-07",
+    "2026-10-12",
+    "2026-11-02",
+    "2026-11-15",
+    "2026-11-20",
+    "2026-12-24",
+    "2026-12-25",
+    "2026-12-31"
+  ],
+  "jobs": [
+    {
+      "id": "5e9f6ea6-8376-49b6-b13f-e01faaa3f521",
+      "bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "7aad9e72-b556-4499-a0c8-f112415a9aab",
+      "bytes": 0,
+      "cache": true
+    }
+  ],
+  "grupos": {
+    "todos": {
+      "n": 2347,
+      "tipico_h": 14.2525,
+      "diferencas": [],
+      "leituras": {
+        "slide3": "Em uma amostra aleatória de 100 pedidos, <strong>56 ficam prontos em até 2 dias</strong> de trabalho e <strong>44 levam mais de 2 dias</strong>.",
+        "slide4": "Na maior parte das vezes entregamos em até 2 dias. Mas os <strong>44% que passam disso</strong> concentram <strong>84% do tempo</strong> que os pedidos ficam com a equipe. <em>É aí que está o ganho:</em> encurtando esses casos, a fila anda mais rápido e o mesmo time dá conta de mais pedidos.",
+        "slide5_titulo": "A demora não é de um mês. Acontece o ano todo.",
+        "slide5": "<strong>Não é sazonal:</strong> todo mês, de 40% a 51% dos pedidos passam de 2 dias. <em>O problema é o processo, não o mês</em> — é nele que está a solução.",
+        "slide6": "O tempo trava principalmente em dois pontos: <strong>Em elaboração</strong> (só até jul) e <strong>Fila de entrada</strong> somam <em>60% do tempo travado</em>.",
+        "slide7": "<strong>Os tipos de maior volume ficam perto do geral</strong>: de 43% a 45% passam de 2 dias, contra 44%. Só <strong>Proativo e Interna</strong>, de menor volume, passam bem mais.",
+        "slide8": [
+          "O tempo típico · 14 h",
+          "A maioria é rápida · 56%",
+          "Os demorados pesam · 84%",
+          "Não é crise, é padrão · todo mês",
+          "Trava em dois pontos · 60%",
+          "Os tipos se parecem · 43–45%"
+        ]
+      }
+    },
+    "exclusivos": {
+      "n": 1609,
+      "tipico_h": 11.8259,
+      "diferencas": [],
+      "leituras": {
+        "slide3": "Em uma amostra aleatória de 100 pedidos, <strong>62 ficam prontos em até 2 dias</strong> de trabalho e <strong>38 levam mais de 2 dias</strong>.",
+        "slide4": "Na maior parte das vezes entregamos em até 2 dias. Mas os <strong>38% que passam disso</strong> concentram <strong>81% do tempo</strong> que os pedidos ficam com a equipe. <em>É aí que está o ganho:</em> encurtando esses casos, a fila anda mais rápido e o mesmo time dá conta de mais pedidos.",
+        "slide5_titulo": "A demora não é de um mês. Acontece o ano todo.",
+        "slide5": "<strong>Não é sazonal:</strong> todo mês, de 29% a 47% dos pedidos passam de 2 dias. <em>O problema é o processo, não o mês</em> — é nele que está a solução.",
+        "slide6": "O tempo trava principalmente em dois pontos: <strong>Em elaboração</strong> (só até jul) e <strong>Fila de entrada</strong> somam <em>65% do tempo travado</em>.",
+        "slide7": "<strong>O Inbound é o que mais demora</strong>: 43% passam de 2 dias, contra 38% no geral — e passa mais tempo na fila de entrada.",
+        "slide8": [
+          "O tempo típico · 12 h",
+          "A maioria é rápida · 62%",
+          "Os demorados pesam · 81%",
+          "Não é crise, é padrão · todo mês",
+          "Trava em dois pontos · 65%",
+          "Pesa mais no Inbound · 43%"
+        ]
+      }
+    },
+    "nao-exclusivos": {
+      "n": 725,
+      "tipico_h": 19.642,
+      "diferencas": [],
+      "leituras": {
+        "slide3": "Em uma amostra aleatória de 100 pedidos, <strong>41 ficam prontos em até 2 dias</strong> de trabalho e <strong>59 levam mais de 2 dias</strong>.",
+        "slide4": "Neste grupo, menos da metade sai em até 2 dias. E os <strong>59% que passam disso</strong> concentram <strong>88% do tempo</strong> que os pedidos ficam com a equipe. <em>É aí que está o ganho:</em> encurtando esses casos, a fila anda mais rápido e o mesmo time dá conta de mais pedidos.",
+        "slide5_titulo": "A demora pesa em alguns meses do ano.",
+        "slide5": "<strong>Há meses mais pesados:</strong> em abril, maio e agosto, de 70% a 75% passam de 2 dias, contra 43% a 60% no resto do ano. <em>Vale planejar a equipe para esses meses.</em>",
+        "slide6": "O tempo trava principalmente em dois pontos: <strong>Em elaboração</strong> (só até jul) e <strong>Fila de entrada</strong> somam <em>54% do tempo travado</em>.",
+        "slide7": "<strong>O Mercado fica perto do geral</strong>: 59% passam de 2 dias, contra 59%. Só <strong>Interna e Proativo</strong>, de menor volume, passam bem mais.",
+        "slide8": [
+          "O tempo típico · 20 h",
+          "Menos da metade é rápida · 41%",
+          "Os demorados pesam · 88%",
+          "Há meses mais pesados · abr, mai e ago",
+          "Trava em dois pontos · 54%",
+          "O Mercado segue o geral · 59%"
+        ]
+      }
+    }
+  }
+}

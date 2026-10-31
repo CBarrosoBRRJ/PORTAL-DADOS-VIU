@@ -1,0 +1,52 @@
+{
+  "conta": "caio.barroso@viu.com.br",
+  "projeto": "gglobo-viu-dados-hdg-prd",
+  "consultas": [
+    {
+      "contrato": "inicio_diario",
+      "dry_bytes": 235063,
+      "statement_type": "SELECT"
+    },
+    {
+      "contrato": "atendimento_fluxo",
+      "dry_bytes": 43826,
+      "statement_type": "SELECT"
+    },
+    {
+      "contrato": "talentos_ano",
+      "dry_bytes": 330326,
+      "statement_type": "SELECT"
+    },
+    {
+      "contrato": "talentos_ranking",
+      "dry_bytes": 330326,
+      "statement_type": "SELECT"
+    },
+    {
+      "contrato": "atendimento_status",
+      "dry_bytes": 10474419,
+      "statement_type": "SELECT"
+    },
+    {
+      "contrato": "sla_movimentos_v2",
+      "dry_bytes": 5516520,
+      "statement_type": "SELECT"
+    },
+    {
+      "contrato": "previsao_mensal",
+      "dry_bytes": 95613,
+      "statement_type": "SELECT"
+    },
+    {
+      "contrato": "previsao_exclusividade",
+      "dry_bytes": 286504,
+      "statement_type": "SELECT"
+    },
+    {
+      "contrato": "previsao_lotes",
+      "dry_bytes": 556947,
+      "statement_type": "SELECT"
+    }
+  ],
+  "observacao": "Apenas SELECTs em dry run. DDL, DML e transação não executados nem homologados."
+}

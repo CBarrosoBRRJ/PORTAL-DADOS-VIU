@@ -1,0 +1,147 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import cabecalho %}
+{% block slides %}
+{% set e = entrega %}
+
+<section class="slide" aria-roledescription="slide" aria-labelledby="s-entrega" data-nivel="gerencial">
+<div class="lamina">
+  {{ cabecalho(apresentacao, secao_atual) }}
+  <div class="sobretitulo">
+    <span class="nivel">Gerencial</span>
+  </div>
+  <h2 class="slide-titulo" id="s-entrega">Quanto tempo levamos para entregar um orçamento?</h2>
+  <div class="slide-corpo duas-colunas sla-corpo">
+    {# C10 (24/10: abaixo da pergunta, numa linha própria; hero e gráfico começam juntos abaixo dele): cada botão já mostra a resposta (mediana de trabalho do grupo); o clique troca o slide para o grupo #}
+    <nav class="grupos" aria-labelledby="rotulo-grupos" data-navegador data-chave="talentos">
+      <span class="navegador-reflexo" aria-hidden="true"></span>
+      <span class="navegador-pilula" aria-hidden="true"></span>
+      <span class="grupos-rotulo" id="rotulo-grupos">Talentos</span>
+      {% for g in e.grupos %}
+      <a href="?talentos={{ g.chave }}#1" class="grupo"{% if g.atual %} aria-current="true"{% endif %}>
+        <span class="grupo-nome">{{ g.rotulo }}</span>
+        <span class="grupo-valor">{{ g.mediana_h_trabalho | inteiro }}&nbsp;h<span class="so-leitor"> de trabalho típico, {{ g.n | inteiro }} orçamentos</span></span>
+      </a>
+      {% endfor %}
+    </nav>
+    <div class="destaque">
+      {% set de_quem = {"todos": "", "exclusivos": " nos talentos exclusivos", "nao-exclusivos": " nos talentos não exclusivos"}[e.grupo] %}
+      {% if e.n_ano %}
+      {# 24/10/2026 (Caio): a resposta direta à pergunta, composta como peça tipográfica; a frase segue na ordem de leitura
+         para o leitor de tela. O número é a mediana (metade dos orçamentos fica pronta nesse tempo ou antes) #}
+      <p class="frase">
+        <span class="f-levamos">Levamos</span>
+        <span class="f-linha"><span class="hero-numero f-numero">{{ e.mediana_h_trabalho | inteiro }}&nbsp;h</span>
+          <span class="f-trabalho"><span>de trabalho</span> <span>da equipe</span></span></span>
+        {# R14: a linha do grupo fica reservada também em "Todos" (invisível), para a frase não pular ao trocar de grupo #}
+        {% if de_quem %}<span class="f-grupo">{{ de_quem | trim }}</span>{% else %}<span class="f-grupo f-grupo-vazia" aria-hidden="true">em todos os talentos</span>{% endif %}
+        <span class="f-entregar">para entregar</span>
+        <span class="f-orcamento">um orçamento</span>
+        <span class="f-cliente">ao cliente.</span>
+        <span class="so-leitor"> (típico: metade dos orçamentos fica pronta nesse tempo ou antes)</span>
+      </p>
+      {# C3c (D54, 26/10/2026, gerente: "mais perto de 2 ou de 3?"): dias úteis do cliente com fração pelo expediente
+         (mediana, 1 casa) e o exemplo da semana tirado do mesmo valor. Os dias corridos ficam no leitor de tela e na ficha #}
+      {% set du = e.dias_uteis_cliente %}
+      {% if du %}<p class="f-apoio entra"><span class="secundario-numero">{{ du.txt }}</span>
+        no calendário para o cliente receber{% if du.exemplo %}<span class="f-apoio-ex">{{ du.exemplo }}</span>{% endif %}
+        <span class="so-leitor"> (típico, contando só o expediente de segunda a sexta, 10h às 19h com pausa de almoço; em dias corridos, contando noites e fins de semana, {{ e.mediana_dias_calendario | decimal(1) }})</span></p>{% endif %}
+      {% else %}
+      {# C7: em janeiro (ou grupo sem entregas) não há mês completo — nada de percentual vazio #}
+      <p class="hero entra"><span class="hero-numero">—</span>
+        <span class="hero-texto">ainda não há meses completos em {{ e.ano_num }}{{ de_quem }}</span></p>
+      <div class="secundarios entra"><p class="hero-base">os números do ano aparecem depois do primeiro mês fechado</p></div>
+      {% endif %}
+    </div>
+
+    <figure class="colunas cartao-grafico">
+      <figcaption>
+        <span class="colunas-titulo">Orçamentos prontos em até {{ e.limite_dias }} dias de trabalho, por mês</span>
+        {# D54 (26/10/2026): rótulo curto da linha da meta, numa linha, com o mesmo traço; fica na linha do título porque
+           sobre os meses cobria barras e números. No celular (barras deitadas) o rótulo fica sobre a própria linha #}
+        <span class="meta-chave" aria-hidden="true" title="meta sugerida, ainda não oficial: metade em até {{ e.limite_dias }} dias de trabalho ({{ e.limite_horas }} h)"><span class="meta-traco"></span>meta sugerida: {{ e.limite_dias }} dias de trabalho</span>
+        {% set t = e.ano.tela %}
+        <span class="legenda">
+          {% if not t %}<span>Sem mês completo em {{ e.ano_num }}:</span>{% endif %}
+          <span><span class="chave chave-escura" aria-hidden="true"></span>até 1 dia{% if t %} <strong>{{ t.ate1 }}%</strong>{% endif %}</span>
+          <span><span class="chave chave-media" aria-hidden="true"></span>1 a 2 dias{% if t %} <strong>{{ t.de1a2 }}%</strong>{% endif %}</span>
+          <span><span class="chave chave-vazia" aria-hidden="true"></span>acima de {{ e.limite_dias }} dias{% if t %} <strong>{{ t.acima2 }}%</strong>{% endif %}</span>
+          {# A3 (25/10, v2): o selo sob cada mês é a mediana de horas de trabalho daquele mês #}
+          <span class="legenda-mediana"><span class="chave-mediana" aria-hidden="true">h</span>típico do mês</span>
+        </span>
+        <span class="so-leitor">Linha tracejada: meta sugerida, ainda não oficial, de metade dos orçamentos ({{ e.meta | pct }}) prontos em até {{ e.limite_dias }} dias de trabalho ({{ e.limite_horas }} horas). Sob cada mês, o típico de horas de trabalho da equipe.</span>
+        {# D38 (25/10/2026, Caio): o típico do grupo contra a meta (mediana exata contra 16 h, C6) e, ao lado, sem meta, a
+           parcela acima de 5 dias de trabalho (C12). Ícone + texto, nunca só cor #}
+        {% if e.tipico %}
+        <span class="sla-meta-msg">
+          <span class="sla-meta-item{{ ' sla-meta-ok' if e.tipico.na_meta else ' sla-meta-acima' }}"><svg class="sla-meta-ic" aria-hidden="true" viewBox="0 0 16 16">{% if e.tipico.na_meta %}<path d="M3.5 8.5l3 3 6-7"/>{% else %}<path d="M8 13V3.5M4 7.5 8 3.5l4 4"/>{% endif %}</svg>{% if e.tipico.na_meta %}O típico já sai em até {{ e.limite_dias }} dias{% else %}O típico {{ "deste grupo " if e.grupo != "todos" }}ainda passa de {{ e.limite_dias }} dias ({{ e.tipico.mediana_txt | replace(" ", " ") }}){% endif %}</span>
+          {# batalha 2 (G1-N1): o complemento é o "acima de 2 dias" da legenda; o corte de 5 dias (C12) fica nos slides 4 e 8 do estudo #}
+          {% if t and t.acima2 %}<span class="sla-meta-item sla-meta-cauda"><svg class="sla-meta-ic" aria-hidden="true" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3.2l2 1.3"/></svg>{{ t.acima2 }}% {{ "passa" if t.acima2 <= 1 else "passam" }} de {{ e.limite_dias }} dias de trabalho</span>{% endif %}
+        </span>
+        {% endif %}
+      </figcaption>
+      {# alturas do gráfico num bloco <style> assinado pelo nonce da página: a CSP proíbe style="" (style-src-attr 'none').
+         D-SLA-7 (D38, 25/10/2026): duas faixas até 2 dias; a meta sugerida mede o total até 2 dias #}
+      <style nonce="{{ request.state.nonce }}">
+        #grafico-entrega { --meta: {{ e.meta * 100 }}; }
+        {% for m in e.meses %}#mes-{{ loop.index0 }} { --i: {{ loop.index0 }};{% if m.n and not m.aguardando %} --total: {{ m.ate2 * 100 }};{% endif %} }
+        {% if m.n and not m.parcial %}#mes-{{ loop.index0 }} .seg-media { --v: {{ m.de1a2 * 100 }}; } #mes-{{ loop.index0 }} .seg-escura { --v: {{ m.ate1 * 100 }}; }{% endif %}
+        {% endfor %}
+      </style>
+      <div class="plot" id="grafico-entrega">
+        {# D54 (26/10/2026): rótulo curto, numa linha; a régua inteira fica no leitor de tela (legenda) e na dica #}
+        <div class="linha-meta" aria-hidden="true"><span title="meta sugerida, ainda não oficial: metade em até {{ e.limite_dias }} dias de trabalho ({{ e.limite_horas }} h)">meta sugerida: {{ e.limite_dias }} dias de trabalho</span></div>
+        <ol class="meses">
+          {% for m in e.meses %}
+          {# G2-2: perto da meta (15,5–16,5 h), uma casa decimal (C6, a mesma função do estudo) #}
+          {% set med = m.mediana_txt | replace(" ", " ") if m.n and not m.aguardando else "—" %}
+          <li id="mes-{{ loop.index0 }}" class="mes{% if m.parcial %} mes-parcial{% endif %}{% if m.aguardando %} mes-aguardando{% endif %}{% if m.futuro %} mes-futuro{% endif %}"{% if m.n or m.parcial %} tabindex="0"{% endif %}{% if m.parcial and m.n and not m.aguardando %} title="{{ m.rotulo }}, parcial{% if m.ate %} até {{ m.ate }}{% endif %}: {{ m.tela.ate2 }}% prontos em até {{ e.limite_dias }} dias, de {{ m.n | inteiro }} entregas"{% elif m.n and not m.parcial %} title="{{ m.rotulo }}: {{ m.tela.ate2 }}% prontos em até {{ e.limite_dias }} dias ({{ m.tela.ate1 }}% até 1 dia, {{ m.tela.de1a2 }}% de 1 a 2 dias), de {{ m.n | inteiro }} orçamentos"{% endif %}>
+            <div class="mes-area">
+              {% if m.parcial %}
+              {# A2: mês vigente vazado (só contorno), fora do ano, da meta e do estudo; com poucas entregas, só o trilho #}
+              <span class="so-leitor">{{ m.rotulo }}, mês em andamento{% if m.ate %} (dados até {{ m.ate }}){% endif %}:
+                {% if m.aguardando %}aguardando entregas{% if m.n %} ({{ m.n | inteiro }} até agora){% endif %}, sem percentual.
+                {% else %}{{ m.tela.ate2 }}% prontos em até {{ e.limite_dias }} dias, de {{ m.n | inteiro }} entregas; típico {{ med }}. Ainda vai mudar.{% endif %}</span>
+              {% if not m.aguardando %}<div class="pilha pilha-vazada" aria-hidden="true"><span class="vazada-txt"><span class="vz-longo">parcial</span><span class="vz-curto">parc.</span></span></div>{% endif %}
+              {% elif m.n %}
+              <span class="so-leitor">{{ m.rotulo }}: {{ m.tela.ate2 }}% prontos em
+                até {{ e.limite_dias }} dias ({{ m.tela.ate1 }}% até 1 dia, {{ m.tela.de1a2 }}% de 1 a 2 dias; {{ m.tela.acima2 }}% acima de {{ e.limite_dias }} dias), de
+                {{ m.n | inteiro }} orçamentos; típico {{ med }} de trabalho.</span>
+              <span class="pilha-total" aria-hidden="true">{{ m.tela.ate2 }}%</span>
+              <div class="pilha" aria-hidden="true">
+                {# D38 (Caio): número de tamanho único, menor; o CSS (container query na própria faixa) encolhe até 8 px
+                   e some se nem assim couber — o valor segue no leitor de tela e no title do mês #}
+                <span class="seg seg-media">{% if m.de1a2 >= 0.02 %}<span class="seg-num">{{ m.tela.de1a2 }}%</span>{% endif %}</span>
+                <span class="seg seg-escura">{% if m.ate1 >= 0.02 %}<span class="seg-num">{{ m.tela.ate1 }}%</span>{% endif %}</span>
+              </div>
+              {% else %}
+              <span class="so-leitor">{{ m.rotulo }}: {% if m.futuro %}mês futuro{% else %}sem entregas{% endif %}.</span>
+              {% endif %}
+            </div>
+            <span class="mes-rotulo" aria-hidden="true">{{ m.rotulo }}
+              {# A3 (v2): típico (mediana) de horas do mês num selo discreto sob o nome do mês (explicado na legenda) #}
+              {% if not m.futuro %}<span class="mes-mediana">{{ med }}</span>{% endif %}</span>
+          </li>
+          {% endfor %}
+        </ol>
+      </div>
+      {# entrada da subpágina "Como medimos" (24/10/2026): só a lupa em amarelo suave no canto do cartão; no hover/foco a
+         palavra "Estudo" sai de dentro dela girando e fica contornando o ícone; clicar abre o estudo #}
+      <a class="estudo-link" href="/{{ apresentacao.slug }}/{{ secao_atual.slug }}/como-medimos{% if e.grupo != 'todos' %}?talentos={{ e.grupo }}{% endif %}"
+         aria-label="Estudo: como chegamos a esse valor">
+        {# a palavra sai de dentro da lupa e gira até contornar o ícone (texto num arco SVG) #}
+        <span class="estudo-anel" aria-hidden="true"><svg viewBox="0 0 60 60">
+          <defs><path id="estudo-arco" d="M 9.5,30 a 20.5,20.5 0 1,1 41,0 a 20.5,20.5 0 1,1 -41,0"/></defs>
+          <circle class="estudo-trilha" cx="30" cy="30" r="17"/>
+          <text><textPath href="#estudo-arco" startOffset="25%" text-anchor="middle">Estudo</textPath></text>
+        </svg></span>
+        <span class="estudo-lupa" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.25"/><path d="m10.2 10.2 3.3 3.3"/></svg></span>
+      </a>
+      {# leitura por regra (C11) retirada da tela a pedido do Caio (24/10/2026); o texto segue calculado em entrega() #}
+    </figure>
+  </div>
+</div>
+</section>
+
+{# slides de leitura (cauda C12, exclusivos × não exclusivos C13–C14) retirados da tela em 24/10/2026, a pedido do Caio:
+   o Prazo fica em uma página só, sem botões de slide. O cálculo continua em calculos.leituras para a próxima conversa. #}
+{% endblock %}

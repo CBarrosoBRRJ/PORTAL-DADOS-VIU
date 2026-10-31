@@ -1,0 +1,17 @@
+# Só para o laboratório de previsão (pasta ml/). O site NÃO depende destes pacotes (não entram no Dockerfile).
+# Instalado em 25/10/2026 no venv C:\Users\CCMB\.venvs\ppd-agenciamento-sla
+# Uso: python -m pip install -r requirements.txt -r requirements-ml.txt
+statsmodels==0.15.0
+scikit-learn==1.9.1
+xgboost==3.4.1
+lightgbm==4.7.0
+prophet==1.5.0
+scipy==1.18.1
+# D55 (26/10/2026): comparação automática (ml/modelos/automatico.py); PyCaret exige Python <= 3.11, o venv é 3.12
+autots==1.0.4
+# dependências diretas relevantes, fixadas para reprodutibilidade
+cmdstanpy==1.3.0
+holidays==0.107
+patsy==1.0.3
+joblib==1.6.0
+threadpoolctl==3.7.0

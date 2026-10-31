@@ -1,0 +1,129 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import cabecalho, lamina_pendente %}
+{# Atendimento (D33, 24/10/2026; revisões de 25 e 26/10/2026): faixa dos números do ano (A15b), extrato mês a mês em três
+   blocos (A24b) e dispersão do entregue sobre o que havia para atender (A25b), com a dica dos status das saídas sem
+   entrega (A26). D58b/A30 (Caio, 27/10): o % é entregues no mês (entregues ao cliente + declinados) ÷ para atender; a faixa do topo mostra o % dos recebidos em cada parte; A28: ▲/▼ no que ficou para o mês
+   seguinte. Memória de cálculo em calculos.py e na ficha docs/paginas/atendimento.md. #}
+{% macro dica_status(id, titulo, c, total) %}{# A26: status do board que compõem "Saíram sem entrega"; total = célula #}
+<span class="dica dica-tipos dica-status" id="{{ id }}" role="tooltip"><span class="dica-titulo">{{ titulo }}</span>
+  {% if c and c.itens %}{% set eq = c.itens | rejectattr("externo") | list %}{% set ex = c.itens | selectattr("externo") | list %}<span class="dica-lista">
+    {%- if eq %}<span class="dica-grupo"><span>Decisão interna</span><strong>{{ eq | sum(attribute="n") | inteiro }}</strong></span>{% for i in eq %}<span class="dica-sub"><span>{{ i.status }}</span><strong>{{ i.n | inteiro }}</strong></span>{% endfor %}{% endif %}
+    {%- if ex %}<span class="dica-grupo"><span>Decisão externa</span><strong>{{ ex | sum(attribute="n") | inteiro }}</strong></span>{% for i in ex %}<span class="dica-sub"><span>{{ i.status }}</span><strong>{{ i.n | inteiro }}</strong></span>{% endfor %}{% endif -%}
+    <span class="dica-status-total"><span>Total</span><strong>{{ total | inteiro }}</strong></span></span>
+  <span class="dica-nota">Status do pedido no board hoje, contado no mês em que chegou a ele.{% if c.sem_data %} {{ c.sem_data | inteiro }} sem data de mudança no histórico: contados no mês em que entraram.{% endif %}</span>
+  {% else %}<span class="dica-nota">Declinados, em standby ou encerrados antes da entrega. A divisão por status não está disponível nesta carga.</span>{% endif %}</span>
+{%- endmacro %}
+{% block slides %}
+{% set a = atendimento %}
+{% if not a %}
+{{ lamina_pendente(apresentacao, secao_atual, "Gerencial", "Bases em atualização", "Entradas e fluxo ainda não representam a mesma fotografia.", "A análise volta quando as bases estiverem conciliadas.") }}
+{% else %}
+<section class="slide" aria-roledescription="slide" aria-labelledby="s-atendimento" data-nivel="gerencial">
+<div class="lamina">
+  {{ cabecalho(apresentacao, secao_atual) }}
+  <div class="sobretitulo"><span class="nivel">Gerencial</span></div>
+  <h2 class="slide-titulo" id="s-atendimento">A equipe está dando conta da demanda?</h2>
+  {% set f = fluxo_mes %}
+  <div class="slide-corpo">
+  {% if f %}
+    {# A15b/A27 (D53, 26/10/2026, Caio): resolvido = ENTREGUE AO CLIENTE. Recebidos → entregues (selo = % da demanda que
+       dependia da equipe no ano: recebidos − saídas por decisão externa) → saíram sem entrega (dica com os status) → em
+       andamento. A régua de baixo tem as três partes, que somam os recebidos, com a entregue em destaque #}
+    {% set total = f.ano_recebidos or 1 %}
+    <style nonce="{{ request.state.nonce }}">
+      #kr-entregue { --w: {{ f.entregues_ano_total / total * 100 }}; } #kr-sem { --w: {{ f.sem_entrega_ano_total / total * 100 }}; } #kr-and { --w: {{ f.ano_seguem / total * 100 }}; }
+    </style>
+    <section class="kpi kpi-entrega" aria-label="Demanda do ano">
+      <dl class="kpi-linha">
+        <div class="kpi-item"><dt>Recebidos em {{ f.ano }}</dt><dd><span class="kpi-num">{{ f.ano_recebidos | inteiro }}</span></dd></div>
+        <div class="kpi-seta" aria-hidden="true"><svg viewBox="0 0 40 12"><path d="M0 6h36M31 1l5 5-5 5"/></svg></div>
+        <div class="kpi-item kpi-destaque"><dt><span class="kpi-chave kpi-entregue" aria-hidden="true"></span>Entregues ao cliente</dt><dd><span class="kpi-num">{{ f.entregues_ano_total | inteiro }}</span><span class="kpi-pct">{{ f.pct_entregues }}%<span class="so-leitor"> dos recebidos</span></span></dd></div>{# D58b (Caio): sem o selo; só o % de cada número sobre os recebidos #}
+        <div class="kpi-seta" aria-hidden="true"><svg viewBox="0 0 40 12"><path d="M0 6h36M31 1l5 5-5 5"/></svg></div>
+        <div class="kpi-item kpi-com-dica"><dt><span class="kpi-chave kpi-sem" aria-hidden="true"></span><button type="button" class="tipo-info kpi-info" aria-describedby="sem-status-topo">Declinados (Não teve seguimento)</button>{{ dica_status("sem-status-topo", "Declinados em " ~ f.ano ~ ", por status", status_sem.ano if status_sem else None, f.sem_entrega_ano_total) }}</dt><dd><span class="kpi-num">{{ f.sem_entrega_ano_total | inteiro }}</span><span class="kpi-pct">{{ f.pct_sem_entrega }}%<span class="so-leitor"> dos recebidos</span></span></dd></div>
+        <div class="kpi-seta" aria-hidden="true"><svg viewBox="0 0 40 12"><path d="M0 6h36M31 1l5 5-5 5"/></svg></div>
+        <div class="kpi-item"><dt><span class="kpi-chave kpi-and" aria-hidden="true"></span>Em andamento</dt><dd><span class="kpi-num">{{ f.ano_seguem | inteiro }}</span><span class="kpi-pct">{{ f.pct_andamento }}%<span class="so-leitor"> dos recebidos</span></span></dd></div>
+        {# AT-11: só dt/dd (em div) dentro do dl: HTML válido #}
+        <div class="kpi-periodo"><dt class="kpi-periodo-rot">dados até</dt><dd class="kpi-periodo-data">{{ a.periodo | replace("até ", "") }}</dd></div>
+      </dl>
+      <div class="kpi-regua" aria-hidden="true"><span class="kpi-parte kpi-entregue" id="kr-entregue"></span><span class="kpi-parte kpi-sem" id="kr-sem"></span><span class="kpi-parte kpi-and" id="kr-and"></span></div>
+    </section>
+  {% endif %}
+  {% set r = ritmo %}
+  {% if r %}{% set dp = r.dispersao %}
+    {# bloco branco com dois painéis. Esquerda: o extrato da demanda mês a mês em três blocos (A24b), com uma linha de %
+       (entregues ÷ para atender). Direita: cada mês, o que havia para atender × o que entregamos ao cliente (A25b) #}
+    <div class="ritmo">
+      {% set qd = r.quadro %}{% set st = status_sem %}
+      <figure class="ritmo-painel quadro">
+        <figcaption class="so-leitor">Extrato da demanda em cada mês, em três blocos. Entrada: o que veio do mês anterior mais o que entrou dá o total para atender. Saída: os entregues ao cliente mais os declinados (não tiveram seguimento) dão os entregues no mês. Saldo: o que ficou para o mês seguinte. Por fim, o percentual: entregues no mês divididos pelo que havia para atender.</figcaption>
+        <p class="painel-tit" aria-hidden="true">Quanto entrou, quanto saiu e quanto ficou</p>
+        {# mesmo quadro do gráfico da direita (proporção 640×340), centralizado; no celular rola para o lado (AT-01) #}
+        <div class="quadro-caixa" tabindex="0" role="region" aria-label="Quadro do extrato, role para o lado">
+        <table class="quadro-tabela quadro-extrato">
+          <thead><tr><td class="q-bloco-vazio"></td><th scope="col"><span class="so-leitor">Etapa</span></th>{% for m in qd.meses %}<th scope="col">{% if m.parcial %}<small>parcial</small>{% endif %}{{ m.rotulo }}</th>{% endfor %}</tr></thead>
+          {% for b in qd.blocos %}
+          <tbody class="q-grupo q-grupo-{{ b.chave }}">
+            {% for l in b.linhas %}
+            <tr class="quadro-{{ l.chave }}{% if l.subtotal %} q-subtotal{% endif %}">
+              {% if loop.first %}<th scope="rowgroup" rowspan="{{ b.linhas | length }}" class="q-bloco"><span>{{ b.nome }}</span></th>{% endif %}
+              <th scope="row"><span class="q-op" aria-hidden="true">{{ l.op }}</span>{% if l.chave == "sem" %}<button type="button" class="tipo-info q-info" aria-describedby="sem-status-ano">{{ l.nome }}</button>{{ dica_status("sem-status-ano", "Declinados em " ~ a.ano ~ ", por status", st.ano if st else None, f.sem_entrega_ano_total if f else 0) }}{% else %}{{ l.nome }}{% endif %}</th>
+              {% for c in l.celulas %}{% set m = qd.meses[loop.index0] %}<td class="{% if l.chave == 'ficou' %}q-n{{ c.nivel }}{% endif %}{% if l.chave == 'sem' %} q-celula-dica{% if loop.index0 >= (l.celulas | length) // 2 %} q-dica-esq{% endif %}{% endif %}">{% if l.chave == "sem" %}<button type="button" class="tipo-info q-num" aria-describedby="sem-status-{{ m.chave }}"><span class="so-leitor">{{ m.extenso }}: </span>{{ c.v | inteiro }}</button>{{ dica_status("sem-status-" ~ m.chave, "Declinados em " ~ m.extenso ~ (" (parcial)" if m.parcial else ""), st.meses.get(m.chave) if st else None, c.v) }}{% else %}{{ c.v | inteiro }}{% if l.chave == "ficou" %}{% set dv = qd.ficou_var[loop.index0] %}{% if dv %}<span class="q-var {{ 'q-var-sobe' if dv > 0 else 'q-var-desce' }}" aria-hidden="true">{{ "▲" if dv > 0 else "▼" }}</span><span class="so-leitor">, {{ "cresceu" if dv > 0 else "caiu" }} {{ dv | abs | inteiro }} em relação ao mês anterior</span>{% endif %}{% endif %}{% endif %}</td>{% endfor %}</tr>
+            {% endfor %}
+          </tbody>
+          {% endfor %}
+          <tbody class="q-grupo q-grupo-pct">
+            <tr class="quadro-pct"><td class="q-bloco-vazio"></td><th scope="row"><button type="button" class="tipo-info q-info" aria-describedby="conta-regra"><span class="so-leitor">Percentual entregue no mês do que havia para atender </span>%</button>
+              <span class="dica dica-tipos dica-status" id="conta-regra" role="tooltip"><span class="dica-titulo">Quanto entregamos do que havia para atender</span>
+                <span class="dica-nota">Entregues no mês (entregues ao cliente + declinados) ÷ para atender (o que veio do mês anterior + o que entrou).</span></span></th>
+              {% for k in qd.conta %}{% set m = qd.meses[loop.index0] %}<td class="{{ 'q-ok' if k.pct >= qd.objetivo else 'q-perto' if k.pct >= qd.corte else 'q-baixo' }} q-celula-dica{% if loop.index0 >= (qd.conta | length) // 2 %} q-dica-esq{% endif %}"><button type="button" class="tipo-info q-num" aria-describedby="conta-{{ m.chave }}"><span class="so-leitor">{{ m.extenso }}: </span>{{ k.pct }}%</button>
+                <span class="dica dica-tipos dica-status" id="conta-{{ m.chave }}" role="tooltip"><span class="dica-titulo">A conta de {{ m.extenso }}{{ " (parcial)" if m.parcial else "" }}</span>
+                  <span class="dica-lista"><span><span>Entregues ao cliente</span><strong>{{ k.entregues | inteiro }}</strong></span>
+                    <span><span>+ Declinados (Não teve seguimento)</span><strong>{{ k.declinados | inteiro }}</strong></span>{% for i in k.itens %}<span class="dica-sub"><span>{{ i.status }}</span><strong>{{ i.n | inteiro }}</strong></span>{% endfor %}
+                    <span class="dica-status-total"><span>= Entregues no Mês</span><strong>{{ k.saiu | inteiro }}</strong></span>
+                    <span><span>÷ Para atender</span><strong>{{ k.atender | inteiro }}</strong></span>
+                    <span class="dica-status-total"><span>Entregamos</span><strong>{{ k.pct }}%</strong></span></span>
+                  </span></td>{% endfor %}</tr>
+          </tbody>
+        </table>
+        </div>
+      </figure>
+      {# A16/A25b (D53, Caio): o MESMO desenho de antes — área acima da diagonal do equilíbrio (100%), reta do corte de
+         90%, "a mais / a menos", cor do ponto pela faixa —; só o eixo vertical e o % passam a ser a ENTREGA (entregues ao
+         cliente ÷ para atender), o mesmo número da última linha do quadro #}
+      <figure class="ritmo-painel">
+        <figcaption class="so-leitor">Quanto entregamos do que havia para atender, em cada mês. Eixo horizontal: para atender no mês (do mês anterior + novos); eixo vertical: entregues no mês (entregues ao cliente + declinados). {{ dp.texto }}. Equilíbrio em {{ dp.objetivo.pct }}% e alerta abaixo de {{ dp.corte.pct }}%.</figcaption>
+        {# D53: o título e o título do eixo horizontal saíram da tela (Caio); ficam na legenda do leitor de tela acima #}
+        <svg class="ritmo-svg" viewBox="0 0 {{ dp.s }} {{ dp.sh }}" aria-hidden="true" focusable="false">
+          {# origem comum dos dois eixos: um único rótulo na quina (pedido do Caio) #}
+          {% for t in dp.marcas %}{% if loop.first %}<text class="ritmo-eixo" x="{{ dp.x0 - 6 }}" y="{{ dp.y0 + 14 }}" text-anchor="end">{{ t.rotulo }}</text>{% else %}<text class="ritmo-eixo" x="{{ t.p_x }}" y="{{ dp.y0 + 16 }}" text-anchor="middle">{{ t.rotulo }}</text><text class="ritmo-eixo" x="{{ dp.x0 - 8 }}" y="{{ t.p_y }}" text-anchor="end">{{ t.rotulo }}</text>{% endif %}{% endfor %}
+          <polygon class="ritmo-zona" points="{{ dp.objetivo.x0 }},{{ dp.objetivo.y0 }} {{ dp.x0 }},{{ dp.y0 }} {{ dp.x0 }},{{ dp.y1 }} {{ dp.x1 }},{{ dp.y1 }} {{ dp.objetivo.x1 }},{{ dp.objetivo.y1 }}"/>
+          <line class="ritmo-eixo-linha" x1="{{ dp.x0 }}" y1="{{ dp.y0 }}" x2="{{ dp.x1 }}" y2="{{ dp.y0 }}"/>
+          <line class="ritmo-eixo-linha" x1="{{ dp.x0 }}" y1="{{ dp.y0 }}" x2="{{ dp.x0 }}" y2="{{ dp.y1 }}"/>
+          <line class="ritmo-diagonal" x1="{{ dp.objetivo.x0 }}" y1="{{ dp.objetivo.y0 }}" x2="{{ dp.objetivo.x1 }}" y2="{{ dp.objetivo.y1 }}"/>
+          {% if dp.corte %}<line class="ritmo-corte" x1="{{ dp.corte.x0 }}" y1="{{ dp.corte.y0 }}" x2="{{ dp.corte.x1 }}" y2="{{ dp.corte.y1 }}"/>{% endif %}
+          <text class="ritmo-zona-rot" x="{{ dp.x0 + 14 }}" y="{{ dp.y1 + 22 }}">▲ entregamos a mais</text>
+          <text class="ritmo-zona-rot" x="{{ dp.x1 - 8 }}" y="{{ dp.y0 - 12 }}" text-anchor="end">▼ entregamos a menos</text>
+          {% for p in dp.pontos %}<circle class="ritmo-mes ponto-{{ p.faixa }}{% if p.parcial %} ritmo-mes-parcial{% endif %}" cx="{{ p.x }}" cy="{{ p.y }}" r="6"/>
+          <text class="ritmo-mes-rot" x="{{ p.rx }}" y="{{ p.ry }}" text-anchor="{{ p.ancora }}">{{ p.rotulo }} <tspan class="ritmo-mes-pct">{{ p.pct }}%</tspan></text>{% endfor %}
+        </svg>
+        <ul class="ritmo-legenda ritmo-legenda-disp">
+          {# faixas da legenda geradas do objetivo e do corte (nada fixo); o mês parcial, vazado, com o nome vindo do dado (AT-04) #}
+          {% set o, c = dp.objetivo.pct, dp.corte.pct %}{% set mp = dp.pontos | selectattr("parcial") | first %}
+          <li><span class="leg-linha-eq" aria-hidden="true"></span>equilíbrio {{ o }}%</li>
+          <li><span class="leg-linha-90" aria-hidden="true"></span>alerta abaixo de {{ c }}%</li>
+          <li><span class="leg-ponto ponto-mais" aria-hidden="true"></span>≥ {{ o }}%</li>
+          <li><span class="leg-ponto ponto-perto" aria-hidden="true"></span>{{ c }}–{{ o - 1 }}%</li>
+          <li><span class="leg-ponto ponto-menos" aria-hidden="true"></span>&lt; {{ c }}%</li>
+          {% if mp %}<li><span class="leg-ponto leg-parcial" aria-hidden="true"></span>{{ mp.rotulo }} parcial</li>{% endif %}
+        </ul>
+      </figure>
+    </div>
+  {% elif f %}
+    {# AT-D03: de janeiro ao fim de fevereiro não há 3 meses para o quadro e o gráfico; a faixa do ano continua #}
+    <p class="aviso-texto" role="status">O quadro mês a mês e o gráfico aparecem a partir do 3º mês do ano.</p>
+  {% endif %}
+  </div>
+</div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,974 @@
+{
+  "data": "2026-10-23T17:42:28.132191-03:00",
+  "jobs": [
+    {
+      "id": "229f52fe-c504-4313-9168-3632f09f879b",
+      "dry_bytes": 4135358,
+      "processed_bytes": 0,
+      "billed_bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "2904b835-457c-4588-a4e8-409f4914f17e",
+      "dry_bytes": 234240,
+      "processed_bytes": 234240,
+      "billed_bytes": 10485760,
+      "cache": false
+    },
+    {
+      "id": "0195c618-4b44-4f80-b09d-bcc5e7657b2e",
+      "dry_bytes": 43820,
+      "processed_bytes": 43820,
+      "billed_bytes": 10485760,
+      "cache": false
+    },
+    {
+      "id": "3376f8c1-1eaf-41e9-b6c1-0bc7ac144448",
+      "dry_bytes": 3007117,
+      "processed_bytes": 3007117,
+      "billed_bytes": 20971520,
+      "cache": false
+    },
+    {
+      "id": "f5e9e687-08ab-4940-bf97-d779a9d56aa9",
+      "dry_bytes": 17795206,
+      "processed_bytes": 17795206,
+      "billed_bytes": 52428800,
+      "cache": false
+    },
+    {
+      "id": "19bccb86-4b89-474b-9e04-d73fff7dbeff",
+      "dry_bytes": 10657960,
+      "processed_bytes": 10657960,
+      "billed_bytes": 41943040,
+      "cache": false
+    }
+  ],
+  "tabelas": {
+    "sla": {
+      "id": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_2026_sla_movimentos",
+      "linhas": 14873,
+      "modified": "2026-10-23T20:24:55.253000+00:00",
+      "processado": "2026-10-23 20:23:42.123467+00:00"
+    },
+    "entrada": {
+      "id": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_entrada_diaria",
+      "linhas": 2336,
+      "modified": "2026-10-23T20:24:55.253000+00:00",
+      "processado": "2026-10-23 20:23:49.578448+00:00"
+    },
+    "fluxo": {
+      "id": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_fluxo_mensal",
+      "linhas": 622,
+      "modified": "2026-10-23T20:24:55.253000+00:00",
+      "processado": "2026-10-23 20:24:38.900283+00:00"
+    }
+  },
+  "validacoes": {
+    "sla": [
+      {
+        "verificacao": "chave projeto_id + passo única",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "passos de 1 a N sem buraco",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "todo projeto começa em Entrada",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "último passo = status atual da silver",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "status_atual igual em todas as linhas do projeto",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "só o último passo sem saída",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "entrada sempre preenchida (R23)",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "passo concluído com tempo corrido e útil preenchidos",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "passos seguidos com o mesmo status (R9 depois de R10)",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "saída nunca antes da entrada",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "útil nunca maior que o corrido e sem negativos",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "hora extra nunca maior que o corrido",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "em aberto só no último passo e fora de fechamento",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "alerta só com o cliente em aberto",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "fase preenchida e conhecida",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "orçamento e link sempre preenchidos",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "uma execução só (_processado_em único)",
+        "resultado": "1",
+        "esperado": "1",
+        "ok": true
+      },
+      {
+        "verificacao": "volume: projetos (ensaio 21/10/2026 = 3.095)",
+        "resultado": "3114",
+        "esperado": "perto de 3.095 e crescendo",
+        "ok": true
+      },
+      {
+        "verificacao": "volume: linhas (ensaio 21/10/2026 = 14.776)",
+        "resultado": "14873",
+        "esperado": "perto de 14.776 e crescendo",
+        "ok": true
+      }
+    ],
+    "entrada": [
+      {
+        "verificacao": "família: Nenhuma (saídas por ano)",
+        "resultado": "2024: 191 | 2025: 2830 | 2026: 3869",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Defesas | Estudo Comercial (saídas por ano)",
+        "resultado": "2025: 13 | 2026: 2",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Card de Oportunidade (Levop) (saídas por ano)",
+        "resultado": "2025: 38 | 2026: 105",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Defesa (saídas por ano)",
+        "resultado": "2024: 1 | 2025: 8 | 2026: 36",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Mídia Kit (saídas por ano)",
+        "resultado": "2025: 8 | 2026: 9",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Levop (saídas por ano)",
+        "resultado": "2024: 12 | 2025: 1 | 2026: 4",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Upfront (saídas por ano)",
+        "resultado": "2025: 73 | 2026: 142",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Análise (saídas por ano)",
+        "resultado": "2025: 8 | 2026: 6",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Curadoria (saídas por ano)",
+        "resultado": "2025: 41 | 2026: 172",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Curadoria Orçada (saídas por ano)",
+        "resultado": "2026: 46",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Nenhuma (por ano)",
+        "resultado": "2024: 313 | 2025: 3386 | 2026: 4932",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Defesas | Estudo Comercial (por ano)",
+        "resultado": "2025: 17 | 2026: 7",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Card de Oportunidade (Levop) (por ano)",
+        "resultado": "2025: 38 | 2026: 105",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Defesa (por ano)",
+        "resultado": "2024: 1 | 2025: 8 | 2026: 37",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Mídia Kit (por ano)",
+        "resultado": "2025: 10 | 2026: 9",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Levop (por ano)",
+        "resultado": "2024: 12 | 2025: 1 | 2026: 4",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Upfront (por ano)",
+        "resultado": "2025: 78 | 2026: 150",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Análise (por ano)",
+        "resultado": "2025: 8 | 2026: 6",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Curadoria (por ano)",
+        "resultado": "2024: 2 | 2025: 40 | 2026: 214",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "família: Curadoria Orçada (por ano)",
+        "resultado": "2026: 56",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "chave data × grupo_input × tipo_de_input × familia única",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "datas antes de 2024-10-01 ou depois de ontem",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "linhas inválidas (vazio, negativo, linha sem card, dia da semana/ano/mês/início da semana errados)",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "grupo_input incoerente com o tipo_de_input (R7)",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "por ano: quantidade + quantidade_estimada = silvers pela data",
+        "resultado": "2024: 317 + 11 = 328 | 2025: 3010 + 576 = 3586 | 2026: 5515 + 5 = 5520",
+        "esperado": "2024: 317 + 11 = 328 | 2025: 3010 + 576 = 3586 | 2026: 5515 + 5 = 5520",
+        "ok": true
+      },
+      {
+        "verificacao": "por ano: quantidade_saida = silvers pela data de saída (R12–R14)",
+        "resultado": "2024: 204 | 2025: 3020 | 2026: 4391",
+        "esperado": "2024: 204 | 2025: 3020 | 2026: 4391",
+        "ok": true
+      },
+      {
+        "verificacao": "quantidade, quantidade_estimada e quantidade_saida = recontagem, dia a dia (dias diferentes: reais | estimados | saídas)",
+        "resultado": "0 | 0 | 0",
+        "esperado": "0 | 0 | 0",
+        "ok": true
+      },
+      {
+        "verificacao": "referência por board histórico: cards dos boards 2024 e 2025 na tabela (carga única)",
+        "resultado": "board 2024: 327 | board 2025: 3578",
+        "esperado": "board 2024: 327 | board 2025: 3578",
+        "ok": true
+      },
+      {
+        "verificacao": "entregue_no_mes + entregue_depois + nao_seguiu + em_andamento = quantidade + quantidade_estimada (R20): linhas diferentes",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "situação = recontagem, dia a dia (dias diferentes)",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "referência de 23/10/2026, com a R21, por ano (entradas 328 | 3586 | ≥ 5520; saídas 204 | 3020 | ≥ 4391): anos diferentes",
+        "resultado": "0",
+        "esperado": "aviso",
+        "ok": true
+      },
+      {
+        "verificacao": "2026 jan–set: meses com mais de 20 em andamento",
+        "resultado": "0",
+        "esperado": "aviso",
+        "ok": true
+      },
+      {
+        "verificacao": "2026 jan–set: em andamento por mês",
+        "resultado": "1: 1 | 2: 0 | 3: 1 | 4: 0 | 5: 0 | 6: 1 | 7: 2 | 8: 3 | 9: 4",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "agosto/2026: total = no mês + depois + não seguiu + em andamento",
+        "resultado": "644 = 489 + 51 + 101 + 3",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "2026 por mês de entrada: total (não seguiu)",
+        "resultado": "1: 374 (60) | 2: 341 (79) | 3: 485 (106) | 4: 472 (85) | 5: 629 (113) | 6: 569 (104) | 7: 765 (112) | 8: 644 (101) | 9: 733 (138) | 10: 508 (74)",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "situação por ano de entrada (no mês | depois | não seguiu | em andamento)",
+        "resultado": "2024: 182 | 30 | 105 | 11 · 2025: 2231 | 781 | 572 | 2 · 2026: 3710 | 678 | 972 | 160",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "Encerrado sem saída válida, por ano de entrada (pendência de preenchimento do board)",
+        "resultado": "2024: 23 | 2025: 66 | 2026: 48",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "em andamento com entrada há mais de 60 dias, por ano de entrada",
+        "resultado": "2024: 11 | 2025: 2 | 2026: 8",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "cadastro retroativo: cards com a data de entrada corrigida para a data_de_entrada, por ano de entrada (R21)",
+        "resultado": "2024: 0 | 2025: 9 | 2026: 145",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "totais por ano (entradas)",
+        "resultado": "2024: 328 | 2025: 3586 | 2026: 5520",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "fora: data antes de 2024-10-01",
+        "resultado": "12",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "fora: sem criado_em nem data_de_saida (por board)",
+        "resultado": "2024: 13 | 2025: 149",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "referência por board histórico: saídas dos boards 2024 e 2025 na tabela (carga única)",
+        "resultado": "board 2024: 213 | board 2025: 3005",
+        "esperado": "board 2024: 213 | board 2025: 3005",
+        "ok": true
+      },
+      {
+        "verificacao": "cards com data estimada",
+        "resultado": "592",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "saídas por ano",
+        "resultado": "2024: 204 | 2025: 3020 | 2026: 4391",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "linhas só com saída (sem entrada no dia)",
+        "resultado": "504",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "fora: saída antes da data de entrada do card, sem correção pelo log (por board, R14; R21)",
+        "resultado": "2024: 1 | 2025: 16 | 2026: 27",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "origem da saída, board 2026 (antes da entrada | coluna | log | sem saída)",
+        "resultado": "antes da entrada: 27 | coluna: 193 | log: 4204 | sem saída: 1105",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "cards com 1ª ida a Aguardando Feedback diferente da data_de_saida (reentregas e edições)",
+        "resultado": "619",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "data_de_saida regravada depois da 1ª entrega (reenvio), por board; a saída fica na 1ª (R12)",
+        "resultado": "2024: sem log | 2025: sem log | 2026: 437",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "fora das saídas: Declinado pelo Mercado sem data de saída (por board)",
+        "resultado": "2024: 9 | 2025: 48 | 2026: 111",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "cards a estimar com data_de_saida além de hoje + 60 dias (fora da estimativa)",
+        "resultado": "0",
+        "esperado": "aviso",
+        "ok": true
+      },
+      {
+        "verificacao": "tipo_de_input novo, sem grupo (Outros): valores e cards",
+        "resultado": "0",
+        "esperado": "aviso",
+        "ok": true
+      }
+    ],
+    "fluxo": [
+      {
+        "verificacao": "chave mes_entrada × evento × mes_evento × grupo_input × tipo_de_input × familia única",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "linhas inválidas (vazio, quantidade nula ou ≤ 0, mês fora do dia 1, evento desconhecido)",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "mes_entrada antes de 2024-10 ou depois do mês de ontem",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "mes_evento antes de mes_entrada (F4)",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "mes_evento depois do mês de ontem",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "mes_evento incoerente com o evento (entregue sem mês; em_andamento com mês)",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "total de cards = entradas da diária (quantidade + quantidade_estimada)",
+        "resultado": "9434",
+        "esperado": "9434",
+        "ok": true
+      },
+      {
+        "verificacao": "= diária por mês de entrada × grupo × tipo × família: combinações diferentes (total | no mês | depois | não seguiu | em andamento)",
+        "resultado": "0 | 0 | 0 | 0 | 0",
+        "esperado": "0 | 0 | 0 | 0 | 0",
+        "ok": true
+      },
+      {
+        "verificacao": "saídas por mês: entregues (mês do evento) ≤ quantidade_saida da diária: meses com mais entregues que saídas",
+        "resultado": "0",
+        "esperado": "0",
+        "ok": true
+      },
+      {
+        "verificacao": "saídas da diária de cards com entrada antes de 2024-10-01 (diária − entregues), por mês",
+        "resultado": "2024-10: 1 | 2024-11: 2",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "cards por evento e ano de entrada",
+        "resultado": "2024: entregue 212 · não seguiu 105 · em andamento 11 | 2025: entregue 3012 · não seguiu 572 · em andamento 2 | 2026: entregue 4388 · não seguiu 972 · em andamento 160",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "não seguiu sem mês do evento (F3), por ano de entrada",
+        "resultado": "2024: 105 | 2025: 572 | 2026: 10",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "não seguiu sem mês do evento, por board (2026: sem log do status atual | 2024 e 2025: sem log, sempre NULL)",
+        "resultado": "2026: 10 | 2024 e 2025: 677",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "não seguiu com o status final antes do mês de entrada, corrigido para o mês de entrada (F4; board 2026)",
+        "resultado": "0",
+        "esperado": "aviso",
+        "ok": true
+      },
+      {
+        "verificacao": "referência set/2026 como safra: entradas = entregue no mês + depois + não seguiu + em andamento (23/10: 733 = 460 + 131 + 138 + 4)",
+        "resultado": "733 = 460 + 131 + 138 + 4",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "referência set/2026 como mês de entrega: entregas = da safra de setembro + de safras anteriores",
+        "resultado": "515 = 460 + 55",
+        "esperado": "informativo",
+        "ok": true
+      },
+      {
+        "verificacao": "entregas em set/2026 de safras anteriores, por safra",
+        "resultado": "2026-08: 50 | 2026-05: 1 | 2026-02: 2 | 2026-01: 2",
+        "esperado": "informativo",
+        "ok": true
+      }
+    ]
+  },
+  "identidade": "caio.barroso@viu.com.br",
+  "projeto": "gglobo-viu-dados-hdg-prd",
+  "sla_independente": {
+    "ano": {
+      "n": 2425,
+      "mediana_h": 15.20536964861111,
+      "mediana_dias": 2.8710249029976853,
+      "ate8": 693,
+      "ate16": 1276
+    },
+    "meses": {
+      "2026-01": {
+        "n": 134,
+        "mediana_h": 15.821676318472221,
+        "mediana_dias": 3.0892209282233796,
+        "ate8": 42,
+        "ate16": 71
+      },
+      "2026-02": {
+        "n": 108,
+        "mediana_h": 14.813758684027778,
+        "mediana_dias": 3.380531736232639,
+        "ate8": 27,
+        "ate16": 60
+      },
+      "2026-03": {
+        "n": 173,
+        "mediana_h": 15.2629388575,
+        "mediana_dias": 2.6988970260416667,
+        "ate8": 34,
+        "ate16": 95
+      },
+      "2026-04": {
+        "n": 225,
+        "mediana_h": 17.602936815555555,
+        "mediana_dias": 3.2326545745138886,
+        "ate8": 60,
+        "ate16": 104
+      },
+      "2026-05": {
+        "n": 202,
+        "mediana_h": 17.373657475277778,
+        "mediana_dias": 3.0223263190335645,
+        "ate8": 58,
+        "ate16": 97
+      },
+      "2026-06": {
+        "n": 303,
+        "mediana_h": 17.18312717111111,
+        "mediana_dias": 2.809790630451389,
+        "ate8": 78,
+        "ate16": 141
+      },
+      "2026-07": {
+        "n": 528,
+        "mediana_h": 12.894327335416666,
+        "mediana_dias": 2.9266869104050928,
+        "ate8": 170,
+        "ate16": 300
+      },
+      "2026-08": {
+        "n": 363,
+        "mediana_h": 12.7343097975,
+        "mediana_dias": 2.0563107186458334,
+        "ate8": 128,
+        "ate16": 208
+      },
+      "2026-09": {
+        "n": 389,
+        "mediana_h": 15.927935349722222,
+        "mediana_dias": 2.8573627437615743,
+        "ate8": 96,
+        "ate16": 200
+      },
+      "2026-10": {
+        "n": 165,
+        "mediana_h": 10.166358591944444,
+        "mediana_dias": 1.249532422511574,
+        "ate8": 68,
+        "ate16": 107
+      }
+    },
+    "grupos": {
+      "False": {
+        "n": 775,
+        "mediana_h": 21.09611506222222,
+        "mediana_dias": 4.1258422709375004,
+        "ate8": 123,
+        "ate16": 293
+      },
+      "True": {
+        "n": 1635,
+        "mediana_h": 12.573458650555555,
+        "mediana_dias": 2.035232550069445,
+        "ate8": 569,
+        "ate16": 980
+      },
+      "nan": {
+        "n": 15,
+        "mediana_h": 52.960310418333336,
+        "mediana_dias": 11.034989866932872,
+        "ate8": 1,
+        "ate16": 3
+      }
+    },
+    "mes_parcial": "2026-10",
+    "diferenca_max_h_site": 1.1368683772161603e-13,
+    "divergencias_faixas": 1,
+    "passos_conferidos": 11759,
+    "diferenca_max_h_gold": 0.005276702222222429,
+    "diferencas_gold_acima_1min": 0
+  },
+  "sla_apos_correcao": {
+    "ano": {
+      "n": 2425,
+      "mediana_h": 15.20536964861111,
+      "mediana_dias": 2.8710249029976853,
+      "ate8": 693,
+      "ate16": 1276
+    },
+    "meses": {
+      "2026-01": {
+        "n": 134,
+        "mediana_h": 15.821676318472221,
+        "mediana_dias": 3.0892209282233796,
+        "ate8": 42,
+        "ate16": 71
+      },
+      "2026-02": {
+        "n": 108,
+        "mediana_h": 14.813758684027778,
+        "mediana_dias": 3.380531736232639,
+        "ate8": 27,
+        "ate16": 60
+      },
+      "2026-03": {
+        "n": 173,
+        "mediana_h": 15.2629388575,
+        "mediana_dias": 2.6988970260416667,
+        "ate8": 34,
+        "ate16": 95
+      },
+      "2026-04": {
+        "n": 225,
+        "mediana_h": 17.602936815555555,
+        "mediana_dias": 3.2326545745138886,
+        "ate8": 60,
+        "ate16": 104
+      },
+      "2026-05": {
+        "n": 202,
+        "mediana_h": 17.373657475277778,
+        "mediana_dias": 3.0223263190335645,
+        "ate8": 58,
+        "ate16": 97
+      },
+      "2026-06": {
+        "n": 303,
+        "mediana_h": 17.18312717111111,
+        "mediana_dias": 2.809790630451389,
+        "ate8": 78,
+        "ate16": 141
+      },
+      "2026-07": {
+        "n": 528,
+        "mediana_h": 12.894327335416666,
+        "mediana_dias": 2.9266869104050928,
+        "ate8": 170,
+        "ate16": 300
+      },
+      "2026-08": {
+        "n": 363,
+        "mediana_h": 12.7343097975,
+        "mediana_dias": 2.0563107186458334,
+        "ate8": 128,
+        "ate16": 208
+      },
+      "2026-09": {
+        "n": 389,
+        "mediana_h": 15.927935349722222,
+        "mediana_dias": 2.8573627437615743,
+        "ate8": 96,
+        "ate16": 200
+      },
+      "2026-10": {
+        "n": 165,
+        "mediana_h": 10.166358591944444,
+        "mediana_dias": 1.249532422511574,
+        "ate8": 68,
+        "ate16": 107
+      }
+    },
+    "grupos": {
+      "False": {
+        "n": 775,
+        "mediana_h": 21.09611506222222,
+        "mediana_dias": 4.1258422709375004,
+        "ate8": 123,
+        "ate16": 293
+      },
+      "True": {
+        "n": 1635,
+        "mediana_h": 12.573458650555555,
+        "mediana_dias": 2.035232550069445,
+        "ate8": 569,
+        "ate16": 980
+      },
+      "nan": {
+        "n": 15,
+        "mediana_h": 52.960310418333336,
+        "mediana_dias": 11.034989866932872,
+        "ate8": 1,
+        "ate16": 3
+      }
+    },
+    "mes_parcial": "2026-10",
+    "diferenca_max_h_site": 0.0,
+    "divergencias_faixas": 0,
+    "passos_conferidos": 11759,
+    "diferenca_max_h_gold": 0.005276702222222429,
+    "diferencas_gold_acima_1min": 0
+  },
+  "extratos_apos_correcao": [
+    {
+      "mes": "2026-05",
+      "entrada": 629,
+      "entregues_no_mes": 449,
+      "nao_entregues_no_mes": 180,
+      "saidas": 504,
+      "anteriores": [
+        {
+          "mes": "2026-04",
+          "nome": "Abril de 2026",
+          "n": 53
+        },
+        {
+          "mes": "2026-03",
+          "nome": "Março de 2026",
+          "n": 1
+        },
+        {
+          "mes": "2026-01",
+          "nome": "Janeiro de 2026",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "mes": "2026-06",
+      "entrada": 569,
+      "entregues_no_mes": 411,
+      "nao_entregues_no_mes": 158,
+      "saidas": 479,
+      "anteriores": [
+        {
+          "mes": "2026-05",
+          "nome": "Maio de 2026",
+          "n": 66
+        },
+        {
+          "mes": "2026-04",
+          "nome": "Abril de 2026",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "mes": "2026-07",
+      "entrada": 765,
+      "entregues_no_mes": 575,
+      "nao_entregues_no_mes": 190,
+      "saidas": 672,
+      "anteriores": [
+        {
+          "mes": "2026-06",
+          "nome": "Junho de 2026",
+          "n": 53
+        },
+        {
+          "mes": "2026-04",
+          "nome": "Abril de 2026",
+          "n": 40
+        },
+        {
+          "mes": "2026-03",
+          "nome": "Março de 2026",
+          "n": 1
+        },
+        {
+          "mes": "2026-01",
+          "nome": "Janeiro de 2026",
+          "n": 3
+        }
+      ]
+    },
+    {
+      "mes": "2026-08",
+      "entrada": 644,
+      "entregues_no_mes": 489,
+      "nao_entregues_no_mes": 155,
+      "saidas": 565,
+      "anteriores": [
+        {
+          "mes": "2026-07",
+          "nome": "Julho de 2026",
+          "n": 76
+        }
+      ]
+    },
+    {
+      "mes": "2026-09",
+      "entrada": 733,
+      "entregues_no_mes": 460,
+      "nao_entregues_no_mes": 273,
+      "saidas": 515,
+      "anteriores": [
+        {
+          "mes": "2026-08",
+          "nome": "Agosto de 2026",
+          "n": 50
+        },
+        {
+          "mes": "2026-05",
+          "nome": "Maio de 2026",
+          "n": 1
+        },
+        {
+          "mes": "2026-02",
+          "nome": "Fevereiro de 2026",
+          "n": 2
+        },
+        {
+          "mes": "2026-01",
+          "nome": "Janeiro de 2026",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "mes": "2026-10",
+      "entrada": 508,
+      "entregues_no_mes": 286,
+      "nao_entregues_no_mes": 222,
+      "saidas": 419,
+      "anteriores": [
+        {
+          "mes": "2026-09",
+          "nome": "Setembro de 2026",
+          "n": 131
+        },
+        {
+          "mes": "2026-08",
+          "nome": "Agosto de 2026",
+          "n": 1
+        },
+        {
+          "mes": "2026-03",
+          "nome": "Março de 2026",
+          "n": 1
+        }
+      ]
+    }
+  ],
+  "total_bytes_processados": 31738343,
+  "total_bytes_faturados_jobs": 136314880
+}

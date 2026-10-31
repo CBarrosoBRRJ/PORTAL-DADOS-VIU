@@ -1,0 +1,9 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import lamina_pendente %}
+{# Resultado: negócios fechados (D19, D30). O board de orçamentos não registra o fechamento ("Encerrado" junta
+   negócios ganhos e encerramentos automáticos de 30 dias); a base virá da planilha de contratações (PD05). #}
+{% block slides %}
+{{ lamina_pendente(apresentacao, secao_atual, "Gerencial", "A resposta depende da base de contratações",
+   "O board de orçamentos não registra o fechamento: “Encerrado” junta negócios ganhos e encerramentos automáticos depois de 30 dias.",
+   "Aqui entram as contratações por mês de entrega: quantas, de quais talentos e com que ticket médio.") }}
+{% endblock %}

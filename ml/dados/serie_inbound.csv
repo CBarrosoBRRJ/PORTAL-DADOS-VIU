@@ -1,0 +1,26 @@
+mes,pedidos,completo,fonte,dados_ate,processado_em
+2024-10,31,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2024-11,54,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2024-12,47,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-01,77,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-02,70,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-03,59,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-04,108,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-05,137,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-06,105,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-07,124,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-08,95,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-09,94,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-10,123,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-11,72,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2025-12,50,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2026-01,132,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2026-02,88,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2026-03,144,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2026-04,99,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2026-05,169,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2026-06,112,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2026-07,165,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2026-08,156,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2026-09,129,True,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00
+2026-10,161,False,"gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",2026-10-29,2026-10-30 12:01:59.926023+00:00

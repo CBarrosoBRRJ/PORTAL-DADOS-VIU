@@ -1,0 +1,20 @@
+# mesma versão do cliente BigQuery validada no PPD-SILVER-MONDAY e no PPD-GOLDEN-AGENCIAMENTO-MONDAY
+google-cloud-bigquery==3.46.1
+db-dtypes==1.8.0
+# leitura rápida (Storage Read API, ~3x mais rápida que a leitura comum)
+google-cloud-bigquery-storage==2.43.0
+pyarrow==26.0.0
+pandas==3.0.6
+fastapi==0.159.1
+uvicorn[standard]==0.54.0
+jinja2==3.1.6
+itsdangerous==2.2.0
+python-dotenv==1.2.4
+# fusos horários para zoneinfo na imagem slim
+tzdata==2026.5
+# Iniciativas (30/10/2026): upload de anexos (multipart/form-data, exigido pelo FastAPI para formulários)
+python-multipart==0.0.32
+# Iniciativas em produção (Cloud Run): quadro no Firestore e anexos num bucket privado do Cloud Storage (ADC da conta
+# de serviço; no computador o backend é SQLite e estas bibliotecas não são usadas)
+google-cloud-firestore==2.34.1
+google-cloud-storage==3.17.1

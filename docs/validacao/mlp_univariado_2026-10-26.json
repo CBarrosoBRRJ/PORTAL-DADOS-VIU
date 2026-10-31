@@ -1,0 +1,295 @@
+{
+  "nota": "MLP uma unidade, cinco sementes, globais=False. Mesmo protocolo histórico; não é novo teste independente. Não publicado.",
+  "carga": {
+    "processado_em": "2026-10-26 12:01:46.659042+00:00",
+    "dados_ate": "2026-10-25",
+    "parcial": {
+      "Inbound": {
+        "mes": "2026-10",
+        "pedidos_ate_agora": 133.0
+      },
+      "Mercado": {
+        "mes": "2026-10",
+        "pedidos_ate_agora": 304.0
+      },
+      "Mercado exclusivos": {
+        "mes": "2026-10",
+        "pedidos_ate_agora": 87.0
+      },
+      "Mercado não exclusivos": {
+        "mes": "2026-10",
+        "pedidos_ate_agora": 185.0
+      }
+    },
+    "recortes": {
+      "Inbound": {
+        "chave": "inbound",
+        "tipo": "Inbound",
+        "grupo": null,
+        "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",
+        "inicio": "2024-10",
+        "fim": "2026-09",
+        "meses": 24,
+        "treino_1o_teste": 12,
+        "curta": false
+      },
+      "Mercado": {
+        "chave": "mercado",
+        "tipo": "Mercado",
+        "grupo": null,
+        "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Mercado",
+        "inicio": "2024-10",
+        "fim": "2026-09",
+        "meses": 24,
+        "treino_1o_teste": 12,
+        "curta": false
+      },
+      "Mercado exclusivos": {
+        "chave": "mercado_exclusivos",
+        "tipo": "Mercado",
+        "grupo": "exclusivos",
+        "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento exclusivo",
+        "inicio": "2026-01",
+        "fim": "2026-09",
+        "meses": 9,
+        "treino_1o_teste": 5,
+        "curta": true
+      },
+      "Mercado não exclusivos": {
+        "chave": "mercado_nao_exclusivos",
+        "tipo": "Mercado",
+        "grupo": "nao_exclusivos",
+        "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento não exclusivo",
+        "inicio": "2026-01",
+        "fim": "2026-09",
+        "meses": 9,
+        "treino_1o_teste": 5,
+        "curta": true
+      }
+    },
+    "mes_fechado": "2026-09"
+  },
+  "resultado": {
+    "Mercado": {
+      "metricas": {
+        "1": {
+          "n": 4,
+          "wape": 0.2033369660385836,
+          "mae": 78.38640040787398,
+          "vies": 0.06661818540867906,
+          "cobertura_80": 0.25,
+          "n_faixa": 4,
+          "largura": 0.9729789408092555
+        },
+        "2": {
+          "n": 4,
+          "wape": 0.09879286857613241,
+          "mae": 38.084650836099044,
+          "vies": 0.09879286857613241,
+          "cobertura_80": 0.5,
+          "n_faixa": 4,
+          "largura": 1.1821097886036367
+        },
+        "3": {
+          "n": 4,
+          "wape": 0.23696166714894462,
+          "mae": 91.34872268591815,
+          "vies": -0.13848089731311783,
+          "cobertura_80": 0.5,
+          "n_faixa": 4,
+          "largura": 1.0068966404114836
+        },
+        "todos": {
+          "n": 12,
+          "wape": 0.17969716725455356,
+          "mae": 69.2732579766304,
+          "vies": 0.008976718890564546,
+          "cobertura_80": 0.4166666666666667,
+          "n_faixa": 12,
+          "largura": 1.053995123274792
+        },
+        "verificacao": {
+          "n": 5,
+          "wape": 0.3140229285249251,
+          "mae": 70.8435726752231,
+          "vies": -0.041375815551767677,
+          "cobertura_80": 0.6,
+          "n_faixa": 5,
+          "largura": 0.8796371683679501
+        }
+      },
+      "backtest": [
+        {
+          "alvo": "2026-01",
+          "horizonte": 1,
+          "origem": "2026-01",
+          "trecho": "verificacao",
+          "real": 125.0,
+          "valor": 162.81,
+          "p10": 88.94,
+          "p90": 242.67
+        },
+        {
+          "alvo": "2026-02",
+          "horizonte": 1,
+          "origem": "2026-02",
+          "trecho": "verificacao",
+          "real": 187.0,
+          "valor": 80.09,
+          "p10": 44.62,
+          "p90": 69.63
+        },
+        {
+          "alvo": "2026-03",
+          "horizonte": 1,
+          "origem": "2026-03",
+          "trecho": "verificacao",
+          "real": 252.0,
+          "valor": 202.18,
+          "p10": 105.44,
+          "p90": 322.95
+        },
+        {
+          "alvo": "2026-04",
+          "horizonte": 1,
+          "origem": "2026-04",
+          "trecho": "verificacao",
+          "real": 228.0,
+          "valor": 343.96,
+          "p10": 249.13,
+          "p90": 515.45
+        },
+        {
+          "alvo": "2026-06",
+          "horizonte": 3,
+          "origem": "2026-04",
+          "trecho": "teste",
+          "real": 339.0,
+          "valor": 200.78,
+          "p10": 145.42,
+          "p90": 300.88
+        },
+        {
+          "alvo": "2026-05",
+          "horizonte": 1,
+          "origem": "2026-05",
+          "trecho": "verificacao",
+          "real": 336.0,
+          "valor": 292.28,
+          "p10": 266.55,
+          "p90": 603.69
+        },
+        {
+          "alvo": "2026-06",
+          "horizonte": 2,
+          "origem": "2026-05",
+          "trecho": "teste",
+          "real": 339.0,
+          "valor": 346.53,
+          "p10": 316.01,
+          "p90": 715.72
+        },
+        {
+          "alvo": "2026-07",
+          "horizonte": 3,
+          "origem": "2026-05",
+          "trecho": "teste",
+          "real": 404.0,
+          "valor": 325.46,
+          "p10": 296.8,
+          "p90": 672.21
+        },
+        {
+          "alvo": "2026-06",
+          "horizonte": 1,
+          "origem": "2026-06",
+          "trecho": "teste",
+          "real": 339.0,
+          "valor": 414.18,
+          "p10": 410.01,
+          "p90": 994.11
+        },
+        {
+          "alvo": "2026-07",
+          "horizonte": 2,
+          "origem": "2026-06",
+          "trecho": "teste",
+          "real": 404.0,
+          "valor": 457.65,
+          "p10": 453.04,
+          "p90": 1098.46
+        },
+        {
+          "alvo": "2026-08",
+          "horizonte": 3,
+          "origem": "2026-06",
+          "trecho": "teste",
+          "real": 322.0,
+          "valor": 397.93,
+          "p10": 393.92,
+          "p90": 955.12
+        },
+        {
+          "alvo": "2026-07",
+          "horizonte": 1,
+          "origem": "2026-07",
+          "trecho": "teste",
+          "real": 404.0,
+          "valor": 388.82,
+          "p10": 337.0,
+          "p90": 748.47
+        },
+        {
+          "alvo": "2026-08",
+          "horizonte": 2,
+          "origem": "2026-07",
+          "trecho": "teste",
+          "real": 322.0,
+          "valor": 397.77,
+          "p10": 344.76,
+          "p90": 765.7
+        },
+        {
+          "alvo": "2026-09",
+          "horizonte": 3,
+          "origem": "2026-07",
+          "trecho": "teste",
+          "real": 477.0,
+          "valor": 404.3,
+          "p10": 350.41,
+          "p90": 778.26
+        },
+        {
+          "alvo": "2026-08",
+          "horizonte": 1,
+          "origem": "2026-08",
+          "trecho": "teste",
+          "real": 322.0,
+          "valor": 454.96,
+          "p10": 430.8,
+          "p90": 714.87
+        },
+        {
+          "alvo": "2026-09",
+          "horizonte": 2,
+          "origem": "2026-08",
+          "trecho": "teste",
+          "real": 477.0,
+          "valor": 492.39,
+          "p10": 466.25,
+          "p90": 773.69
+        },
+        {
+          "alvo": "2026-09",
+          "horizonte": 1,
+          "origem": "2026-09",
+          "trecho": "teste",
+          "real": 477.0,
+          "valor": 386.77,
+          "p10": 257.52,
+          "p90": 385.46
+        }
+      ]
+    }
+  }
+}

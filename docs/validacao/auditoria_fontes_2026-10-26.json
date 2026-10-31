@@ -1,0 +1,2616 @@
+{
+  "data": "2026-10-26T19:58:38.210450-03:00",
+  "fontes": {
+    "entrada": {
+      "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_entrada_diaria",
+      "modified": "2026-10-26T12:03:09.269000+00:00",
+      "linhas_origem": 2344,
+      "bytes_origem": 303052,
+      "schema": [
+        {
+          "nome": "data",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "dia_semana",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "ano",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "mes",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "inicio_semana",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "grupo_input",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_input",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "familia",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "quantidade",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "quantidade_estimada",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "_processado_em",
+          "tipo": "TIMESTAMP",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "quantidade_saida",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "entregue_no_mes",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "entregue_depois",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "nao_seguiu",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "em_andamento",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        }
+      ],
+      "linhas_lidas": 2344,
+      "processado": "2026-10-26 12:01:46.659042+00:00"
+    },
+    "fluxo": {
+      "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_fluxo_mensal",
+      "modified": "2026-10-26T12:03:09.269000+00:00",
+      "linhas_origem": 622,
+      "bytes_origem": 43826,
+      "schema": [
+        {
+          "nome": "mes_entrada",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "evento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "mes_evento",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "grupo_input",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_input",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "familia",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "quantidade",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "_processado_em",
+          "tipo": "TIMESTAMP",
+          "modo": "NULLABLE"
+        }
+      ],
+      "linhas_lidas": 622,
+      "processado": "2026-10-26 12:02:47.695095+00:00"
+    },
+    "talentos": {
+      "tabela": "gglobo-viu-dados-hdg-prd.silver_monday.slv_agenciamento_2026_itens",
+      "modified": "2026-10-26T11:33:32.418000+00:00",
+      "linhas_origem": 5591,
+      "bytes_origem": 5344262,
+      "schema": [
+        {
+          "nome": "projeto_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "item_id_atual",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "item_id_legado",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "board_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "nome_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "state",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "grupo_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "grupo_nome",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criador_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criador_nome",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criador_origem",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criado_em",
+          "tipo": "DATETIME",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "atualizado_em",
+          "tipo": "DATETIME",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "audiencia",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "conteudo",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "gp",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "orcamento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "producao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "talent_manager",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "talentos_exclusivos",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "interveniencia",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "talento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "exclusivo",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "captacao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "edicao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "categoria",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "segmento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_de_veiculacao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "contato",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_de_entrada",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_de_saida",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "deadline",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "vendido",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_da_venda",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "valor_da_proposta",
+          "tipo": "NUMERIC",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "qtd_de_cotas",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marca",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marca_nivel",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marca_grupo",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marcas_do_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "produto_globo",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "upfront",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "curadoria",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "defesa",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "levop",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "midia_kit",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "analise",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "sla_entrada_da_demanda",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "total_score",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "prioridade",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "impacto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_input",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_output",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "divergencia_interveniencia",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "divergencia_curadoria",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_da_pasta_orcamento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_da_pasta_planejamento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_da_proposta",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_do_email",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_sf",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "monday_doc_v2",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "formulario",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "lia_chave_sync_nao_editar",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "subitems",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "status",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "no_recorte_de_cobranca",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "fonte_ingerido_em",
+          "tipo": "TIMESTAMP",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "fonte_run_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "fonte_operacao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "grupo_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "pendente_revisao",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "_processado_em",
+          "tipo": "TIMESTAMP",
+          "modo": "NULLABLE"
+        }
+      ],
+      "linhas_lidas": 3
+    },
+    "talentos_top": {
+      "tabela": "gglobo-viu-dados-hdg-prd.silver_monday.slv_agenciamento_2026_itens",
+      "modified": "2026-10-26T11:33:32.418000+00:00",
+      "linhas_origem": 5591,
+      "bytes_origem": 5344262,
+      "schema": [
+        {
+          "nome": "projeto_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "item_id_atual",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "item_id_legado",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "board_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "nome_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "state",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "grupo_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "grupo_nome",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criador_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criador_nome",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criador_origem",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criado_em",
+          "tipo": "DATETIME",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "atualizado_em",
+          "tipo": "DATETIME",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "audiencia",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "conteudo",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "gp",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "orcamento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "producao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "talent_manager",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "talentos_exclusivos",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "interveniencia",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "talento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "exclusivo",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "captacao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "edicao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "categoria",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "segmento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_de_veiculacao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "contato",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_de_entrada",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_de_saida",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "deadline",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "vendido",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_da_venda",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "valor_da_proposta",
+          "tipo": "NUMERIC",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "qtd_de_cotas",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marca",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marca_nivel",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marca_grupo",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marcas_do_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "produto_globo",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "upfront",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "curadoria",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "defesa",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "levop",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "midia_kit",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "analise",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "sla_entrada_da_demanda",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "total_score",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "prioridade",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "impacto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_input",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_output",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "divergencia_interveniencia",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "divergencia_curadoria",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_da_pasta_orcamento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_da_pasta_planejamento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_da_proposta",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_do_email",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_sf",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "monday_doc_v2",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "formulario",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "lia_chave_sync_nao_editar",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "subitems",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "status",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "no_recorte_de_cobranca",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "fonte_ingerido_em",
+          "tipo": "TIMESTAMP",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "fonte_run_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "fonte_operacao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "grupo_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "pendente_revisao",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "_processado_em",
+          "tipo": "TIMESTAMP",
+          "modo": "NULLABLE"
+        }
+      ],
+      "linhas_lidas": 431
+    },
+    "sla": {
+      "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_2026_sla_movimentos",
+      "modified": "2026-10-26T12:03:09.269000+00:00",
+      "linhas_origem": 14998,
+      "bytes_origem": 5516520,
+      "schema": [
+        {
+          "nome": "projeto_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "item_id_atual",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "item_id_legado",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "board_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "nome_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "status_atual",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "talento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "exclusivo",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_input",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_output",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marca",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "orcamento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "passo",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "status",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "fase",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "entrada",
+          "tipo": "DATETIME",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "saida",
+          "tipo": "DATETIME",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "saida_horario",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "saida_por",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "saida_por_automacao",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "sla_corrido_horas",
+          "tipo": "FLOAT",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "sla_util_horas",
+          "tipo": "FLOAT",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "fora_expediente",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "hora_extra_horas",
+          "tipo": "FLOAT",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "sla_corrido",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "sla_util",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "em_aberto",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "aberto_ha_corrido_horas",
+          "tipo": "FLOAT",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "aberto_ha_util_horas",
+          "tipo": "FLOAT",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "alerta",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "retrabalho",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "reaberto",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "entrega_sem_aguardando",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "encerrado_sem_entrega",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "_processado_em",
+          "tipo": "TIMESTAMP",
+          "modo": "NULLABLE"
+        }
+      ],
+      "linhas_lidas": 14998,
+      "processado": "2026-10-26 12:01:34.624989+00:00"
+    },
+    "saidas_status": {
+      "tabela": "gglobo-viu-dados-hdg-prd.silver_monday.slv_agenciamento_2026_itens",
+      "modified": "2026-10-26T11:33:32.418000+00:00",
+      "linhas_origem": 5591,
+      "bytes_origem": 5344262,
+      "schema": [
+        {
+          "nome": "projeto_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "item_id_atual",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "item_id_legado",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "board_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "nome_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "state",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "grupo_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "grupo_nome",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criador_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criador_nome",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criador_origem",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "criado_em",
+          "tipo": "DATETIME",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "atualizado_em",
+          "tipo": "DATETIME",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "audiencia",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "conteudo",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "gp",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "orcamento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "producao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "talent_manager",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "talentos_exclusivos",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "interveniencia",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "talento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "exclusivo",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "captacao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "edicao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "categoria",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "segmento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_de_veiculacao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "contato",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_de_entrada",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_de_saida",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "deadline",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "vendido",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "data_da_venda",
+          "tipo": "DATE",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "valor_da_proposta",
+          "tipo": "NUMERIC",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "qtd_de_cotas",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marca",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marca_nivel",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marca_grupo",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "marcas_do_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "produto_globo",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "upfront",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "curadoria",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "defesa",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "levop",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "midia_kit",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "analise",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "sla_entrada_da_demanda",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "total_score",
+          "tipo": "INTEGER",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "prioridade",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "impacto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_input",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_output",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "tipo_de_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "divergencia_interveniencia",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "divergencia_curadoria",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_da_pasta_orcamento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_da_pasta_planejamento",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_da_proposta",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_do_email",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_sf",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "monday_doc_v2",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "formulario",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "lia_chave_sync_nao_editar",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "subitems",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "status",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "no_recorte_de_cobranca",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "fonte_ingerido_em",
+          "tipo": "TIMESTAMP",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "fonte_run_id",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "fonte_operacao",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "grupo_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "pendente_revisao",
+          "tipo": "BOOLEAN",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "link_projeto",
+          "tipo": "STRING",
+          "modo": "NULLABLE"
+        },
+        {
+          "nome": "_processado_em",
+          "tipo": "TIMESTAMP",
+          "modo": "NULLABLE"
+        }
+      ],
+      "linhas_lidas": 40
+    }
+  },
+  "jobs": [
+    {
+      "id": "7191d8c1-f62c-498b-8ef0-2cb58c169cd0",
+      "dry_bytes": 235063,
+      "processed_bytes": 0,
+      "billed_bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "bb2ed21a-6b02-4e42-b4c6-3b5a8a10a0d4",
+      "dry_bytes": 43826,
+      "processed_bytes": 0,
+      "billed_bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "d42ea85f-0c46-4462-a813-7ed93a82a436",
+      "dry_bytes": 330326,
+      "processed_bytes": 0,
+      "billed_bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "d79b7541-7dde-49e8-85fd-b06b47753fb0",
+      "dry_bytes": 330326,
+      "processed_bytes": 0,
+      "billed_bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "9bc52993-cc84-4528-bbc3-bc497e32890f",
+      "dry_bytes": 4168951,
+      "processed_bytes": 0,
+      "billed_bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "1d1fc347-ae84-4cbc-a8c8-b56f008c48e7",
+      "dry_bytes": 10474419,
+      "processed_bytes": 0,
+      "billed_bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "cfffc641-f350-44a0-a094-609bd8330f7d",
+      "dry_bytes": 150016,
+      "processed_bytes": 150016,
+      "billed_bytes": 10485760,
+      "cache": false
+    },
+    {
+      "id": "4f0bbfaa-f02e-46f6-9add-5304fe533c69",
+      "dry_bytes": 20896,
+      "processed_bytes": 20896,
+      "billed_bytes": 10485760,
+      "cache": false
+    },
+    {
+      "id": "6b68177b-297e-439b-8928-253a2ac0b10f",
+      "dry_bytes": 330326,
+      "processed_bytes": 330326,
+      "billed_bytes": 10485760,
+      "cache": false
+    }
+  ],
+  "conta": "caio.barroso@viu.com.br",
+  "projeto": "gglobo-viu-dados-hdg-prd",
+  "entrada_mensal": [
+    {
+      "mes": "2024-10",
+      "entradas": 74,
+      "saidas": 37,
+      "proprio": 36,
+      "depois": 10,
+      "nao_seguiu": 25,
+      "andamento": 3
+    },
+    {
+      "mes": "2024-11",
+      "entradas": 143,
+      "saidas": 76,
+      "proprio": 66,
+      "depois": 11,
+      "nao_seguiu": 59,
+      "andamento": 7
+    },
+    {
+      "mes": "2024-12",
+      "entradas": 111,
+      "saidas": 91,
+      "proprio": 80,
+      "depois": 9,
+      "nao_seguiu": 21,
+      "andamento": 1
+    },
+    {
+      "mes": "2025-01",
+      "entradas": 177,
+      "saidas": 102,
+      "proprio": 92,
+      "depois": 38,
+      "nao_seguiu": 45,
+      "andamento": 2
+    },
+    {
+      "mes": "2025-02",
+      "entradas": 197,
+      "saidas": 142,
+      "proprio": 107,
+      "depois": 35,
+      "nao_seguiu": 55,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-03",
+      "entradas": 166,
+      "saidas": 125,
+      "proprio": 95,
+      "depois": 44,
+      "nao_seguiu": 27,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-04",
+      "entradas": 329,
+      "saidas": 216,
+      "proprio": 177,
+      "depois": 78,
+      "nao_seguiu": 74,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-05",
+      "entradas": 312,
+      "saidas": 264,
+      "proprio": 182,
+      "depois": 83,
+      "nao_seguiu": 47,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-06",
+      "entradas": 268,
+      "saidas": 270,
+      "proprio": 183,
+      "depois": 65,
+      "nao_seguiu": 20,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-07",
+      "entradas": 275,
+      "saidas": 241,
+      "proprio": 190,
+      "depois": 44,
+      "nao_seguiu": 41,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-08",
+      "entradas": 474,
+      "saidas": 291,
+      "proprio": 235,
+      "depois": 166,
+      "nao_seguiu": 73,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-09",
+      "entradas": 395,
+      "saidas": 311,
+      "proprio": 244,
+      "depois": 96,
+      "nao_seguiu": 55,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-10",
+      "entradas": 459,
+      "saidas": 528,
+      "proprio": 327,
+      "depois": 58,
+      "nao_seguiu": 74,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-11",
+      "entradas": 346,
+      "saidas": 289,
+      "proprio": 232,
+      "depois": 71,
+      "nao_seguiu": 43,
+      "andamento": 0
+    },
+    {
+      "mes": "2025-12",
+      "entradas": 188,
+      "saidas": 241,
+      "proprio": 167,
+      "depois": 3,
+      "nao_seguiu": 18,
+      "andamento": 0
+    },
+    {
+      "mes": "2026-01",
+      "entradas": 374,
+      "saidas": 244,
+      "proprio": 241,
+      "depois": 72,
+      "nao_seguiu": 60,
+      "andamento": 1
+    },
+    {
+      "mes": "2026-02",
+      "entradas": 341,
+      "saidas": 269,
+      "proprio": 220,
+      "depois": 42,
+      "nao_seguiu": 79,
+      "andamento": 0
+    },
+    {
+      "mes": "2026-03",
+      "entradas": 485,
+      "saidas": 338,
+      "proprio": 287,
+      "depois": 91,
+      "nao_seguiu": 106,
+      "andamento": 1
+    },
+    {
+      "mes": "2026-04",
+      "entradas": 472,
+      "saidas": 386,
+      "proprio": 292,
+      "depois": 95,
+      "nao_seguiu": 85,
+      "andamento": 0
+    },
+    {
+      "mes": "2026-05",
+      "entradas": 629,
+      "saidas": 504,
+      "proprio": 449,
+      "depois": 67,
+      "nao_seguiu": 113,
+      "andamento": 0
+    },
+    {
+      "mes": "2026-06",
+      "entradas": 569,
+      "saidas": 479,
+      "proprio": 411,
+      "depois": 53,
+      "nao_seguiu": 104,
+      "andamento": 1
+    },
+    {
+      "mes": "2026-07",
+      "entradas": 765,
+      "saidas": 672,
+      "proprio": 575,
+      "depois": 76,
+      "nao_seguiu": 112,
+      "andamento": 2
+    },
+    {
+      "mes": "2026-08",
+      "entradas": 644,
+      "saidas": 565,
+      "proprio": 489,
+      "depois": 51,
+      "nao_seguiu": 101,
+      "andamento": 3
+    },
+    {
+      "mes": "2026-09",
+      "entradas": 733,
+      "saidas": 515,
+      "proprio": 460,
+      "depois": 131,
+      "nao_seguiu": 138,
+      "andamento": 4
+    },
+    {
+      "mes": "2026-10",
+      "entradas": 544,
+      "saidas": 446,
+      "proprio": 313,
+      "depois": 0,
+      "nao_seguiu": 76,
+      "andamento": 155
+    }
+  ],
+  "fluxo_mensal": [
+    {
+      "mes_entrada": "2024-10-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2024-10-01",
+      "evento": "entregue",
+      "mes_evento": "2024-10-01",
+      "n": 36
+    },
+    {
+      "mes_entrada": "2024-10-01",
+      "evento": "entregue",
+      "mes_evento": "2024-11-01",
+      "n": 8
+    },
+    {
+      "mes_entrada": "2024-10-01",
+      "evento": "entregue",
+      "mes_evento": "2024-12-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2024-10-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 25
+    },
+    {
+      "mes_entrada": "2024-11-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 7
+    },
+    {
+      "mes_entrada": "2024-11-01",
+      "evento": "entregue",
+      "mes_evento": "2024-11-01",
+      "n": 66
+    },
+    {
+      "mes_entrada": "2024-11-01",
+      "evento": "entregue",
+      "mes_evento": "2024-12-01",
+      "n": 9
+    },
+    {
+      "mes_entrada": "2024-11-01",
+      "evento": "entregue",
+      "mes_evento": "2025-01-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2024-11-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 59
+    },
+    {
+      "mes_entrada": "2024-12-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2024-12-01",
+      "evento": "entregue",
+      "mes_evento": "2024-12-01",
+      "n": 80
+    },
+    {
+      "mes_entrada": "2024-12-01",
+      "evento": "entregue",
+      "mes_evento": "2025-01-01",
+      "n": 8
+    },
+    {
+      "mes_entrada": "2024-12-01",
+      "evento": "entregue",
+      "mes_evento": "2025-04-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2024-12-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 21
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "entregue",
+      "mes_evento": "2025-01-01",
+      "n": 92
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "entregue",
+      "mes_evento": "2025-02-01",
+      "n": 35
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "entregue",
+      "mes_evento": "2025-03-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "entregue",
+      "mes_evento": "2025-04-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2025-01-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 45
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "entregue",
+      "mes_evento": "2025-02-01",
+      "n": 107
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "entregue",
+      "mes_evento": "2025-03-01",
+      "n": 29
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "entregue",
+      "mes_evento": "2025-04-01",
+      "n": 4
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "entregue",
+      "mes_evento": "2025-05-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "entregue",
+      "mes_evento": "2025-06-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-02-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 55
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "entregue",
+      "mes_evento": "2025-03-01",
+      "n": 95
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "entregue",
+      "mes_evento": "2025-04-01",
+      "n": 32
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "entregue",
+      "mes_evento": "2025-05-01",
+      "n": 9
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "entregue",
+      "mes_evento": "2025-06-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-03-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 27
+    },
+    {
+      "mes_entrada": "2025-04-01",
+      "evento": "entregue",
+      "mes_evento": "2025-04-01",
+      "n": 177
+    },
+    {
+      "mes_entrada": "2025-04-01",
+      "evento": "entregue",
+      "mes_evento": "2025-05-01",
+      "n": 72
+    },
+    {
+      "mes_entrada": "2025-04-01",
+      "evento": "entregue",
+      "mes_evento": "2025-06-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2025-04-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2025-04-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 74
+    },
+    {
+      "mes_entrada": "2025-05-01",
+      "evento": "entregue",
+      "mes_evento": "2025-05-01",
+      "n": 182
+    },
+    {
+      "mes_entrada": "2025-05-01",
+      "evento": "entregue",
+      "mes_evento": "2025-06-01",
+      "n": 81
+    },
+    {
+      "mes_entrada": "2025-05-01",
+      "evento": "entregue",
+      "mes_evento": "2025-07-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-05-01",
+      "evento": "entregue",
+      "mes_evento": "2025-08-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-05-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 47
+    },
+    {
+      "mes_entrada": "2025-06-01",
+      "evento": "entregue",
+      "mes_evento": "2025-06-01",
+      "n": 183
+    },
+    {
+      "mes_entrada": "2025-06-01",
+      "evento": "entregue",
+      "mes_evento": "2025-07-01",
+      "n": 50
+    },
+    {
+      "mes_entrada": "2025-06-01",
+      "evento": "entregue",
+      "mes_evento": "2025-08-01",
+      "n": 14
+    },
+    {
+      "mes_entrada": "2025-06-01",
+      "evento": "entregue",
+      "mes_evento": "2025-09-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-06-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 20
+    },
+    {
+      "mes_entrada": "2025-07-01",
+      "evento": "entregue",
+      "mes_evento": "2025-07-01",
+      "n": 190
+    },
+    {
+      "mes_entrada": "2025-07-01",
+      "evento": "entregue",
+      "mes_evento": "2025-08-01",
+      "n": 41
+    },
+    {
+      "mes_entrada": "2025-07-01",
+      "evento": "entregue",
+      "mes_evento": "2025-09-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-07-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2025-07-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 41
+    },
+    {
+      "mes_entrada": "2025-08-01",
+      "evento": "entregue",
+      "mes_evento": "2025-08-01",
+      "n": 235
+    },
+    {
+      "mes_entrada": "2025-08-01",
+      "evento": "entregue",
+      "mes_evento": "2025-09-01",
+      "n": 65
+    },
+    {
+      "mes_entrada": "2025-08-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 100
+    },
+    {
+      "mes_entrada": "2025-08-01",
+      "evento": "entregue",
+      "mes_evento": "2025-12-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-08-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 73
+    },
+    {
+      "mes_entrada": "2025-09-01",
+      "evento": "entregue",
+      "mes_evento": "2025-09-01",
+      "n": 244
+    },
+    {
+      "mes_entrada": "2025-09-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 95
+    },
+    {
+      "mes_entrada": "2025-09-01",
+      "evento": "entregue",
+      "mes_evento": "2025-12-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-09-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 55
+    },
+    {
+      "mes_entrada": "2025-10-01",
+      "evento": "entregue",
+      "mes_evento": "2025-10-01",
+      "n": 327
+    },
+    {
+      "mes_entrada": "2025-10-01",
+      "evento": "entregue",
+      "mes_evento": "2025-11-01",
+      "n": 57
+    },
+    {
+      "mes_entrada": "2025-10-01",
+      "evento": "entregue",
+      "mes_evento": "2025-12-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2025-10-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 74
+    },
+    {
+      "mes_entrada": "2025-11-01",
+      "evento": "entregue",
+      "mes_evento": "2025-11-01",
+      "n": 232
+    },
+    {
+      "mes_entrada": "2025-11-01",
+      "evento": "entregue",
+      "mes_evento": "2025-12-01",
+      "n": 71
+    },
+    {
+      "mes_entrada": "2025-11-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 43
+    },
+    {
+      "mes_entrada": "2025-12-01",
+      "evento": "entregue",
+      "mes_evento": "2025-12-01",
+      "n": 167
+    },
+    {
+      "mes_entrada": "2025-12-01",
+      "evento": "entregue",
+      "mes_evento": "2026-01-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2025-12-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 18
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-01-01",
+      "n": 241
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-02-01",
+      "n": 49
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-03-01",
+      "n": 11
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-04-01",
+      "n": 6
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-05-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-07-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "entregue",
+      "mes_evento": "2026-09-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-01-01",
+      "n": 46
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-02-01",
+      "n": 13
+    },
+    {
+      "mes_entrada": "2026-01-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-03-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "entregue",
+      "mes_evento": "2026-02-01",
+      "n": 220
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "entregue",
+      "mes_evento": "2026-03-01",
+      "n": 40
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "entregue",
+      "mes_evento": "2026-09-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-02-01",
+      "n": 61
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-03-01",
+      "n": 15
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-05-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-02-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-10-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "entregue",
+      "mes_evento": "2026-03-01",
+      "n": 287
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "entregue",
+      "mes_evento": "2026-04-01",
+      "n": 88
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "entregue",
+      "mes_evento": "2026-05-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "entregue",
+      "mes_evento": "2026-07-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "entregue",
+      "mes_evento": "2026-10-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-03-01",
+      "n": 79
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-04-01",
+      "n": 21
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-05-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-03-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-10-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "entregue",
+      "mes_evento": "2026-04-01",
+      "n": 292
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "entregue",
+      "mes_evento": "2026-05-01",
+      "n": 53
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "entregue",
+      "mes_evento": "2026-06-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "entregue",
+      "mes_evento": "2026-07-01",
+      "n": 40
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-04-01",
+      "n": 68
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-05-01",
+      "n": 14
+    },
+    {
+      "mes_entrada": "2026-04-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-07-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-05-01",
+      "evento": "entregue",
+      "mes_evento": "2026-05-01",
+      "n": 449
+    },
+    {
+      "mes_entrada": "2026-05-01",
+      "evento": "entregue",
+      "mes_evento": "2026-06-01",
+      "n": 66
+    },
+    {
+      "mes_entrada": "2026-05-01",
+      "evento": "entregue",
+      "mes_evento": "2026-09-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-05-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-05-01",
+      "n": 92
+    },
+    {
+      "mes_entrada": "2026-05-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-06-01",
+      "n": 21
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "entregue",
+      "mes_evento": "2026-06-01",
+      "n": 411
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "entregue",
+      "mes_evento": "2026-07-01",
+      "n": 53
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-06-01",
+      "n": 76
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-07-01",
+      "n": 26
+    },
+    {
+      "mes_entrada": "2026-06-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-09-01",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 2
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "entregue",
+      "mes_evento": "2026-07-01",
+      "n": 575
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "entregue",
+      "mes_evento": "2026-08-01",
+      "n": 76
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-07-01",
+      "n": 87
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-08-01",
+      "n": 24
+    },
+    {
+      "mes_entrada": "2026-07-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-09-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "entregue",
+      "mes_evento": "2026-08-01",
+      "n": 489
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "entregue",
+      "mes_evento": "2026-09-01",
+      "n": 50
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "entregue",
+      "mes_evento": "2026-10-01",
+      "n": 1
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-08-01",
+      "n": 72
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-09-01",
+      "n": 26
+    },
+    {
+      "mes_entrada": "2026-08-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-10-01",
+      "n": 3
+    },
+    {
+      "mes_entrada": "2026-09-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 4
+    },
+    {
+      "mes_entrada": "2026-09-01",
+      "evento": "entregue",
+      "mes_evento": "2026-09-01",
+      "n": 460
+    },
+    {
+      "mes_entrada": "2026-09-01",
+      "evento": "entregue",
+      "mes_evento": "2026-10-01",
+      "n": 131
+    },
+    {
+      "mes_entrada": "2026-09-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-09-01",
+      "n": 117
+    },
+    {
+      "mes_entrada": "2026-09-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-10-01",
+      "n": 21
+    },
+    {
+      "mes_entrada": "2026-10-01",
+      "evento": "em_andamento",
+      "mes_evento": "NaT",
+      "n": 155
+    },
+    {
+      "mes_entrada": "2026-10-01",
+      "evento": "entregue",
+      "mes_evento": "2026-10-01",
+      "n": 313
+    },
+    {
+      "mes_entrada": "2026-10-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "NaT",
+      "n": 10
+    },
+    {
+      "mes_entrada": "2026-10-01",
+      "evento": "nao_seguiu",
+      "mes_evento": "2026-10-01",
+      "n": 66
+    }
+  ],
+  "classificacao_talentos": [
+    {
+      "sem_classificacao": 125,
+      "com_nome_sem_classificacao": 0
+    }
+  ],
+  "bytes_processados": 501238,
+  "bytes_faturaveis": 31457280
+}

@@ -1,0 +1,63 @@
+{% extends "apresentacao.html" %}
+{# Encerramento (V2, Caio, 31/10/2026; ficha docs/paginas/encerramento.md). O marinho inteiro continua; por cima, uma
+   faixa branca estreita no topo, com o corte em diagonal e o filete azul da capa, que leva o logo da VIU e a data. À
+   esquerda, "ViU Agenciamento", "Obrigado." com o fio amarelo e o botão "Voltar ao início" (amarelo, no padrão do
+   "Começar"), que leva à capa. No canto inferior direito, o MASCOTE (SVG próprio, decorativo, gerado por script): um
+   balão de conversa lavanda claro, contorno marinho fino, rostinho com olhos ovais com brilho, sorriso aberto e
+   bochechas rosadas, coração amarelo VIU ao lado. Loops CONTÍNUOS por SMIL (nada de loop no CSS): acena (antebraço e mão,
+   1,4 s, a mão com leve atraso), pisca (3,4 s), flutua (3,2 s) e o coração pulsa (1,4 s). fim.js começa os loops
+   depois da entrada; eles só param com a aba oculta (economia) e com movimento reduzido (aí fica parado, sorrindo).
+   3ª rodada (Caio, 31/10/2026): saíram o fluxo à direita, a mão ao lado do título e o 1º bonequinho. Versões
+   anteriores: _descartados/2026-10-31/encerramento_antes/. #}
+{% block slides %}
+{% set e = apresentacao.encerramento %}
+<section class="slide slide-fim" aria-roledescription="slide" aria-labelledby="s-fim">
+<div class="lamina fim">
+  <div class="fim-faixa" aria-hidden="true"></div>
+  <div class="fim-filete" aria-hidden="true"></div>
+  <img class="fim-logo" src="/static/viu_logo.jpg" alt="VIU" width="132" height="84">
+  <p class="fim-data">{{ apresentacao.capa.data }}</p>
+  <div class="fim-corpo">
+    <p class="fim-sobre">{{ e.sobre }}</p>
+    <h2 class="fim-titulo" id="s-fim">{{ e.titulo }}</h2>
+    {% if e.frase %}<p class="fim-frase">{{ e.frase }}</p>{% endif %}
+    {% if e.pergunta %}<p class="fim-pergunta">{{ e.pergunta }}</p>{% endif %}
+    <a class="fim-voltar" href="/{{ apresentacao.slug }}/capa"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M6 4.5 3 7.5l3 3M3.5 7.5h6a3 3 0 0 1 0 6H8"/></svg>{{ e.voltar }}</a>
+  </div>
+  <svg class="fim-boneco" viewBox="0 0 160 180" aria-hidden="true" focusable="false"><ellipse cx="74" cy="160" rx="36" ry="4" fill="rgba(0,0,0,.3)"/><g>
+    <path d="M54 110C52 122 46 131 36 138C52 137 66 129 76 116" fill="#e2e5ff" stroke="#0b1220" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <g class="braco">
+    <path d="M130 82L146 68" stroke="#0b1220" stroke-width="14" stroke-linecap="round"/>
+    <path d="M130 82L146 68" stroke="#e2e5ff" stroke-width="9" stroke-linecap="round"/>
+    <g>
+    <path d="M146 68L150 46" stroke="#0b1220" stroke-width="14" stroke-linecap="round"/>
+    <path d="M146 68L150 46" stroke="#e2e5ff" stroke-width="9" stroke-linecap="round"/>
+    <g><g transform="rotate(10.3 150 46)"><g transform="translate(150 48)">
+    <ellipse cx="0" cy="-8.5" rx="10.3" ry="10.6" fill="#0b1220"/><path d="M-5.4 -12L-8.2 -20.5" stroke="#0b1220" stroke-width="9.6" stroke-linecap="round"/><path d="M-1.9 -14L-2.7 -24.6" stroke="#0b1220" stroke-width="9.6" stroke-linecap="round"/><path d="M1.9 -14L2.8 -24.2" stroke="#0b1220" stroke-width="9.6" stroke-linecap="round"/><path d="M5.4 -12L8.2 -19.8" stroke="#0b1220" stroke-width="9.6" stroke-linecap="round"/><path d="M-6 -6L-13 -10.5" stroke="#0b1220" stroke-width="9.6" stroke-linecap="round"/>
+    <ellipse cx="0" cy="-8.5" rx="8" ry="8.3" fill="#fff"/><path d="M-5.4 -12L-8.2 -20.5" stroke="#fff" stroke-width="5.2" stroke-linecap="round"/><path d="M-1.9 -14L-2.7 -24.6" stroke="#fff" stroke-width="5.2" stroke-linecap="round"/><path d="M1.9 -14L2.8 -24.2" stroke="#fff" stroke-width="5.2" stroke-linecap="round"/><path d="M5.4 -12L8.2 -19.8" stroke="#fff" stroke-width="5.2" stroke-linecap="round"/><path d="M-6 -6L-13 -10.5" stroke="#fff" stroke-width="5.2" stroke-linecap="round"/>
+    </g></g>
+    <animateTransform attributeName="transform" type="rotate" dur="1.4s" begin="indefinite" repeatCount="indefinite"
+            values="-12 150 46;-16 150 46;18 150 46;-12 150 46" keyTimes="0;0.12;0.62;1" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1"/></g>
+    <animateTransform attributeName="transform" type="rotate" dur="1.4s" begin="indefinite" repeatCount="indefinite"
+          values="-9 146 68;11 146 68;-9 146 68" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/>
+    </g>
+    </g>
+    <rect x="20" y="24" width="116" height="94" rx="44" fill="#e2e5ff" stroke="#0b1220" stroke-width="2.5"/>
+    <path d="M55.5 112C54 121 50 127 44 132C55 130 65 124 72.5 114Z" fill="#e2e5ff"/>
+    <path d="M30 62C33 44 46 34 62 31" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity="0.95"/>
+    <ellipse cx="53.4" cy="75.2" rx="6.2" ry="3.8" fill="#ff9db5" opacity="0.6"/>
+    <ellipse cx="102.6" cy="75.2" rx="6.2" ry="3.8" fill="#ff9db5" opacity="0.6"/>
+    <g transform="translate(78 64)"><g class="pisca"><ellipse cx="-14.6" cy="0" rx="5.2" ry="6.9" fill="#0b1220"/><circle cx="-12.8" cy="-2.7" r="2.0" fill="#fff"/><ellipse cx="14.6" cy="0" rx="5.2" ry="6.9" fill="#0b1220"/><circle cx="16.4" cy="-2.7" r="2.0" fill="#fff"/>
+    <animateTransform attributeName="transform" type="scale" dur="3.4s" begin="indefinite" repeatCount="indefinite"
+        values="1 1;1 1;1 0.1;1 1;1 1" keyTimes="0;0.9;0.93;0.96;1"/></g></g>
+    <clipPath id="b3-boca"><path d="M67.9 76.3Q78.0 92.0 88.1 76.3Z"/></clipPath>
+    <path d="M67.9 76.3Q78.0 92.0 88.1 76.3Z" fill="#0b1220" stroke="#0b1220" stroke-width="1.7" stroke-linejoin="round"/>
+    <ellipse cx="78" cy="85.8" rx="6.2" ry="4.0" fill="#ff8aa5" clip-path="url(#b3-boca)"/><g transform="translate(24 22)"><g>
+    <path d="M0 6C-7 0-11-4-11-8.5S-6-15 0-10C6-15 11-12.5 11-8.5S7 0 0 6Z" fill="#f8fd0b" stroke="#0b1220" stroke-width="2.2" stroke-linejoin="round"/>
+    <animateTransform attributeName="transform" type="scale" dur="1.4s" begin="indefinite" repeatCount="indefinite" values="1;1.14;1" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/></g></g>
+    <animateTransform attributeName="transform" type="translate" dur="3.2s" begin="indefinite" repeatCount="indefinite"
+        values="0 0;0 -3;0 0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/></g></svg>
+</div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="/static/fim.js?v={{ v() }}"></script>{% endblock %}

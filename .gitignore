@@ -1,0 +1,21 @@
+.env
+__pycache__/
+*.pyc
+*.zip
+.venv/
+
+.playwright-mcp/
+.pytest_cache/
+
+.taste-skill/
+# GitHub (31/10/2026): fora do repositório
+_descartados/
+_congelado/
+app/base_congelada/
+espelho/
+*.db
+*.db-wal
+*.db-shm
+anexos/
+.vscode/
+node_modules/

@@ -1,0 +1,356 @@
+{
+  "data": "2026-10-26",
+  "antes": {
+    "troca_para_movimento_reduzido": {
+      "runningCopy": 1,
+      "disabled": false,
+      "label": "Parar"
+    }
+  },
+  "desktop": {
+    "width": 1440,
+    "checks": [
+      {
+        "path": "",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/talentos",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/atendimento",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/sla",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/previsao",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/qualidade",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/o-que-falta",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/talentos",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/atendimento",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/sla",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/previsao",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/qualidade",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/o-que-falta",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 1440,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      }
+    ],
+    "errors": []
+  },
+  "celular": {
+    "width": 390,
+    "checks": [
+      {
+        "path": "",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/talentos?talentos=exclusivos",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/atendimento",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/sla?talentos=nao-exclusivos",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/previsao?talentos=exclusivos",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/qualidade",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/o-que-falta",
+        "motion": "no-preference",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/talentos?talentos=exclusivos",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/atendimento",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/sla?talentos=nao-exclusivos",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/previsao?talentos=exclusivos",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/qualidade",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      },
+      {
+        "path": "/o-que-falta",
+        "motion": "reduce",
+        "status": 200,
+        "scroll": 390,
+        "running": 0,
+        "infinite": 0,
+        "hiddenCopy": 0
+      }
+    ],
+    "errors": []
+  },
+  "estudo": {
+    "slides": [
+      {
+        "hash": "#1",
+        "visible": 1,
+        "running": 0,
+        "scroll": 1440
+      },
+      {
+        "hash": "#2",
+        "visible": 1,
+        "running": 0,
+        "scroll": 1440
+      },
+      {
+        "hash": "#3",
+        "visible": 1,
+        "running": 0,
+        "scroll": 1440
+      },
+      {
+        "hash": "#4",
+        "visible": 1,
+        "running": 0,
+        "scroll": 1440
+      },
+      {
+        "hash": "#5",
+        "visible": 1,
+        "running": 0,
+        "scroll": 1440
+      },
+      {
+        "hash": "#6",
+        "visible": 1,
+        "running": 0,
+        "scroll": 1440
+      },
+      {
+        "hash": "#7",
+        "visible": 1,
+        "running": 0,
+        "scroll": 1440
+      },
+      {
+        "hash": "#8",
+        "visible": 1,
+        "running": 0,
+        "scroll": 1440
+      }
+    ],
+    "rapid": {
+      "hash": "#8",
+      "transitionAttribute": null,
+      "visible": [
+        "8 de 8"
+      ]
+    },
+    "errors": []
+  },
+  "interacoes": {
+    "start": {
+      "disabled": true,
+      "copies": 0
+    },
+    "active": 1,
+    "reduced": {
+      "disabled": true,
+      "copies": 0,
+      "sameText": true
+    },
+    "print": {
+      "copies": 0,
+      "sameText": true
+    },
+    "end": {
+      "copies": 0,
+      "sameText": true,
+      "label": "Ver a subida e descida das posições ao longo do ano"
+    },
+    "errors": []
+  }
+}

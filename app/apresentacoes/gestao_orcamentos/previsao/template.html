@@ -1,0 +1,189 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import cabecalho, lamina_pendente %}
+{% from "icones.html" import icone %}
+{# Previsão de demanda (D56, 26/10/2026; revisa a D48 e a D55): uma série e um modelo por recorte. Em cada coluna (Inbound
+   à esquerda, Mercado à direita), uma fileira de cartões — mês vigente (realizado até a véspera da carga + previsão de
+   fechamento + situação) e os dois seguintes (previsão e faixa) — e, embaixo, o gráfico de 2026 num cartão flutuante
+   com o modelo e o erro médio. O botão "Modelos comparados" abre um <dialog> nativo com todos os modelos testados nas
+   séries do filtro. Regras P1–P12 em previsao/calculos.py; contrato v3 em ml/previsao.py. Sem o previsao.json, a máscara. #}
+{% macro svg_grafico(g, classe) %}
+<svg viewBox="0 0 {{ g.w }} {{ g.h }}" aria-hidden="true" focusable="false" class="pv-svg {{ classe }}">
+  <defs><pattern id="{{ g.prefixo }}-hach" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect class="pv-hach-fundo" width="5" height="5"/><line class="pv-hach-linha" x1="0" y1="0" x2="0" y2="5"/></pattern></defs>
+  {% for z in g.zonas %}<rect class="pv-zona" x="{{ z.x }}" y="{{ g.topo_y - 18 }}" width="{{ z.w }}" height="{{ g.base - g.topo_y + 18 }}" rx="3"/><text class="pv-zona-txt" x="{{ z.tx }}" y="{{ g.topo_y - 6 }}" text-anchor="middle">{{ z.t }}</text>{% endfor %}
+  {% for l in g.grade %}<line class="pv-grade" x1="{{ g.esq }}" x2="{{ g.dir }}" y1="{{ l.y }}" y2="{{ l.y }}"/><text class="pv-eixo" x="{{ g.esq - 5 }}" y="{{ l.y + 4 }}" text-anchor="end">{{ l.t }}</text>{% endfor %}
+  <g class="pv-colunas">{% for b in g.colunas %}<rect class="{{ b.classe }}" x="{{ b.x }}" y="{{ b.y }}" width="{{ b.w }}" height="{{ b.h }}" rx="1.5"{% if b.classe == 'pv-real-parcial' %} fill="url(#{{ g.prefixo }}-hach)"{% endif %}><title>{{ b.dica }}</title></rect>{% endfor %}</g>
+  {% for f in g.faixas %}<rect class="pv-faixa" x="{{ f.x }}" y="{{ f.y }}" width="{{ f.w }}" height="{{ f.h }}" rx="2"/>{% endfor %}
+  {% if g.linha %}<polyline class="pv-linha" points="{{ g.linha }}"/>{% endif %}
+  {% for p in g.pontos %}<circle class="{{ p.classe }}" cx="{{ p.cx }}" cy="{{ p.cy }}" r="{{ 3.6 if p.classe == 'pv-fut' else 3.4 }}"><title>{{ p.dica }}</title></circle>{% endfor %}
+  <line class="pv-eixo-linha" x1="{{ g.esq }}" x2="{{ g.dir }}" y1="{{ g.base }}" y2="{{ g.base }}"/>
+  {% for r in g.rotulos %}<text class="pv-mes-eixo" x="{{ r.x }}" y="{{ g.y_mes }}" text-anchor="middle">{{ r.t }}</text>{% endfor %}
+</svg>
+{% endmacro %}
+{% macro erro_pct(v) %}{% if v is none %}<span class="pv-na">—</span>{% else %}{{ v | pct }}{% endif %}{% endmacro %}
+{% block slides %}
+{% if not t %}
+{{ lamina_pendente(apresentacao, secao_atual, "Gerencial", "A previsão ainda não foi calculada nesta máquina",
+   "A página lê o retrato mensal do job de previsão (ml/saida/previsao.json). Rode python -m ml.rodar --rotina.",
+   "Aqui entram os pedidos previstos por mês no Inbound e no Mercado, com a faixa provável.") }}
+{% else %}
+{% set ac = t.acompanhamento %}
+<section class="slide slide-previsao" aria-roledescription="slide" aria-labelledby="s-previsao" data-nivel="gerencial">
+<div class="lamina lamina-previsao">
+  {{ cabecalho(apresentacao, secao_atual) }}
+  <div class="sobretitulo">
+    <span class="nivel">Gerencial</span>
+    {# Caio, 31/10/2026: o texto do retrato ("Retrato de … · modelos de … · mês até …") saiu da tela; fica só o aviso de
+       falha da atualização, que aparece apenas quando ela falhou #}
+    {% if previsao_falha %}<p class="pv-rodou"><span class="pv-falha">{{ icone("alerta") }}a última atualização falhou{% if previsao_falha.fim %} em {{ previsao_falha.fim | data_hora }}{% endif %}; mostrando o retrato anterior</span></p>{% endif %}
+  </div>
+  <h2 class="slide-titulo titulo-longo" id="s-previsao">{{ secao_atual.pergunta }}</h2>
+
+  <div class="pv-controles">
+    <nav class="grupos" aria-labelledby="rotulo-grupos-pv" data-navegador data-chave="talentos-previsao">
+      <span class="navegador-reflexo" aria-hidden="true"></span>
+      <span class="navegador-pilula" aria-hidden="true"></span>
+      <span class="grupos-rotulo" id="rotulo-grupos-pv">Talentos</span>
+      {% for g in t.grupos %}
+      <a href="?talentos={{ g.chave }}#1" class="grupo"{% if g.atual %} aria-current="true"{% endif %}><span class="grupo-nome">{{ g.rotulo }}</span></a>
+      {% endfor %}
+    </nav>
+    <p class="pv-legenda" aria-hidden="true">
+      <span><span class="pv-chave pv-chave-real"></span>entraram</span>
+      <span><span class="pv-chave pv-chave-prev"></span>previsto no teste</span>
+      <span><span class="pv-chave pv-chave-parcial"></span>mês em andamento</span>
+      <span><span class="pv-chave pv-chave-faixa"></span>previsão e faixa provável</span>
+    </p>
+    <button type="button" class="pv-modelos-botao" data-dialogo="pv-dialogo" commandfor="pv-dialogo" command="show-modal" aria-haspopup="dialog">{{ icone("lista") }}<span>Modelos comparados</span></button>
+  </div>
+
+  <div class="pv-corpo{% if t.colunas | length == 1 %} pv-corpo-uma{% endif %}">
+    {% for c in t.colunas %}
+    {% if c.nao_se_aplica %}
+    <section class="pv-coluna pv-coluna-nao-aplica" aria-labelledby="pv-t-{{ c.chave }}">
+      <h3 class="pv-tipo" id="pv-t-{{ c.chave }}">{{ c.titulo }}<span class="so-leitor">{{ t.de_quem }}</span></h3>
+      {# D55/P4: Inbound de talento não exclusivo não existe (o que aparece na base é erro de cadastro, PD24) #}
+      <div class="pv-nao-aplica" role="note">
+        {{ icone("pessoas") }}
+        <p class="pv-nao-aplica-txt">{{ c.texto }}</p>
+        <p class="pv-nao-aplica-dica">Os poucos pedidos de Inbound marcados como não exclusivos são erro de cadastro e contam em Exclusivos.</p>
+      </div>
+    </section>
+    {% else %}
+    {% set m = c.metricas %}
+    <section class="pv-coluna" aria-labelledby="pv-t-{{ c.chave }}">
+      <h3 class="pv-tipo" id="pv-t-{{ c.chave }}">{{ c.titulo }}{% if c.recorte %}<span class="pv-recorte">{{ c.recorte }}</span>{% endif %}<span class="so-leitor">{{ t.de_quem }}</span></h3>
+      {% if c.confiavel %}
+      <ul class="pv-meses" aria-label="{{ c.titulo }}{% if c.recorte %} ({{ c.recorte }}){% endif %}: mês em andamento e os dois seguintes">
+        {% for n in c.meses %}
+        <li class="pv-mes{% if n.vigente %} pv-mes-vigente{% endif %}">
+          <span class="pv-mes-nome">{{ n.rotulo }}{% if n.vigente %}<small> · em andamento</small>{% endif %}</span>
+          {% if n.vigente and n.realizado is not none %}
+          {% set si = n.situacao %}
+          <span class="pv-mes-valor">{{ n.realizado | inteiro }}<span class="pv-mes-unid"> até {{ ac.ate_txt }}</span></span>
+          {% if n.barra %}
+          <svg class="pv-ritmo" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="pv-ritmo-trilho" x="0" y="2" width="100" height="4" rx="2"/><rect class="pv-ritmo-cheio pv-ritmo-{{ si.lugar if si else 'dentro' }}" x="0" y="2" width="{{ n.barra.cheio }}" height="4" rx="2"/><line class="pv-ritmo-marca" x1="{{ n.barra.marca }}" x2="{{ n.barra.marca }}" y1="0" y2="8"/></svg>
+          {% endif %}
+          <span class="pv-mes-linha">de {% if n.valor is not none %}{{ n.valor | inteiro }} previstos{% else %}— previstos{% endif %}<span class="so-leitor"> para o mês inteiro ({{ ac.dias_uteis_decorridos }} de {{ ac.dias_uteis_mes }} dias úteis decorridos)</span></span>
+          {% if si %}
+          <span class="pv-situacao pv-situacao-{{ si.lugar }}" title="Esperado até {{ ac.ate_txt }}: {{ si.esperado | inteiro }} = previsão × {{ ac.dias_uteis_decorridos }} de {{ ac.dias_uteis_mes }} dias úteis">{% if si.lugar == "dentro" %}{{ icone("ok", "icone pv-sit-icone") }}dentro da faixa{% if si.delta | abs >= 0.005 %} <span class="pv-sit-pct">({{ si.delta | variacao }})</span>{% endif %}{% else %}<span class="var-seta pv-sit-seta" aria-hidden="true">{{ "▼" if si.lugar == "abaixo" else "▲" }}</span>{{ si.delta | variacao(false) }} {{ si.lugar }} do esperado{% endif %}<span class="so-leitor"> até {{ ac.ate_txt }} (esperado ≈ {{ si.esperado | inteiro }})</span></span>
+          {% endif %}
+          {% elif n.sem_previsao %}
+          <span class="pv-mes-valor pv-mes-aguarda">—</span>
+          <span class="pv-mes-linha">aguardando o retrato</span>
+          {% else %}
+          <span class="pv-mes-valor">{{ n.valor | inteiro }}<span class="so-leitor"> pedidos previstos para {{ n.rotulo }}</span></span>
+          {% if n.p10 is not none %}<span class="pv-mes-linha"><span class="so-leitor">faixa provável de </span>{{ n.p10 | inteiro }}–{{ n.p90 | inteiro }}<span aria-hidden="true"> provável</span></span>{% else %}<span class="pv-mes-linha">sem faixa (poucos meses)</span>{% endif %}
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="pv-sem-numero" role="note">{{ icone("alerta") }}<span>{% if c.poucos %}Poucos pedidos para prever com confiança{% else %}Erro alto demais no teste para prever com confiança{% endif %}{% if c.media_teste is not none %} <small>({{ c.media_teste | inteiro }} por mês no teste)</small>{% endif %}</span></p>
+      {% endif %}
+      <p class="pv-por-que">{% if c.por_que %}<span class="pv-por-que-rotulo">Por quê</span> {{ c.por_que }}.{% endif %}{% if c.sem_talento %} {{ c.sem_talento | inteiro }} pedidos do {{ c.titulo }} em {{ ac.rotulo }} ainda sem talento informado (fora deste recorte).{% endif %}</p>
+      <figure class="pv-cartao">
+        <figcaption class="pv-cartao-topo">
+          <span class="pv-modelo" title="{{ c.modelo }} · {{ c.familia }}">Modelo: {{ c.modelo_txt }}</span>
+          {% if m %}<span class="pv-erro-curto">erro médio <strong>{{ m.wape | pct }}</strong> em {{ t.teste_txt }}</span>{% endif %}
+          <span class="so-leitor">Pedidos de {{ c.titulo }}{{ t.de_quem }} por mês em 2026: o que entrou, o que o modelo previu no teste de junho a setembro e a previsão dos meses seguintes com a faixa provável. Os valores estão na tabela a seguir.</span>
+        </figcaption>
+        <div class="pv-grafico">
+          {{ svg_grafico(c.grafico, "pv-svg-largo") }}
+          {{ svg_grafico(c.grafico_xl, "pv-svg-xl") }}
+          {{ svg_grafico(c.grafico_estreito, "pv-svg-estreito") }}
+        </div>
+        {% if m %}
+        {% set v, ing, mf, rb = c.verificacao, c.ingenua, c.mae_faixa, c.robustez %}
+        <p class="pv-erro">
+          <span class="pv-erro-valor">{% if v %}fora do teste ({{ t.verificacao_txt }}): <strong>{{ v.wape | pct }}</strong> · {% endif %}≈ {% if mf | length == 2 and mf[0] != mf[1] %}{{ mf[0] | inteiro }} a {{ mf[1] | inteiro }}{% else %}{{ mf[0] | inteiro }}{% endif %} pedidos/mês{% if ing %} · repetir o último mês erraria {{ ing.wape | pct }}{% if v and ing.verificacao is not none %} e {{ ing.verificacao | pct }}{% endif %}{% endif %}</span>
+          {% if c.curta %}<span class="pv-selo pv-selo-curta" title="A série começa em jan/2026: cada previsão do teste treinou com 5 a 8 meses e não há verificação em jan–mai.">{{ icone("alerta") }}confiança menor · série só de 2026</span>
+          {% elif rb.robusto is sameas false %}<span class="pv-selo pv-selo-fragil" title="{{ rb.texto }}">{{ icone("alerta") }}não robusto: fora do teste perde de repetir o último mês</span>{% endif %}
+        </p>
+        {% endif %}
+      </figure>
+      <div class="so-leitor"><table>
+        <caption>{{ c.titulo }}{% if c.recorte %} ({{ c.recorte }}){% endif %}: pedidos por mês em 2026</caption>
+        <thead><tr><th scope="col">Mês</th><th scope="col">Entraram</th><th scope="col">Previsto no teste</th><th scope="col">Previsão</th></tr></thead>
+        <tbody>{% for l in c.acessivel %}<tr><th scope="row">{{ l.mes }}</th>
+          <td>{% if l.real is not none %}{{ l.real | inteiro }}{% elif l.parcial is not none %}{{ l.parcial | inteiro }} até {{ ac.ate_txt }} (mês em andamento){% else %}—{% endif %}</td>
+          <td>{{ l.previsto | inteiro if l.previsto is not none else "—" }}</td>
+          <td>{% if l.futuro %}{{ l.futuro.valor | inteiro }}{% if l.futuro.p10 is not none %}, faixa {{ l.futuro.p10 | inteiro }} a {{ l.futuro.p90 | inteiro }}{% endif %}{% else %}—{% endif %}</td></tr>{% endfor %}</tbody>
+      </table></div>
+    </section>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  {% set d = t.dialogo %}
+  <dialog id="pv-dialogo" class="pv-dialogo" aria-labelledby="pv-dialogo-titulo" aria-describedby="pv-dialogo-sub">
+    <form method="dialog" class="pv-dialogo-caixa">
+      <header class="pv-dialogo-topo">
+        <div>
+          <h2 class="pv-dialogo-titulo" id="pv-dialogo-titulo">Modelos comparados</h2>
+          <p class="pv-dialogo-sub" id="pv-dialogo-sub">Erro médio de cada modelo (menor é melhor) no teste de {{ t.teste_txt }}, onde se escolhe, e em {{ t.verificacao_txt }}, fora da escolha.</p>
+        </div>
+        <button class="pv-fechar" value="fechar" autofocus>{{ icone("fechar") }}<span class="so-leitor">Fechar</span></button>
+      </header>
+      <ul class="pv-resumo">
+        {% for r in d.resumo %}
+        <li><span class="pv-resumo-serie">{{ r.serie }}</span> {{ icone("ok", "icone pv-venc-icone") }}{{ r.modelo }} · {{ r.teste | pct }}{% if r.verificacao is not none %} e {{ r.verificacao | pct }}{% endif %}
+          {% if r.curta %}<span class="pv-resumo-nota">série só de 2026: sem verificação</span>{% elif r.robusto is sameas false %}<span class="pv-resumo-nota">não robusto{% if r.alternativa %} · bate a ingênua nos dois: {{ r.alternativa.rotulo }} ({{ r.alternativa.teste | pct }} e {{ r.alternativa.verificacao | pct }}){% endif %}</span>{% elif r.robusto %}<span class="pv-resumo-nota">bate a ingênua nos dois períodos</span>{% endif %}</li>
+        {% endfor %}
+      </ul>
+      <div class="pv-tabela-rolagem" tabindex="0" role="region" aria-label="Erro de todos os modelos">
+      <table class="pv-tabela">
+        <thead>
+          <tr><th scope="col" rowspan="2" class="pv-col-modelo">Modelo</th>{% for s in d.series %}<th scope="colgroup" colspan="2" class="pv-col-serie">{{ s }}</th>{% endfor %}</tr>
+          <tr>{% for s in d.series %}<th scope="col" class="pv-col-num">{{ t.teste_txt }}</th><th scope="col" class="pv-col-num">{{ t.verificacao_txt }}</th>{% endfor %}</tr>
+        </thead>
+        {% for f in d.familias %}
+        <tbody class="pv-familia">
+          <tr class="pv-familia-nome"><th scope="rowgroup" colspan="{{ 1 + 2 * (d.series | length) }}">{{ f.familia }}</th></tr>
+          {% for l in f.linhas %}
+          <tr{% if l.vencedor %} class="pv-linha-venc"{% endif %}>
+            <th scope="row" class="pv-col-modelo" title="{{ l.nome }}">{{ l.rotulo }}{% if l.pos_hoc %}<span class="pv-pos-hoc" title="criado depois de ver o teste da D47">&#8239;*</span>{% endif %}</th>
+            {% for cel in l.celulas %}
+            {% if cel.teste is not none %}
+            <td class="pv-col-num{% if cel.vencedor %} pv-venc{% elif cel.alternativa %} pv-alt{% endif %}">{% if cel.vencedor %}{{ icone("ok", "icone pv-venc-icone") }}<span class="so-leitor">vencedor: </span>{% elif cel.alternativa %}<span class="so-leitor">alternativa robusta: </span>{% endif %}{{ cel.teste | pct }}</td>
+            <td class="pv-col-num">{{ erro_pct(cel.verificacao) }}</td>
+            {% else %}
+            <td class="pv-col-num pv-na" colspan="2" title="{{ cel.motivo }}">{{ cel.falta or "—" }}</td>
+            {% endif %}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+          {% if f.sem %}
+          <tr class="pv-linha-sem"><th scope="row" class="pv-col-modelo" title="{{ f.sem.nomes }}">{{ f.sem.n }} {{ "modelo" if f.sem.n == 1 else "modelos" }}</th><td class="pv-na" colspan="{{ 2 * (d.series | length) }}" title="{{ f.sem.nomes }}">não se aplica · {{ f.sem.motivo }}</td></tr>
+          {% endif %}
+        </tbody>
+        {% endfor %}
+      </table>
+      </div>
+      <p class="pv-dialogo-pe">{{ icone("ok", "icone pv-venc-icone") }} vencedor: menor erro no teste (empate de menos de 1 ponto = o mais simples) · <span class="pv-alt-chave">sublinhado</span> = alternativa que bate repetir o último mês nos dois períodos · * criado depois de ver o teste da D47 · — sem verificação (série só de 2026)</p>
+    </form>
+  </dialog>
+
+</div>
+</section>
+{% endif %}
+{% endblock %}

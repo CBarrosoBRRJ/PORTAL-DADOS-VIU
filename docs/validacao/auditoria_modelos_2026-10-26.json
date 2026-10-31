@@ -1,0 +1,482 @@
+{
+  "carga": {
+    "processado_em": "2026-10-26 12:01:46.659042+00:00",
+    "dados_ate": "2026-10-25",
+    "parcial": {
+      "Inbound": {
+        "mes": "2026-10",
+        "pedidos_ate_agora": 133.0
+      },
+      "Mercado": {
+        "mes": "2026-10",
+        "pedidos_ate_agora": 304.0
+      },
+      "Mercado exclusivos": {
+        "mes": "2026-10",
+        "pedidos_ate_agora": 87.0
+      },
+      "Mercado não exclusivos": {
+        "mes": "2026-10",
+        "pedidos_ate_agora": 185.0
+      }
+    },
+    "recortes": {
+      "Inbound": {
+        "chave": "inbound",
+        "tipo": "Inbound",
+        "grupo": null,
+        "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",
+        "inicio": "2024-10",
+        "fim": "2026-09",
+        "meses": 24,
+        "treino_1o_teste": 12,
+        "curta": false
+      },
+      "Mercado": {
+        "chave": "mercado",
+        "tipo": "Mercado",
+        "grupo": null,
+        "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Mercado",
+        "inicio": "2024-10",
+        "fim": "2026-09",
+        "meses": 24,
+        "treino_1o_teste": 12,
+        "curta": false
+      },
+      "Mercado exclusivos": {
+        "chave": "mercado_exclusivos",
+        "tipo": "Mercado",
+        "grupo": "exclusivos",
+        "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento exclusivo",
+        "inicio": "2026-01",
+        "fim": "2026-09",
+        "meses": 9,
+        "treino_1o_teste": 5,
+        "curta": true
+      },
+      "Mercado não exclusivos": {
+        "chave": "mercado_nao_exclusivos",
+        "tipo": "Mercado",
+        "grupo": "nao_exclusivos",
+        "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento não exclusivo",
+        "inicio": "2026-01",
+        "fim": "2026-09",
+        "meses": 9,
+        "treino_1o_teste": 5,
+        "curta": true
+      }
+    },
+    "mes_fechado": "2026-09"
+  },
+  "modelos": 61,
+  "verificacoes": 1284,
+  "divergencias": [],
+  "vencedores": {
+    "Inbound": {
+      "modelo": "ref_media_6m",
+      "metricas": {
+        "1": {
+          "n": 4,
+          "wape": 0.1441281138790036,
+          "mae": 20.250000000000004,
+          "vies": -0.09608540925266901,
+          "cobertura_80": 0.75,
+          "n_faixa": 4,
+          "largura": 0.6864347003637163
+        },
+        "2": {
+          "n": 4,
+          "wape": 0.1749703440094899,
+          "mae": 24.583333333333332,
+          "vies": -0.17319098457888493,
+          "cobertura_80": 0.75,
+          "n_faixa": 4,
+          "largura": 0.5290963009277239
+        },
+        "3": {
+          "n": 4,
+          "wape": 0.22301304863582444,
+          "mae": 31.333333333333332,
+          "vies": -0.22301304863582444,
+          "cobertura_80": 0.5,
+          "n_faixa": 4,
+          "largura": 0.5803715683365107
+        },
+        "todos": {
+          "n": 12,
+          "wape": 0.18070383550810595,
+          "mae": 25.388888888888886,
+          "vies": -0.16409648082245945,
+          "cobertura_80": 0.6666666666666666,
+          "n_faixa": 12,
+          "largura": 0.5986341898759837
+        },
+        "verificacao": {
+          "n": 5,
+          "wape": 0.26925105485232065,
+          "mae": 34.03333333333333,
+          "vies": -0.2412974683544304,
+          "cobertura_80": 0.4,
+          "n_faixa": 5,
+          "largura": 0.629546175871414
+        }
+      },
+      "futuro": [
+        {
+          "mes": "2026-10",
+          "valor": 138.33,
+          "p10": 130.82,
+          "p90": 211.93
+        },
+        {
+          "mes": "2026-11",
+          "valor": 138.33,
+          "p10": 146.24,
+          "p90": 218.52
+        },
+        {
+          "mes": "2026-12",
+          "valor": 138.33,
+          "p10": 146.53,
+          "p90": 220.83
+        }
+      ],
+      "sensibilidade_excluir_mes": [
+        {
+          "mes_retirado": "2026-06",
+          "menor_wape_bruto": [
+            0.10848888888888894,
+            "arimax_011"
+          ]
+        },
+        {
+          "mes_retirado": "2026-07",
+          "menor_wape_bruto": [
+            0.1003778337531486,
+            "comb_media"
+          ]
+        },
+        {
+          "mes_retirado": "2026-08",
+          "menor_wape_bruto": [
+            0.10453201970443353,
+            "arimax_110"
+          ]
+        },
+        {
+          "mes_retirado": "2026-09",
+          "menor_wape_bruto": [
+            0.07704387990762125,
+            "arimax_100_ct"
+          ]
+        }
+      ],
+      "nota": "Sensibilidade interna; não é novo teste independente nem aplica desempate por simplicidade."
+    },
+    "Mercado": {
+      "modelo": "mlp_1",
+      "metricas": {
+        "1": {
+          "n": 4,
+          "wape": 0.1262781083495514,
+          "mae": 48.68021076875206,
+          "vies": 0.07441932230962693,
+          "cobertura_80": 0.25,
+          "n_faixa": 4,
+          "largura": 0.652904351229765
+        },
+        "2": {
+          "n": 4,
+          "wape": 0.08544451819575047,
+          "mae": 32.938861764461805,
+          "vies": 0.022797432328108182,
+          "cobertura_80": 0.5,
+          "n_faixa": 4,
+          "largura": 0.7261843239568575
+        },
+        "3": {
+          "n": 4,
+          "wape": 0.24739266608583213,
+          "mae": 95.36987277608829,
+          "vies": -0.16100195520813704,
+          "cobertura_80": 0.5,
+          "n_faixa": 4,
+          "largura": 0.6422355883061762
+        },
+        "todos": {
+          "n": 12,
+          "wape": 0.15303843087704466,
+          "mae": 58.99631510310072,
+          "vies": -0.021261733523467306,
+          "cobertura_80": 0.4166666666666667,
+          "n_faixa": 12,
+          "largura": 0.6737747544975995
+        },
+        "verificacao": {
+          "n": 5,
+          "wape": 0.2676951255556181,
+          "mae": 60.39202032534744,
+          "vies": -0.11172831834495531,
+          "cobertura_80": 0.6,
+          "n_faixa": 5,
+          "largura": 0.6171441111584772
+        }
+      },
+      "futuro": [
+        {
+          "mes": "2026-10",
+          "valor": 464.25,
+          "p10": 334.1,
+          "p90": 483.27
+        },
+        {
+          "mes": "2026-11",
+          "valor": 516.93,
+          "p10": 372.01,
+          "p90": 538.1
+        },
+        {
+          "mes": "2026-12",
+          "valor": 588.24,
+          "p10": 423.33,
+          "p90": 612.34
+        }
+      ],
+      "sensibilidade_excluir_mes": [
+        {
+          "mes_retirado": "2026-06",
+          "menor_wape_bruto": [
+            0.13433915211970077,
+            "mlp_4x2"
+          ]
+        },
+        {
+          "mes_retirado": "2026-07",
+          "menor_wape_bruto": [
+            0.160896309314587,
+            "prophet_log_sem_sazonal"
+          ]
+        },
+        {
+          "mes_retirado": "2026-08",
+          "menor_wape_bruto": [
+            0.0645,
+            "mlp_4x2"
+          ]
+        },
+        {
+          "mes_retirado": "2026-09",
+          "menor_wape_bruto": [
+            0.10753990610328641,
+            "comb_drift_log"
+          ]
+        }
+      ],
+      "nota": "Sensibilidade interna; não é novo teste independente nem aplica desempate por simplicidade."
+    },
+    "Mercado exclusivos": {
+      "modelo": "comb_mediana",
+      "metricas": {
+        "1": {
+          "n": 4,
+          "wape": 0.10899084992816545,
+          "mae": 19.37312357473141,
+          "vies": -0.0027270363858708725,
+          "cobertura_80": null,
+          "n_faixa": 0,
+          "largura": null
+        },
+        "2": {
+          "n": 4,
+          "wape": 0.11715082771294337,
+          "mae": 20.823559625975683,
+          "vies": -0.007215123473441662,
+          "cobertura_80": null,
+          "n_faixa": 0,
+          "largura": null
+        },
+        "3": {
+          "n": 4,
+          "wape": 0.23172869682687072,
+          "mae": 41.18977586097627,
+          "vies": -0.14433669361208268,
+          "cobertura_80": null,
+          "n_faixa": 0,
+          "largura": null
+        },
+        "todos": {
+          "n": 12,
+          "wape": 0.15262345815599318,
+          "mae": 27.12881968722779,
+          "vies": -0.05142628449046507,
+          "cobertura_80": null,
+          "n_faixa": 0,
+          "largura": null
+        },
+        "verificacao": {
+          "n": 0,
+          "wape": null,
+          "mae": null,
+          "vies": null,
+          "cobertura_80": null,
+          "n_faixa": 0,
+          "largura": null,
+          "n_parcial": 2
+        }
+      },
+      "futuro": [
+        {
+          "mes": "2026-10",
+          "valor": 195.52,
+          "p10": 157.94,
+          "p90": 214.16
+        },
+        {
+          "mes": "2026-11",
+          "valor": 199.74,
+          "p10": 161.34,
+          "p90": 218.78
+        },
+        {
+          "mes": "2026-12",
+          "valor": 203.54,
+          "p10": 164.41,
+          "p90": 222.94
+        }
+      ],
+      "sensibilidade_excluir_mes": [
+        {
+          "mes_retirado": "2026-06",
+          "menor_wape_bruto": [
+            0.13018726591760302,
+            "comb_mediana"
+          ]
+        },
+        {
+          "mes_retirado": "2026-07",
+          "menor_wape_bruto": [
+            0.1359238095238095,
+            "comb_holt_amort"
+          ]
+        },
+        {
+          "mes_retirado": "2026-08",
+          "menor_wape_bruto": [
+            0.03420107719928184,
+            "comb_holt_amort"
+          ]
+        },
+        {
+          "mes_retirado": "2026-09",
+          "menor_wape_bruto": [
+            0.09135396518375245,
+            "comb_theta"
+          ]
+        }
+      ],
+      "nota": "Sensibilidade interna; não é novo teste independente nem aplica desempate por simplicidade."
+    },
+    "Mercado não exclusivos": {
+      "modelo": "comb_holt_amort",
+      "metricas": {
+        "1": {
+          "n": 4,
+          "wape": 0.1923259154900866,
+          "mae": 38.369020140272276,
+          "vies": -0.05764958598579389,
+          "cobertura_80": null,
+          "n_faixa": 0,
+          "largura": null
+        },
+        "2": {
+          "n": 4,
+          "wape": 0.17007916179941193,
+          "mae": 33.93079277898268,
+          "vies": -0.08177581609396241,
+          "cobertura_80": null,
+          "n_faixa": 0,
+          "largura": null
+        },
+        "3": {
+          "n": 4,
+          "wape": 0.21780792521151984,
+          "mae": 43.45268107969821,
+          "vies": -0.10271013006259343,
+          "cobertura_80": null,
+          "n_faixa": 0,
+          "largura": null
+        },
+        "todos": {
+          "n": 12,
+          "wape": 0.19340433416700611,
+          "mae": 38.58416466631772,
+          "vies": -0.08071184404744991,
+          "cobertura_80": null,
+          "n_faixa": 0,
+          "largura": null
+        },
+        "verificacao": {
+          "n": 0,
+          "wape": null,
+          "mae": null,
+          "vies": null,
+          "cobertura_80": null,
+          "n_faixa": 0,
+          "largura": null,
+          "n_parcial": 2
+        }
+      },
+      "futuro": [
+        {
+          "mes": "2026-10",
+          "valor": 243.91,
+          "p10": 193.75,
+          "p90": 317.64
+        },
+        {
+          "mes": "2026-11",
+          "valor": 263.11,
+          "p10": 209.0,
+          "p90": 342.65
+        },
+        {
+          "mes": "2026-12",
+          "valor": 281.93,
+          "p10": 223.95,
+          "p90": 367.16
+        }
+      ],
+      "sensibilidade_excluir_mes": [
+        {
+          "mes_retirado": "2026-06",
+          "menor_wape_bruto": [
+            0.22810264385692072,
+            "comb_holt_amort"
+          ]
+        },
+        {
+          "mes_retirado": "2026-07",
+          "menor_wape_bruto": [
+            0.2005299145299146,
+            "comb_holt_amort"
+          ]
+        },
+        {
+          "mes_retirado": "2026-08",
+          "menor_wape_bruto": [
+            0.16646875000000003,
+            "comb_holt_amort"
+          ]
+        },
+        {
+          "mes_retirado": "2026-09",
+          "menor_wape_bruto": [
+            0.17089353612167305,
+            "comb_holt_amort"
+          ]
+        }
+      ],
+      "nota": "Sensibilidade interna; não é novo teste independente nem aplica desempate por simplicidade."
+    }
+  }
+}

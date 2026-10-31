@@ -1,0 +1,28 @@
+{
+  "corte": "2026-10-25 00:00:00",
+  "checks": {
+    "entrada_fluxo_por_safra_grupo_tipo_familia": true,
+    "situacoes_por_linha": true,
+    "talentos_total": true,
+    "status_todos_meses": true,
+    "balanco_anual": true
+  },
+  "grupos_conferidos": 299,
+  "totais": {
+    "entradas": 5556,
+    "resolvidos": 5389,
+    "fila": 167
+  },
+  "status_meses": {
+    "2026-01": true,
+    "2026-02": true,
+    "2026-03": true,
+    "2026-04": true,
+    "2026-05": true,
+    "2026-06": true,
+    "2026-07": true,
+    "2026-08": true,
+    "2026-09": true,
+    "2026-10": true
+  }
+}

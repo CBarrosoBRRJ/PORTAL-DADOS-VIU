@@ -1,0 +1,41 @@
+{% extends "apresentacao.html" %}
+{% from "macros.html" import cabecalho %}
+{% from "icones.html" import icone %}
+{# A LIA na prática (V2, 30/10/2026; PRD do slide do vídeo de @cris adaptado). Vídeo 16:9 à esquerda (player nativo,
+   só metadados até o play, sem tocar sozinho; capa e legendas opcionais) ou o espaço reservado enquanto não há
+   arquivo; à direita, as etapas que o vídeo percorre, ligadas por um trilho. Conteúdo em lia_na_pratica/__init__.py. #}
+{% block slides %}
+{% set f = pratica %}
+<section class="slide" aria-roledescription="slide" aria-labelledby="s-pratica" data-nivel="gerencial">
+<div class="lamina">
+  {{ cabecalho(apresentacao, secao_atual) }}
+  <div class="sobretitulo"><span class="nivel">Gerencial</span></div>
+  <h2 class="slide-titulo" id="s-pratica">{{ secao_atual.pergunta }}</h2>
+  <div class="slide-corpo fn">
+    <div class="fn-video">
+      {% if f.arquivo %}
+      <video class="fn-player" controls preload="metadata" aria-label="Vídeo: a LIA trabalhando, do e-mail à carta orçamento"{% if f.capa %} poster="{{ f.capa }}"{% endif %}>
+        <source src="{{ f.arquivo }}" type="video/mp4">
+        {% if f.legendas %}<track kind="subtitles" src="{{ f.legendas }}" srclang="pt-BR" label="Português" default>{% endif %}
+        Seu navegador não reproduz este vídeo.
+      </video>
+      {% else %}
+      <div class="fn-reservado" role="img" aria-label="Espaço reservado para o vídeo: a LIA trabalhando, do e-mail à carta orçamento. Vídeo a incluir.">
+        {{ icone("video", "icone fn-reservado-ic") }}
+        <p class="fn-reservado-tit">Vídeo a incluir</p>
+        <p class="fn-reservado-sub">A LIA trabalhando, do e-mail à carta orçamento</p>
+      </div>
+      {% endif %}
+    </div>
+    <div class="fn-etapas">
+      <p class="fn-etapas-tit">O que o vídeo mostra</p>
+      <ol>
+        {% for e in f.etapas %}
+        <li><span class="fn-n" aria-hidden="true">{{ loop.index }}</span><span class="fn-tit">{{ e.titulo }}</span><span class="fn-txt">{{ e.texto }} <span class="fn-sigla">{{ e.sigla }}{% if e.fase %} · {{ e.fase | lower }}{% endif %}</span></span></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}
