@@ -52,11 +52,16 @@ async function abrir(url) {
 
 // controles que só fazem sentido na tela (setas, fechar, tela cheia, lupa, nova iniciativa): somem da captura.
 // Pelo element.style (a CSP do portal barra <style> injetado)
-const SEM_CONTROLES = `document.querySelectorAll('.cab-passos, .tela-cheia-botao, .estudo-lupa, .ini-nova, .sla-lupa,
-  [class*="lupa"], .fechar-estudo, .controles-centro').forEach((e) => { e.style.visibility = 'hidden'; }); true`;
+// (também dentro do quadro da tela cheia, um iframe do próprio site)
+const SEM_CONTROLES = `(() => { let n = 0;
+  const docs = [document, ...[...document.querySelectorAll('iframe')].map((f) => { try { return f.contentDocument; } catch { return null; } })];
+  for (const d of docs.filter(Boolean)) d.querySelectorAll('.cab-passos, .tela-cheia-botao, .estudo-lupa, .ini-nova, .sla-lupa, [class*="lupa"], .fechar-estudo, .controles-centro')
+    .forEach((e) => { e.style.setProperty('visibility', 'hidden', 'important'); n++; });
+  return n; })()`;
 
 async function capturar(nome) {
-  await avaliar(SEM_CONTROLES);
+  const escondidos = await avaliar(SEM_CONTROLES);
+  if (!escondidos) console.log(`  aviso: nenhum controle escondido em ${nome}`);
   // página mais alta que a janela: captura inteira (o PPT encaixa na lâmina); senão, só a janela
   const altura = await avaliar("Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)");
   const alto = altura > H + 4;

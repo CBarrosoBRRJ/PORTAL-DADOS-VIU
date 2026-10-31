@@ -1,5 +1,12 @@
 # PPD-AGENCIAMENTO-SLA-V2 — guia para retomar
 
+**Publicação de 31/10/2026 (D66/D66b) — ler primeiro: [PRD_V2, seção 0](docs/PRD_V2.md).** No Cloud Run:
+`viu-agenciamento` (AUTH=publico, só leitura) e `viu-agenciamento-restrito` (IAP, 4 e-mails, edição), os dois no ar
+e trancados (a org barrou o link aberto; a TI precisa liberar os e-mails no IAP). Espelho temporário na VPS do Caio
+(EasyPanel `rede-globo`, `Dockerfile.vps`, ramo `vps` do GitHub `CBarrosoBRRJ/PORTAL-DADOS-VIU`; sem credencial,
+link com `?k=`). Corte desligado até a carga de 02/11 (`CORTE_DADOS=off` no deploy e `ARG` no Dockerfile); na segunda,
+`docs/congelar_outubro.md` + `tools/publicar*.ps1 -Congelado`. Git: o projeto agora tem repositório (dados fora).
+
 **Endereço novo (Caio, 31/10/2026):** a área saiu de `/gestao-orcamentos/...` para `/viu-agenciamento/...` (mesmos nomes
 de página). O slug fica em `app/apresentacoes/gestao_orcamentos/__init__.py` (`SLUG`; a pasta não mudou) e as rotas,
 links do Roadmap, API das Iniciativas e `data-ini-api` derivam dele. Endereço antigo: um redirecionamento genérico em

@@ -8,8 +8,8 @@
 | **Escrito em** | 31/10/2026, a partir do código atual (não da memória). Onde o código e uma ficha divergem, vale o código; a divergência está na seção 10 |
 | **Carga vigente** | gold processada em **30/10/2026 09:01 (São Paulo)**, dados até **29/10/2026** (lida em 31/10/2026 02:51 por uma instância local só de leitura) |
 | **Endereço** | `/viu-agenciamento/...` desde 31/10/2026 (antes `/gestao-orcamentos/...`, que responde 301; 308 para POST/PUT/PATCH/DELETE). Aba do navegador: só "ViU Agenciamento" |
-| **Estado de publicação** | Nada publicado. Roteiro de deploy em `docs/deploy_iniciativas.md` (Cloud Run + IAP), não executado |
-| **Testes** | 564 coletados em 31/10/2026 (`tests/`, dados sintéticos, sem BigQuery) |
+| **Estado de publicação** | 31/10/2026: dois serviços no Cloud Run **no ar, mas trancados pela organização**; espelho temporário na VPS. Ver **seção 0** |
+| **Testes** | **634 passam** em 31/10/2026 (`tests/`, dados sintéticos, sem BigQuery) |
 | **Números de linha** | conferidos no código de 31/10/2026 às 03:10; `app/main.py`, `app/dados.py` e `apresentacao.py` ainda estavam sendo editados por outros agentes, então use também o nome da função citado ao lado |
 
 **Como ler.** Seção 1 = o que é e como se navega. Seção 2 = arquitetura. Seção 3 = uma subseção por página, sempre
@@ -26,6 +26,95 @@ Documentos de apoio, que este PRD resume e não substitui:
 - `docs/legado/` (os três projetos antigos, só leitura).
 
 ---
+
+## 0. Publicação de 31/10/2026 — decisões, configuração e passo a passo (D66, D66b)
+
+Registro do dia em que a revisão 1 foi publicada para o gerente e a diretoria. Decisões do Caio nesta conversa; o
+que o Claude não pôde executar está marcado.
+
+### 0.1 Decisões
+
+| Código | Decisão | Motivo e efeito |
+|---|---|---|
+| D66 | **Link aberto agora (B), restrito depois (A).** Modo `AUTH=publico`: sem login, **só leitura** (edição das Iniciativas desligada à força em `config.py`), cabeçalho `X-Robots-Tag: noindex`. A trava da D10 continua: `AUTH=off` nunca sobe no Cloud Run | Compartilhamento controlado pelo Caio; depois volta o IAP para os e-mails |
+| D66-org | A organização **bloqueou o link aberto** no Cloud Run duas vezes: `constraints/run.managed.requireInvokerIam` recusou `--no-invoker-iam-check`, e a política de IAM recusou `allUsers` como `run.invoker` | O serviço `viu-agenciamento` está no ar, mas ninguém de fora abre |
+| D66-iap | **Dois links** (pedido do Caio): `viu-agenciamento` (aberto, só leitura) e `viu-agenciamento-restrito` (IAP, login Google, só os 4 e-mails, **edição das Iniciativas ligada**, mesmo Firestore e bucket) | O restrito está no ar com IAP, mas **falta a TI liberar os e-mails**: a conta do Caio não tem `iap.webServices.setIamPolicy`. Mensagem para o Leo no relatório da conversa |
+| D66b | **Espelho temporário na VPS própria** (EasyPanel, projeto `rede-globo`), até o restrito ser liberado. O Claude não recomendou | Nenhuma credencial do GCP sai dele: o site lê **arquivos** (`ESPELHO_DIR`, gerados por `tools/gerar_espelho.py`) e nunca o BigQuery. O link só abre com a chave (`CHAVE_ACESSO`): o `?k=` vira um cookie de 30 dias; sem a chave, 403. Sai do ar quando o restrito funcionar |
+| D66c | O "parcial" de outubro **fica até segunda** | Os dados vão até 29/10; tirar hoje mostraria outubro "completo" sem o dia 30. A carga de 02/11 (dados até 01/11) fecha outubro sozinha |
+| D66d | Corte desligado até segunda: no Cloud Run, `CORTE_DADOS=off` (gold ao vivo) e `ARG CORTE_DADOS=off` no `Dockerfile` (só no build) | Na segunda, depois de congelar, os dois voltam para `2026-10-31` (`tools/publicar.ps1 -Congelado`) |
+| D66e | Exportação em **PDF + PPT** das 14 telas (Capa, Roadmap, Demanda, Talentos, SLA, 5 slides do estudo, LIA, Iniciativas, Previsão, Encerramento), sem os controles de tela | `tools/exportar_paginas.mjs` + `tools/montar_pdf_ppt.py`; saída em `Downloads\ViU Agenciamento - outubro 2026.pdf/.pptx` |
+| D66f | Repositório **privado** `github.com/CBarrosoBRRJ/PORTAL-DADOS-VIU`: ramo `main` (código e docs, sem dados) e ramo `vps` (com o espelho; apagar junto com a VPS) | A proteção do Claude Code barrou o envio; o Caio envia (passo 0.4) |
+| D66g | Varredura de responsividade antes do deploy: 14 telas × 16 tamanhos (de 1366 px a 4K, ultrawide, tablet, celular, zoom de 125% e 150%), com 4 correções só de CSS | `tools/conferir_responsivo.mjs`; registro em `docs/HISTORICO_2026-10.md` (6d) |
+
+### 0.2 Configuração
+
+**GCP.** Tudo executado pelo Caio.
+- Projeto `gglobo-viu-dados-hdg-prd` (número `241421786646`), conta `caio.barroso@viu.com.br`.
+- APIs: run, cloudbuild, artifactregistry, storage, firestore e iap.
+- Conta de serviço `viu-agenciamento@gglobo-viu-dados-hdg-prd.iam.gserviceaccount.com`:
+  - no projeto: `bigquery.jobUser`, `bigquery.readSessionUser` e `datastore.user`;
+  - no bucket: `storage.objectAdmin`;
+  - `bigquery.dataViewer` no schema `gold_monday`, por `GRANT` em SQL (o `bq add-iam-policy-binding` exige allowlist).
+- Firestore `(default)` nativo, em us-central1.
+- Bucket `gs://gglobo-viu-dados-hdg-prd-viu-agenciamento-anexos`, em us-central1, com acesso público bloqueado.
+- Cloud Run em us-central1: 1 a 3 instâncias, 2 GiB, 1 CPU, cpu-boost e timeout de 300 s.
+
+| Serviço | URL | Variáveis |
+|---|---|---|
+| `viu-agenciamento` | `https://viu-agenciamento-241421786646.us-central1.run.app` | `AUTH=publico`, `CORTE_DADOS=off`, `MODO=apresentacao`, `INICIATIVAS_BACKEND=firestore`, `INICIATIVAS_BUCKET=…-anexos` |
+| `viu-agenciamento-restrito` | `https://viu-agenciamento-restrito-241421786646.us-central1.run.app` | `AUTH=iap`, `IAP_AUDIENCE=/projects/241421786646/locations/us-central1/services/viu-agenciamento-restrito`, `INICIATIVAS_EDICAO=on` e as demais iguais |
+
+**VPS.** EasyPanel, projeto `rede-globo`, serviço `portal-viu`:
+- Fonte: GitHub `CBarrosoBRRJ/PORTAL-DADOS-VIU`, ramo `vps`. Build pelo `Dockerfile.vps`, porta 8080.
+- O `Dockerfile.vps` já define `AUTH=publico`, `MODO=apresentacao`, `CORTE_DADOS=off`, `PREVISAO_JOB=off`, `ESPELHO_DIR=/app/espelho` e as Iniciativas em SQLite temporário.
+- No painel entra só a `CHAVE_ACESSO`, nunca no repositório.
+- O espelho tem a carga de 30/10/2026 às 09:01 (dados até 29/10).
+- Em 31/10, `hub-viu` e `lia-automacao-email` foram apagados do projeto, a pedido do Caio. Falta apagar `monitoramento-monday-quadro-agenciamento-erros`, que a proteção do Claude Code barrou.
+
+**Arquivos novos:**
+- `tools/publicar.ps1`: link aberto; `-Congelado` na segunda.
+- `tools/publicar_restrito.ps1`: IAP e liberação dos e-mails.
+- `tools/gerar_espelho.py` e `Dockerfile.vps`: espelho da VPS.
+- `tools/exportar_paginas.mjs` e `tools/montar_pdf_ppt.py`: PDF e PPT.
+- `tools/conferir_responsivo.mjs`: varredura de telas.
+- Testes `test_d66_*` e `test_d66b_*`, em `tests/test_seguranca_iniciativas.py`.
+
+### 0.3 Passo a passo — Cloud Run (no PowerShell **do computador**, não no Cloud Shell)
+
+1. Login (uma vez): `$env:CLOUDSDK_CONFIG="C:\Users\CCMB\AppData\Roaming\gcloud-viu"; gcloud auth login caio.barroso@viu.com.br --update-adc`
+2. Link aberto: `pwsh -ExecutionPolicy Bypass -File "G:\Meu Drive\Workspace\globo\scripts\PPD-AGENCIAMENTO-SLA-V2\tools\publicar.ps1"`
+3. Link restrito: o mesmo comando, com `tools\publicar_restrito.ps1`. O passo 3/3 (liberar os e-mails) depende da permissão do IAP.
+4. Para republicar, rode o mesmo arquivo. O link não muda.
+
+### 0.4 Passo a passo — VPS e GitHub
+
+1. **Gerar o espelho.** Com o venv e as credenciais do gcloud-viu, rode `python tools/gerar_espelho.py`. Depois atualize o commit do ramo `vps`.
+2. **Enviar ao GitHub.** No terminal do VS Code, na pasta V2:
+   - uma vez: `git remote add origin https://github.com/CBarrosoBRRJ/PORTAL-DADOS-VIU.git`;
+   - depois: `git push -u origin main vps`.
+3. **Criar o serviço.** No EasyPanel, entre em `rede-globo` → **+ Service → App** e dê o nome `portal-viu`. Configure:
+   - *Source*: GitHub, `CBarrosoBRRJ/PORTAL-DADOS-VIU`, ramo `vps`;
+   - *Build*: Dockerfile, arquivo `Dockerfile.vps`;
+   - *Environment*: `CHAVE_ACESSO=<chave>`;
+   - *Domains*: porta **8080**.
+
+   Depois clique em **Deploy**.
+4. **Link para compartilhar:** `https://<domínio do EasyPanel>/viu-agenciamento/capa?k=<chave>`. Sem o `?k=`, a resposta é 403.
+5. **Tirar do ar:** apagar o serviço no EasyPanel, o ramo `vps` no GitHub e a pasta `espelho/`.
+
+### 0.5 Pendências
+
+- **TI (Leo):** liberar `roles/iap.httpsResourceAccessor` no `viu-agenciamento-restrito` para os 4 e-mails, ou dar
+  `roles/iap.admin` ao Caio no projeto. Depois, rodar só o passo 3/3 do `publicar_restrito.ps1`.
+- **Custo:** os dois serviços estão com `--min-instances 1`, cerca de US$ 20 por mês cada. Se o link aberto não for
+  liberado, apagar o serviço ou passar para `--min-instances 0`.
+- **Segunda, 02/11, depois das 09:30:**
+  1. Seguir `docs/congelar_outubro.md`.
+  2. Republicar os dois serviços (aberto e restrito) com `-Congelado`.
+  3. Gerar de novo o espelho, o PDF e o PPT.
+
+  O "parcial" de outubro some sozinho.
+- **Vídeo da LIA:** o pop-up ainda mostra "Vídeo a incluir".
 
 ## 1. Visão geral
 
