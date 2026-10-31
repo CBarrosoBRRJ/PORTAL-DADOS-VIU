@@ -9,7 +9,7 @@
 | **Carga vigente** | gold processada em **30/10/2026 09:01 (São Paulo)**, dados até **29/10/2026** (lida em 31/10/2026 02:51 por uma instância local só de leitura) |
 | **Endereço** | `/viu-agenciamento/...` desde 31/10/2026 (antes `/gestao-orcamentos/...`, que responde 301; 308 para POST/PUT/PATCH/DELETE). Aba do navegador: só "ViU Agenciamento" |
 | **Estado de publicação** | 31/10/2026: dois serviços no Cloud Run **no ar, mas trancados pela organização**; espelho temporário na VPS. Ver **seção 0** |
-| **Testes** | **634 passam** em 31/10/2026 (`tests/`, dados sintéticos, sem BigQuery) |
+| **Testes** | **633 passam** em 31/10/2026 (`tests/`, dados sintéticos, sem BigQuery) |
 | **Números de linha** | conferidos no código de 31/10/2026 às 03:10; `app/main.py`, `app/dados.py` e `apresentacao.py` ainda estavam sendo editados por outros agentes, então use também o nome da função citado ao lado |
 
 **Como ler.** Seção 1 = o que é e como se navega. Seção 2 = arquitetura. Seção 3 = uma subseção por página, sempre
