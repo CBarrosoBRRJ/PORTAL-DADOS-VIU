@@ -8,8 +8,10 @@ abertura) e LEGENDAS (.vtt em pt-BR) são opcionais, na mesma pasta (LEIA-ME.md 
 mostram o espaço reservado ("Vídeo a incluir"), sem player quebrado.
 """
 
+from pathlib import Path
+
 PASTA = "video"  # app/static/video/
-ARQUIVO = "lia-na-pratica.mp4"  # Caio, 03/11/2026: "fluxo LIA.mp4" renomeado (H.264 1920×1080, 1min47s, 40 MB)
+ARQUIVO = "lia-na-pratica.mp4"  # Caio, 03/11/2026: "lia escopo completo.mp4" renomeado (H.264 1920×1080, 1min46s, 42 MB)
 CAPA = ""  # ex.: "lia-na-pratica.jpg" (opcional)
 LEGENDAS = ""  # ex.: "lia-na-pratica.vtt" (opcional, pt-BR)
 
@@ -35,5 +37,15 @@ def tela() -> dict:
         chave = grupo[e["sigla"]]["chave"] if e["sigla"] in grupo else ""
         etapas.append({**e, "fase": grupo[e["sigla"]]["titulo"] if chave else "", "concluida": chave == "producao",
                        "selo": "" if chave == "producao" else "Em teste" if chave == "testes" else "Em andamento"})
-    caminho = lambda nome: f"/static/{PASTA}/{nome}" if nome else ""
+    def caminho(nome: str) -> str:
+        # só arquivos do próprio site; com a versão do arquivo (tamanho e data), para o navegador não mostrar o vídeo
+        # antigo depois de trocado (Caio, 03/11/2026)
+        if not nome:
+            return ""
+        arq = Path(__file__).resolve().parents[3] / "static" / PASTA / nome
+        if not arq.is_file():
+            return f"/static/{PASTA}/{nome}"
+        info = arq.stat()
+        return f"/static/{PASTA}/{nome}?v={info.st_size:x}{info.st_mtime_ns // 1_000_000_000:x}"
+
     return {"arquivo": caminho(ARQUIVO), "capa": caminho(CAPA), "legendas": caminho(LEGENDAS), "etapas": etapas}

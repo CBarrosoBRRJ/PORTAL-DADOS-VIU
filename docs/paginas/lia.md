@@ -9,7 +9,7 @@ não lia `extracted_emails_2026-11.json`, gravado em UTC, onde estão 4 e-mails 
 `_descartados/2026-11-03/app/apresentacoes/gestao_orcamentos/lia/retrato_2160.json`. Retrato anterior (até 29/10, 2.047
 lidos) em `_descartados/2026-11-03/`. Percentuais das partes pelo maior resto (fecham em 100%; ver a tabela de 03/11 em
 "Quando o inbound chega"). **Vídeo publicado** no pop-up (`app/static/video/lia-na-pratica.mp4`,
-"fluxo LIA.mp4" do Caio, H.264 1920×1080, 1min47s, 40 MB; `lia_na_pratica.ARQUIVO`). As etapas do vídeo mostram a
+"lia escopo completo.mp4" do Caio (03/11, substituiu o "fluxo LIA.mp4"), H.264 1920×1080, 1min46s, 42 MB; `lia_na_pratica.ARQUIVO`). As etapas do vídeo mostram a
 situação: ✓ azul = iniciativa em produção (1 a 4: LIA e GPS), ampulheta + selo "Em teste" = fase de testes (5 e 6:
 Orça+AI e COP.IA), derivada do `iniciativas/catalogo.py`. Os números abaixo, de 30/10, são histórico.
 
