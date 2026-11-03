@@ -1,55 +1,55 @@
 {
-  "gerado_em": "2026-10-31T05:08:10-03:00",
+  "gerado_em": "2026-11-03T14:31:45-03:00",
   "tabelas": {
     "gld_agenciamento_2026_sla_movimentos": {
       "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_2026_sla_movimentos",
-      "linhas": 15545,
-      "modificada_em": "2026-10-30T12:04:13.863000+00:00"
+      "linhas": 15712,
+      "modificada_em": "2026-11-03T12:05:15.008000+00:00"
     },
     "gld_agenciamento_2026_sla_entregas": {
       "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_2026_sla_entregas",
-      "linhas": 2699,
-      "modificada_em": "2026-10-30T12:04:13.863000+00:00"
+      "linhas": 2717,
+      "modificada_em": "2026-11-03T12:05:15.008000+00:00"
     },
     "gld_agenciamento_2026_sla_entregas_status": {
       "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_2026_sla_entregas_status",
-      "linhas": 7148,
-      "modificada_em": "2026-10-30T12:04:13.863000+00:00"
+      "linhas": 7196,
+      "modificada_em": "2026-11-03T12:05:15.008000+00:00"
     },
     "gld_agenciamento_entrada_diaria": {
       "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_entrada_diaria",
-      "linhas": 2365,
-      "modificada_em": "2026-10-30T12:04:13.863000+00:00"
+      "linhas": 2372,
+      "modificada_em": "2026-11-03T12:05:15.008000+00:00"
     },
     "gld_agenciamento_fluxo_mensal": {
       "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_fluxo_mensal",
-      "linhas": 623,
-      "modificada_em": "2026-10-30T12:04:13.863000+00:00"
+      "linhas": 625,
+      "modificada_em": "2026-11-03T12:05:15.008000+00:00"
     },
     "gld_agenciamento_fila_mensal": {
       "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_fila_mensal",
-      "linhas": 120,
-      "modificada_em": "2026-10-30T12:04:13.863000+00:00"
+      "linhas": 128,
+      "modificada_em": "2026-11-03T12:05:15.008000+00:00"
     },
     "gld_agenciamento_atendimento_mensal": {
       "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_atendimento_mensal",
-      "linhas": 22,
-      "modificada_em": "2026-10-30T12:04:13.863000+00:00"
+      "linhas": 23,
+      "modificada_em": "2026-11-03T12:05:15.008000+00:00"
     },
     "gld_agenciamento_2026_talentos_ano": {
       "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_2026_talentos_ano",
       "linhas": 3,
-      "modificada_em": "2026-10-30T12:04:13.863000+00:00"
+      "modificada_em": "2026-11-03T12:05:15.008000+00:00"
     },
     "gld_agenciamento_2026_talentos_ranking": {
       "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_2026_talentos_ranking",
-      "linhas": 438,
-      "modificada_em": "2026-10-30T12:04:13.863000+00:00"
+      "linhas": 445,
+      "modificada_em": "2026-11-03T12:05:15.008000+00:00"
     },
     "gld_agenciamento_2026_saidas_status": {
       "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_2026_saidas_status",
       "linhas": 40,
-      "modificada_em": "2026-10-30T12:04:13.863000+00:00"
+      "modificada_em": "2026-11-03T12:05:15.008000+00:00"
     }
   }
 }
