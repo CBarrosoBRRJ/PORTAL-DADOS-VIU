@@ -189,6 +189,14 @@ def _cabecalho(b: bytes):
     return None
 
 
+def _versionado(arquivo: str) -> str:
+    """Caio, 03/11/2026: endereço da imagem do painel com a versão do arquivo (tamanho e data). A galeria abre a imagem
+    grande pelo JSON, sem o ?v= da página; o navegador guardava a cópia antiga por um dia (as desfocadas continuavam
+    aparecendo depois de trocadas)."""
+    info = (PASTA_IMAGENS / arquivo).stat()
+    return f"/static/roadmap/{arquivo}?v={info.st_size:x}{info.st_mtime_ns // 1_000_000_000:x}"
+
+
 def _registro(r: dict):
     """Imagem pronta para a miniatura e o painel (caminhos e tamanhos); None se algum arquivo faltar."""
     nome = r.get("imagem") or ""
@@ -199,8 +207,8 @@ def _registro(r: dict):
     alta = _tamanho(PASTA_IMAGENS / f"{nome}-alta.webp")
     return {"titulo": r["titulo"], "legenda": r.get("legenda", ""), "alt": r["alt"], "imagem": nome,
             "mini": f"/static/roadmap/{nome}-mini.webp", "mw": mini[0], "mh": mini[1],
-            "src": f"/static/roadmap/{nome}.webp", "w": grande[0], "h": grande[1],
-            "alta": f"/static/roadmap/{nome}-alta.webp" if alta else f"/static/roadmap/{nome}.webp",
+            "src": _versionado(f"{nome}.webp"), "w": grande[0], "h": grande[1],
+            "alta": _versionado(f"{nome}-alta.webp" if alta else f"{nome}.webp"),
             "aw": (alta or grande)[0], "ah": (alta or grande)[1]}
 
 
