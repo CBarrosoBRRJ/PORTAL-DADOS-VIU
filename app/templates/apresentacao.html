@@ -105,7 +105,9 @@
        próprio (rodape_texto: a data da sua fonte ou "conteúdo editorial"); a regra 9 continua: toda página tem rodapé.
        F03: a Previsão acrescenta a data própria do acompanhamento (rodape_extra) e, se o retrato ou o acompanhamento
        forem de outra carga, um aviso discreto com ícone e texto (rodape_aviso) #}
-    {% if rodape_texto %}<p class="rodape-dados">{{ rodape_texto }}</p>
+    {# Caio, 03/11/2026: a capa nova não mostra o rodapé datado (sem_rodape; exceção à regra 9, só na capa) #}
+    {% if sem_rodape %}
+    {% elif rodape_texto %}<p class="rodape-dados">{{ rodape_texto }}</p>
     {% elif momento %}<p class="rodape-dados">Dados até {{ momento | recorte }} · atualizados em {{ momento | atualizado }}{% if base_congelada %} · base congelada para a apresentação{% endif %}{% if rodape_extra %} · {{ rodape_extra }}{% endif %}{% if rodape_aviso %} · <span class="rodape-aviso">{{ icone("alerta", "icone rodape-aviso-icone") }}{{ rodape_aviso }}</span>{% endif %}</p>{% endif %}
 
     {% if not sem_controles %}

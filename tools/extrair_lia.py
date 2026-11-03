@@ -6,7 +6,8 @@ remetente, assunto ou conteúdo de e-mail sai da fonte). O slide lê esse retrat
 
 Regras (as mesmas da ficha docs/paginas/lia.md):
 - e-mail = mensagem única (internet_message_id) em extracted_emails_AAAA-MM.json; se a mesma mensagem foi processada
-  mais de uma vez, vale o último processamento;
+  mais de uma vez, vale o último processamento dentro da janela; os arquivos são por mês em UTC, então se leem também
+  o mês anterior a inicio e o seguinte a fim (03/11/2026: e-mails de 31/10 depois das 21h estão no arquivo de novembro);
 - dia = data do processamento no fuso de São Paulo; janela padrão 21/09 a 29/10/2026;
 - categoria = classificação da LIA (nao_lead, lead, duvida/DUVIDA = validação), trocada pela classificação correta da
   revisão manual (revisao_manual.json) quando o item foi revisado;
@@ -35,9 +36,6 @@ from collections import Counter
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-import google.auth
-from google.auth.transport.requests import AuthorizedSession
-
 RAIZ = Path(__file__).resolve().parent.parent
 SAIDA = RAIZ / "app" / "apresentacoes" / "gestao_orcamentos" / "lia" / "retrato.json"
 BUCKET, PASTA = "gglobo-viu-lia-dados-prd", "data/"
@@ -60,7 +58,7 @@ def linhas(texto: str) -> list[dict]:
 
 
 def momento(iso: str) -> datetime:
-    return datetime.fromisoformat(iso.replace("Z", "+00:00")).astimezone(SP)
+    return datetime.fromisoformat(iso).astimezone(SP)  # Python 3.11+ aceita o "Z" do UTC
 
 
 def dia(iso: str) -> date:
@@ -94,11 +92,26 @@ def turno(t: datetime) -> str:
 
 
 def meses(inicio: date, fim: date) -> list[str]:
-    a, m, out = inicio.year, inicio.month, []
-    while (a, m) <= (fim.year, fim.month):
+    """Meses (AAAA-MM) dos arquivos a ler: os da janela mais o anterior a inicio e o seguinte a fim. Os arquivos são
+    gravados pela data em UTC (3 h à frente de São Paulo): um e-mail processado em 31/10 às 22h (SP) cai em
+    extracted_emails_2026-11.json (03/11/2026: 4 e-mails se perdiam). O filtro da janela continua pela data em SP."""
+    a, m = (inicio.year - 1, 12) if inicio.month == 1 else (inicio.year, inicio.month - 1)
+    ultimo = (fim.year + 1, 1) if fim.month == 12 else (fim.year, fim.month + 1)
+    out = []
+    while (a, m) <= ultimo:
         out.append(f"{a}-{m:02d}")
         a, m = (a + 1, 1) if m == 12 else (a, m + 1)
     return out
+
+
+def ultimos_na_janela(processados: list[dict], inicio: date, fim: date) -> list[dict]:
+    """Um registro por mensagem (internet_message_id): o último processamento DENTRO da janela (data em SP). Filtrar antes
+    de deduplicar deixa o retrato estável: reprocessar depois de fim não tira da janela um e-mail que já estava nela."""
+    ultimo = {}
+    for e in sorted(processados, key=lambda e: momento(e["data_processamento"])):
+        if inicio <= dia(e["data_processamento"]) <= fim:
+            ultimo[e["internet_message_id"]] = e
+    return list(ultimo.values())
 
 
 def main():
@@ -110,15 +123,28 @@ def main():
     a = p.parse_args()
     inicio, fim, corte = (date.fromisoformat(x) for x in (a.inicio, a.fim, a.corte))
 
+    import google.auth  # só aqui: montar_retrato() e os testes não precisam da rede nem das credenciais
+    from google.auth.transport.requests import AuthorizedSession
+
     os.environ.setdefault("CLOUDSDK_CONFIG", r"C:\Users\CCMB\AppData\Roaming\gcloud-viu")
     cred, _ = google.auth.default(scopes=["https://www.googleapis.com/auth/devstorage.read_only"])
     s = AuthorizedSession(cred)
 
     processados = [e for m in meses(inicio, fim) for e in linhas(baixar(s, f"extracted_emails_{m}.json"))]
-    ultimo = {}
-    for e in sorted(processados, key=lambda e: e["data_processamento"]):
-        ultimo[e["internet_message_id"]] = e
     revisao = json.loads(baixar(s, "revisao_manual.json") or "[]")
+    retrato = montar_retrato(processados, revisao, inicio, fim, corte)
+    saida = Path(a.saida)
+    saida.write_text(json.dumps(retrato, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    periodos = retrato["periodos"]
+    tot = sum(sum(p[k] for k in ("nao_lead", "lead", "validacao")) for p in periodos)
+    print(f"{tot} e-mails únicos de {inicio:%d/%m} a {fim:%d/%m}; períodos: "
+          + "; ".join(f"{p['rotulo']}: {p['nao_lead']} / {p['lead']} / {p['validacao']}" for p in periodos)
+          + f"; {len(retrato['dias'])} dias; {retrato['fim_de_semana']} no fim de semana -> {saida}")
+
+
+def montar_retrato(processados: list[dict], revisao: list[dict], inicio: date, fim: date, corte: date) -> dict:
+    """Só contagens agregadas, sem rede (testável com dados sintéticos): os processamentos lidos dos arquivos e a revisão
+    manual viram o retrato.json do slide."""
     correta = {r["email_id"]: r["classificacao_correta"] for r in revisao if r.get("revisado") and r.get("classificacao_correta")}
 
     por_dia: dict[date, Counter] = {}
@@ -130,11 +156,9 @@ def main():
     lead_hora: dict[str, Counter] = {"util": Counter(), "fim_de_semana": Counter(), "feriado": Counter()}
     nl_hora: dict[str, Counter] = {"util": Counter(), "fim_de_semana": Counter(), "feriado": Counter()}
     revisados = 0
-    for e in ultimo.values():
+    for e in ultimos_na_janela(processados, inicio, fim):
         t = momento(e["data_processamento"])
         d = t.date()
-        if not inicio <= d <= fim:
-            continue
         cat = CATEGORIA[correta.get(e["email_id"], e["classificacao"])]
         revisados += e["email_id"] in correta
         por_dia.setdefault(d, Counter())[cat] += 1
@@ -172,7 +196,7 @@ def main():
                         "fora": sum(v for d, v in fora_dia.items() if ini <= d <= fi)})
         seg += timedelta(days=7)
 
-    retrato = {
+    return {
         "fonte": f"gs://{BUCKET}/{PASTA} (extracted_emails_*, revisao_manual.json)",
         "extraido_em": datetime.now(SP).strftime("%Y-%m-%d %H:%M"),
         "inicio": inicio.isoformat(), "fim": fim.isoformat(), "corte_revisao": corte.isoformat(),
@@ -184,12 +208,6 @@ def main():
         "horas_lead": {k: [c.get(h, 0) for h in range(24)] for k, c in lead_hora.items()},
         "horas_nao_lead": {k: [c.get(h, 0) for h in range(24)] for k, c in nl_hora.items()},
     }
-    saida = Path(a.saida)
-    saida.write_text(json.dumps(retrato, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    tot = sum(sum(p[k] for k in ("nao_lead", "lead", "validacao")) for p in periodos)
-    print(f"{tot} e-mails únicos de {inicio:%d/%m} a {fim:%d/%m}; períodos: "
-          + "; ".join(f"{p['rotulo']}: {p['nao_lead']} / {p['lead']} / {p['validacao']}" for p in periodos)
-          + f"; {len(dias)} dias; {fds} no fim de semana -> {saida}")
 
 
 if __name__ == "__main__":

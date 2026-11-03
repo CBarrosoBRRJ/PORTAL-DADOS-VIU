@@ -1,5 +1,18 @@
 # LIA — e-mails lidos e filtrados (V2)
 
+**Atualização de 03/11/2026 (Caio, D67; extrator corrigido na validação da tarde):** LIA extraída de novo até
+**31/10** (`tools/extrair_lia.py --fim 2026-10-31`, extraída em 03/11 16:44): **2.164** e-mails de 21/09 a 31/10; não
+lead 1.880 (86,9%), lead 200 (9,2%), validação 84 (3,9%); revisado (até 12/10) 946 / 112 / 43, sem revisão 934 / 88 /
+41; 304 no fim de semana; 459 itens com revisão manual; triagem poupada ≈ 63 h (≈ 11 h/semana, premissa
+`MINUTOS_TRIAGEM` = 2); **50% fora do expediente (1.083)**. A extração das 13:20 dava 2.160 (1.876 não lead): o extrator
+não lia `extracted_emails_2026-11.json`, gravado em UTC, onde estão 4 e-mails de 31/10 à noite (São Paulo); guardada em
+`_descartados/2026-11-03/app/apresentacoes/gestao_orcamentos/lia/retrato_2160.json`. Retrato anterior (até 29/10, 2.047
+lidos) em `_descartados/2026-11-03/`. Percentuais das partes pelo maior resto (fecham em 100%; ver a tabela de 03/11 em
+"Quando o inbound chega"). **Vídeo publicado** no pop-up (`app/static/video/lia-na-pratica.mp4`,
+"fluxo LIA.mp4" do Caio, H.264 1920×1080, 1min47s, 40 MB; `lia_na_pratica.ARQUIVO`). As etapas do vídeo mostram a
+situação: ✓ azul = iniciativa em produção (1 a 4: LIA e GPS), ampulheta + selo "Em teste" = fase de testes (5 e 6:
+Orça+AI e COP.IA), derivada do `iniciativas/catalogo.py`. Os números abaixo, de 30/10, são histórico.
+
 **Estado (30/10/2026): entregue na V2 (porta 8400), aprovado pelo Caio.** Histórico das rodadas abaixo. Uma tela
 só: o que a LIA leu e como os e-mails se dividem, com o extrato de cada semana ao clicar e o vídeo "A LIA na prática" num
 pop-up. Rota `/viu-agenciamento/lia#1` (`?semana=NN` abre o extrato sem JS). A análise de tempo na régua do SLA
@@ -30,6 +43,23 @@ equipe" (≈ 59 h, ≈ 11 h por semana; 1.777 descartados sem a equipe abrir, 87
 (almoço dentro); gráfico "E-mails por semana" com a dica ao lado da coluna e a semana 44 no padrão de parcial. Cabe sem
 rolagem em 1440×810, 1280×720 e 1920×1080 (cartões da esquerda e do gráfico com o mesmo topo e a mesma base) e não rola
 para o lado em 390 px. Legenda dos quadrantes enxuta (sem fundo de pílula), cada grupo numa linha nas telas de mesa.
+
+**Números da tela em 03/11/2026 (retrato de 21/09 a 31/10, 2.164 e-mails; mesmas regras e mesmo layout de 30/10).**
+Percentuais pelo maior resto em dois níveis (`lia._pct_lados`): dentro + fora = 100% em cada categoria e as faixas de
+cada lado somam o lado. Antes, arredondados um a um, os leads davam 74% + 27% = 101%.
+
+| Faixa | Leads | % dos 200 | Não leads | % dos 1.880 | Validação | % das 84 | E-mails | % dos 2.164 | Taxa de lead |
+|---|---|---|---|---|---|---|---|---|---|
+| 10h–12h (dentro) | 35 | 18% | 270 | 14% | 13 | 16% | 318 | 15% | 11,0% |
+| Almoço 12h–13h (dentro) | 13 | 7% | 98 | 5% | 6 | 7% | 117 | 5% | 11,1% |
+| 13h–19h (dentro) | 99 | 49% | 521 | 28% | 26 | 31% | 646 | 30% | 15,3% |
+| Antes das 10h (fora) | 17 | 9% | 191 | 10% | 15 | 18% | 223 | 10% | 7,6% |
+| Noite e madrugada (fora) | 27 | 13% | 469 | 25% | 15 | 18% | 511 | 24% | 5,3% |
+| Fim de semana e feriado (fora) | 9 | 4% | 331 | 18% | 9 | 10% | 349 | 16% | 2,6% |
+| **Dentro / fora** | 147 / 53 | **74% / 26%** | 889 / 991 | **47% / 53%** | 45 / 39 | **54% / 46%** | 1.081 / 1.083 | **50% / 50%** | 13,6% / 4,9% |
+
+Taxa de lead do período: 9,2% (200 ÷ 2.164). Fração (1 casa, maior resto): 86,9% + 9,2% + 3,9% = 100,0%; cada semana
+do gráfico também fecha em 100,0%. A tabela de 30/10 abaixo é histórico.
 
 **Estado vigente de "Quando o inbound chega" (Caio, 30/10/2026, última rodada) — substitui as versões abaixo.**
 
@@ -369,8 +399,8 @@ ao abrir. Fora da gold (D57): exceção registrada aqui, como a sensibilidade de
 
 | Regra | Como |
 |---|---|
-| E-mail | mensagem única (`internet_message_id`) em `extracted_emails_AAAA-MM.json`; reprocessada = vale o último processamento (116 reprocessamentos na janela) |
-| Dia | data de `data_processamento` no fuso de São Paulo; janela 21/09 a 29/10/2026 |
+| E-mail | mensagem única (`internet_message_id`) em `extracted_emails_AAAA-MM.json`; reprocessada = vale o último processamento **dentro da janela** (116 reprocessamentos na janela de 30/10). Os arquivos são por mês em UTC: o extrator lê também o mês anterior a `--inicio` e o seguinte a `--fim` (03/11/2026) |
+| Dia | data de `data_processamento` no fuso de São Paulo; janela 21/09 a 31/10/2026 (até 29/10 antes de 03/11) |
 | Categoria | `classificacao` da LIA (`nao_lead`, `lead`, `duvida`/`DUVIDA` = validação), trocada por `classificacao_correta` de `revisao_manual.json` quando `revisado` |
 | Períodos | revisado até 12/10; sem revisão de 13/10 em diante |
 | Semana (novo, D-LIA-2) | segunda a domingo; todos os dias (as semanas somam o total) |
@@ -570,6 +600,11 @@ hora de recebimento do e-mail (`recebido_em`), e a gold levar `h_email_ate_regis
 
 ## Histórico
 
+- 03/11/2026 (validação, extrator): `tools/extrair_lia.py::meses` passa a ler o mês anterior a `--inicio` e o seguinte a `--fim` (arquivos gravados em UTC; 4 e-mails de 31/10 à noite estavam em `extracted_emails_2026-11.json`); filtro pela data em São Paulo mantido; dedup pelo último processamento dentro da janela (`ultimos_na_janela`); contagem separada em `montar_retrato()` (sem rede). Testes sintéticos em `tests/test_lia_extrator.py`.
+- 03/11/2026 (validação, retrato): retrato regerado com `--fim 2026-10-31`: 2.164 = 1.880 / 200 / 84 (antes 2.160 = 1.876 / 200 / 84; cópia em `_descartados/2026-11-03/app/apresentacoes/gestao_orcamentos/lia/retrato_2160.json`). `tools/congelar_base.py --conferir` "Tudo certo" e `python -m app.conferir_base` "Pacote conferido".
+- 03/11/2026 (validação, percentuais): partes pelo maior resto (`lia._maior_resto`, `_pct_partes`, `_pct_lados`): quadrantes dentro × fora e faixas (leads 74% + 26%, antes 74% + 27%), fração e semanas (1 casa, fecham em 100,0%), turnos e períodos; o "fora do expediente" do bloco de cima é o mesmo número do par. Teste `test_lia_percentuais_das_partes_fecham_em_100`.
+- 03/11/2026 (validação, comentários): comentários de `lia/__init__.py` (TURNOS e FAIXAS_DIA), do `template.html` e do teste que citavam "54%" corrigidos (o 54% era a regra do SLA de 30/10; a tela usa o expediente da LIA, com o almoço dentro, hoje 50%).
+- 03/11/2026 (validação, ficha): topo com os números de 2.164 e tabela de 03/11 em "Quando o inbound chega" com as faixas, os % e as taxas de lead da tela.
 - 31/10/2026 (auditoria do Codex, F05 e F10): retrato fora do contrato (sem semanas, sem dias ou total zero, campos ausentes, JSON quebrado) vira a lâmina "Os números da LIA estão indisponíveis agora", sem erro (`lia.validar_retrato`, `RetratoInvalido`); rodapé próprio "Dados da LIA até dd/mm/aaaa · extraídos em …" (fim do retrato), no lugar da data da carga de entradas. Testes em `tests/test_auditoria_dados.py`.
 - 30/10/2026: criada na V2 a partir do PRD de @cris; números da fonte; conferência acima.
 - 30/10/2026 (noite, D-LIA-1): visão 2 auditada e refeita na régua do SLA (view gold de entregas; típico em horas e

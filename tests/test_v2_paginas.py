@@ -1,5 +1,6 @@
 """V2 (30/10/2026): páginas novas — Iniciativas, LIA (e-mails e leads; antes × depois), A LIA na prática (vídeo), Roadmap — e a capa sem o menu dos temas, com o "Começar" para o Roadmap. Conteúdo fixo ou retrato; nenhuma consulta ao BigQuery."""
 
+import itertools
 import json
 import math
 import re
@@ -8,9 +9,13 @@ from datetime import date, timedelta
 import pytest
 from fastapi.testclient import TestClient
 
-from app.apresentacoes.gestao_orcamentos import iniciativas, lia, lia_na_pratica, roadmap
+from app.apresentacoes.gestao_orcamentos import (
+    iniciativas,
+    lia,
+    lia_na_pratica,
+    roadmap,
+)
 from app.apresentacoes.gestao_orcamentos.iniciativas import catalogo
-
 
 
 @pytest.fixture
@@ -25,49 +30,43 @@ FASES = ["Em produção", "Fase de testes", "Em desenvolvimento", "Na esteira"]
 
 
 def test_capa_sem_menu_com_comecar_para_o_roadmap(cliente):
-    """V2 (Caio, 30/10/2026): o menu dos temas (e o modo denso, RF5) saiu da capa; o Roadmap faz a navegação. No plano
-    marinho: ilustração decorativa (aria-hidden) e o "Começar", um link para o Roadmap; a frase virou o subtítulo do lado
-    branco. Animação contínua por decisão do Caio (botão de pausa retirado em 30/10/2026); respeita movimento reduzido."""
+    """V2 (Caio, 30/10/2026): sem o menu dos temas; o Roadmap faz a navegação. Capa nova aplicada em 03/11/2026 (Caio):
+    sem o subtítulo, sem textos no desenho e sem o rodapé datado; o "Começar" leva ao Roadmap. Loop contínuo só na capa
+    (autorizado pelo Caio), parado com movimento reduzido e com a aba oculta (capa_nova.js). Detalhes em
+    tests/test_capa_nova.py."""
     html = cliente.get("/viu-agenciamento/capa").text
     assert "capa-menu" not in html and "Temas</p>" not in html
-    assert html.count('class="capa-comecar"') == 1
-    assert '<a class="capa-comecar" href="/viu-agenciamento/roadmap#1">Começar' in html
-    assert '<div class="capa-desenho" aria-hidden="true">' in html
-    assert '<p class="capa-sub">Tudo o que a área analisa, constrói e entrega, num só lugar.</p>' in html
-    assert "capa-frase" not in html and "Como a demanda chega" not in html
+    assert html.count('class="cn-comecar"') == 1
+    assert '<a class="cn-comecar" href="/viu-agenciamento/roadmap#1">Começar' in html
+    assert '<div class="cn-desenho" aria-hidden="true">' in html
+    assert "Tudo o que a área analisa" not in html and "rodape-dados" not in html
     assert 'href="/viu-agenciamento/roadmap#1" rel="next"' in html  # seta → e passador seguem para o Roadmap
     assert 'style="' not in html  # CSP
-    # fluxo contínuo: loop autorizado pelo Caio (30/10/2026) SÓ na capa, sem botão de pausa (decisão dele no mesmo dia)
-    assert html.count("<animateMotion") >= 9 and 'repeatCount="indefinite"' in html
-    assert "capa-pausa" not in html and "Pausar animação" not in html
-    assert '<script src="/static/capa_fluxo.js' in html
+    assert 'repeatCount="indefinite"' in html and "capa-pausa" not in html
+    assert '<script src="/static/capa_nova.js' in html
     for outra in ("/viu-agenciamento", "/viu-agenciamento/roadmap", "/viu-agenciamento/sla"):
         assert "repeatCount" not in cliente.get(outra).text, outra
     from pathlib import Path
 
-    js = (Path(__file__).resolve().parents[1] / "app" / "static" / "capa_fluxo.js").read_text(encoding="utf-8")
+    js = (Path(__file__).resolve().parents[1] / "app" / "static" / "capa_nova.js").read_text(encoding="utf-8")
     assert "pauseAnimations" in js and "visibilitychange" in js and "prefers-reduced-motion" in js
-    assert "localStorage" not in js
-    assert "/viu-agenciamento/atendimento" not in html
-    assert "negocios-fechados" not in html and "/viu-agenciamento/qualidade" not in html
-
 
 def test_iniciativas_colunas_quadros_e_painel(cliente, quadro_limpo):
     t = iniciativas.tela()
     assert [g["titulo"] for g in t["grupos"]] == FASES
     assert [g["nivel"] for g in t["grupos"]] == [4, 3, 2, 1]  # medidor: a mais madura acende tudo
-    assert t["total"] == sum(len(g["itens"]) for g in t["grupos"]) == 11
+    assert t["total"] == sum(len(g["itens"]) for g in t["grupos"]) == 13
     html = cliente.get("/viu-agenciamento/iniciativas").text
     # colunas na ordem do catálogo, com a contagem escrita (não só cor)
     posicoes = [html.index(f'>{f}</h3>') for f in FASES]
     assert posicoes == sorted(posicoes)
     assert '<span class="ini-num">2</span><span class="so-leitor"> iniciativas</span>' in html
     # sem JS: cada quadro é um details nativo com o detalhe dentro; Fechar e Expandir só aparecem com JS (hidden)
-    assert html.count('<details class="ini-quadro">') == 11
-    assert html.count('role="group" aria-label="Descrição: ') == 11
-    assert html.count('data-ini-fechar hidden>') == 11
-    assert html.count('data-ini-expandir aria-haspopup="dialog" hidden>') == 11
-    assert 'class="ini-painel"' in html and "11</span> iniciativas" in html
+    assert html.count('<details class="ini-quadro">') == 13
+    assert html.count('role="group" aria-label="Descrição: ') == 13
+    assert html.count('data-ini-fechar hidden>') == 13
+    assert html.count('data-ini-expandir aria-haspopup="dialog" hidden>') == 13
+    assert 'class="ini-painel"' in html and "13</span> iniciativas" in html
     # só a LIA tem página própria: botão "Ver resultados"
     assert html.count('class="ini-botao ini-botao-forte" href="/viu-agenciamento/lia#1"') == 1
     assert 'src="/static/iniciativas.js' in html and 'style="' not in html
@@ -93,23 +92,23 @@ def test_iniciativas_ferramenta_grava_no_servidor(cliente, quadro_limpo):
     Sem JS: ferramentas hidden e pop-ups fechados (só leitura)."""
     t = iniciativas.tela()
     ids = [i["id"] for g in t["grupos"] for i in g["itens"]]
-    assert len(set(ids)) == 11 and ids[:2] == ["lia", "gps"] and "orca-ai" in ids and "auto" in ids  # estáveis e únicos
+    assert len(set(ids)) == 13 and ids[:2] == ["lia", "gps"] and "orca-ai" in ids and "auto" in ids  # estáveis e únicos
     html = cliente.get("/viu-agenciamento/iniciativas").text
     for chave in ("producao", "testes", "desenvolvimento", "esteira"):
         assert f'data-ini-fase="{chave}"' in html
-    assert html.count('<li class="ini-item" data-ini-id="') == 11
+    assert html.count('<li class="ini-item" data-ini-id="') == 13
     assert ('<li class="ini-item" data-ini-id="lia" data-ini-sigla="LIA" data-ini-nome="Leitura Inteligente Automatizada" '
             'data-ini-resp="" data-ini-status="" data-ini-prox="">') in html
     assert 'data-ini-api="/viu-agenciamento/iniciativas/api" data-ini-edicao="on" data-ini-semente="1"' in html
     # botões com nome acessível; sem JS ficam ocultos
-    assert html.count('class="ini-ferramentas" data-ini-ferramentas hidden>') == 11
+    assert html.count('class="ini-ferramentas" data-ini-ferramentas hidden>') == 13
     assert 'data-ini-editar aria-label="Editar iniciativa: LIA"' in html
     assert 'data-ini-excluir aria-label="Excluir do quadro: LIA"' in html
-    assert html.count("data-ini-editar") == html.count("data-ini-excluir") == 11
+    assert html.count("data-ini-editar") == html.count("data-ini-excluir") == 13
     assert html.count('data-ini-nova hidden aria-label="Nova iniciativa em ') == 4
     assert "class=\"ini-edicao" not in html and "Restaurar o catálogo" not in html and "Copiar resumo" not in html
-    assert "11</span> iniciativas" in html and "Clique em uma iniciativa para ver o que ela faz." in html
-    assert html.count("<dt>Responsável</dt><dd>a definir</dd>") == 11
+    assert "13</span> iniciativas" in html and "Clique em uma iniciativa para ver o que ela faz." in html
+    assert html.count("<dt>Responsável</dt><dd>a definir</dd>") == 13
     # pop-ups: fechados sem JS; campos com rótulo; erro ligável; anexos com rótulo e dica; visor e visão ampliada
     assert '<dialog class="ini-dialogo" data-ini-dialogo aria-labelledby="ini-d-titulo">' in html and "<dialog open" not in html
     for campo, rotulo in (("sigla", "Sigla"), ("nome", "Nome / título"), ("fase", "Fase"), ("resp", "Responsável")):
@@ -123,7 +122,7 @@ def test_iniciativas_ferramenta_grava_no_servidor(cliente, quadro_limpo):
     assert all(f'<option value="{c}">{f}</option>' in html for c, f in
                zip(("producao", "testes", "desenvolvimento", "esteira"), FASES))
     assert 'aria-live="polite" data-ini-anuncio' in html and 'data-ini-estado aria-live="polite" hidden' in html
-    assert html.count('<details class="ini-quadro">') == 11 and 'style="' not in html  # CSP; details segue nativo
+    assert html.count('<details class="ini-quadro">') == 13 and 'style="' not in html  # CSP; details segue nativo
     from pathlib import Path
 
     js = (Path(__file__).resolve().parents[1] / "app" / "static" / "iniciativas.js").read_text(encoding="utf-8")
@@ -234,7 +233,7 @@ def test_lia_ganho_e_quando_em_inteiros():
 
 def test_lia_recebimento_soma_o_total_e_bate_com_o_fora():
     """Caio, 30/10/2026: 'Quando o inbound chega' sobre os e-mails do período: turnos do expediente (10h–13h, 14h–19h, fora)
-    somam o total e o 'fora' é o mesmo dos 54%; dia da semana com total (soma = total) e média inteira por dia."""
+    somam o total e o 'fora' dos turnos segue a regra do SLA (faixas do retrato) e o das faixas do dia é o pct_fora da tela; dia da semana com total (soma = total) e média inteira por dia."""
     r = json.loads(lia.RETRATO.read_text(encoding="utf-8"))
     total = sum(d["nao_lead"] + d["lead"] + d["validacao"] for d in r["dias"])
     rc = lia.recebimento(r)
@@ -262,6 +261,42 @@ def test_lia_recebimento_soma_o_total_e_bate_com_o_fora():
     assert all(d["media_int"] == math.floor(d["total"] / d["n"] + 0.5) for d in rc["dias"])
     assert rc["maior_dia"]["media"] == max(d["media"] for d in rc["dias"]) and max(d["largura"] for d in rc["dias"]) == 100
     assert abs(sum(t["largura"] for t in rc["turnos"]) - 100) < 0.01
+
+
+def _lia_n_pct(txt: str) -> float:
+    return float(txt.rstrip("%").replace(",", "."))
+
+
+def test_lia_percentuais_das_partes_fecham_em_100():
+    """03/11/2026: arredondadas uma a uma, as partes somavam 101% (leads 74% dentro + 27% fora). Maior resto: dentro + fora
+    = 100%, as faixas de cada lado somam o lado, e a fração e cada semana (três categorias, 1 casa) somam 100,0%."""
+    assert lia._maior_resto([147, 53], 200, 100) == [74, 26]  # 73,5 + 26,5: empate de resto, a ordem decide
+    assert lia._maior_resto([1, 1, 1], 3, 100) == [34, 33, 33] and lia._maior_resto([0, 0], 0, 100) == [0, 0]
+    assert lia._pct_partes([1880, 200, 84], 1) == ["86,9%", "9,2%", "3,9%"] and lia._pct_partes([0, 0]) == ["—", "—"]
+    por, d, f = lia._pct_lados({"a": 1, "b": 1, "c": 1, "x": 1, "y": 2}, ("a", "b", "c"), ("x", "y"))
+    assert (d, f) == (50, 50) and sum(por[k] for k in "abc") == 50 and por["x"] + por["y"] == 50
+    with pytest.raises(ValueError):
+        lia._maior_resto([1, 1], 2, 150)  # alvo que as cotas não alcançam
+    e = lia.tela()
+    assert sum(_lia_n_pct(x["pct"]) for x in e["fracao"]) == pytest.approx(100)
+    for s in e["semanas"]:
+        assert sum(_lia_n_pct(p["pct"]) for p in s["partes"]) == pytest.approx(100)
+    dd = e["recebimento"]["dia"]
+    assert _lia_n_pct(dd["dentro"]["pct"]) + _lia_n_pct(dd["fora"]["pct"]) == 100 and dd["fora"]["pct"] == e["pct_fora"]
+    assert sum(_lia_n_pct(x["pct"]) for x in dd["faixas"]) == 100
+    for campo in ("pct_leads", "pct_nl", "pct_v"):
+        assert sum(_lia_n_pct(x[campo]) for x in dd["faixas"]) == 100, campo
+    for linha in dd["quadrantes"]["linhas"]:
+        dentro, fora = _lia_n_pct(linha["dentro_pct"]), _lia_n_pct(linha["fora_pct"])
+        assert dentro + fora == 100, linha["rot"]
+        assert sum(_lia_n_pct(g["pct"]) for g in linha["dentro"]) == dentro and sum(_lia_n_pct(g["pct"]) for g in linha["fora"]) == fora
+    # o que a tela escreve na faixa de cada categoria é o mesmo número do quadrante
+    leads = next(x for x in dd["quadrantes"]["linhas"] if x["cat"] == "l")
+    assert {g["chave"]: g["pct"] for g in leads["dentro"] + leads["fora"]} == {x["chave"]: x["pct_leads"] for x in dd["faixas"]}
+    assert leads["dentro_pct"] == dd["leads"]["dentro_pct"] and leads["fora_pct"] == dd["leads"]["fora_pct"]
+    rc = e["recebimento"]
+    assert sum(_lia_n_pct(t["pct"]) for t in rc["turnos"]) == 100
+    assert sum(_lia_n_pct(p["pct_mails"]) for p in e["padroes"]["periodos"]) == 100
 
 
 def test_lia_tempo_poupado_e_estimativa_com_premissa(monkeypatch):
@@ -349,6 +384,7 @@ def test_lia_capa_da_previa_do_video(cliente, monkeypatch):
 
 def test_lia_botao_e_popup_do_video(cliente, monkeypatch):
     """Caio, 30/10/2026: o vídeo é um pop-up da LIA; sem JS o botão leva à página antiga (oculta, endereço mantido)."""
+    monkeypatch.setattr(lia_na_pratica, "ARQUIVO", "")
     html = cliente.get("/viu-agenciamento/lia").text
     assert 'href="/viu-agenciamento/lia-na-pratica#1" data-lia-video' in html and '<span class="lia-vc-tit">A LIA na prática</span>' in html
     assert '<dialog id="lia-video"' in html and "Vídeo a incluir" in html and "<video" not in html  # sem arquivo
@@ -363,12 +399,28 @@ def test_lia_botao_e_popup_do_video(cliente, monkeypatch):
 
 def test_video_reservado_sem_arquivo(cliente, monkeypatch):
     assert len(lia_na_pratica.ETAPAS) == 6
+    monkeypatch.setattr(lia_na_pratica, "ARQUIVO", "")
     html = cliente.get("/viu-agenciamento/lia-na-pratica").text
     assert "Vídeo a incluir" in html and "<video" not in html and 'style="' not in html
     monkeypatch.setattr(lia_na_pratica, "ARQUIVO", "lia.mp4")
     monkeypatch.setattr(lia_na_pratica, "LEGENDAS", "lia.vtt")
     html = cliente.get("/viu-agenciamento/lia-na-pratica").text
     assert 'preload="metadata"' in html and 'srclang="pt-BR"' in html and "autoplay" not in html
+
+
+def test_video_publicado_e_situacao_das_etapas(cliente):
+    """Caio, 03/11/2026: o vídeo entrou (app/static/video/lia-na-pratica.mp4); etapas de iniciativa em produção ficam
+    concluídas (✓) e as da fase de testes em andamento (ampulheta + selo "Em teste", texto e não só cor)."""
+    from pathlib import Path
+
+    assert (Path(__file__).resolve().parents[1] / "app" / "static" / "video" / lia_na_pratica.ARQUIVO).is_file()
+    situacao = [(e["sigla"], e["concluida"], e["selo"]) for e in lia_na_pratica.tela()["etapas"]]
+    assert situacao == [("LIA", True, ""), ("LIA", True, ""), ("LIA", True, ""), ("GPS", True, ""),
+                        ("Orça+AI", False, "Em teste"), ("COP.IA", False, "Em teste")]
+    html = cliente.get("/viu-agenciamento/lia").text
+    assert 'src="/static/video/lia-na-pratica.mp4"' in html and "Vídeo a incluir" not in html
+    assert html.count('<li class="fn-feita">') == 4 and html.count('<li class="fn-andamento">') == 2
+    assert html.count('<span class="fn-selo">Em teste</span>') == 2
 
 
 def _bloco_rm():
@@ -412,13 +464,13 @@ def test_roadmap(cliente):
         assert e["css_w"] <= roadmap.TITULO + 1e-6
     for lado in ("acima", "abaixo"):
         blocos = sorted((e["x"] - e["css_w"] / 2, e["x"] + e["css_w"] / 2) for e in t["marcos"] if e["lado"] == lado)
-        assert all(b[0] - a[1] >= 0.8 for a, b in zip(blocos, blocos[1:])), lado  # nenhum título encosta no vizinho
+        assert all(b[0] - a[1] >= 0.8 for a, b in itertools.pairwise(blocos)), lado  # nenhum título encosta no vizinho
     # respiro no eixo vertical: o 02 desce, o 03 sobe no ramo de baixo, o 06 sobe um pouco
     assert {e["chave"]: e["css_dy"] for e in t["marcos"] if e["css_dy"]} == {"mapa": 1.2, "dashboards": -0.7, "centralizar": -0.5}
     assert t["aqui"]["chave"] == "estudos" and not any(e["futuro"] for e in t["marcos"])
     # linhas: âmbar só na espera (trilho de cima, y = 93 − 29); depois dos nós de agora, tracejada até a borda, com uma
     # seta por trilho contínuo; sem nó de chegada
-    u = lambda em: f"{round(em * 10, 1):g}"  # noqa: E731
+    u = lambda em: f"{round(em * 10, 1):g}"
     assert t["linhas"]["espera"] == f"M {u(x['ti'])} 64 H {u(x['liberada'])}"
     assert t["linhas"]["feito"].startswith("M 0 93 H") and t["linhas"]["futuro"].count("M ") == 2
     assert t["linhas"]["futuro"].count("H 723") == 2 and len(t["setas"]) == 2 and t["continuo"] == "Evolução contínua"
@@ -434,7 +486,8 @@ def test_roadmap(cliente):
     assert ol.count('<li id="rm-no-') == 8 and html.count('<svg class="rm-trilha" viewBox="0 0 730 280"') == 1
     for e in t["marcos"]:
         assert f'<li id="rm-no-{e["chave"]}" class="rm-marco rm-i{e["indice"]} rm-t-{e["trilho"]} rm-{e["lado"]} rm-e-{e["chave"]}' in ol
-        assert f"#rm-no-{e['chave']} {{ --x: {e['css_x']}em;" in html  # posição pelo <style> com nonce
+        # Roadmap novo aplicado em 03/11/2026: o <style> com nonce traz antes o atraso da entrada (--rmn-d)
+        assert re.search(rf"#rm-no-{e['chave']} \{{ --rmn-d: \d+ms; --x: {e['css_x']}em;", html)  # posição pelo <style> com nonce
     assert re.search(r'<style nonce="[^"]+">[^<]*@keyframes rm-anda-1', html)
     posicoes = [ol.index(f'</span>{e["titulo"]}</h3>') for e in t["marcos"]]
     assert posicoes == sorted(posicoes)  # na ordem da numeração
@@ -477,7 +530,7 @@ def test_roadmap_enxuto(cliente):
     icones = re.findall(r'<span class="rm-no" aria-hidden="true">\s*<svg class="icone rm-no-ic rm-ic-([a-z]+)"', html)
     assert icones == ["dispersos", "fluxo", "grafico", "ampulheta", "ok", "banco", "tendencia", "lapis"]
     assert _ol(html).count(" rm-reage") == 8
-    css, bloco = _bloco_rm()
+    _css, bloco = _bloco_rm()
     assert "rm-mancha" not in bloco and "body:has(.rm-palco)" not in bloco  # a lâmina fica branca
     painel = bloco[bloco.index(".rm.slide-corpo {"):bloco.index(".rm .rm-palco { font-size: 0.92em; }")]
     assert "border-radius: 22px;" in painel and "0 40px 80px -36px" in painel and "22px 22px" in painel  # painel flutuante
@@ -506,10 +559,11 @@ def test_roadmap_cliques(cliente):
     o ponteiro; só links, miniaturas e o círculo do nó. Nenhum JS do Roadmap impede o clique nos destinos."""
     from pathlib import Path
 
-    css, bloco = _bloco_rm()
+    _css, bloco = _bloco_rm()
     assert "pointer-events: none; }\n.rm-marco a, .rm-no { pointer-events: auto; }" in bloco
     assert ".rm-trilha, .rm-retro-rotulo, .rm-continuo, .rm-soltos, .rm-haste, .rm-aqui, .rm-espera { pointer-events: none; }" in bloco
-    js = (Path(__file__).resolve().parents[1] / "app" / "static" / "roadmap.js").read_text(encoding="utf-8")
+    # Roadmap novo aplicado em 03/11/2026: o JS carregado é o roadmap_novo.js
+    js = (Path(__file__).resolve().parents[1] / "app" / "static" / "roadmap_novo.js").read_text(encoding="utf-8")
     assert 'querySelectorAll("[data-rm-galeria]")' in js and "rm-destino" not in js  # o JS só trata as miniaturas
 
 
@@ -519,8 +573,11 @@ def test_roadmap_botoes(cliente):
     foco acende o nó."""
     html = cliente.get("/viu-agenciamento/roadmap").text
     ol = _ol(html)
+    # Roadmap novo aplicado em 03/11/2026: depois da linha para o leitor de tela vem a seta (enfeite, aria-hidden)
     achados = re.findall(r'<a class="rm-botao rm-destino( rm-destino-proximo)?" href="([^"]+)"><span class="rm-destino-circ" aria-hidden="true">\s*<svg[^>]*>.*?</svg>\s*</span>'
-                         r'<span class="rm-destino-nome">([^<]+)</span>(?:<span class="rm-proximo">próximo</span>)?<span class="so-leitor">: ([^<]+)</span></a>', ol, re.S)
+                         r'<span class="rm-destino-nome">([^<]+)</span>(?:<span class="rm-proximo">próximo</span>)?<span class="so-leitor">: ([^<]+)</span>'
+                         r'<span class="rmn-destino-seta" aria-hidden="true">\s*<svg[^>]*>.*?</svg>\s*</span></a>', ol, re.DOTALL)
+    assert len(achados) == 6
     links = {rot: href for _, href, rot, _ in achados}
     assert links == {"Demanda": "/viu-agenciamento", "Talentos": "/viu-agenciamento/talentos#1",
                      "SLA": "/viu-agenciamento/sla#1", "LIA": "/viu-agenciamento/lia#1",
@@ -536,7 +593,7 @@ def test_roadmap_botoes(cliente):
     assert set(re.findall(r'class="(rm-botao(?: [^"]*)?)"', html)) == (
         {"rm-botao rm-destino", "rm-botao rm-destino rm-destino-proximo", "rm-botao rm-dlg-passo", "rm-botao rm-dlg-zoom",
          "rm-botao rm-dlg-fechar"})
-    css, bloco = _bloco_rm()
+    _css, bloco = _bloco_rm()
     assert ".rm-alvo:has(.rm-destino:hover, .rm-destino:focus-visible) .rm-no" in bloco
     assert ".rm-botao:focus-visible { outline: 2px solid var(--azul)" in bloco
     assert "height: 2.3em;" in bloco and "rotate: -1.5deg;" in bloco  # ≥ 32 px a 1280 × 720 (2,3 × 14,8 px); colagem
@@ -570,31 +627,33 @@ def test_roadmap_registros(cliente):
 
     t = roadmap.tela()
     gal = {e["chave"]: [x["imagem"] for x in e["galeria"]] for e in t["marcos"] if e["galeria"]}
-    assert gal == {"mapa": ["fluxo-processo"], "dashboards": ["dashboard-pagamento", "dashboard-contratos"],
+    assert gal == {"mapa": ["fluxo-processo"], "dashboards": ["dashboard-pagamento", "dashboard-contratos", "dashboard-raiox"],
                    "centralizar": ["bigquery"]}
     estaticos = Path(__file__).resolve().parents[1] / "app" / "static"
     for x in [x for e in t["marcos"] for x in e["galeria"]]:
         for chave in ("mini", "src", "alta"):
             arquivo = estaticos / x[chave].removeprefix("/static/")
-            assert arquivo.is_file() and arquivo.stat().st_size < 300_000
+            assert arquivo.is_file() and arquivo.stat().st_size < 400_000  # 03/11/2026: sem desfoque, a alta do fluxo tem ~345 KB (só carrega ao ampliar)
         assert x["w"] > 0 and x["mw"] > 0 and len(x["alt"]) >= 20
     html = cliente.get("/viu-agenciamento/roadmap").text
-    links = re.findall(r'<a class="rm-mini( rm-mini-pilha)?" href="([^"]+)" data-rm-galeria=\'([^\']+)\' aria-haspopup="dialog">(.*?)</a>', html, re.S)
+    links = re.findall(r'<a class="rm-mini( rm-mini-pilha)?" href="([^"]+)" data-rm-galeria=\'([^\']+)\' aria-haspopup="dialog">(.*?)</a>', html, re.DOTALL)
     assert [bool(p) for p, *_ in links] == [False, True, False]
     galerias = [json.loads(g) for _, _, g, _ in links]
-    assert [[x["imagem"] for x in g] for g in galerias] == [["fluxo-processo"], ["dashboard-pagamento", "dashboard-contratos"], ["bigquery"]]
+    assert [[x["imagem"] for x in g] for g in galerias] == [["fluxo-processo"], ["dashboard-pagamento", "dashboard-contratos", "dashboard-raiox"], ["bigquery"]]
     assert all(h.startswith(g[0]["src"]) for (_, h, _, _), g in zip(links, galerias))  # sem JS, abre a 1ª imagem
     imgs = re.findall(r'<img class="rm-mini-img"[^>]*>', html)
-    assert len(imgs) == 4
+    assert len(imgs) == 5
     for img in imgs:  # alt descritivo, tamanho declarado e carga preguiçosa
         assert re.search(r'alt="[^"]{20,}"', img) and 'width="' in img and 'height="' in img and 'loading="lazy"' in img
         assert re.search(r'src="/static/roadmap/[a-z-]+-mini\.webp', img)
-    assert "(2 imagens; abre ampliada)" in html and galerias[0][0]["alta"] == "/static/roadmap/fluxo-processo-alta.webp"
+    assert "(3 imagens; abre ampliada)" in html and galerias[0][0]["alta"] == "/static/roadmap/fluxo-processo-alta.webp"
     assert '<div class="rm-dlg-quadro" role="region"' in html and "data-rm-fechar" in html and "data-rm-zoom" in html
     assert 'data-rm-anterior aria-label="Imagem anterior"' in html and 'data-rm-proxima aria-label="Próxima imagem"' in html
     assert "data-rm-navegacao hidden" in html and 'data-rm-contador aria-live="polite"' in html
-    assert '<dialog id="rm-dialogo"' in html and 'src="/static/roadmap.js' in html and 'style="' not in html
-    js = (estaticos / "roadmap.js").read_text(encoding="utf-8")
+    # Roadmap novo aplicado em 03/11/2026: diálogo com o acabamento novo, JS próprio e sem o link "tamanho real"
+    assert '<dialog id="rm-dialogo" class="rm-dialogo rmn-dialogo"' in html and 'style="' not in html
+    assert 'src="/static/roadmap_novo.js' in html and 'src="/static/roadmap.js' not in html and "rm-dlg-abrir" not in html
+    js = (estaticos / "roadmap_novo.js").read_text(encoding="utf-8")
     assert "data-rm-galeria" in js and "JSON.parse" in js and '"ArrowRight"' in js and "mostrar(atual + 1)" in js
     assert 'ev.key !== " "' in js  # Espaço também abre
     for nome in ("Marcela", "Pelagio", "Gil", "Boa noite"):  # nenhum nome de pessoa do PDF nem a saudação do print
@@ -637,5 +696,5 @@ def test_roadmap_escala_mais_etapas(cliente, monkeypatch):
     assert xs == sorted(xs) and xs[-1] < 73
     html = cliente.get("/viu-agenciamento/roadmap").text
     assert _ol(html).count('<li id="rm-no-') == 9 and " rm-i8 " in html
-    css, bloco = _bloco_rm()
+    _css, bloco = _bloco_rm()
     assert ".rm-i9 { --i: 9; }" in bloco and "@media (max-width: 900px)" in bloco

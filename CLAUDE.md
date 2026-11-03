@@ -1,5 +1,11 @@
 # PPD-AGENCIAMENTO-SLA-V2 — guia para retomar
 
+**03/11/2026 (D67) — ler primeiro: [PRD_V2, seção 0.6](docs/PRD_V2.md).** Base **congelada da carga de 03/11** (dados
+até 02/11; a de 02/11 foi trocada antes de congelar), com `CORTE_FOLGA_DIAS` padrão **2** e `ARG CORTE_DADOS=2026-10-31`
+no `Dockerfile`; Previsão de outubro e LIA até 31/10; `checar_reuniao.py` TUDO CERTO. Iniciativas com MIA e Raio-X
+(Firestore de produção a atualizar pela tela), vídeo da LIA no ar, Roadmap sem desfoque e com o Raio-X. Falta o Caio
+publicar (Cloud Run `-Congelado`, VPS). 635 testes. Os parágrafos de 31/10 abaixo são histórico.
+
 **Publicação de 31/10/2026 (D66/D66b) — ler primeiro: [PRD_V2, seção 0](docs/PRD_V2.md).** No Cloud Run:
 `viu-agenciamento` (AUTH=publico, só leitura) e `viu-agenciamento-restrito` (IAP, 4 e-mails, edição), os dois no ar
 e trancados (a org barrou o link aberto; a TI precisa liberar os e-mails no IAP). Espelho temporário na VPS do Caio

@@ -39,6 +39,7 @@ opcional, "proximo": True); mostrar (False tira o nó da tela, sem apagar daqui)
 Geometria (em em, a mesma do bloco .rm-* do CSS): palco de 73 × 28 em; a posição (--x) e a largura do texto (--w)
 de cada nó vão para o <style> com nonce da página (a CSP proíbe style=""). O SVG tem viewBox 730 × 280 (0,1 em).
 """
+import itertools
 from pathlib import Path
 
 from app.apresentacoes.gestao_orcamentos import SLUG
@@ -61,13 +62,19 @@ CATEGORIAS = {
 FLUXO = {"titulo": "Fluxo ponta a ponta", "imagem": "fluxo-processo",
          "alt": "Fluxo da área em raias: entrada do pedido e orçamento, execução, pagamento, contratos e aquisição de talentos",
          "legenda": "Do pedido à proposta, à execução, ao contrato e ao pagamento, com os pontos de atenção marcados."}
+# Caio, 03/11/2026: imagens sem desfoque (dados internos da equipe; tools/gerar_imagens_roadmap.py, DESFOCAR) e o
+# Raio-X dos talentos incluído
 DASHBOARDS = (
     {"titulo": "Controle do processo de pagamento", "imagem": "dashboard-pagamento",
      "alt": "Painel de controle do processo de pagamento",
-     "legenda": "Volume de pagamentos, notas fiscais e SLA, e a matriz de risco financeiro. Nomes e valores por linha desfocados."},
+     "legenda": "Volume de pagamentos, notas fiscais e SLA, e a matriz de risco financeiro."},
     {"titulo": "Contratos e bloqueios", "imagem": "dashboard-contratos",
      "alt": "Painel de contratos e bloqueios dos talentos",
-     "legenda": "Contratos vigentes, renovações e a linha do tempo dos contratos. Nomes e datas por linha desfocados."},
+     "legenda": "Contratos vigentes, renovações e a linha do tempo dos contratos."},
+    {"titulo": "Raio-X dos talentos", "imagem": "dashboard-raiox",
+     "alt": "Painel Raio-X dos talentos: visão 360° do talento e da relação com a ViU",
+     "legenda": "Resultados comerciais, valor gerado pela ViU, saúde operacional, financeiro, bloqueios, audiência e "
+                "satisfação de cada talento."},
 )
 BIGQUERY = {"titulo": "Camada ouro no BigQuery", "imagem": "bigquery",
             "alt": "Camada ouro no BigQuery: tabelas e views do dataset gold_monday",
@@ -275,7 +282,7 @@ def _liga(pontos):
     """Pontos (x, y) → trechos: reto quando a altura não muda; senão uma curva em S de largura CURVA (ou menor, se não
     couber), centrada entre os dois pontos."""
     segs = []
-    for (x0, y0), (x1, y1) in zip(pontos, pontos[1:]):
+    for (x0, y0), (x1, y1) in itertools.pairwise(pontos):
         if x1 - x0 <= 1e-6:
             continue
         if abs(y1 - y0) < 1e-6:
@@ -398,7 +405,7 @@ def tela() -> dict:
     def soma(pontos, donos, rotas_alvo):
         """Liga os pontos; donos[i] = o nó de onde sai o trecho i (para a espera); devolve os trechos."""
         saida = []
-        for i, ((x0, y0), (x1, y1)) in enumerate(zip(pontos, pontos[1:])):
+        for i, ((x0, y0), (x1, y1)) in enumerate(itertools.pairwise(pontos)):
             for s in _liga([(x0, y0), (x1, y1)]):
                 trechos.append((estilo(s[1], donos[i]), s))
                 saida.append(s)

@@ -1,4 +1,5 @@
 {% extends "apresentacao.html" %}
+{% from "icones.html" import icone %}
 {# Estudo "Como medimos" do SLA (24/10/2026): a análise por trás da métrica, em slides de palestra (Anterior/Próximo no
    pé e "A seguir" com o nome do próximo slide). Visual sóbrio, como a referência do Caio: fundo branco, cabeçalho claro
    com filete, "Como medimos" + título; a linha do tempo se desenha etapa por etapa na entrada do slide.
@@ -165,7 +166,7 @@
        "Como ler" fica logo ao lado dele, sem buraco no meio #}
     <div class="explora-linha">
     <figure class="explora-hist">
-      <figcaption class="so-leitor">Histograma: orçamentos em cada faixa de 4 horas de trabalho da equipe ({{ d.n | inteiro }} no total): {{ hs.texto }}. Dos {{ d.n | inteiro }} orçamentos entregues {{ d.periodo }}: {{ bx.pcts[0] }}% rápidos, até {{ bx.q1_txt }}; {{ bx.pcts[1] }}% comuns, de {{ bx.q1_txt }} a {{ bx.q3_txt }}; {{ bx.pcts[2] }}% demorados, no padrão, até {{ bx.lim_txt }}; {{ bx.pcts[3] }}% fora da curva, acima de {{ bx.lim_txt }}, até {{ d.max_txt }}. Típico (mediana) {{ d.mediana_txt }}, média {{ d.media_txt }}.</figcaption>
+      <figcaption class="so-leitor">Histograma: orçamentos em faixas de 4 horas de trabalho da equipe até o limite do padrão ({{ bx.lim_txt }}) e, na última barra, os fora da curva ({{ d.n | inteiro }} no total): {{ hs.texto }}. Dos {{ d.n | inteiro }} orçamentos entregues {{ d.periodo }}: {{ bx.pcts[0] }}% rápidos, até {{ bx.q1_txt }}; {{ bx.pcts[1] }}% comuns, de {{ bx.q1_txt }} a {{ bx.q3_txt }}; {{ bx.pcts[2] }}% demorados, no padrão, até {{ bx.lim_txt }}; {{ bx.pcts[3] }}% fora da curva, acima de {{ bx.lim_txt }}, até {{ d.max_txt }}. Típico (mediana) {{ d.mediana_txt }}, média {{ d.media_txt }}.</figcaption>
       <svg class="explora-svg" viewBox="0 0 {{ hs.w }} {{ hs.h }}" preserveAspectRatio="xMinYMax meet" aria-hidden="true" focusable="false">
         {% for g in hs.grade %}<line class="ex-grade" x1="{{ hs.e }}" x2="{{ hs.dir }}" y1="{{ g.y }}" y2="{{ g.y }}"/>{% endfor %}
         {% for g in hs.grade %}<text class="ex-eixo" x="{{ hs.e - 6 }}" y="{{ g.y + 4 }}" text-anchor="end">{{ g.t }}</text>{% endfor %}
@@ -175,8 +176,8 @@
           {% if f.mostra_pct %}<text class="ex-faixa-txt t-{{ f.zona }}" x="{{ f.x0 + 7 }}" y="{{ hs.y_faixa + 15.5 }}"><tspan class="ex-pct">{{ f.pct }}%</tspan>{% if f.txt %}<tspan class="ex-faixa-rot" dx="5">{{ f.txt }}</tspan>{% endif %}</text>{% endif %}{% endfor %}
           {% for gx in hs.guias_box %}<line class="ex-guia" x1="{{ gx }}" x2="{{ gx }}" y1="{{ hs.y_faixa + hs.h_faixa + 2 }}" y2="{{ hs.base }}"/>{% endfor %}
         </g>
-        {# D46: barras e contagens em grupos (a entrada anima o grupo, não cada barra); cor pela zona do boxplot #}
-        <g class="ex-barras">{% for b in hs.barras %}<rect class="ex-barra z-{{ b.zona }} {{ b.zona_box }}" x="{{ b.x }}" y="{{ b.y }}" width="{{ b.w }}" height="{{ b.h }}" rx="1.5"/>{% if b.fora %}<rect class="ex-barra z-{{ b.zona }} box-fora" x="{{ b.x }}" y="{{ b.fora.y }}" width="{{ b.w }}" height="{{ b.fora.h }}" rx="1.5"/>{% endif %}{% endfor %}</g>
+        {# D46: barras e contagens em grupos (a entrada anima o grupo, não cada barra); cor pela zona do boxplot; X2 (03/11/2026): faixas até o limite e uma última barra, toda vermelha, "acima de <limite>" #}
+        <g class="ex-barras">{% for b in hs.barras %}<rect class="ex-barra z-{{ b.zona }} {{ b.zona_box }}" x="{{ b.x }}" y="{{ b.y }}" width="{{ b.w }}" height="{{ b.h }}" rx="1.5"/>{% endfor %}</g>
         <g class="ex-ns">{% for b in hs.barras %}<text class="ex-n" x="{{ b.tx }}" y="{{ b.y - 5 }}" text-anchor="{{ b.ancora }}">{{ b.n }}</text>{% endfor %}</g>
         {# típico e média (alfinetes) #}
         <g class="ex-camada ex-alfinetes">
@@ -192,7 +193,7 @@
     {# "Como ler" (V2, 30/10/2026, Caio: "feio e simples demais"; X11): típico e média lado a lado, a régua do eixo do
        gráfico com os dois alfinetes e o "puxão" entre eles (+N h), e os fora da curva em 100 quadrados (os vermelhos
        no fim, como no gráfico). Cor nunca sozinha: número e texto em cada item. Escala da régua = o eixo x do
-       histograma (0 até o fim de "60 h ou mais"). #}
+       histograma (0 até o fim da barra "acima de <limite>"). #}
     {% set r0, r1 = 6, 294 %}{% set esc = (r1 - r0) / (hs.fim - hs.e) %}
     {% set xm = (r0 + (hs.alf_med.x - hs.e) * esc) | round(1) %}{% set xa = (r0 + (hs.alf_media.x - hs.e) * esc) | round(1) %}
     {% set zf = hs.zonas | selectattr("zona", "equalto", "box-fora") | first %}
@@ -216,7 +217,7 @@
         <text class="rg-t rg-t-media" x="{{ xa - 3 }}" y="55" text-anchor="start">média</text>
       </svg>
       <dl class="explora-ler-lista el-baixo">
-        <div class="el-item el-fora"><dt><span class="el-marca" aria-hidden="true"></span>Fora da curva</dt><dd><span class="el-valor">{{ (nf ~ "%") if nf else ("menos de 1%" if d.n_fora else "0%") }}</span><span class="el-waffle" role="img" aria-label="{{ nf }} em cada 100 pedidos fora da curva">{% for i in range(100) %}<span class="eq{{ ' eq-fora' if i >= 100 - nf else '' }}"></span>{% endfor %}</span><span class="el-texto">{% if d.n_fora %}{{ d.n_fora | inteiro }} {{ "pedido" if d.n_fora == 1 else "pedidos" }} acima de {{ bx.lim_txt | replace(" ", " ") }}: olhar caso a caso{% else %}nenhum pedido neste recorte{% endif %}</span></dd></div>
+        <div class="el-item el-fora"><dt><span class="el-marca" aria-hidden="true"></span>Fora da curva</dt><dd><span class="el-valor">{{ (nf ~ "%") if nf else ("menos de 1%" if d.n_fora else "0%") }}</span><span class="el-waffle" role="img" aria-label="{{ nf }} em cada 100 pedidos fora da curva">{% for i in range(100) %}<span class="eq{{ ' eq-fora' if i >= 100 - nf else '' }}"></span>{% endfor %}</span><span class="el-texto">{% if d.n_fora %}{{ d.n_fora | inteiro }} {{ "pedido" if d.n_fora == 1 else "pedidos" }} acima de {{ bx.lim_txt | replace(" ", " ") }}: olhar caso a caso{% else %}nenhum pedido neste recorte{% endif %}</span>{% if d.fora_lista %}<button type="button" class="ef-lupa" data-ef-abrir aria-haspopup="dialog" aria-controls="estudo-fora">{{ icone("ampliar", "icone ef-lupa-ic") }}<span>Ver os {{ d.fora_lista | length }} pedidos</span></button>{% endif %}</dd></div>
       </dl>
     </section>
     </div>
@@ -514,4 +515,37 @@
 </div>
 </section>
 {% endif %}
+{# Caio, 03/11/2026: a lupa do "Fora da curva" (slide 2) abre a lista dos pedidos acima do limite de Tukey, num
+   pop-up de ~70% da tela (como o vídeo da LIA): nome, marca e talento, entrada, 1ª entrega, horas de trabalho e o item
+   no monday. Lista de sla/calculos.py (fora_da_curva); JS no fim de apresentacao.js; sem JS, o botão não aparece (hidden) e nada quebra. #}
+{% if exploracao and exploracao.fora_lista %}{% set fl = exploracao.fora_lista %}
+<dialog id="estudo-fora" class="ef-dlg" aria-labelledby="ef-titulo">
+  <div class="ef-caixa">
+    <div class="ef-topo">
+      <div>
+        <h3 class="ef-titulo" id="ef-titulo">Fora da curva: {{ fl | length }} {{ "pedido" if fl | length == 1 else "pedidos" }} acima de {{ exploracao.box.lim_txt }} de trabalho</h3>
+        <p class="ef-sub">Do mais longo ao mais curto · horas de trabalho da equipe até a 1ª entrega · {{ exploracao.periodo }}</p>
+      </div>
+      <button type="button" class="lia-botao" data-ef-fechar>{{ icone("fechar", "icone lia-botao-ic") }}<span>Fechar</span></button>
+    </div>
+    <div class="ef-rolagem" tabindex="0" role="region" aria-label="Lista dos pedidos fora da curva">
+      <table class="ef-tabela">
+        <thead><tr><th scope="col">Projeto</th><th scope="col">Entrada</th><th scope="col">1ª entrega</th><th scope="col" class="ef-num">Tempo</th><th scope="col"><span class="so-leitor">Link no </span>monday</th></tr></thead>
+        <tbody>
+          {% for p in fl %}
+          <tr>
+            <th scope="row"><span class="ef-nome">{{ p.nome }}</span>{% if p.talento or p.marca %}<span class="ef-quem">{{ p.talento }}{% if p.talento and p.marca %} · {% endif %}{{ p.marca }}</span>{% endif %}</th>
+            <td>{{ p.entrada }}</td>
+            <td>{{ p.entrega }}</td>
+            <td class="ef-num"><strong>{{ p.horas_txt }}</strong><span class="ef-dias">{{ p.dias_txt }}</span></td>
+            <td>{% if p.link %}<a class="ef-link" href="{{ p.link }}" target="_blank" rel="noopener">Abrir<span class="so-leitor"> {{ p.nome }} no monday (nova aba)</span>{{ icone("avancar", "icone ef-link-ic") }}</a>{% else %}–{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</dialog>
+{% endif %}
 {% endblock %}
+

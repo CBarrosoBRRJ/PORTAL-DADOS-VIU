@@ -83,7 +83,9 @@ CONGELAR = not EM_PRODUCAO and os.environ.get("CONGELAR", "true").strip().lower(
 # Enquanto o corte estiver ligado, ele substitui o CONGELAR acima na recarga (o CONGELAR continua parando o job, J5).
 _CORTE_TXT = os.environ.get("CORTE_DADOS", "2026-10-31").strip().lower()
 CORTE_DADOS = None if _CORTE_TXT in ("", "off", "false", "0", "nao", "não") else date.fromisoformat(_CORTE_TXT)
-CORTE_FOLGA_DIAS = int(os.environ.get("CORTE_FOLGA_DIAS", "1"))
+# D67 (Caio, 03/11/2026): folga 1 → 2. A carga de 02/11 (até 01/11) foi trocada pela de 03/11 (até 02/11) antes de
+# congelar; a gold só guarda a carga atual. Rodapé honesto: "Dados até 02/11/2026"
+CORTE_FOLGA_DIAS = int(os.environ.get("CORTE_FOLGA_DIAS", "2"))
 BASE_CONGELADA_DIR = Path(os.environ.get("BASE_CONGELADA_DIR", str(RAIZ / "app" / "base_congelada")))
 # previsão de demanda (D47): a página só lê o JSON que o job de ML grava (ml/saida/previsao.json); o site não depende
 # das bibliotecas de ML. No computador, a carga nova da gold de entradas dispara o job em segundo plano

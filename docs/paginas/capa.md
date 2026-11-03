@@ -1,5 +1,7 @@
 # Capa (V2)
 
+**Capa nova APLICADA (Caio, 03/11/2026):** `templates/capa.html` (com `static/capa_nova.css` e `capa_nova.js`): título atravessando o corte, desenho limpo, fluxo que termina no "Começar"; **sem** o subtítulo, sem textos no desenho e **sem o rodapé datado** (`sem_rodape`, exceção à regra 9 só na capa, pedido do Caio). Refinada com as referências do Impeccable (critique, polish, typeset, quieter, delight). `/capa-nova` responde 301 para `/capa`. A validada está em `_descartados/2026-11-03/capa_validada/`; a proposta em `_descartados/2026-11-03/app/templates/capa_nova.html`. Testes em `tests/test_capa_nova.py`.
+
 **Estado (30/10/2026, 3ª rodada):** capa sem o menu dos temas. O subtítulo fica no lado branco. No plano marinho ficam
 só a ilustração "dados → área", com fluxo contínuo, e o botão "Começar". Está na V2 (porta 8400). Rota
 `/viu-agenciamento/capa` (a raiz `/` abre nela). Arquivos: `app/templates/capa.html`, textos em `capa={...}` de

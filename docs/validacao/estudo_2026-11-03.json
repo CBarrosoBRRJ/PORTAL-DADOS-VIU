@@ -1,0 +1,104 @@
+{
+  "data": "2026-11-03T14:32:05.523173-03:00",
+  "identidade": "caio.barroso@viu.com.br",
+  "projeto": "gglobo-viu-dados-hdg-prd",
+  "tabela": "gglobo-viu-dados-hdg-prd.gold_monday.gld_agenciamento_2026_sla_movimentos",
+  "processado_em": "2026-11-03 12:02:20.737448+00:00",
+  "mes_parcial": "2026-11",
+  "feriados": [
+    "2026-01-01",
+    "2026-01-20",
+    "2026-01-25",
+    "2026-02-16",
+    "2026-02-17",
+    "2026-02-18",
+    "2026-04-03",
+    "2026-04-21",
+    "2026-04-23",
+    "2026-05-01",
+    "2026-06-04",
+    "2026-07-09",
+    "2026-09-07",
+    "2026-10-12",
+    "2026-11-02",
+    "2026-11-15",
+    "2026-11-20",
+    "2026-12-24",
+    "2026-12-25",
+    "2026-12-31"
+  ],
+  "jobs": [
+    {
+      "id": "903f508d-da84-41e9-80b3-cf9749301c79",
+      "bytes": 0,
+      "cache": true
+    },
+    {
+      "id": "29a36198-507b-49e5-80ae-f165704c77ac",
+      "bytes": 1868688,
+      "cache": false
+    }
+  ],
+  "grupos": {
+    "todos": {
+      "n": 2716,
+      "tipico_h": 14.3175,
+      "diferencas": [],
+      "leituras": {
+        "slide2": "<strong>Poucos pedidos demoram muito:</strong> os 7% fora da curva, acima de 59 h, puxam a média para 25 h. O pedido típico leva 14 h. <em>Por isso medimos pelo típico (a mediana).</em>",
+        "slide3": "Mais da metade dos pedidos (<strong>55%</strong>) sai em até 2 dias e leva <strong>17% das horas</strong> da equipe; os outros <strong>45% passam disso</strong> e levam <strong>83%</strong>.",
+        "slide4_titulo": "A demora não é de um mês. Acontece o ano todo.",
+        "slide4": "<strong>Não é sazonal:</strong> todo mês, de 40% a 51% dos pedidos passam de 2 dias. <em>O problema é o processo, não o mês</em> — é nele que está a solução.",
+        "slide5": "O tempo trava principalmente em dois pontos: <strong>Em elaboração</strong> (só até jul) e <strong>Fila de entrada</strong> somam <em>58% do tempo travado</em>.",
+        "fora_tipo": "<strong>Os tipos de maior volume ficam perto do geral</strong>: de 44% a 46% passam de 2 dias, contra 45%. Só <strong>Proativo e Interna</strong>, de menor volume, passam bem mais.",
+        "fora_conclusao": [
+          "O tempo típico · 14 h",
+          "A maioria é rápida · 55%",
+          "Os demorados pesam · 83%",
+          "Não é crise, é padrão · todo mês",
+          "Trava em dois pontos · 58%"
+        ]
+      }
+    },
+    "exclusivos": {
+      "n": 1845,
+      "tipico_h": 11.7149,
+      "diferencas": [],
+      "leituras": {
+        "slide2": "<strong>Poucos pedidos demoram muito:</strong> os 7% fora da curva, acima de 50 h, puxam a média para 23 h. O pedido típico leva 12 h. <em>Por isso medimos pelo típico (a mediana).</em>",
+        "slide3": "Mais da metade dos pedidos (<strong>62%</strong>) sai em até 2 dias e leva <strong>20% das horas</strong> da equipe; os outros <strong>38% passam disso</strong> e levam <strong>80%</strong>.",
+        "slide4_titulo": "A demora não é de um mês. Acontece o ano todo.",
+        "slide4": "<strong>Não é sazonal:</strong> todo mês, de 28% a 47% dos pedidos passam de 2 dias. <em>O problema é o processo, não o mês</em> — é nele que está a solução.",
+        "slide5": "O tempo trava principalmente em dois pontos: <strong>Em elaboração</strong> (só até jul) e <strong>Fila de entrada</strong> somam <em>64% do tempo travado</em>.",
+        "fora_tipo": "<strong>O Inbound é o que mais demora</strong>: 44% passam de 2 dias, contra 38% no geral — e passa mais tempo na fila de entrada.",
+        "fora_conclusao": [
+          "O tempo típico · 12 h",
+          "A maioria é rápida · 62%",
+          "Os demorados pesam · 80%",
+          "Não é crise, é padrão · todo mês",
+          "Trava em dois pontos · 64%"
+        ]
+      }
+    },
+    "nao-exclusivos": {
+      "n": 854,
+      "tipico_h": 20.3194,
+      "diferencas": [],
+      "leituras": {
+        "slide2": "<strong>Poucos pedidos demoram muito:</strong> os 5% fora da curva, acima de 70 h, puxam a média para 29 h. O pedido típico leva 20 h. <em>Por isso medimos pelo típico (a mediana).</em>",
+        "slide3": "Menos da metade dos pedidos (<strong>40%</strong>) sai em até 2 dias e leva <strong>12% das horas</strong> da equipe; os outros <strong>60% passam disso</strong> e levam <strong>88%</strong>.",
+        "slide4_titulo": "A demora pesa em alguns meses do ano.",
+        "slide4": "<strong>Há meses mais pesados:</strong> em abril, maio, agosto e outubro, de 64% a 75% passam de 2 dias, contra 43% a 60% no resto do ano. <em>Vale planejar a equipe para esses meses.</em>",
+        "slide5": "O tempo trava principalmente em dois pontos: <strong>Em elaboração</strong> (só até jul) e <strong>Fila de entrada</strong> somam <em>52% do tempo travado</em>.",
+        "fora_tipo": "<strong>O Mercado fica perto do geral</strong>: 60% passam de 2 dias, contra 60%. Só <strong>Interna e Proativo</strong>, de menor volume, passam bem mais.",
+        "fora_conclusao": [
+          "O tempo típico · 20 h",
+          "Menos da metade é rápida · 40%",
+          "Os demorados pesam · 88%",
+          "Há meses mais pesados · abr, mai, ago e out",
+          "Trava em dois pontos · 52%"
+        ]
+      }
+    }
+  }
+}

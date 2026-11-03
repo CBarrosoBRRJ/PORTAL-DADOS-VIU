@@ -58,8 +58,7 @@ def _p3(h, n_pac=0):
 
 
 def test_insight_do_passo_3_final():
-    bx = c._boxplot(H)  # zonas 39/38/19/4; Q3 20 h; limite 35 h
-    f = _p3(H)
+    f = _p3(H)  # zonas 39/38/19/4; Q3 20 h; limite 35 h
     assert f["pct_horas_outliers"] == 20 and f["pct_meta"] == 58  # horas só no cálculo
     assert f["fora_rodape"] == ("<strong>77% dos orçamentos saem em até 20 h</strong>: os rápidos e os comuns. Outros 19% "
                                 "demoram mais, até 35 h, mas seguem o padrão do processo. <em>4% (2 orçamentos) estão fora da "
@@ -79,7 +78,7 @@ def test_insight_do_passo_3_final():
     assert f3.endswith("mas seguem o padrão do processo; <em>neste recorte, ninguém fica fora da curva.</em>")
     x = c.exploracao(base(), "2026-10")  # sem demorados: a frase do meio some
     assert x["insights"]["3"] == ("<strong>76% dos orçamentos saem em até 2 h</strong>: os rápidos e os comuns. <em>24% "
-                                  "(17 orçamentos) estão fora da curva, acima de 4 h: vamos olhar caso a caso.</em>")
+                                  "(17 orçamentos) estão fora da curva, acima de 3,5 h: vamos olhar caso a caso.</em>")
     assert x["pct_horas_outliers"] == 86
 
 

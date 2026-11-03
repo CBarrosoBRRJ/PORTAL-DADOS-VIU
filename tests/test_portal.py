@@ -2,12 +2,13 @@
 
 import re
 
+import gold_simulada  # views da gold sobre os dados sintéticos (D57)
 import pytest
 from fastapi.testclient import TestClient
 
 from app import config
 from app.apresentacoes.gestao_orcamentos import pendencias
-import gold_simulada  # views da gold sobre os dados sintéticos (D57)
+
 
 @pytest.fixture
 def cliente():
@@ -46,11 +47,11 @@ def test_capa_e_encerramento(cliente):
     # D61: desenho do relatório de referência — título em duas linhas, "Começar", jornada de 6 etapas cujo relógio para
     # no típico do SLA (o mesmo número da página do SLA)
     r = cliente.get("/viu-agenciamento/capa")
-    assert r.status_code == 200 and 'ViU<span class="capa-titulo-2">Agenciamento</span>' in r.text  # V2
+    assert r.status_code == 200 and 'id="s-capa"' in r.text and "Agenciamento" in r.text  # capa nova (Caio, 03/11/2026)
     # V2 (Caio, 30/10/2026): o menu dos temas saiu (o Roadmap navega); no plano marinho, a ilustração decorativa, a frase
     # e o "Começar", que leva ao Roadmap; a jornada animada (capa.js) continua fora
     assert "capa-menu" not in r.text and '<script src="/static/capa.js' not in r.text
-    assert 'class="capa-comecar" href="/viu-agenciamento/roadmap#1"' in r.text
+    assert 'class="cn-comecar" href="/viu-agenciamento/roadmap#1"' in r.text
     assert "A equipe está dando conta da demanda?" not in r.text  # V2: Atendimento fora do relatório
     assert 'href="/viu-agenciamento/roadmap#1" rel="next"' in r.text and "data-pagina-anterior" not in r.text  # 1ª página; V2: segue para o Roadmap
     assert "<span>Demanda</span>" in cliente.get("/viu-agenciamento/sla").text
@@ -75,6 +76,7 @@ def test_capas_de_secao_desligadas(cliente, monkeypatch):
     for rota in ("/viu-agenciamento/capa", "/viu-agenciamento", "/viu-agenciamento/atendimento"):
         assert "data-capa-secao" not in cliente.get(rota).text, rota
     from dataclasses import replace
+
     from app.apresentacoes.gestao_orcamentos import apresentacao as ap
     religada = replace(ap.APRESENTACAO, capas_secao=ap.CAPAS_SECAO)
     _, proxima = religada.vizinhas(religada.secao("talentos"))  # V2: Atendimento fora; Linha do tempo sem capa de seção

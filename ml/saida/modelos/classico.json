@@ -1,24 +1,24 @@
 {
  "modulo": "classico",
  "carga": {
-  "processado_em": "2026-10-26 12:01:46.659042+00:00",
-  "dados_ate": "2026-10-25",
+  "processado_em": "2026-11-03 12:02:39.240344+00:00",
+  "dados_ate": "2026-11-02",
   "parcial": {
    "Inbound": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 133.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 4.0
    },
    "Mercado": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 304.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    },
    "Mercado exclusivos": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 87.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    },
    "Mercado não exclusivos": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 185.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    }
   },
   "recortes": {
@@ -28,8 +28,8 @@
     "grupo": null,
     "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",
     "inicio": "2024-10",
-    "fim": "2026-09",
-    "meses": 24,
+    "fim": "2026-10",
+    "meses": 25,
     "treino_1o_teste": 12,
     "curta": false
    },
@@ -39,8 +39,8 @@
     "grupo": null,
     "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Mercado",
     "inicio": "2024-10",
-    "fim": "2026-09",
-    "meses": 24,
+    "fim": "2026-10",
+    "meses": 25,
     "treino_1o_teste": 12,
     "curta": false
    },
@@ -48,10 +48,10 @@
     "chave": "mercado_exclusivos",
     "tipo": "Mercado",
     "grupo": "exclusivos",
-    "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento exclusivo",
+    "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado exclusivos",
     "inicio": "2026-01",
-    "fim": "2026-09",
-    "meses": 9,
+    "fim": "2026-10",
+    "meses": 10,
     "treino_1o_teste": 5,
     "curta": true
    },
@@ -59,15 +59,15 @@
     "chave": "mercado_nao_exclusivos",
     "tipo": "Mercado",
     "grupo": "nao_exclusivos",
-    "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento não exclusivo",
+    "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado não exclusivos",
     "inicio": "2026-01",
-    "fim": "2026-09",
-    "meses": 9,
+    "fim": "2026-10",
+    "meses": 10,
     "treino_1o_teste": 5,
     "curta": true
    }
   },
-  "mes_fechado": "2026-09"
+  "mes_fechado": "2026-10"
  },
  "protocolo": "D56",
  "modelos": {
@@ -527,48 +527,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 132.81,
-      "p10": 84.44,
-      "p90": 208.57
-     },
-     {
       "mes": "2026-11",
-      "valor": 132.81,
-      "p10": 83.07,
-      "p90": 211.97
+      "valor": 149.21,
+      "p10": 96.57,
+      "p90": 230.23
      },
      {
       "mes": "2026-12",
-      "valor": 132.81,
-      "p10": 81.77,
-      "p90": 215.31
+      "valor": 149.21,
+      "p10": 93.23,
+      "p90": 238.44
+     },
+     {
+      "mes": "2027-01",
+      "valor": 149.21,
+      "p10": 90.22,
+      "p90": 246.34
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 476.98,
-      "p10": 329.05,
-      "p90": 691.22
-     },
-     {
       "mes": "2026-11",
-      "valor": 476.98,
-      "p10": 282.12,
-      "p90": 805.96
+      "valor": 477.32,
+      "p10": 338.66,
+      "p90": 672.58
      },
      {
       "mes": "2026-12",
-      "valor": 476.98,
-      "p10": 250.69,
-      "p90": 906.74
+      "valor": 477.32,
+      "p10": 300.2,
+      "p90": 758.59
+     },
+     {
+      "mes": "2027-01",
+      "valor": 477.32,
+      "p10": 272.95,
+      "p90": 834.14
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 0.5,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_holt_amortecido": {
    "descricao": "Holt com tendência amortecida, em log",
@@ -1026,48 +1026,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 162.7,
-      "p10": 112.9,
-      "p90": 234.27
-     },
-     {
       "mes": "2026-11",
-      "valor": 171.05,
-      "p10": 118.71,
-      "p90": 246.28
+      "valor": 160.38,
+      "p10": 119.49,
+      "p90": 215.15
      },
      {
       "mes": "2026-12",
-      "valor": 179.66,
-      "p10": 124.7,
-      "p90": 258.64
+      "valor": 162.6,
+      "p10": 121.15,
+      "p90": 218.11
+     },
+     {
+      "mes": "2027-01",
+      "valor": 164.39,
+      "p10": 122.48,
+      "p90": 220.51
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 457.99,
-      "p10": 325.74,
-      "p90": 643.79
-     },
-     {
       "mes": "2026-11",
-      "valor": 500.9,
-      "p10": 356.28,
-      "p90": 704.06
+      "valor": 551.39,
+      "p10": 439.04,
+      "p90": 692.43
      },
      {
       "mes": "2026-12",
-      "valor": 546.84,
-      "p10": 388.98,
-      "p90": 768.59
+      "valor": 607.28,
+      "p10": 483.56,
+      "p90": 762.59
+     },
+     {
+      "mes": "2027-01",
+      "valor": 666.2,
+      "p10": 530.49,
+      "p90": 836.56
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 0.3,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_arima_aicc": {
    "descricao": "ARIMA pequeno em log (p,q<=2, d<=1, drift), escolhido por AICc",
@@ -1525,48 +1525,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 113.65,
-      "p10": 72.63,
-      "p90": 177.53
-     },
-     {
       "mes": "2026-11",
-      "valor": 113.65,
-      "p10": 72.63,
-      "p90": 177.53
+      "valor": 137.16,
+      "p10": 95.68,
+      "p90": 196.43
      },
      {
       "mes": "2026-12",
-      "valor": 113.65,
-      "p10": 72.63,
-      "p90": 177.53
+      "valor": 159.38,
+      "p10": 110.12,
+      "p90": 230.47
+     },
+     {
+      "mes": "2027-01",
+      "valor": 142.14,
+      "p10": 88.54,
+      "p90": 227.82
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 477.0,
-      "p10": 323.67,
-      "p90": 702.73
-     },
-     {
       "mes": "2026-11",
-      "valor": 477.0,
-      "p10": 275.61,
-      "p90": 825.02
+      "valor": 479.0,
+      "p10": 334.21,
+      "p90": 686.33
      },
      {
       "mes": "2026-12",
-      "valor": 477.0,
-      "p10": 243.61,
-      "p90": 933.07
+      "valor": 479.0,
+      "p10": 287.89,
+      "p90": 796.54
+     },
+     {
+      "mes": "2027-01",
+      "valor": 479.0,
+      "p10": 256.73,
+      "p90": 892.95
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 4.5,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 6.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_theta": {
    "descricao": "método Theta (tendência linear + suavização exponencial), em log",
@@ -2024,48 +2024,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 173.96,
-      "p10": 118.71,
-      "p90": 254.69
-     },
-     {
       "mes": "2026-11",
-      "valor": 179.05,
-      "p10": 92.33,
-      "p90": 346.37
+      "valor": 163.84,
+      "p10": 117.12,
+      "p90": 229.06
      },
      {
       "mes": "2026-12",
-      "valor": 184.3,
-      "p10": 78.33,
-      "p90": 431.83
+      "valor": 170.2,
+      "p10": 102.06,
+      "p90": 283.39
+     },
+     {
+      "mes": "2027-01",
+      "valor": 176.81,
+      "p10": 93.17,
+      "p90": 334.74
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 502.5,
-      "p10": 344.12,
-      "p90": 733.57
-     },
-     {
       "mes": "2026-11",
-      "valor": 529.4,
-      "p10": 309.9,
-      "p90": 903.86
+      "valor": 512.6,
+      "p10": 402.31,
+      "p90": 653.05
      },
      {
       "mes": "2026-12",
-      "valor": 557.73,
-      "p10": 289.46,
-      "p90": 1073.78
+      "valor": 546.98,
+      "p10": 388.11,
+      "p90": 770.72
+     },
+     {
+      "mes": "2027-01",
+      "valor": 583.67,
+      "p10": 383.34,
+      "p90": 888.43
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 1.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 1.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_combinado": {
    "descricao": "mediana de ETS, ARIMA e Theta (em log)",
@@ -2523,48 +2523,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 132.81,
-      "p10": 84.44,
-      "p90": 208.57
-     },
-     {
       "mes": "2026-11",
-      "valor": 132.81,
-      "p10": 83.07,
-      "p90": 211.97
+      "valor": 149.21,
+      "p10": 96.57,
+      "p90": 229.06
      },
      {
       "mes": "2026-12",
-      "valor": 132.81,
-      "p10": 78.33,
-      "p90": 215.31
+      "valor": 159.38,
+      "p10": 102.06,
+      "p90": 238.44
+     },
+     {
+      "mes": "2027-01",
+      "valor": 149.21,
+      "p10": 90.22,
+      "p90": 246.34
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 477.0,
-      "p10": 329.05,
-      "p90": 702.73
-     },
-     {
       "mes": "2026-11",
-      "valor": 477.0,
-      "p10": 282.12,
-      "p90": 825.02
+      "valor": 479.0,
+      "p10": 338.66,
+      "p90": 672.58
      },
      {
       "mes": "2026-12",
-      "valor": 477.0,
-      "p10": 250.69,
-      "p90": 933.07
+      "valor": 479.0,
+      "p10": 300.2,
+      "p90": 770.72
+     },
+     {
+      "mes": "2027-01",
+      "valor": 479.0,
+      "p10": 272.95,
+      "p90": 888.43
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 6.3,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 7.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_validado": {
    "descricao": "candidato clássico escolhido pelo menor erro num backtest dentro do próprio treino",
@@ -3022,48 +3022,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 132.81,
-      "p10": 84.44,
-      "p90": 208.57
-     },
-     {
       "mes": "2026-11",
-      "valor": 132.81,
-      "p10": 83.07,
-      "p90": 211.97
+      "valor": 160.38,
+      "p10": 119.49,
+      "p90": 215.15
      },
      {
       "mes": "2026-12",
-      "valor": 132.81,
-      "p10": 81.77,
-      "p90": 215.31
+      "valor": 162.6,
+      "p10": 121.15,
+      "p90": 218.11
+     },
+     {
+      "mes": "2027-01",
+      "valor": 164.39,
+      "p10": 122.48,
+      "p90": 220.51
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 457.99,
-      "p10": 325.74,
-      "p90": 643.79
-     },
-     {
       "mes": "2026-11",
-      "valor": 500.9,
-      "p10": 356.28,
-      "p90": 704.06
+      "valor": 551.39,
+      "p10": 439.04,
+      "p90": 692.43
      },
      {
       "mes": "2026-12",
-      "valor": 546.84,
-      "p10": 388.98,
-      "p90": 768.59
+      "valor": 607.28,
+      "p10": 483.56,
+      "p90": 762.59
+     },
+     {
+      "mes": "2027-01",
+      "valor": 666.2,
+      "p10": 530.49,
+      "p90": 836.56
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 11.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 12.2,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_arima_aicc_faixa_erros": {
    "descricao": "ARIMA pequeno em log escolhido por AICc; faixa pelos erros do próprio passado",
@@ -3521,48 +3521,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 113.65,
-      "p10": null,
-      "p90": null
-     },
-     {
       "mes": "2026-11",
-      "valor": 113.65,
+      "valor": 137.16,
       "p10": null,
       "p90": null
      },
      {
       "mes": "2026-12",
-      "valor": 113.65,
+      "valor": 159.38,
+      "p10": null,
+      "p90": null
+     },
+     {
+      "mes": "2027-01",
+      "valor": 142.14,
       "p10": null,
       "p90": null
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 477.0,
-      "p10": null,
-      "p90": null
-     },
-     {
       "mes": "2026-11",
-      "valor": 477.0,
+      "valor": 479.0,
       "p10": null,
       "p90": null
      },
      {
       "mes": "2026-12",
-      "valor": 477.0,
+      "valor": 479.0,
+      "p10": null,
+      "p90": null
+     },
+     {
+      "mes": "2027-01",
+      "valor": 479.0,
       "p10": null,
       "p90": null
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 7.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 7.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_holt_amortecido_faixa_erros": {
    "descricao": "Holt amortecido em log; faixa pelos erros do próprio passado",
@@ -4020,48 +4020,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 162.7,
-      "p10": null,
-      "p90": null
-     },
-     {
       "mes": "2026-11",
-      "valor": 171.05,
+      "valor": 160.38,
       "p10": null,
       "p90": null
      },
      {
       "mes": "2026-12",
-      "valor": 179.66,
+      "valor": 162.6,
+      "p10": null,
+      "p90": null
+     },
+     {
+      "mes": "2027-01",
+      "valor": 164.39,
       "p10": null,
       "p90": null
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 457.99,
-      "p10": null,
-      "p90": null
-     },
-     {
       "mes": "2026-11",
-      "valor": 500.9,
+      "valor": 551.39,
       "p10": null,
       "p90": null
      },
      {
       "mes": "2026-12",
-      "valor": 546.84,
+      "valor": 607.28,
+      "p10": null,
+      "p90": null
+     },
+     {
+      "mes": "2027-01",
+      "valor": 666.2,
       "p10": null,
       "p90": null
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 0.7,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   }
  }
 }

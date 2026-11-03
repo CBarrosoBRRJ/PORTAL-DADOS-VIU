@@ -231,6 +231,31 @@ def test_eixo_so_2026_com_teste_e_previsao(p):
             for b in g["colunas"]:
                 assert g["topo_y"] - 0.5 <= b["y"] and b["y"] + b["h"] == pytest.approx(g["base"], abs=0.2)
     assert len({(c["grafico"]["w"], c["grafico_xl"]["w"], c["grafico_estreito"]["w"]) for c in t["colunas"]}) == 1
+    assert all(g["virada"] is None for c in t["colunas"] for g in (c["grafico"], c["grafico_estreito"]))
+
+
+def test_eixo_vai_ate_jan_27_quando_a_previsao_passa_de_dezembro(p):
+    """P7 (03/11/2026): com o retrato de outubro, o horizonte de 3 meses chega a jan/27; o gráfico e a tabela do leitor
+    de tela vão até ele (antes só o cartão mostrava), com a virada de ano tracejada, a zona "previsão" inteira e o ano
+    nas dicas; no gráfico estreito o rótulo fica "jan" (sem espaço para "jan/27")."""
+    for s in p["series"].values():
+        ultimo = s["futuro"][-1]
+        s["futuro"].append({**ultimo, "mes": "2027-01", "valor": ultimo["valor"] + 1})
+    assert C.meses_do_eixo([{"mes": "2027-01"}])[-2:] == ["2026-12", "2027-01"] and len(C.meses_do_eixo(None)) == 12
+    for c in C.tela(p)["colunas"]:
+        if c["nao_se_aplica"]:
+            continue
+        largo, estreito = c["grafico"], c["grafico_estreito"]
+        assert [r["t"] for r in largo["rotulos"]][-2:] == ["dez", "jan/27"]
+        assert [r["t"] for r in estreito["rotulos"]][-2:] == ["dez", "jan"]
+        for g in (largo, estreito, c["grafico_xl"]):
+            assert len(g["rotulos"]) == 13 and g["dir"] == g["w"] - C.DIR
+            assert len([x for x in g["pontos"] if x["classe"] == "pv-fut"]) == 4
+            assert [z["t"] for z in g["zonas"]] == ["teste", "previsão"]
+            assert g["rotulos"][-2]["x"] < g["virada"] < g["rotulos"][-1]["x"]
+            assert any(x["dica"].startswith("jan/2027: previsão") for x in g["pontos"])
+        assert c["acessivel"][-1]["mes"] == "jan/2027" and c["acessivel"][-1]["futuro"]["mes"] == "2027-01"
+        assert c["acessivel"][0]["mes"] == "jan/2026" and len(c["acessivel"]) == 13
 
 
 def test_pagina_previsao(cliente):
@@ -259,7 +284,7 @@ def test_dialogo_modelos_comparados_acessivel(p, cliente):
     assert re.search(r'<button type="button" class="pv-modelos-botao" data-dialogo="pv-dialogo" commandfor="pv-dialogo" '
                      r'command="show-modal" aria-haspopup="dialog">', html)
     assert '<dialog id="pv-dialogo" class="pv-dialogo" aria-labelledby="pv-dialogo-titulo" aria-describedby="pv-dialogo-sub">' in html
-    assert '<form method="dialog"' in html and re.search(r'<button class="pv-fechar" value="fechar" autofocus>.*?Fechar', html, re.S)
+    assert '<form method="dialog"' in html and re.search(r'<button class="pv-fechar" value="fechar" autofocus>.*?Fechar', html, re.DOTALL)
     assert html.count("<dialog") == 1 and 'role="region"' in html and 'tabindex="0"' in html
     d = C.tela(p, "exclusivos")["dialogo"]
     assert d["series"] == ["Inbound", "Mercado exclusivos"]
@@ -367,6 +392,41 @@ def test_acompanhamento_nao_mexe_na_previsao(tmp_path, p):
     assert novo["series"] == p["series"] and novo["retrato"] == p["retrato"]
     linhas = [{**x, "completo": True} for x in linhas]  # outubro fechou: é hora de um retrato novo, não de acompanhar
     assert not mp.atualizar_acompanhamento(arq, pd.DataFrame(linhas), excl, lotes=pd.DataFrame())
+
+
+def test_rotulo_do_holt_amortecido_simples():
+    """03/11/2026: comb_holt_amort é Holt com tendência amortecida (ml/modelos/combinacao.py), não "Holt simples";
+    o rótulo vem de ml/previsao.py e foi trocado também no previsao.json publicado (sem rodar os modelos)."""
+    assert mp.ROTULO["comb_holt_amort"] == "Holt amortecido simples"
+    assert mp.ROTULO["comb_holt_amort"] != mp.ROTULO["cls_holt_amortecido"]  # o clássico segue "Holt amortecido"
+    publicado = mp.PREVISAO.read_text(encoding="utf-8") if mp.PREVISAO.exists() else ""
+    assert "Holt simples" not in publicado
+
+
+def test_lotes_usa_o_mes_do_acompanhamento():
+    """S6 (correção de 03/11/2026): o vigente do diagnóstico de lotes é o mês do acompanhamento, não o último mês
+    presente na base; série sem linha desse mês (ou sem mês anterior) fica sem diagnóstico, e mês posterior não entra
+    na média."""
+    carga = "2026-11-03 12:00:00+00:00"
+
+    def linha(recorte, mes, pedidos, em_lote):
+        return {"recorte": recorte, "mes": mes, "ate_dia": 2, "pedidos": pedidos, "em_lote": em_lote,
+                "avulsos": pedidos - em_lote, "processado_em": carga, "dados_ate": "2026-11-02"}
+
+    lotes = pd.DataFrame([
+        linha("inbound", "2026-09", 12, 0), linha("inbound", "2026-10", 9, 0), linha("inbound", "2026-11", 4, 0),
+        linha("mercado", "2026-09", 50, 30), linha("mercado", "2026-10", 20, 6),  # sem novembro: o caso de 03/11
+        linha("mercado_exclusivos", "2026-11", 3, 1),  # só o mês do acompanhamento: sem anteriores
+    ])
+    d = mp._lotes(lotes, carga, "2026-11")
+    assert set(d) == {"Inbound"}
+    assert d["Inbound"]["mes"] == "2026-11" and d["Inbound"]["vigente"]["pedidos"] == 4
+    assert d["Inbound"]["meses_anteriores"] == ["2026-09", "2026-10"] and d["Inbound"]["media_anteriores"]["pedidos"] == 10.5
+    # num mês anterior, os meses posteriores a ele não contam como "anteriores"
+    out = mp._lotes(lotes, carga, "2026-10")
+    assert out["Mercado"]["mes"] == "2026-10" and out["Mercado"]["meses_anteriores"] == ["2026-09"]
+    assert out["Inbound"]["meses_anteriores"] == ["2026-09"] and out["Inbound"]["vigente"]["pedidos"] == 9
+    assert mp._lotes(lotes, "outra carga", "2026-11") == {} and mp._lotes(None, carga, "2026-11") == {}
 
 
 def test_registro_uma_vez_por_retrato_e_protocolo(tmp_path, p):

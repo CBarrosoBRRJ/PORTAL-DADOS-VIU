@@ -3,6 +3,7 @@
 Uso (PyMuPDF e Pillow; o venv do projeto não tem PyMuPDF, o Python 3.12 do computador tem):
     python -I tools/gerar_imagens_roadmap.py <PDF do fluxo> app/static/roadmap [<PNG do BigQuery>]
     python -I tools/gerar_imagens_roadmap.py --dashboards app/static/roadmap <PNG pagamento> <PNG contratos>
+    python -I tools/gerar_imagens_roadmap.py --dashboard app/static/roadmap dashboard-raiox <PNG do Raio-X>
 
 Dashboards (prints do Caio, 30/10/2026): <nome>-mini.webp e <nome>.webp (o painel usa a própria ampliada a 100%: o print
 já está na resolução da tela). Desfocados os nomes de talentos, marcas e projetos, os valores e datas por linha, a
@@ -24,6 +25,8 @@ from pathlib import Path
 import pymupdf
 from PIL import Image, ImageFilter
 
+# Caio, 03/11/2026: imagens SEM desfoque (dados internos da equipe). As caixas abaixo ficam como registro; True religa
+DESFOCAR = False
 MINI_LARG = 440  # px; a miniatura aparece com ~140 px de largura na lâmina (nítida em tela de densidade 2x)
 IMAGEM_MIN_PT = 8  # capturas coladas no quadro maiores que isto (em pontos do PDF) são desfocadas
 NOMES = (  # trechos (x0, y0, x1, y1 em pontos do PDF) com nomes de pessoas, contrato de talento ou e-mail
@@ -48,11 +51,13 @@ BQ_RECORTE = (326, 80, 1845, 893)  # px do print: do caminho "projeto / Datasets
 
 
 def _desfocar(img: Image.Image, r: pymupdf.Rect, escala: float, caixas) -> None:
+    if not DESFOCAR:
+        return
     for x0, y0, x1, y1 in caixas:
         caixa = pymupdf.Rect(x0, y0, x1, y1) & r
         if caixa.is_empty:
             continue
-        box = tuple(int(round(v)) for v in ((caixa.x0 - r.x0) * escala, (caixa.y0 - r.y0) * escala,
+        box = tuple(round(v) for v in ((caixa.x0 - r.x0) * escala, (caixa.y0 - r.y0) * escala,
                                             (caixa.x1 - r.x0) * escala, (caixa.y1 - r.y0) * escala))
         img.paste(img.crop(box).filter(ImageFilter.GaussianBlur(max(6, 3.5 * escala))), box[:2])
 
@@ -97,22 +102,33 @@ DASHBOARDS = {
         (20, 466, 300, 817),     # nomes dos talentos e contagem por talento
         (950, 466, 1100, 817),   # datas e prazos por contrato
     ), 1.0),
+    # Caio, 03/11/2026: print "0. Raio-X - Visão Geral 2.png" publicado SEM desfoque, por decisão dele
+    "dashboard-raiox": ((), 1.0),
 }
 
 
+def gerar_dashboard(destino: Path, nome: str, png: Path) -> None:
+    caixas, fracao = DASHBOARDS[nome]
+    img = Image.open(png).convert("RGB")
+    for box in caixas if DESFOCAR else ():
+        img.paste(img.crop(box).filter(ImageFilter.GaussianBlur(9)), box[:2])
+    img.save(destino / f"{nome}.webp", "WEBP", quality=86, method=6)
+    _mini(img, fracao, destino / f"{nome}-mini.webp")
+    print(nome, img.size, (destino / f"{nome}.webp").stat().st_size // 1024, "KB")
+
+
 def gerar_dashboards(destino: Path, *pngs: Path) -> None:
-    for (nome, (caixas, fracao)), png in zip(DASHBOARDS.items(), pngs):
-        img = Image.open(png).convert("RGB")
-        for box in caixas:
-            img.paste(img.crop(box).filter(ImageFilter.GaussianBlur(9)), box[:2])
-        img.save(destino / f"{nome}.webp", "WEBP", quality=86, method=6)
-        _mini(img, fracao, destino / f"{nome}-mini.webp")
-        print(nome, img.size, (destino / f"{nome}.webp").stat().st_size // 1024, "KB")
+    """Pagamento e contratos, nessa ordem (uso original de 30/10/2026)."""
+    for nome, png in zip(("dashboard-pagamento", "dashboard-contratos"), pngs):
+        gerar_dashboard(destino, nome, png)
 
 
 if __name__ == "__main__":
     if sys.argv[1] == "--dashboards":
         gerar_dashboards(Path(sys.argv[2]), *map(Path, sys.argv[3:]))
+        sys.exit()
+    if sys.argv[1] == "--dashboard":  # um painel: --dashboard <pasta> <nome> <PNG>
+        gerar_dashboard(Path(sys.argv[2]), sys.argv[3], Path(sys.argv[4]))
         sys.exit()
     gerar(Path(sys.argv[1]), Path(sys.argv[2]))
     if len(sys.argv) > 3:

@@ -1,234 +1,114 @@
 {% extends "apresentacao.html" %}
 {% from "icones.html" import icone %}
-{# Capa da área (D59; desenho D61; V2, 30/10/2026). Lado branco: logo, sobretítulo, título em duas linhas (a 2ª em
-   itálico), fio azul, subtítulo discreto ("Tudo o que a área analisa, constrói e entrega, num só lugar.", capa.subtitulo
-   em apresentacao.py) e, no pé, a data. Plano marinho em diagonal, com o filete azul no corte.
-   V2 (Caio, 30/10/2026): o menu dos temas saiu do plano marinho, porque o Roadmap (1ª página depois da capa) faz a
-   navegação com botões para as páginas. No plano marinho ficam só a ilustração decorativa "dados → área" (SVG,
-   aria-hidden) e, centralizado sob ela, o botão "Começar", um link para a próxima página da sequência (o Roadmap), o
-   mesmo destino da seta → e do rel="next". Pontos de origem espalhados cujas linhas convergem num nó amarelo e seguem
-   como uma linha única. Entrada por CSS (estilo.css, bloco "V2 ... capa sem o menu dos temas"), até 1,2 s. Depois, o
-   FLUXO CONTÍNUO: itens brancos saem dos pontos, seguem as linhas e, no nó, viram quadradinhos amarelos iguais
-   ("padronizados") que correm pela linha única. Animações SMIL do SVG (só posição e opacidade; nada de loop no CSS),
-   visíveis só com html.js e sem movimento reduzido.
-   Botão de pausa retirado por decisão do Caio em 30/10/2026; animação contínua; respeita movimento reduzido.
-   capa_fluxo.js só para a animação com a aba oculta (economia) e com movimento reduzido; sem JS ou com movimento
-   reduzido, a composição fica parada, sem partículas, e o link funciona.
-   A jornada animada do pedido (D61, capa.js) continua fora da capa; o arquivo fica, sem ser carregado. Cópias das capas
-   anteriores: _congelado/2026-10-30_capa_antes/ (original) e _descartados/2026-10-30/app/templates/capa.html (menu). #}
+{# PROPOSTA de capa nova (Caio, 03/11/2026), só para comparar com a validada (capa.html, que segue intacta). Rota
+   /viu-agenciamento/capa-nova, fora da navegação. CSS em static/capa_nova.css (prefixo cn-); JS em static/capa_nova.js.
+   Conceito: a metáfora "dados espalhados → uma linha só" vira a composição inteira da lâmina.
+   - O plano marinho em diagonal (com o filete azul) continua, mais largo, com luz e profundidade: pontos de três
+     tamanhos e brilhos (perto, meio, longe), anéis concêntricos e um halo atrás do nó amarelo.
+   - Da área (o nó) sai uma linha só, que desce e termina no botão "Começar": o fluxo entrega o visitante ao Roadmap.
+     3ª rodada (Caio, 03/11/2026): sem texto no desenho (as paradas saíram) e sem o subtítulo; a linha só "acende"
+     quando o "Começar" recebe hover ou foco.
+   - O título atravessa o corte: a mesma palavra é escura no branco e branca no marinho. São duas camadas iguais,
+     recortadas pelo mesmo polígono do plano; a 2ª é só desenho (aria-hidden, sem id) e o h2 real fica na 1ª.
+   Movimento: entrada única por CSS (até 1,2 s) e fluxo contínuo por SMIL (só posição e opacidade), visível só com
+   html.js e sem movimento reduzido; capa_nova.js pausa o SVG com a aba oculta e com movimento reduzido. Sem JS ou com
+   movimento reduzido, a composição fica completa e parada. Geometria do desenho no viewBox 380×450 (1 unidade = 0,1em
+   da lâmina): nó em (236, 150), botão sob o fim da linha, em (306, 388). #}
 {% block slides %}
+<link rel="stylesheet" href="/static/capa_nova.css?v={{ v() }}">
 {% set c = apresentacao.capa %}
 {% set comecar = proxima.href if proxima else "/" ~ apresentacao.slug ~ "/roadmap#1" %}
-<section class="slide slide-capa" aria-roledescription="slide" aria-labelledby="s-capa">
-<div class="lamina capa">
-  <div class="capa-plano" aria-hidden="true"></div>
-  <div class="capa-filete" aria-hidden="true"></div>
-  <div class="capa-branca">
-    <img class="capa-logo" src="/static/viu_logo.jpg" alt="VIU" width="132" height="84">
-    <div class="capa-abertura">
-      <p class="capa-sobre">{{ c.sobre }}</p>
-      <h2 class="capa-titulo" id="s-capa">{{ c.titulo_1 }}<span class="capa-titulo-2">{{ c.titulo_2 }}</span></h2>
-      {% if c.subtitulo %}<p class="capa-sub">{{ c.subtitulo }}</p>{% endif %}
+{# origens dos dados: (x, y, camada); camada 3 = perto (maior e mais clara), 1 = longe (menor e apagada). 2ª rodada
+   (Caio, 03/11/2026, "menos é mais"): 10 origens (antes 15), sete por cima e três por baixo do título, que fica
+   dentro do fluxo e ocupa o marinho também abaixo dele (em 16:10 a área vazia some) #}
+{% set origens = [
+  (78, 42, 2), (150, 22, 1), (198, 64, 3), (58, 108, 1), (118, 128, 3), (40, 182, 2), (156, 196, 1),
+  (40, 400, 1), (124, 428, 1), (186, 360, 2)
+] %}
+{% set nx, ny = 236, 150 %}
+{% macro texto(real) %}
+  {# lado branco: logo no topo, título no centro óptico e, no pé, o colofão (o que é e quando), alinhado ao botão #}
+  <div class="cn-coluna">
+    <img class="cn-logo" src="/static/viu_logo.jpg" alt="{{ 'VIU' if real else '' }}" width="132" height="84">
+    <div class="cn-abertura">
+      {% if real %}<h2 class="cn-titulo" id="s-capa"><span class="cn-titulo-1">{{ c.titulo_1 }}</span> <span class="cn-titulo-2">{{ c.titulo_2 }}</span></h2>
+      {% else %}<p class="cn-titulo"><span class="cn-titulo-1">{{ c.titulo_1 }}</span> <span class="cn-titulo-2">{{ c.titulo_2 }}</span></p>{% endif %}
     </div>
-    <div class="capa-rodape">
-      <p class="capa-data">{{ c.data }}</p>
-    </div>
+    <p class="cn-colofao"><span class="cn-sobre">{{ c.sobre }}</span> <span class="cn-data">{{ c.data }}</span></p>
   </div>
-  <div class="capa-direita">
-    <button type="button" class="tela-cheia-botao capa-tela-cheia" data-tela-cheia hidden aria-label="Tela cheia" title="Tela cheia">
-      {{ icone("abrir-tela", "icone icone-abrir") }}{{ icone("sair-tela", "icone icone-fechar") }}
-    </button>
-    <div class="capa-desenho" aria-hidden="true">
-      <svg viewBox="0 0 480 440" preserveAspectRatio="xMidYMid meet" focusable="false">
-        <defs>
-          <path id="capa-rota-1" d="M18 22C158 22 240 220 330 220H478"/>
-          <path id="capa-rota-2" d="M104 58C206 58 240 220 330 220H478"/>
-          <path id="capa-rota-3" d="M46 100C174 100 240 220 330 220H478"/>
-          <path id="capa-rota-4" d="M150 132C231 132 240 220 330 220H478"/>
-          <path id="capa-rota-5" d="M12 170C155 170 240 220 330 220H478"/>
-          <path id="capa-rota-6" d="M92 206C199 206 240 220 330 220H478"/>
-          <path id="capa-rota-7" d="M30 248C165 248 240 220 330 220H478"/>
-          <path id="capa-rota-8" d="M140 276C226 276 240 220 330 220H478"/>
-          <path id="capa-rota-9" d="M56 318C179 318 240 220 330 220H478"/>
-          <path id="capa-rota-10" d="M118 356C213 356 240 220 330 220H478"/>
-          <path id="capa-rota-11" d="M24 400C162 400 240 220 330 220H478"/>
-          <path id="capa-rota-12" d="M210 14C264 14 240 220 330 220H478"/>
-          <path id="capa-rota-13" d="M214 428C266 428 240 220 330 220H478"/>
-        </defs>
-        <g class="capa-fios">
-          <path class="capa-fio" d="M18 22C158 22 240 220 330 220" pathLength="1" opacity="0.73"/>
-          <path class="capa-fio" d="M104 58C206 58 240 220 330 220" pathLength="1" opacity="0.64"/>
-          <path class="capa-fio" d="M46 100C174 100 240 220 330 220" pathLength="1" opacity="0.78"/>
-          <path class="capa-fio" d="M150 132C231 132 240 220 330 220" pathLength="1" opacity="0.67"/>
-          <path class="capa-fio" d="M12 170C155 170 240 220 330 220" pathLength="1" opacity="0.76"/>
-          <path class="capa-fio" d="M92 206C199 206 240 220 330 220" pathLength="1" opacity="0.69"/>
-          <path class="capa-fio" d="M30 248C165 248 240 220 330 220" pathLength="1" opacity="0.78"/>
-          <path class="capa-fio" d="M140 276C226 276 240 220 330 220" pathLength="1" opacity="0.67"/>
-          <path class="capa-fio" d="M56 318C179 318 240 220 330 220" pathLength="1" opacity="0.73"/>
-          <path class="capa-fio" d="M118 356C213 356 240 220 330 220" pathLength="1" opacity="0.64"/>
-          <path class="capa-fio" d="M24 400C162 400 240 220 330 220" pathLength="1" opacity="0.76"/>
-          <path class="capa-fio" d="M210 14C264 14 240 220 330 220" pathLength="1" opacity="0.62"/>
-          <path class="capa-fio" d="M214 428C266 428 240 220 330 220" pathLength="1" opacity="0.62"/>
-        </g>
-        <path class="capa-saida" d="M330 220H478" pathLength="1"/>
-        <g class="capa-particulas">
-          <g>
-            <rect class="capa-cartao" x="-5.0" y="-3.0" width="10" height="6" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.709;0.719;1" dur="14.7s" begin="0s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.715;0.729;0.95;1" dur="14.7s" begin="0s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="14.7s" begin="0s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-1"/></animateMotion>
+{% endmacro %}
+<section class="slide slide-capa slide-capa-nova" aria-roledescription="slide" aria-labelledby="s-capa">
+<div class="lamina cn">
+  <div class="cn-plano" aria-hidden="true"></div>
+  <div class="cn-filete" aria-hidden="true"></div>
+  <div class="cn-camada cn-dia">{{ texto(true) }}</div>
+  <div class="cn-camada cn-noite" aria-hidden="true">{{ texto(false) }}</div>
+  <button type="button" class="tela-cheia-botao cn-tela-cheia" data-tela-cheia hidden aria-label="Tela cheia" title="Tela cheia">
+    {{ icone("abrir-tela", "icone icone-abrir") }}{{ icone("sair-tela", "icone icone-fechar") }}
+  </button>
+  <div class="cn-direita">
+    <div class="cn-quadro">
+      <div class="cn-desenho" aria-hidden="true">
+        <svg viewBox="0 0 380 450" preserveAspectRatio="xMidYMid meet" focusable="false">
+          <defs>
+            <radialGradient id="cn-luz" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#6f7dff" stop-opacity="0.26"/>
+              <stop offset="0.5" stop-color="#3b46c9" stop-opacity="0.08"/>
+              <stop offset="1" stop-color="#2400ff" stop-opacity="0"/>
+            </radialGradient>
+            <path id="cn-rota-saida" d="M236 150H270C296 150 306 160 306 186V388"/>
+          </defs>
+          <circle class="cn-halo" cx="236" cy="150" r="140" fill="url(#cn-luz)"/>
+          <g class="cn-aneis">
+            <circle cx="236" cy="150" r="48"/>
+            <circle cx="236" cy="150" r="108" opacity="0.55"/>
           </g>
-          <g>
-            <rect class="capa-cartao" x="-5.0" y="-3.0" width="10" height="6" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.709;0.719;1" dur="14.7s" begin="-7.3s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.715;0.729;0.95;1" dur="14.7s" begin="-7.3s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="14.7s" begin="-7.3s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-1"/></animateMotion>
+          <g class="cn-fios">
+            {% for x, y, k in origens %}
+            <path id="cn-rota-{{ x }}-{{ y }}" class="cn-fio cn-k{{ k }}" pathLength="1" d="M{{ x }} {{ y }}C{{ '%.1f' | format(x + (nx - x) * 0.6) }} {{ y }} {{ '%.1f' | format(nx - (nx - x) * 0.3) }} {{ ny }} {{ nx }} {{ ny }}"/>
+            {% endfor %}
           </g>
-          <g>
-            <rect class="capa-cartao" x="-4.0" y="-2.5" width="8" height="5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.651;0.661;1" dur="11.2s" begin="-4.1s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.657;0.671;0.95;1" dur="11.2s" begin="-4.1s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="11.2s" begin="-4.1s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-2"/></animateMotion>
+          <path class="cn-saida-sombra" d="M236 150H270C296 150 306 160 306 186V388"/>
+          <path class="cn-saida" d="M236 150H270C296 150 306 160 306 186V388" pathLength="1"/>
+          {# fluxo calmo: um item por fio (só nas camadas de perto e do meio), ciclos de 10 a 14 s e passo com easing #}
+          <g class="cn-particulas">
+            {% for x, y, k in origens if k > 1 %}
+            {% set dur = 8 + ((nx - x) ** 2 + (ny - y) ** 2) ** 0.5 / 40 + k * 0.5 %}
+            {% set w = [6, 7, 9][k - 1] %}
+            {% set inicio = '%.1f' | format(-((loop.index * 0.61 * dur) % dur)) %}
+            <rect class="cn-cartao cn-k{{ k }}" x="{{ -w / 2 }}" y="{{ -w * 0.3 }}" width="{{ w }}" height="{{ '%.1f' | format(w * 0.6) }}" rx="1.2" opacity="0">
+              <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.14;0.86;1" dur="{{ '%.1f' | format(dur) }}s" begin="{{ inicio }}s" repeatCount="indefinite"/>
+              <animateMotion dur="{{ '%.1f' | format(dur) }}s" begin="{{ inicio }}s" repeatCount="indefinite" rotate="auto" calcMode="spline" keyTimes="0;1" keyPoints="0;1" keySplines="0.45 0 0.25 1"><mpath href="#cn-rota-{{ x }}-{{ y }}"/></animateMotion>
+            </rect>
+            {% endfor %}
+            {% for i in range(3) %}
+            <rect class="cn-padrao" x="-3" y="-3" width="6" height="6" rx="1.2" opacity="0">
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.9;1" dur="9.6s" begin="{{ '%.1f' | format(-i * 3.2) }}s" repeatCount="indefinite"/>
+              <animateMotion dur="9.6s" begin="{{ '%.1f' | format(-i * 3.2) }}s" repeatCount="indefinite" rotate="auto" calcMode="spline" keyTimes="0;1" keyPoints="0;1" keySplines="0.4 0 0.3 1"><mpath href="#cn-rota-saida"/></animateMotion>
+            </rect>
+            {% endfor %}
           </g>
-          <g>
-            <rect class="capa-cartao" x="-4.0" y="-2.5" width="8" height="5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.651;0.661;1" dur="11.2s" begin="-9.7s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.657;0.671;0.95;1" dur="11.2s" begin="-9.7s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="11.2s" begin="-9.7s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-2"/></animateMotion>
+          <g class="cn-pontos">
+            {% for x, y, k in origens %}
+            <circle class="cn-ponto cn-k{{ k }}" cx="{{ x }}" cy="{{ y }}" r="{{ [1.8, 2.8, 4][k - 1] }}"/>
+            {% endfor %}
           </g>
-          <g>
-            <rect class="capa-cartao" x="-5.5" y="-3.25" width="11" height="6.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.669;0.679;1" dur="13.6s" begin="-10.1s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.675;0.689;0.95;1" dur="13.6s" begin="-10.1s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="13.6s" begin="-10.1s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-3"/></animateMotion>
+          <g class="cn-no-grupo">
+            <circle class="cn-no-pulso" cx="236" cy="150" r="9">
+              <animate attributeName="r" values="9;26" dur="4.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.2 0 0.2 1"/>
+              <animate attributeName="opacity" values="0.45;0" dur="4.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.2 0 0.2 1"/>
+            </circle>
+            <circle class="cn-no-anel" cx="236" cy="150" r="14"/>
+            <circle class="cn-no" cx="236" cy="150" r="6.5"/>
           </g>
-          <g>
-            <rect class="capa-cartao" x="-5.5" y="-3.25" width="11" height="6.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.669;0.679;1" dur="13.6s" begin="-3.3s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.675;0.689;0.95;1" dur="13.6s" begin="-3.3s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="13.6s" begin="-3.3s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-3"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.5" y="-2.75" width="9" height="5.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.572;0.582;1" dur="9.3s" begin="-1.0s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.578;0.592;0.95;1" dur="9.3s" begin="-1.0s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="9.3s" begin="-1.0s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-4"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.5" y="-2.75" width="9" height="5.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.572;0.582;1" dur="9.3s" begin="-5.7s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.578;0.592;0.95;1" dur="9.3s" begin="-5.7s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="9.3s" begin="-5.7s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-4"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-5.25" y="-2.5" width="10.5" height="5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.676;0.686;1" dur="11.5s" begin="-5.5s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.682;0.696;0.95;1" dur="11.5s" begin="-5.5s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="11.5s" begin="-5.5s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-5"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-5.25" y="-2.5" width="10.5" height="5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.676;0.686;1" dur="11.5s" begin="-11.3s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.682;0.696;0.95;1" dur="11.5s" begin="-11.3s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="11.5s" begin="-11.3s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-5"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.0" y="-3.0" width="8" height="6" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.607;0.617;1" dur="11.0s" begin="-9.4s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.613;0.627;0.95;1" dur="11.0s" begin="-9.4s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="11.0s" begin="-9.4s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-6"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.0" y="-3.0" width="8" height="6" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.607;0.617;1" dur="11.0s" begin="-3.9s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.613;0.627;0.95;1" dur="11.0s" begin="-3.9s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="11.0s" begin="-3.9s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-6"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-5.5" y="-3.0" width="11" height="6" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.661;0.671;1" dur="12.2s" begin="-2.7s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.667;0.681;0.95;1" dur="12.2s" begin="-2.7s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="12.2s" begin="-2.7s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-7"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-5.5" y="-3.0" width="11" height="6" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.661;0.671;1" dur="12.2s" begin="-8.8s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.667;0.681;0.95;1" dur="12.2s" begin="-8.8s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="12.2s" begin="-8.8s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-7"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.5" y="-3.25" width="9" height="6.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.566;0.576;1" dur="8.7s" begin="-5.1s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.572;0.586;0.95;1" dur="8.7s" begin="-5.1s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="8.7s" begin="-5.1s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-8"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.5" y="-3.25" width="9" height="6.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.566;0.576;1" dur="8.7s" begin="-0.8s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.572;0.586;0.95;1" dur="8.7s" begin="-0.8s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="8.7s" begin="-0.8s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-8"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.75" y="-2.5" width="9.5" height="5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.656;0.666;1" dur="12.3s" begin="-11.8s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.662;0.676;0.95;1" dur="12.3s" begin="-11.8s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="12.3s" begin="-11.8s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-9"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.75" y="-2.5" width="9.5" height="5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.656;0.666;1" dur="12.3s" begin="-5.7s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.662;0.676;0.95;1" dur="12.3s" begin="-5.7s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="12.3s" begin="-5.7s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-9"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.0" y="-2.75" width="8" height="5.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.628;0.638;1" dur="10.5s" begin="-3.5s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.634;0.648;0.95;1" dur="10.5s" begin="-3.5s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="10.5s" begin="-3.5s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-10"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.0" y="-2.75" width="8" height="5.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.628;0.638;1" dur="10.5s" begin="-8.7s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.634;0.648;0.95;1" dur="10.5s" begin="-8.7s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="10.5s" begin="-8.7s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-10"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-5.0" y="-3.25" width="10" height="6.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.701;0.711;1" dur="14.6s" begin="-10.2s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.707;0.721;0.95;1" dur="14.6s" begin="-10.2s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="14.6s" begin="-10.2s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-11"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-5.0" y="-3.25" width="10" height="6.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.701;0.711;1" dur="14.6s" begin="-2.9s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.707;0.721;0.95;1" dur="14.6s" begin="-2.9s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="14.6s" begin="-2.9s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-11"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.0" y="-2.5" width="8" height="5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.624;0.634;1" dur="10.6s" begin="-0.7s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.630;0.644;0.95;1" dur="10.6s" begin="-0.7s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="10.6s" begin="-0.7s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-12"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.0" y="-2.5" width="8" height="5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.624;0.634;1" dur="10.6s" begin="-6.0s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.630;0.644;0.95;1" dur="10.6s" begin="-6.0s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="10.6s" begin="-6.0s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-12"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.5" y="-2.75" width="9" height="5.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.624;0.634;1" dur="10.9s" begin="-4.8s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.630;0.644;0.95;1" dur="10.9s" begin="-4.8s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="10.9s" begin="-4.8s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-13"/></animateMotion>
-          </g>
-          <g>
-            <rect class="capa-cartao" x="-4.5" y="-2.75" width="9" height="5.5" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0.95;0.95;0;0" keyTimes="0;0.05;0.624;0.634;1" dur="10.9s" begin="-10.2s" repeatCount="indefinite"/></rect>
-            <rect class="capa-padrao" x="-3.5" y="-3.5" width="7" height="7" rx="1.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.630;0.644;0.95;1" dur="10.9s" begin="-10.2s" repeatCount="indefinite"/></rect>
-            <animateMotion dur="10.9s" begin="-10.2s" repeatCount="indefinite" rotate="auto"><mpath href="#capa-rota-13"/></animateMotion>
-          </g>
-        </g>
-        <g class="capa-pontos">
-          <circle class="capa-ponto" cx="18" cy="22" r="4.5" opacity="0.85"/>
-          <circle class="capa-ponto" cx="104" cy="58" r="3.4" opacity="0.65"/>
-          <circle class="capa-ponto" cx="46" cy="100" r="5.5" opacity="0.95"/>
-          <circle class="capa-ponto" cx="150" cy="132" r="3.4" opacity="0.7"/>
-          <circle class="capa-ponto" cx="12" cy="170" r="4.5" opacity="0.9"/>
-          <circle class="capa-ponto" cx="92" cy="206" r="3.6" opacity="0.75"/>
-          <circle class="capa-ponto" cx="30" cy="248" r="5.5" opacity="0.95"/>
-          <circle class="capa-ponto" cx="140" cy="276" r="3.4" opacity="0.7"/>
-          <circle class="capa-ponto" cx="56" cy="318" r="4.5" opacity="0.85"/>
-          <circle class="capa-ponto" cx="118" cy="356" r="3.4" opacity="0.65"/>
-          <circle class="capa-ponto" cx="24" cy="400" r="5" opacity="0.9"/>
-          <circle class="capa-ponto" cx="210" cy="14" r="3.4" opacity="0.6"/>
-          <circle class="capa-ponto" cx="214" cy="428" r="3.4" opacity="0.6"/>
-        </g>
-        <g class="capa-no-grupo">
-          <circle class="capa-no-anel" cx="330" cy="220" r="17"/>
-          <circle class="capa-no" cx="330" cy="220" r="7"/>
-        </g>
-      </svg>
-    </div>
-    <div class="capa-fecho">
-      <a class="capa-comecar" href="{{ comecar }}">Começar<svg aria-hidden="true" viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a>
+        </svg>
+      </div>
+      <div class="cn-fecho">
+        <a class="cn-comecar" href="{{ comecar }}">Começar<svg aria-hidden="true" viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a>
+      </div>
     </div>
   </div>
 </div>
 </section>
 {% endblock %}
-{% block scripts %}<script src="/static/capa_fluxo.js?v={{ v() }}"></script>{% endblock %}
+{% block scripts %}<script src="/static/capa_nova.js?v={{ v() }}"></script>{% endblock %}

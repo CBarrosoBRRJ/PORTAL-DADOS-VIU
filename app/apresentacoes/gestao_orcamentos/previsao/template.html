@@ -15,6 +15,7 @@
   {% for f in g.faixas %}<rect class="pv-faixa" x="{{ f.x }}" y="{{ f.y }}" width="{{ f.w }}" height="{{ f.h }}" rx="2"/>{% endfor %}
   {% if g.linha %}<polyline class="pv-linha" points="{{ g.linha }}"/>{% endif %}
   {% for p in g.pontos %}<circle class="{{ p.classe }}" cx="{{ p.cx }}" cy="{{ p.cy }}" r="{{ 3.6 if p.classe == 'pv-fut' else 3.4 }}"><title>{{ p.dica }}</title></circle>{% endfor %}
+  {% if g.virada %}<line class="pv-virada" x1="{{ g.virada }}" x2="{{ g.virada }}" y1="{{ g.topo_y }}" y2="{{ g.base + 4 }}"/>{% endif %}
   <line class="pv-eixo-linha" x1="{{ g.esq }}" x2="{{ g.dir }}" y1="{{ g.base }}" y2="{{ g.base }}"/>
   {% for r in g.rotulos %}<text class="pv-mes-eixo" x="{{ r.x }}" y="{{ g.y_mes }}" text-anchor="middle">{{ r.t }}</text>{% endfor %}
 </svg>
@@ -27,6 +28,7 @@
    "Aqui entram os pedidos previstos por mês no Inbound e no Mercado, com a faixa provável.") }}
 {% else %}
 {% set ac = t.acompanhamento %}
+<link rel="stylesheet" href="/static/previsao_ajustes.css?v={{ v() }}">
 <section class="slide slide-previsao" aria-roledescription="slide" aria-labelledby="s-previsao" data-nivel="gerencial">
 <div class="lamina lamina-previsao">
   {{ cabecalho(apresentacao, secao_atual) }}
@@ -122,7 +124,7 @@
         {% endif %}
       </figure>
       <div class="so-leitor"><table>
-        <caption>{{ c.titulo }}{% if c.recorte %} ({{ c.recorte }}){% endif %}: pedidos por mês em 2026</caption>
+        <caption>{{ c.titulo }}{% if c.recorte %} ({{ c.recorte }}){% endif %}: pedidos por mês, de {{ c.acessivel[0].mes }} a {{ c.acessivel[-1].mes }}</caption>
         <thead><tr><th scope="col">Mês</th><th scope="col">Entraram</th><th scope="col">Previsto no teste</th><th scope="col">Previsão</th></tr></thead>
         <tbody>{% for l in c.acessivel %}<tr><th scope="row">{{ l.mes }}</th>
           <td>{% if l.real is not none %}{{ l.real | inteiro }}{% elif l.parcial is not none %}{{ l.parcial | inteiro }} até {{ ac.ate_txt }} (mês em andamento){% else %}—{% endif %}</td>

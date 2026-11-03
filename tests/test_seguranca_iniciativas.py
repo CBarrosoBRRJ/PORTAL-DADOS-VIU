@@ -13,9 +13,9 @@ import time
 from pathlib import Path
 
 import pytest
+import test_iniciativas_servidor as tis
 from fastapi.testclient import TestClient
 
-import test_iniciativas_servidor as tis
 from app import config, iap
 from app.apresentacoes.gestao_orcamentos.iniciativas import api, repositorio
 
@@ -155,18 +155,18 @@ def test_f04_sqlite_falha_no_meio_da_semente_nao_deixa_marca_e_recupera(monkeypa
         q.listar()
     assert b.meta("semeado_em") is None and b.iniciativas() == []  # tudo ou nada
     monkeypatch.setattr(repositorio.Quadro, "itens_da_semente", staticmethod(original))
-    assert len(q.listar()) == 11 and b.meta("semeado_em") and q.na_semente()  # a mesma instância tenta de novo
+    assert len(q.listar()) == 13 and b.meta("semeado_em") and q.na_semente()  # a mesma instância tenta de novo
 
 
 def test_f04_sqlite_marca_parcial_da_versao_anterior_semeia_de_novo(tmp_path):
     b = repositorio.SqliteBackend(tmp_path / "q.db", tmp_path / "anexos")
     assert b.meta_criar("semeado_em", "2026-10-31T00:00:00+00:00")  # o estado que a versão anterior deixava
-    assert len(repositorio.Quadro(b).listar()) == 11
+    assert len(repositorio.Quadro(b).listar()) == 13
     # com itens, não semeia de novo (nem sobre um quadro todo excluído)
     q = repositorio.Quadro(b)
     for i in q.listar():
         q.excluir(i["id"])
-    assert repositorio.Quadro(b).listar() == [] and len(b.iniciativas()) == 11
+    assert repositorio.Quadro(b).listar() == [] and len(b.iniciativas()) == 13
 
 
 class _LoteAtomico(tis._Lote):
@@ -203,13 +203,13 @@ def test_f04_firestore_batch_com_falha_nao_grava_nada_e_recupera():
         q.listar()
     assert not fs.collection("iniciativas").dados and "semeado_em" not in fs.collection("iniciativas_meta").dados
     fs.quebrar = False
-    assert len(q.listar()) == 11 and fs.cols["iniciativas_meta"].dados["alterado"] == {"valor": "0"}
+    assert len(q.listar()) == 13 and fs.cols["iniciativas_meta"].dados["alterado"] == {"valor": "0"}
     assert "semeado_em" in fs.cols["iniciativas_meta"].dados
     # marca parcial (versão anterior) + coleção vazia: semeia de novo; com itens, outra réplica não semeia
     fs2 = _FirestoreAtomico()
     fs2.collection("iniciativas_meta").dados["semeado_em"] = {"valor": "antes"}
     assert len(repositorio.Quadro(repositorio.FirestoreBackend("p", "(default)", "", "", cliente=fs2,
-                                                               bucket_obj=tis._Bucket())).listar()) == 11
+                                                               bucket_obj=tis._Bucket())).listar()) == 13
     q.editar("gps", {"nome": "Pastas"})
     q2 = repositorio.Quadro(repositorio.FirestoreBackend("p", "(default)", "", "", cliente=fs, bucket_obj=tis._Bucket()))
     assert q2.obter("gps")["nome"] == "Pastas"
@@ -279,11 +279,11 @@ def test_f12_sinc_post_valida_a_origem(monkeypatch):
 
 def test_a32_sinc_desligado_por_padrao_na_v2():
     env = {k: v for k, v in os.environ.items() if k not in ("SINC", "K_SERVICE")}
-    saida = subprocess.run([sys.executable, "-c", "from app import config; print(config.SINC)"], cwd=RAIZ, env=env,
+    saida = subprocess.run([sys.executable, "-c", "from app import config; print(config.SINC)"], check=False, cwd=RAIZ, env=env,
                            capture_output=True, text=True, timeout=60)
     assert saida.stdout.strip() == "False", saida.stderr
     env["SINC"] = "on"
-    saida = subprocess.run([sys.executable, "-c", "from app import config; print(config.SINC)"], cwd=RAIZ, env=env,
+    saida = subprocess.run([sys.executable, "-c", "from app import config; print(config.SINC)"], check=False, cwd=RAIZ, env=env,
                            capture_output=True, text=True, timeout=60)
     assert saida.stdout.strip() == "True", saida.stderr
 
@@ -325,10 +325,10 @@ def test_d66_publico_sobe_em_producao_sem_edicao():
     env = {k: v for k, v in os.environ.items() if k not in ("SINC",)}
     env.update(K_SERVICE="viu-agenciamento", AUTH="publico", INICIATIVAS_EDICAO="on", CORTE_DADOS="off")
     cod = "from app import config, main; print(config.EM_PRODUCAO, config.INICIATIVAS_EDICAO, config.DEV)"
-    saida = subprocess.run([sys.executable, "-c", cod], cwd=RAIZ, env=env, capture_output=True, text=True, timeout=120)
+    saida = subprocess.run([sys.executable, "-c", cod], check=False, cwd=RAIZ, env=env, capture_output=True, text=True, timeout=120)
     assert saida.stdout.strip().splitlines()[-1] == "True False False", saida.stderr
     env["AUTH"] = "off"  # sem o modo explícito, a trava da D10 continua
-    saida = subprocess.run([sys.executable, "-c", "import app.main"], cwd=RAIZ, env=env, capture_output=True, text=True,
+    saida = subprocess.run([sys.executable, "-c", "import app.main"], check=False, cwd=RAIZ, env=env, capture_output=True, text=True,
                            timeout=120)
     assert saida.returncode != 0 and "AUTH=off" in saida.stderr
 
@@ -350,6 +350,7 @@ def test_d66b_chave_no_link(monkeypatch, quadro_limpo):
 
 def test_d66b_espelho_le_arquivos_sem_bigquery(monkeypatch, tmp_path):
     import pandas as pd
+
     from app import congelamento, dados
 
     t = dados.Tabela("Teste", "projeto.gold.tab_teste", chave=("a",))

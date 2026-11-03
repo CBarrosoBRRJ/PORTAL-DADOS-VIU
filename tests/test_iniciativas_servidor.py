@@ -41,14 +41,14 @@ def _enviar(c, ident, nome, conteudo, cabecalhos=CSRF):
 def test_semente_vem_do_catalogo_uma_vez(quadro_limpo):
     q = quadro_limpo
     itens = q.listar()
-    assert [i["id"] for i in itens][:2] == ["lia", "gps"] and len(itens) == 11
+    assert [i["id"] for i in itens][:2] == ["lia", "gps"] and len(itens) == 13
     assert itens[0]["link_href"] == "/viu-agenciamento/lia#1" and itens[0]["fase"] == "producao"
-    assert [i["ordem"] for i in itens if i["fase"] == "esteira"] == [0, 1, 2, 3]
+    assert [i["ordem"] for i in itens if i["fase"] == "esteira"] == [0, 1, 2, 3, 4]
     assert q.na_semente()
     # uma 2ª instância sobre o mesmo arquivo não semeia de novo (e enxerga o que foi gravado)
     q.editar("gps", {"nome": "Pastas"})
     outro = repositorio.Quadro(repositorio.SqliteBackend(config.INICIATIVAS_DB, config.INICIATIVAS_ANEXOS))
-    assert len(outro.listar()) == 11 and outro.obter("gps")["nome"] == "Pastas" and not outro.na_semente()
+    assert len(outro.listar()) == 13 and outro.obter("gps")["nome"] == "Pastas" and not outro.na_semente()
 
 
 def test_crud_mover_e_exclusao_logica(quadro_limpo):
@@ -61,7 +61,7 @@ def test_crud_mover_e_exclusao_logica(quadro_limpo):
     q.mover(novo["id"], "producao", 0)
     prod = [i["id"] for i in q.listar() if i["fase"] == "producao"]
     testes = [(i["id"], i["ordem"]) for i in q.listar() if i["fase"] == "testes"]
-    assert prod == [novo["id"], "lia", "gps"] and testes == [("orca-ai", 0), ("cop-ia", 1)]
+    assert prod == [novo["id"], "lia", "gps", "mia"] and testes == [("orca-ai", 0), ("cop-ia", 1)]
     # mudar a fase pela edição leva para o fim da nova coluna
     q.editar("lia", {"fase": "esteira"})
     assert [i["id"] for i in q.listar() if i["fase"] == "esteira"][-1] == "lia"
@@ -103,7 +103,7 @@ def test_importacao_do_navegador(quadro_limpo):
     por_fase = {}
     for i in q.listar():
         por_fase.setdefault(i["fase"], []).append(i["sigla"])
-    assert por_fase["producao"] == ["GPS", "LIA"] and por_fase["testes"] == ["Orça+AI", "XYZ"]
+    assert por_fase["producao"] == ["GPS", "LIA", "MIA"] and por_fase["testes"] == ["Orça+AI", "XYZ"]
     assert por_fase["desenvolvimento"] == ["RAIO-X", "CACHÊ"] and q.obter("fila")["responsavel"] == "Dados"
     with pytest.raises(repositorio.ErroQuadro) as e:  # o quadro já não está na semente: 409
         q.importar(estado)
@@ -113,7 +113,7 @@ def test_importacao_do_navegador(quadro_limpo):
 # ---------------------------------------------------------------- API
 def test_api_crud_e_pagina_renderizada_do_banco(cliente):
     r = cliente.get(f"{API}/iniciativas")
-    assert r.status_code == 200 and len(r.json()["iniciativas"]) == 11 and r.json()["edicao"] is True
+    assert r.status_code == 200 and len(r.json()["iniciativas"]) == 13 and r.json()["edicao"] is True
     r = cliente.post(f"{API}/iniciativas", json={"sigla": "TESTE", "nome": "Iniciativa de teste", "fase": "esteira",
                                                  "descricao": "Criada pelo teste."}, headers=CSRF)
     assert r.status_code == 201
@@ -125,7 +125,7 @@ def test_api_crud_e_pagina_renderizada_do_banco(cliente):
     html = cliente.get("/viu-agenciamento/iniciativas").text  # a página lê o quadro salvo
     assert f'data-ini-id="{ident}" data-ini-sigla="TESTE"' in html and "<dt>Responsável</dt><dd>Caio</dd>" in html
     assert html.index(f'data-ini-id="{ident}"') < html.index('data-ini-id="lia"')
-    assert "12</span> iniciativas" in html and 'data-ini-semente="0"' in html and 'style="' not in html
+    assert "14</span> iniciativas" in html and 'data-ini-semente="0"' in html and 'style="' not in html
     assert cliente.delete(f"{API}/iniciativas/{ident}", headers=CSRF).status_code == 204
     assert cliente.delete(f"{API}/iniciativas/{ident}", headers=CSRF).status_code == 404
     assert f'data-ini-id="{ident}"' not in cliente.get("/viu-agenciamento/iniciativas").text
@@ -171,7 +171,7 @@ def test_producao_simulada_escrita_bloqueada_leitura_aberta(cliente, monkeypatch
     assert _enviar(cliente, "lia", "a.png", PNG).status_code == 403
     assert cliente.post(f"{API}/importar", json={}, headers=CSRF).status_code == 403
     html = cliente.get("/viu-agenciamento/iniciativas").text
-    assert 'data-ini-edicao="off"' in html and html.count('<details class="ini-quadro">') == 11
+    assert 'data-ini-edicao="off"' in html and html.count('<details class="ini-quadro">') == 13
 
 
 def _config_novo():
@@ -269,7 +269,7 @@ def test_pagina_cai_para_o_catalogo_se_o_armazenamento_falhar(monkeypatch, quadr
 
     monkeypatch.setattr(repositorio, "quadro", falha)
     t = iniciativas.tela()
-    assert t["total"] == 11 and t["edicao"] is False and "só para leitura" in t["aviso"]
+    assert t["total"] == 13 and t["edicao"] is False and "só para leitura" in t["aviso"]
     from app.main import app
 
     with TestClient(app) as c:
@@ -376,11 +376,11 @@ class _Bucket:
 def test_backend_firestore_com_falsos(monkeypatch):
     fs, bucket = _Firestore(), _Bucket()
     q = repositorio.Quadro(repositorio.FirestoreBackend("proj", "(default)", "", "", cliente=fs, bucket_obj=bucket))
-    assert len(q.listar()) == 11 and q.na_semente()
+    assert len(q.listar()) == 13 and q.na_semente()
     assert set(fs.cols) >= {"iniciativas", "iniciativas_meta"} and fs.cols["iniciativas_meta"].dados["alterado"] == {"valor": "0"}
     n = q.criar({"sigla": "FS", "nome": "Firestore", "fase": "testes"})
     q.mover(n["id"], "producao", 1)
-    assert [i["id"] for i in q.listar() if i["fase"] == "producao"] == ["lia", n["id"], "gps"]
+    assert [i["id"] for i in q.listar() if i["fase"] == "producao"] == ["lia", n["id"], "gps", "mia"]
     q.excluir("gps")
     assert fs.cols["iniciativas"].dados["gps"]["excluido"] == 1 and not q.na_semente()
     a = q.anexar(n["id"], "tela.png", PNG)
@@ -487,9 +487,9 @@ def test_main_recusa_auth_iap_sem_publico(monkeypatch):
 
 
 def test_catalogo_segue_como_semente():
-    # o catálogo continua no código, como semente e histórico: 4 fases e 11 itens
-    assert len(catalogo.GRUPOS) == 4 and sum(len(g["itens"]) for g in catalogo.GRUPOS) == 11
-    assert [s["id"] for s in repositorio.Quadro.itens_da_semente()][:3] == ["lia", "gps", "orca-ai"]
+    # o catálogo continua no código, como semente e histórico: 4 fases e 13 itens (MIA em produção e Raio-X na esteira, 03/11/2026)
+    assert len(catalogo.GRUPOS) == 4 and sum(len(g["itens"]) for g in catalogo.GRUPOS) == 13
+    assert [s["id"] for s in repositorio.Quadro.itens_da_semente()][:4] == ["lia", "gps", "mia", "orca-ai"]
 
 
 # ---------------------------------------------------------------- persistência de ponta a ponta (pedido do Caio)
@@ -517,7 +517,7 @@ def test_persistencia_de_ponta_a_ponta_sobrevive_a_reinicio(quadro_limpo):
         n = por_id[nova["id"]]
         assert (n["fase"], n["ordem"], n["responsavel"], n["status"], n["proximo"]) == (
             "producao", 1, "Gerente", "Em teste", "Apresentar")
-        assert [i["id"] for i in dados["iniciativas"] if i["fase"] == "producao"] == ["lia", nova["id"], "gps"]
+        assert [i["id"] for i in dados["iniciativas"] if i["fase"] == "producao"] == ["lia", nova["id"], "gps", "mia"]
         assert por_id["fila"]["nome"] == "Fila Inteligente (RAIO-X)" and "auto" not in por_id
         assert [a["nome"] for a in dados["anexos"][nova["id"]]] == ["raio-x.png", "proposta.pdf"]
         assert c2.get(anexo["url"]).content == PNG and dados["na_semente"] is False
@@ -526,7 +526,7 @@ def test_persistencia_de_ponta_a_ponta_sobrevive_a_reinicio(quadro_limpo):
         assert 'data-ini-id="auto"' not in html and "<dt>Responsável</dt><dd>Gerente</dd>" in html
         assert html.index('data-ini-id="lia"') < html.index(f'data-ini-id="{nova["id"]}"') < html.index('data-ini-id="gps"')
         assert 'aria-label="Imagem 1 de 2: raio-x.png"' in html and 'aria-label="Documento 2 de 2: proposta.pdf"' in html
-        assert "11</span> iniciativas" in html  # 11 + 1 nova - 1 excluída
+        assert "13</span> iniciativas" in html  # 13 + 1 nova - 1 excluída
 
 
 def test_falha_na_gravacao_nao_finge_que_salvou(cliente, monkeypatch, quadro_limpo):
@@ -542,7 +542,7 @@ def test_falha_na_gravacao_nao_finge_que_salvou(cliente, monkeypatch, quadro_lim
     assert cliente.post(f"{API}/iniciativas/lia/mover", json={"fase": "testes", "posicao": 0}, headers=CSRF).status_code == 503
     assert _enviar(cliente, "lia", "a.png", PNG).status_code == 503
     monkeypatch.undo()
-    assert [i["id"] for i in quadro_limpo.listar()][:2] == ["lia", "gps"] and len(quadro_limpo.listar()) == 11
+    assert [i["id"] for i in quadro_limpo.listar()][:2] == ["lia", "gps"] and len(quadro_limpo.listar()) == 13
     js = (Path(__file__).resolve().parents[1] / "app" / "static" / "iniciativas.js").read_text(encoding="utf-8")
     assert 'estado(err.message, "erro")' in js and "falha.hidden = false" in js  # erro visível no aviso e no pop-up
     assert 'O quadro voltou ao que está salvo.' in js  # mover/excluir que falham voltam ao estado do servidor

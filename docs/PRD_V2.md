@@ -6,10 +6,10 @@
 | **Responsável** | Caio Barroso (dados; administrador). Quem apresenta na reunião é o **gerente do Caio** |
 | **Reunião** | Diretoria, **04/11/2026**, com os dados congelados em **31/10/2026** (D65) |
 | **Escrito em** | 31/10/2026, a partir do código atual (não da memória). Onde o código e uma ficha divergem, vale o código; a divergência está na seção 10 |
-| **Carga vigente** | gold processada em **30/10/2026 09:01 (São Paulo)**, dados até **29/10/2026** (lida em 31/10/2026 02:51 por uma instância local só de leitura) |
+| **Carga vigente** | **base congelada (D67):** gold processada em **03/11/2026 09:02 (São Paulo)**, dados até **02/11/2026** (seção 0.6). Até 31/10: carga de 30/10, dados até 29/10 |
 | **Endereço** | `/viu-agenciamento/...` desde 31/10/2026 (antes `/gestao-orcamentos/...`, que responde 301; 308 para POST/PUT/PATCH/DELETE). Aba do navegador: só "ViU Agenciamento" |
 | **Estado de publicação** | 31/10/2026: dois serviços no Cloud Run **no ar, mas trancados pela organização**; espelho temporário na VPS. Ver **seção 0** |
-| **Testes** | **633 passam** em 31/10/2026 (`tests/`, dados sintéticos, sem BigQuery) |
+| **Testes** | **635 passam** em 03/11/2026 (`tests/`, dados sintéticos, sem BigQuery) |
 | **Números de linha** | conferidos no código de 31/10/2026 às 03:10; `app/main.py`, `app/dados.py` e `apresentacao.py` ainda estavam sendo editados por outros agentes, então use também o nome da função citado ao lado |
 
 **Como ler.** Seção 1 = o que é e como se navega. Seção 2 = arquitetura. Seção 3 = uma subseção por página, sempre
@@ -114,7 +114,40 @@ que o Claude não pôde executar está marcado.
   3. Gerar de novo o espelho, o PDF e o PPT.
 
   O "parcial" de outubro some sozinho.
-- **Vídeo da LIA:** o pop-up ainda mostra "Vídeo a incluir".
+- **Vídeo da LIA:** publicado em 03/11/2026 (seção 0.6).
+
+### 0.6 Atualização de 03/11/2026 — base congelada da carga de 03/11 (D67) e ajustes de conteúdo
+
+**Por que mudou o roteiro de 02/11:** a carga de segunda 02/11 (dados até 01/11) foi trocada pela de terça 03/11 às
+09:02 (dados até 02/11) antes de alguém congelar, e a gold só guarda a carga atual. O corte padrão (folga de 1 dia)
+recusaria essa carga. **D67 (Caio, 03/11/2026):** congelar a carga de 03/11, com `CORTE_FOLGA_DIAS` padrão 2 em
+`app/config.py` (teste `tests/test_folga_corte.py`) e rodapé honesto "Dados até 02/11/2026".
+
+**Feito em 03/11 (Claude, conferido):**
+- Base `app/base_congelada/v-20261102-20261103T132014-422c0a` (10 tabelas, 1,1 MB); `congelar_base.py --conferir` e
+  `app.conferir_base`: tudo certo. `tools/checar_reuniao.py`: **TUDO CERTO** (Q1/Q2, carga site × banco, estudo nos 3
+  grupos; `docs/validacao/reuniao_2026-11-03.json` e `estudo_2026-11-03.json`).
+- Previsão: retrato de **2026-10** da mesma carga (`ml.rodar --rotina`). LIA até **31/10** (2.164 e-mails; extrator corrigido em 03/11).
+- Números novos no topo de cada ficha (Demanda 5.789, +90%; Talentos 3.548 / 2.084 / 157; SLA 14 / 12 / 20 h; Previsão;
+  LIA). **Mudaram em relação aos de 31/10: o gerente precisa ver antes de apresentar.**
+- Conteúdo: Iniciativas (MIA em produção, FILA "Priorização da demanda", Raio-X na esteira, G1.IA com o texto do Caio),
+  vídeo da LIA publicado com a situação das etapas (✓ × "Em teste"), Roadmap sem desfoque e com o Raio-X (fichas).
+- `Dockerfile`: `ARG CORTE_DADOS=2026-10-31` (o build volta a exigir a base). Espelho da VPS regerado (`espelho/`).
+- 635 testes passam.
+
+**Falta o Caio executar (nada disto foi rodado pelo Claude):**
+1. **Cloud Run**, no PowerShell do computador: `tools\publicar_restrito.ps1 -Congelado` e `tools\publicar.ps1 -Congelado`
+   (passo 0.3). O build para com "PACOTE REPROVADO" se a base, a Previsão ou a LIA não baterem.
+2. **Iniciativas no Cloud Run (Firestore):** o quadro de produção **não** recebe o catálogo novo sozinho (a semente só
+   roda em banco vazio, e o `iniciativas_admin.py restaurar-catalogo` só funciona com SQLite). Quando o IAP for liberado,
+   pela tela do link restrito: incluir MIA (Em produção) e Raio-X (Na esteira) e editar FILA e G1.IA com os textos do
+   `iniciativas/catalogo.py`. A VPS não precisa: o SQLite dela nasce do catálogo a cada publicação.
+3. **VPS:** commit no ramo `vps` com o código e o `espelho/` novos, `git push origin vps` e **Deploy** no EasyPanel
+   (passo 0.4). O link continua o mesmo.
+4. **PDF e PPT:** gerados pelo Claude em 03/11 (ver o relatório da conversa); refazer se algo mudar.
+
+**Decisão aberta:** na Previsão do Inbound, a faixa provável não contém o ponto em dez (150; 158–206) e jan/27 (150;
+167–239). Já acontecia no retrato de setembro. Ver `docs/paginas/previsao.md` (topo).
 
 ## 1. Visão geral
 

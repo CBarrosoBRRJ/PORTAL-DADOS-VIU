@@ -1,15 +1,15 @@
 {
  "versao": 3,
  "protocolo": "D56",
- "gerado_em": "2026-10-26T21:38:52+00:00",
+ "gerado_em": "2026-11-03T16:35:50+00:00",
  "carga": {
-  "processado_em": "2026-10-26 12:01:46.659042+00:00",
-  "dados_ate": "2026-10-25"
+  "processado_em": "2026-11-03 12:02:39.240344+00:00",
+  "dados_ate": "2026-11-02"
  },
  "retrato": {
-  "mes_fechado": "2026-09",
-  "processado_em": "2026-10-26 12:01:46.659042+00:00",
-  "dados_ate": "2026-10-25"
+  "mes_fechado": "2026-10",
+  "processado_em": "2026-11-03 12:02:39.240344+00:00",
+  "dados_ate": "2026-11-02"
  },
  "regua": {
   "nome": "D56",
@@ -56,7 +56,7 @@
   "vencedor": {
    "Inbound": "ref_media_6m",
    "Mercado": "mlp_1",
-   "Mercado exclusivos": "comb_mediana",
+   "Mercado exclusivos": "comb_media",
    "Mercado não exclusivos": "comb_holt_amort"
   },
   "ranking": {
@@ -636,23 +636,23 @@
    ],
    "Mercado exclusivos": [
     {
+     "nome": "comb_media",
+     "wape": 0.10995253262413436,
+     "nivel": 1
+    },
+    {
      "nome": "comb_mediana",
-     "wape": 0.10899084992816545,
+     "wape": 0.10999356106189384,
      "nivel": 1
     },
     {
      "nome": "comb_theta",
-     "wape": 0.11024043935436341,
-     "nivel": 1
-    },
-    {
-     "nome": "comb_media",
-     "wape": 0.11025614326359717,
+     "wape": 0.1102622061482821,
      "nivel": 1
     },
     {
      "nome": "comb_holt_amort",
-     "wape": 0.11363628860801736,
+     "wape": 0.11270368989571043,
      "nivel": 1
     },
     {
@@ -672,12 +672,12 @@
     },
     {
      "nome": "ref_media_3m",
-     "wape": 0.17112048757618376,
+     "wape": 0.17158931082981713,
      "nivel": 0
     },
     {
      "nome": "comb_drift_log",
-     "wape": 0.28294988383381753,
+     "wape": 0.28255270461720955,
      "nivel": 1
     }
    ],
@@ -760,100 +760,93 @@
   ]
  },
  "acompanhamento": {
-  "mes": "2026-10",
-  "ate": "2026-10-29",
-  "processado_em": "2026-10-30 12:01:59.926023+00:00",
-  "dias_uteis_decorridos": 20,
-  "dias_uteis_mes": 21,
+  "mes": "2026-11",
+  "ate": "2026-11-02",
+  "processado_em": "2026-11-03 12:02:39.240344+00:00",
+  "dias_uteis_decorridos": 0,
+  "dias_uteis_mes": 19,
   "pedidos": {
-   "Inbound": 161.0,
-   "Mercado": 459.0,
-   "Mercado exclusivos": 142.0,
-   "Mercado não exclusivos": 268.0
+   "Inbound": 4.0,
+   "Mercado": 0.0,
+   "Mercado exclusivos": 0.0,
+   "Mercado não exclusivos": 0.0
   },
   "sem_talento": {
-   "Inbound": 2,
-   "Mercado": 49
+   "Inbound": 0,
+   "Mercado": 0
   },
   "lotes": {
    "Inbound": {
-    "ate_dia": 29,
-    "mes": "2026-10",
+    "ate_dia": 2,
+    "mes": "2026-11",
     "meses_anteriores": [
-     "2026-06",
      "2026-07",
-     "2026-08",
-     "2026-09"
+     "2026-09",
+     "2026-10"
     ],
     "vigente": {
-     "pedidos": 161,
-     "em_lote": 3,
-     "avulsos": 158
+     "pedidos": 4,
+     "em_lote": 0,
+     "avulsos": 4
     },
     "media_anteriores": {
-     "pedidos": 131.75,
-     "em_lote": 6.5,
-     "avulsos": 125.25
+     "pedidos": 12.0,
+     "em_lote": 0.0,
+     "avulsos": 12.0
     }
    },
    "Mercado": {
-    "ate_dia": 29,
+    "ate_dia": 2,
     "mes": "2026-10",
     "meses_anteriores": [
-     "2026-06",
      "2026-07",
-     "2026-08",
      "2026-09"
     ],
     "vigente": {
-     "pedidos": 459,
-     "em_lote": 296,
-     "avulsos": 163
+     "pedidos": 20,
+     "em_lote": 6,
+     "avulsos": 14
     },
     "media_anteriores": {
-     "pedidos": 369.75,
-     "em_lote": 198.0,
-     "avulsos": 171.75
+     "pedidos": 48.5,
+     "em_lote": 28.5,
+     "avulsos": 20.0
     }
    },
    "Mercado exclusivos": {
-    "ate_dia": 29,
+    "ate_dia": 2,
     "mes": "2026-10",
     "meses_anteriores": [
-     "2026-06",
      "2026-07",
-     "2026-08",
      "2026-09"
     ],
     "vigente": {
-     "pedidos": 142,
-     "em_lote": 48,
-     "avulsos": 94
+     "pedidos": 8,
+     "em_lote": 3,
+     "avulsos": 5
     },
     "media_anteriores": {
-     "pedidos": 169.5,
-     "em_lote": 57.25,
-     "avulsos": 112.25
+     "pedidos": 25.5,
+     "em_lote": 14.0,
+     "avulsos": 11.5
     }
    },
    "Mercado não exclusivos": {
-    "ate_dia": 29,
+    "ate_dia": 2,
     "mes": "2026-10",
     "meses_anteriores": [
-     "2026-06",
      "2026-07",
-     "2026-08",
      "2026-09"
     ],
     "vigente": {
-     "pedidos": 268,
-     "em_lote": 184,
-     "avulsos": 84
+     "pedidos": 11,
+     "em_lote": 0,
+     "avulsos": 11
     },
     "media_anteriores": {
-     "pedidos": 192.5,
-     "em_lote": 121.0,
-     "avulsos": 71.5
+     "pedidos": 23.0,
+     "em_lote": 13.0,
+     "avulsos": 10.0
     }
    }
   }
@@ -866,7 +859,7 @@
    "grupo": null,
    "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",
    "inicio": "2024-10",
-   "meses": 24,
+   "meses": 25,
    "treino_1o_teste": 12,
    "curta": false,
    "modelo": "ref_media_6m",
@@ -906,7 +899,8 @@
     "2026-06": 112.0,
     "2026-07": 165.0,
     "2026-08": 156.0,
-    "2026-09": 129.0
+    "2026-09": 129.0,
+    "2026-10": 167.0
    },
    "backtest": [
     {
@@ -1082,22 +1076,22 @@
    ],
    "futuro": [
     {
-     "mes": "2026-10",
-     "valor": 138.33,
-     "p10": 130.82,
-     "p90": 211.93
-    },
-    {
      "mes": "2026-11",
-     "valor": 138.33,
-     "p10": 146.24,
-     "p90": 218.52
+     "valor": 149.67,
+     "p10": 142.28,
+     "p90": 229.29
     },
     {
      "mes": "2026-12",
-     "valor": 138.33,
-     "p10": 146.53,
-     "p90": 220.83
+     "valor": 149.67,
+     "p10": 158.22,
+     "p90": 205.67
+    },
+    {
+     "mes": "2027-01",
+     "valor": 149.67,
+     "p10": 166.89,
+     "p90": 238.92
     }
    ],
    "metricas": {
@@ -1269,7 +1263,7 @@
       },
       {
        "nome": "comb_holt_amort",
-       "rotulo": "Holt simples",
+       "rotulo": "Holt amortecido simples",
        "pos_hoc": false,
        "vencedor": false,
        "alternativa": false,
@@ -1893,7 +1887,7 @@
    "grupo": null,
    "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Mercado",
    "inicio": "2024-10",
-   "meses": 24,
+   "meses": 25,
    "treino_1o_teste": 12,
    "curta": false,
    "modelo": "mlp_1",
@@ -1940,7 +1934,8 @@
     "2026-06": 339.0,
     "2026-07": 404.0,
     "2026-08": 322.0,
-    "2026-09": 477.0
+    "2026-09": 477.0,
+    "2026-10": 479.0
    },
    "backtest": [
     {
@@ -2116,22 +2111,22 @@
    ],
    "futuro": [
     {
-     "mes": "2026-10",
-     "valor": 464.25,
-     "p10": 334.1,
-     "p90": 483.27
-    },
-    {
      "mes": "2026-11",
-     "valor": 516.93,
-     "p10": 372.01,
-     "p90": 538.1
+     "valor": 525.34,
+     "p10": 406.74,
+     "p90": 550.84
     },
     {
      "mes": "2026-12",
-     "valor": 588.24,
-     "p10": 423.33,
-     "p90": 612.34
+     "valor": 562.74,
+     "p10": 435.7,
+     "p90": 590.05
+    },
+    {
+     "mes": "2027-01",
+     "valor": 701.58,
+     "p10": 543.2,
+     "p90": 735.63
     }
    ],
    "metricas": {
@@ -2192,22 +2187,22 @@
      "n_robustos": 11,
      "futuro": [
       {
-       "mes": "2026-10",
-       "valor": 515.37,
-       "p10": 384.94,
-       "p90": 689.88
-      },
-      {
        "mes": "2026-11",
-       "valor": 569.77,
-       "p10": 417.68,
-       "p90": 777.12
+       "valor": 618.22,
+       "p10": 499.78,
+       "p90": 764.69
       },
       {
        "mes": "2026-12",
-       "valor": 635.21,
-       "p10": 464.56,
-       "p90": 868.42
+       "valor": 703.94,
+       "p10": 568.92,
+       "p90": 870.95
+      },
+      {
+       "mes": "2027-01",
+       "valor": 807.02,
+       "p10": 652.25,
+       "p90": 998.45
       }
      ]
     },
@@ -2340,7 +2335,7 @@
       },
       {
        "nome": "comb_holt_amort",
-       "rotulo": "Holt simples",
+       "rotulo": "Holt amortecido simples",
        "pos_hoc": false,
        "vencedor": false,
        "alternativa": false,
@@ -2951,34 +2946,35 @@
    "chave": "mercado_exclusivos",
    "tipo": "Mercado",
    "grupo": "exclusivos",
-   "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento exclusivo",
+   "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado exclusivos",
    "inicio": "2026-01",
-   "meses": 9,
+   "meses": 10,
    "treino_1o_teste": 5,
    "curta": true,
-   "modelo": "comb_mediana",
-   "rotulo": "Combinação de 6",
-   "descricao": "mediana de 6 métodos simples e clássicos (candidato principal da família)",
+   "modelo": "comb_media",
+   "rotulo": "Média de 3 métodos",
+   "descricao": "média de suavização, Holt amortecido e Theta",
    "familia": "Combinação",
    "pos_hoc": false,
-   "motivo": "Menor erro no teste de jun–set/2026 (horizonte 1) entre os 9 modelos que se aplicam: 11%; repetir o último mês errou 13%. Empatou (menos de 1 ponto de diferença) com Theta simples, Média de 3 métodos, Holt simples; pela regra, ficou o mais simples.",
+   "motivo": "Menor erro no teste de jun–set/2026 (horizonte 1) entre os 9 modelos que se aplicam: 11%; repetir o último mês errou 13%. Empatou (menos de 1 ponto de diferença) com Combinação de 6, Theta simples, Holt amortecido simples; pela regra, ficou o mais simples.",
    "empatados": [
+    "comb_media",
     "comb_mediana",
     "comb_theta",
-    "comb_media",
     "comb_holt_amort"
    ],
    "n_modelos": 9,
    "historico": {
     "2026-01": 62.0,
     "2026-02": 81.0,
-    "2026-03": 81.0,
-    "2026-04": 134.0,
+    "2026-03": 82.0,
+    "2026-04": 133.0,
     "2026-05": 164.0,
     "2026-06": 177.0,
     "2026-07": 186.0,
     "2026-08": 154.0,
-    "2026-09": 194.0
+    "2026-09": 194.0,
+    "2026-10": 144.0
    },
    "backtest": [
     {
@@ -2986,8 +2982,8 @@
      "horizonte": 1,
      "origem": "2026-04",
      "trecho": "verificacao",
-     "real": 134.0,
-     "valor": 81.0,
+     "real": 133.0,
+     "valor": 83.67,
      "p10": null,
      "p90": null
     },
@@ -2997,7 +2993,7 @@
      "origem": "2026-04",
      "trecho": "teste",
      "real": 177.0,
-     "valor": 81.0,
+     "valor": 87.0,
      "p10": null,
      "p90": null
     },
@@ -3007,7 +3003,7 @@
      "origem": "2026-05",
      "trecho": "verificacao",
      "real": 164.0,
-     "valor": 134.86,
+     "valor": 137.16,
      "p10": null,
      "p90": null
     },
@@ -3017,7 +3013,7 @@
      "origem": "2026-05",
      "trecho": "teste",
      "real": 177.0,
-     "valor": 141.94,
+     "valor": 145.38,
      "p10": null,
      "p90": null
     },
@@ -3027,7 +3023,7 @@
      "origem": "2026-05",
      "trecho": "teste",
      "real": 186.0,
-     "valor": 148.31,
+     "valor": 153.13,
      "p10": null,
      "p90": null
     },
@@ -3037,7 +3033,7 @@
      "origem": "2026-06",
      "trecho": "teste",
      "real": 177.0,
-     "valor": 169.02,
+     "valor": 171.15,
      "p10": null,
      "p90": null
     },
@@ -3047,7 +3043,7 @@
      "origem": "2026-06",
      "trecho": "teste",
      "real": 186.0,
-     "valor": 176.85,
+     "valor": 182.39,
      "p10": null,
      "p90": null
     },
@@ -3057,7 +3053,7 @@
      "origem": "2026-06",
      "trecho": "teste",
      "real": 154.0,
-     "valor": 183.28,
+     "valor": 193.5,
      "p10": null,
      "p90": null
     },
@@ -3067,7 +3063,7 @@
      "origem": "2026-07",
      "trecho": "teste",
      "real": 186.0,
-     "valor": 183.26,
+     "valor": 186.77,
      "p10": null,
      "p90": null
     },
@@ -3077,7 +3073,7 @@
      "origem": "2026-07",
      "trecho": "teste",
      "real": 154.0,
-     "valor": 189.53,
+     "valor": 197.78,
      "p10": null,
      "p90": null
     },
@@ -3087,7 +3083,7 @@
      "origem": "2026-07",
      "trecho": "teste",
      "real": 194.0,
-     "valor": 195.79,
+     "valor": 208.65,
      "p10": null,
      "p90": null
     },
@@ -3097,7 +3093,7 @@
      "origem": "2026-08",
      "trecho": "teste",
      "real": 154.0,
-     "valor": 191.78,
+     "valor": 199.16,
      "p10": null,
      "p90": null
     },
@@ -3107,7 +3103,7 @@
      "origem": "2026-08",
      "trecho": "teste",
      "real": 194.0,
-     "valor": 197.55,
+     "valor": 209.7,
      "p10": null,
      "p90": null
     },
@@ -3117,60 +3113,60 @@
      "origem": "2026-09",
      "trecho": "teste",
      "real": 194.0,
-     "valor": 165.0,
+     "valor": 167.6,
      "p10": null,
      "p90": null
     }
    ],
    "futuro": [
     {
-     "mes": "2026-10",
-     "valor": 195.52,
-     "p10": 157.94,
-     "p90": 214.16
-    },
-    {
      "mes": "2026-11",
-     "valor": 199.74,
-     "p10": 161.34,
-     "p90": 218.78
+     "valor": 168.49,
+     "p10": 125.16,
+     "p90": 186.86
     },
     {
      "mes": "2026-12",
-     "valor": 203.54,
-     "p10": 164.41,
-     "p90": 222.94
+     "valor": 173.04,
+     "p10": 123.66,
+     "p90": 177.92
+    },
+    {
+     "mes": "2027-01",
+     "valor": 177.34,
+     "p10": 126.74,
+     "p90": 182.34
     }
    ],
    "metricas": {
     "1": {
-     "wape": 0.10899084992816545,
-     "mae": 19.37312357473141,
-     "vies": -0.0027270363858708725,
+     "wape": 0.10995253262413436,
+     "mae": 19.544062673939884,
+     "vies": 0.019232906175382796,
      "cobertura": null,
      "largura": null,
      "n": 4
     },
     "2": {
-     "wape": 0.11715082771294337,
-     "mae": 20.823559625975683,
-     "vies": -0.007215123473441662,
+     "wape": 0.13320467804442893,
+     "mae": 23.67713152239724,
+     "vies": 0.034112071656693506,
      "cobertura": null,
      "largura": null,
      "n": 4
     },
     "3": {
-     "wape": 0.23172869682687072,
-     "mae": 41.18977586097627,
-     "vies": -0.14433669361208268,
+     "wape": 0.24897228688856174,
+     "mae": 44.25482399444185,
+     "vies": -0.0966410480337404,
      "cobertura": null,
      "largura": null,
      "n": 4
     },
     "todos": {
-     "wape": 0.15262345815599318,
-     "mae": 27.12881968722779,
-     "vies": -0.05142628449046507,
+     "wape": 0.164043165852375,
+     "mae": 29.158672730259653,
+     "vies": -0.014432023400554703,
      "cobertura": null,
      "largura": null,
      "n": 12
@@ -3221,9 +3217,9 @@
        "vencedor": false,
        "alternativa": false,
        "ingenua": false,
-       "teste": 0.17112048757618376,
+       "teste": 0.17158931082981713,
        "verificacao": null,
-       "mae": 30.41666666666666
+       "mae": 30.499999999999996
       },
       {
        "nome": "ref_media_6m",
@@ -3263,15 +3259,26 @@
      "familia": "Combinação",
      "linhas": [
       {
-       "nome": "comb_mediana",
-       "rotulo": "Combinação de 6",
+       "nome": "comb_media",
+       "rotulo": "Média de 3 métodos",
        "pos_hoc": false,
        "vencedor": true,
        "alternativa": false,
        "ingenua": false,
-       "teste": 0.10899084992816545,
+       "teste": 0.10995253262413436,
        "verificacao": null,
-       "mae": 19.37312357473141
+       "mae": 19.544062673939884
+      },
+      {
+       "nome": "comb_mediana",
+       "rotulo": "Combinação de 6",
+       "pos_hoc": false,
+       "vencedor": false,
+       "alternativa": false,
+       "ingenua": false,
+       "teste": 0.10999356106189384,
+       "verificacao": null,
+       "mae": 19.55135547875163
       },
       {
        "nome": "comb_theta",
@@ -3280,31 +3287,20 @@
        "vencedor": false,
        "alternativa": false,
        "ingenua": false,
-       "teste": 0.11024043935436341,
+       "teste": 0.1102622061482821,
        "verificacao": null,
-       "mae": 19.595238095238095
-      },
-      {
-       "nome": "comb_media",
-       "rotulo": "Média de 3 métodos",
-       "pos_hoc": false,
-       "vencedor": false,
-       "alternativa": false,
-       "ingenua": false,
-       "teste": 0.11025614326359717,
-       "verificacao": null,
-       "mae": 19.598029465104396
+       "mae": 19.599107142857143
       },
       {
        "nome": "comb_holt_amort",
-       "rotulo": "Holt simples",
+       "rotulo": "Holt amortecido simples",
        "pos_hoc": false,
        "vencedor": false,
        "alternativa": false,
        "ingenua": false,
-       "teste": 0.11363628860801736,
+       "teste": 0.11270368989571043,
        "verificacao": null,
-       "mae": 20.198850300075087
+       "mae": 20.03308087896253
       },
       {
        "nome": "comb_ses",
@@ -3335,9 +3331,9 @@
        "vencedor": false,
        "alternativa": false,
        "ingenua": false,
-       "teste": 0.28294988383381753,
+       "teste": 0.28255270461720955,
        "verificacao": null,
-       "mae": 50.29434185146107
+       "mae": 50.223743245709
       },
       {
        "nome": "comb_holt_amort_log",
@@ -3410,7 +3406,7 @@
        "motivo": "precisa de 12 meses de treino; a série tem 5 antes de 2026-06 (mês do teste sem treino suficiente)"
       }
      ],
-     "melhor": 0.10899084992816545
+     "melhor": 0.10995253262413436
     },
     {
      "modulo": "classico",
@@ -3885,13 +3881,13 @@
    "chave": "mercado_nao_exclusivos",
    "tipo": "Mercado",
    "grupo": "nao_exclusivos",
-   "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento não exclusivo",
+   "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado não exclusivos",
    "inicio": "2026-01",
-   "meses": 9,
+   "meses": 10,
    "treino_1o_teste": 5,
    "curta": true,
    "modelo": "comb_holt_amort",
-   "rotulo": "Holt simples",
+   "rotulo": "Holt amortecido simples",
    "descricao": "Holt com tendência amortecida (parâmetros ajustados no próprio passado)",
    "familia": "Combinação",
    "pos_hoc": false,
@@ -3909,7 +3905,8 @@
     "2026-06": 155.0,
     "2026-07": 213.0,
     "2026-08": 158.0,
-    "2026-09": 272.0
+    "2026-09": 272.0,
+    "2026-10": 278.0
    },
    "backtest": [
     {
@@ -4055,22 +4052,22 @@
    ],
    "futuro": [
     {
-     "mes": "2026-10",
-     "valor": 243.91,
-     "p10": 193.75,
-     "p90": 317.64
-    },
-    {
      "mes": "2026-11",
-     "valor": 263.11,
-     "p10": 209.0,
-     "p90": 342.65
+     "valor": 274.14,
+     "p10": 241.69,
+     "p90": 349.5
     },
     {
      "mes": "2026-12",
-     "valor": 281.93,
-     "p10": 223.95,
-     "p90": 367.16
+     "valor": 295.41,
+     "p10": 238.79,
+     "p90": 384.23
+    },
+    {
+     "mes": "2027-01",
+     "valor": 316.26,
+     "p10": 255.64,
+     "p90": 411.35
     }
    ],
    "metricas": {
@@ -4195,7 +4192,7 @@
      "linhas": [
       {
        "nome": "comb_holt_amort",
-       "rotulo": "Holt simples",
+       "rotulo": "Holt amortecido simples",
        "pos_hoc": false,
        "vencedor": true,
        "alternativa": false,
@@ -4869,10 +4866,16 @@
     "total": 129
    },
    "2026-10": {
-    "exclusivos": 111,
-    "nao_exclusivos": 19,
-    "sem_talento": 3,
-    "total": 133
+    "exclusivos": 142,
+    "nao_exclusivos": 23,
+    "sem_talento": 2,
+    "total": 167
+   },
+   "2026-11": {
+    "exclusivos": 4,
+    "nao_exclusivos": 0,
+    "sem_talento": 0,
+    "total": 4
    }
   },
   "Mercado": {
@@ -4889,16 +4892,16 @@
     "total": 187
    },
    "2026-03": {
-    "exclusivos": 81,
+    "exclusivos": 82,
     "nao_exclusivos": 163,
     "sem_talento": 7,
-    "total": 251
+    "total": 252
    },
    "2026-04": {
-    "exclusivos": 134,
+    "exclusivos": 133,
     "nao_exclusivos": 94,
     "sem_talento": 1,
-    "total": 229
+    "total": 228
    },
    "2026-05": {
     "exclusivos": 164,
@@ -4931,10 +4934,16 @@
     "total": 477
    },
    "2026-10": {
-    "exclusivos": 87,
-    "nao_exclusivos": 185,
-    "sem_talento": 32,
-    "total": 304
+    "exclusivos": 144,
+    "nao_exclusivos": 278,
+    "sem_talento": 57,
+    "total": 479
+   },
+   "2026-11": {
+    "exclusivos": 0,
+    "nao_exclusivos": 0,
+    "sem_talento": 0,
+    "total": 0
    }
   }
  },
@@ -4953,12 +4962,13 @@
      "2026-07": 14,
      "2026-08": 3,
      "2026-09": 1,
-     "2026-10": 19
+     "2026-10": 23,
+     "2026-11": 0
     },
-    "fechados": 78,
-    "parcial": 19,
-    "pct_fechados": 0.06532663316582915,
-    "meses_com_caso": 9
+    "fechados": 101,
+    "parcial": 0,
+    "pct_fechados": 0.07421013960323292,
+    "meses_com_caso": 10
    }
   }
  },
@@ -5078,11 +5088,12 @@
        "posicao": 1
       },
       {
-       "treino_fim": "2026-09",
-       "modelo": "Theta",
+       "treino_fim": "2026-10",
+       "modelo": "ETS",
        "transformacoes": [
-        "ShiftFirstValue",
-        "MaxAbsScaler"
+        "ClipOutliers",
+        "Detrend",
+        "MinMaxScaler"
        ],
        "posicao": 1
       }
@@ -5200,10 +5211,12 @@
        "posicao": 2
       },
       {
-       "treino_fim": "2026-09",
+       "treino_fim": "2026-10",
        "modelo": "UnobservedComponents",
        "transformacoes": [
-        "RobustScaler"
+        "ClipOutliers",
+        "Detrend",
+        "bkfilter"
        ],
        "posicao": 2
       }
@@ -5324,12 +5337,11 @@
        "posicao": 3
       },
       {
-       "treino_fim": "2026-09",
-       "modelo": "ETS",
+       "treino_fim": "2026-10",
+       "modelo": "Theta",
        "transformacoes": [
-        "ClipOutliers",
-        "Detrend",
-        "MinMaxScaler"
+        "ShiftFirstValue",
+        "MaxAbsScaler"
        ],
        "posicao": 3
       }
@@ -5606,10 +5618,12 @@
        "posicao": 1
       },
       {
-       "treino_fim": "2026-09",
-       "modelo": "ARIMA",
+       "treino_fim": "2026-10",
+       "modelo": "GLS",
        "transformacoes": [
-        "bkfilter"
+        "ClipOutliers",
+        "Detrend",
+        "StandardScaler"
        ],
        "posicao": 1
       }
@@ -5726,11 +5740,12 @@
        "posicao": 2
       },
       {
-       "treino_fim": "2026-09",
-       "modelo": "LastValueNaive",
+       "treino_fim": "2026-10",
+       "modelo": "AverageValueNaive",
        "transformacoes": [
-        "PositiveShift",
-        "bkfilter"
+        "ClipOutliers",
+        "Detrend",
+        "RollingMeanTransformer"
        ],
        "posicao": 2
       }
@@ -5845,10 +5860,11 @@
        "posicao": 3
       },
       {
-       "treino_fim": "2026-09",
-       "modelo": "ETS",
+       "treino_fim": "2026-10",
+       "modelo": "UnobservedComponents",
        "transformacoes": [
-        "ClipOutliers"
+        "ClipOutliers",
+        "Detrend"
        ],
        "posicao": 3
       }
@@ -6031,8 +6047,8 @@
    "familia": "ARIMA / ARIMAX",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 1.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 2.0,
    "series": {
     "Inbound": {
      "1": {
@@ -6136,8 +6152,8 @@
    "familia": "ARIMA / ARIMAX",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 1.6,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 2.1,
    "series": {
     "Inbound": {
      "1": {
@@ -6241,8 +6257,8 @@
    "familia": "ARIMA / ARIMAX",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.2,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.3,
    "series": {
     "Inbound": {
      "1": {
@@ -6346,8 +6362,8 @@
    "familia": "ARIMA / ARIMAX",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.7,
    "series": {
     "Inbound": {
      "1": {
@@ -6451,8 +6467,8 @@
    "familia": "ARIMA / ARIMAX",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.9,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 1.3,
    "series": {
     "Inbound": {
      "1": {
@@ -6556,8 +6572,8 @@
    "familia": "ARIMA / ARIMAX",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 2.4,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 3.6,
    "series": {
     "Inbound": {
      "1": {
@@ -6661,8 +6677,8 @@
    "familia": "ARIMA / ARIMAX",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.7,
    "series": {
     "Inbound": {
      "1": {
@@ -6766,8 +6782,8 @@
    "familia": "ARIMA / ARIMAX",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 3.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 3.1,
    "series": {
     "Inbound": {
      "1": {
@@ -6871,8 +6887,8 @@
    "familia": "ARIMA / ARIMAX",
    "pos_hoc": true,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 1.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 1.7,
    "series": {
     "Inbound": {
      "1": {
@@ -6976,8 +6992,8 @@
    "familia": "ARIMA / ARIMAX",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 4.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 5.6,
    "series": {
     "Inbound": {
      "1": {
@@ -7081,8 +7097,8 @@
    "familia": "ARIMA / ARIMAX",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 45.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 46.1,
    "series": {
     "Inbound": {
      "1": {
@@ -7186,8 +7202,8 @@
    "familia": "Busca automática (AutoTS)",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 326.2,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 403.4,
    "series": {
     "Inbound": {
      "1": {
@@ -7291,8 +7307,8 @@
    "familia": "Busca automática (AutoTS)",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.0,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.1,
    "series": {
     "Inbound": {
      "1": {
@@ -7396,7 +7412,7 @@
    "familia": "Busca automática (AutoTS)",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.1,
    "series": {
     "Inbound": {
@@ -7501,8 +7517,8 @@
    "familia": "Gradient boosting",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 1.0,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 1.3,
    "series": {
     "Inbound": {
      "1": {
@@ -7606,8 +7622,8 @@
    "familia": "Gradient boosting",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 1.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 2.0,
    "series": {
     "Inbound": {
      "1": {
@@ -7711,7 +7727,7 @@
    "familia": "Gradient boosting",
    "pos_hoc": true,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.9,
    "series": {
     "Inbound": {
@@ -7816,8 +7832,8 @@
    "familia": "Gradient boosting",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.4,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.5,
    "series": {
     "Inbound": {
      "1": {
@@ -7921,8 +7937,8 @@
    "familia": "Série clássica",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.8,
    "series": {
     "Inbound": {
      "1": {
@@ -8026,8 +8042,8 @@
    "familia": "Série clássica",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.5,
    "series": {
     "Inbound": {
      "1": {
@@ -8131,8 +8147,8 @@
    "familia": "Série clássica",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 4.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 6.1,
    "series": {
     "Inbound": {
      "1": {
@@ -8236,8 +8252,8 @@
    "familia": "Série clássica",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 1.0,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 1.3,
    "series": {
     "Inbound": {
      "1": {
@@ -8341,8 +8357,8 @@
    "familia": "Série clássica",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 6.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 7.7,
    "series": {
     "Inbound": {
      "1": {
@@ -8446,8 +8462,8 @@
    "familia": "Série clássica",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 11.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 12.2,
    "series": {
     "Inbound": {
      "1": {
@@ -8551,8 +8567,8 @@
    "familia": "Série clássica",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 7.0,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 7.8,
    "series": {
     "Inbound": {
      "1": {
@@ -8656,8 +8672,8 @@
    "familia": "Série clássica",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.8,
    "series": {
     "Inbound": {
      "1": {
@@ -8761,8 +8777,8 @@
    "familia": "Combinação",
    "pos_hoc": false,
    "minimo_treino": 3,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.2,
    "series": {
     "Inbound": {
      "1": {
@@ -8858,9 +8874,9 @@
       "n": 4
      },
      "2": {
-      "wape": 0.1350210970464135,
-      "mae": 24.0,
-      "vies": -0.07032348804500703,
+      "wape": 0.13642756680731363,
+      "mae": 24.25,
+      "vies": -0.07172995780590717,
       "cobertura": null,
       "largura": null,
       "n": 4
@@ -8874,9 +8890,9 @@
       "n": 4
      },
      "todos": {
-      "wape": 0.17112048757618378,
-      "mae": 30.416666666666668,
-      "vies": -0.11017346460384435,
+      "wape": 0.17158931082981715,
+      "mae": 30.5,
+      "vies": -0.11064228785747773,
       "cobertura": null,
       "largura": null,
       "n": 12
@@ -8936,14 +8952,14 @@
   },
   {
    "nome": "comb_holt_amort",
-   "rotulo": "Holt simples",
+   "rotulo": "Holt amortecido simples",
    "modulo": "combinacao",
    "descricao": "Holt com tendência amortecida (parâmetros ajustados no próprio passado)",
    "familia": "Combinação",
    "pos_hoc": false,
    "minimo_treino": 3,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.2,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.3,
    "series": {
     "Inbound": {
      "1": {
@@ -9031,33 +9047,33 @@
     },
     "Mercado exclusivos": {
      "1": {
-      "wape": 0.11363628860801736,
-      "mae": 20.198850300075087,
-      "vies": 0.08656282709833012,
+      "wape": 0.11270368989571043,
+      "mae": 20.03308087896253,
+      "vies": 0.07784639785104304,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "2": {
-      "wape": 0.19795800112430917,
-      "mae": 35.18703469984595,
-      "vies": 0.12165929143789646,
+      "wape": 0.19158497152563692,
+      "mae": 34.05422868868196,
+      "vies": 0.112081041170603,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "3": {
-      "wape": 0.31517383972519275,
-      "mae": 56.022150011153016,
-      "vies": -0.020641891926272346,
+      "wape": 0.30978605897792144,
+      "mae": 55.06447198332554,
+      "vies": -0.02691329881289513,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "todos": {
-      "wape": 0.20892270981917307,
-      "mae": 37.136011670358016,
-      "vies": 0.06252674220331807,
+      "wape": 0.20469157346642292,
+      "mae": 36.383927183656674,
+      "vies": 0.0543380467362503,
       "cobertura": null,
       "largura": null,
       "n": 12
@@ -9123,8 +9139,8 @@
    "familia": "Combinação",
    "pos_hoc": false,
    "minimo_treino": 3,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.2,
    "series": {
     "Inbound": {
      "1": {
@@ -9212,33 +9228,33 @@
     },
     "Mercado exclusivos": {
      "1": {
-      "wape": 0.11024043935436341,
-      "mae": 19.595238095238095,
-      "vies": 0.02219878105954055,
+      "wape": 0.1102622061482821,
+      "mae": 19.599107142857143,
+      "vies": 0.02204641350210968,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "2": {
-      "wape": 0.12414104882459312,
-      "mae": 22.066071428571426,
-      "vies": 0.06394414305806707,
+      "wape": 0.12555756479807112,
+      "mae": 22.317857142857143,
+      "vies": 0.061985131605384707,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "3": {
-      "wape": 0.23978300180831824,
-      "mae": 42.62142857142857,
-      "vies": -0.0453084187261402,
+      "wape": 0.2388185654008438,
+      "mae": 42.44999999999999,
+      "vies": -0.04500703234880452,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "todos": {
-      "wape": 0.1580548299957583,
-      "mae": 28.094246031746035,
-      "vies": 0.013611501797155812,
+      "wape": 0.158212778782399,
+      "mae": 28.122321428571425,
+      "vies": 0.01300817091956329,
       "cobertura": null,
       "largura": null,
       "n": 12
@@ -9304,7 +9320,7 @@
    "familia": "Combinação",
    "pos_hoc": false,
    "minimo_treino": 3,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.1,
    "series": {
     "Inbound": {
@@ -9401,25 +9417,25 @@
       "n": 4
      },
      "2": {
-      "wape": 0.1917487107360525,
-      "mae": 34.083333333333336,
-      "vies": 0.1917487107360525,
+      "wape": 0.18940459446788563,
+      "mae": 33.66666666666667,
+      "vies": 0.18940459446788563,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "3": {
-      "wape": 0.3178621659634318,
-      "mae": 56.5,
-      "vies": 0.1279887482419128,
+      "wape": 0.31153305203938114,
+      "mae": 55.375,
+      "vies": 0.12869198312236288,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "todos": {
-      "wape": 0.2195767195767196,
-      "mae": 39.029761904761905,
-      "vies": 0.1311030741410488,
+      "wape": 0.21668564284598044,
+      "mae": 38.51587301587302,
+      "vies": 0.13055611367847655,
       "cobertura": null,
       "largura": null,
       "n": 12
@@ -9485,7 +9501,7 @@
    "familia": "Combinação",
    "pos_hoc": false,
    "minimo_treino": 15,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.0,
    "nao_se_aplica": "o efeito do mesmo mês do ano anterior precisa de 15 meses (12 + os 3 que antecedem); a janela tem 12"
   },
@@ -9497,7 +9513,7 @@
    "familia": "Combinação",
    "pos_hoc": false,
    "minimo_treino": 3,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.3,
    "series": {
     "Inbound": {
@@ -9586,33 +9602,33 @@
     },
     "Mercado exclusivos": {
      "1": {
-      "wape": 0.10899084992816545,
-      "mae": 19.37312357473141,
-      "vies": -0.0027270363858708725,
+      "wape": 0.10999356106189384,
+      "mae": 19.55135547875163,
+      "vies": -0.003754863051043949,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "2": {
-      "wape": 0.11715082771294337,
-      "mae": 20.823559625975683,
-      "vies": -0.007215123473441662,
+      "wape": 0.11866039086683763,
+      "mae": 21.09188447658039,
+      "vies": -0.008855287390848105,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "3": {
-      "wape": 0.23172869682687072,
-      "mae": 41.18977586097627,
-      "vies": -0.14433669361208268,
+      "wape": 0.23178384085417386,
+      "mae": 41.199577711829406,
+      "vies": -0.1447233626544552,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "todos": {
-      "wape": 0.15262345815599318,
-      "mae": 27.12881968722779,
-      "vies": -0.05142628449046507,
+      "wape": 0.15347926426096842,
+      "mae": 27.280939222387136,
+      "vies": -0.052444504365449084,
       "cobertura": null,
       "largura": null,
       "n": 12
@@ -9678,7 +9694,7 @@
    "familia": "Combinação",
    "pos_hoc": false,
    "minimo_treino": 3,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.3,
    "series": {
     "Inbound": {
@@ -9767,33 +9783,33 @@
     },
     "Mercado exclusivos": {
      "1": {
-      "wape": 0.11025614326359717,
-      "mae": 19.598029465104396,
-      "vies": 0.022189171776955546,
+      "wape": 0.10995253262413436,
+      "mae": 19.544062673939884,
+      "vies": 0.019232906175382796,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "2": {
-      "wape": 0.1327081815436614,
-      "mae": 23.588879269385814,
-      "vies": 0.03842664881698557,
+      "wape": 0.13320467804442893,
+      "mae": 23.67713152239724,
+      "vies": 0.034112071656693506,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "3": {
-      "wape": 0.2510896926068103,
-      "mae": 44.63119286086053,
-      "vies": -0.0946510411973114,
+      "wape": 0.24897228688856174,
+      "mae": 44.25482399444185,
+      "vies": -0.0966410480337404,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "todos": {
-      "wape": 0.16468467247135626,
-      "mae": 29.272700531783574,
-      "vies": -0.011345073534456762,
+      "wape": 0.164043165852375,
+      "mae": 29.158672730259653,
+      "vies": -0.014432023400554703,
       "cobertura": null,
       "largura": null,
       "n": 12
@@ -9859,8 +9875,8 @@
    "familia": "Combinação",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.6,
    "series": {
     "Inbound": {
      "1": {
@@ -9964,8 +9980,8 @@
    "familia": "Combinação",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.6,
    "series": {
     "Inbound": {
      "1": {
@@ -10069,7 +10085,7 @@
    "familia": "Combinação",
    "pos_hoc": true,
    "minimo_treino": 3,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.1,
    "series": {
     "Inbound": {
@@ -10158,33 +10174,33 @@
     },
     "Mercado exclusivos": {
      "1": {
-      "wape": 0.28294988383381753,
-      "mae": 50.29434185146107,
-      "vies": 0.28294988383381753,
+      "wape": 0.28255270461720955,
+      "mae": 50.223743245709,
+      "vies": 0.28255270461720955,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "2": {
-      "wape": 0.48718994718683795,
-      "mae": 86.59801311246045,
-      "vies": 0.48718994718683795,
+      "wape": 0.48500620998555755,
+      "mae": 86.20985382493285,
+      "vies": 0.48500620998555755,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "3": {
-      "wape": 0.659366211583841,
-      "mae": 117.20234410902773,
-      "vies": 0.517217223041871,
+      "wape": 0.6504949802180402,
+      "mae": 115.62548273375664,
+      "vies": 0.518678142245692,
       "cobertura": null,
       "largura": null,
       "n": 4
      },
      "todos": {
-      "wape": 0.47650201420149896,
-      "mae": 84.69823302431644,
-      "vies": 0.4291190180208422,
+      "wape": 0.47268463160693575,
+      "mae": 84.01969326813283,
+      "vies": 0.4287456856161531,
       "cobertura": null,
       "largura": null,
       "n": 12
@@ -10250,7 +10266,7 @@
    "familia": "Combinação",
    "pos_hoc": true,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.2,
    "series": {
     "Inbound": {
@@ -10355,8 +10371,8 @@
    "familia": "Combinação",
    "pos_hoc": true,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.2,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.3,
    "series": {
     "Inbound": {
      "1": {
@@ -10460,8 +10476,8 @@
    "familia": "Combinação",
    "pos_hoc": true,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.7,
    "series": {
     "Inbound": {
      "1": {
@@ -10565,7 +10581,7 @@
    "familia": "Combinação",
    "pos_hoc": true,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.2,
    "series": {
     "Inbound": {
@@ -10670,8 +10686,8 @@
    "familia": "Rede neural",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 6.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 8.1,
    "series": {
     "Inbound": {
      "1": {
@@ -10775,8 +10791,8 @@
    "familia": "Rede neural",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 9.4,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 15.7,
    "series": {
     "Inbound": {
      "1": {
@@ -10880,8 +10896,8 @@
    "familia": "Rede neural",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 11.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 14.5,
    "series": {
     "Inbound": {
      "1": {
@@ -10985,8 +11001,8 @@
    "familia": "Rede neural",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 12.9,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 15.3,
    "series": {
     "Inbound": {
      "1": {
@@ -11090,8 +11106,8 @@
    "familia": "Rede neural",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 14.6,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 16.5,
    "series": {
     "Inbound": {
      "1": {
@@ -11195,8 +11211,8 @@
    "familia": "Rede neural",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 14.6,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 22.7,
    "series": {
     "Inbound": {
      "1": {
@@ -11300,8 +11316,8 @@
    "familia": "Rede neural",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 15.6,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 27.3,
    "series": {
     "Inbound": {
      "1": {
@@ -11405,8 +11421,8 @@
    "familia": "Rede neural",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 15.6,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 20.9,
    "series": {
     "Inbound": {
      "1": {
@@ -11510,8 +11526,8 @@
    "familia": "Rede neural",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 14.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 24.3,
    "series": {
     "Inbound": {
      "1": {
@@ -11615,8 +11631,8 @@
    "familia": "Rede neural",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 20.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 31.7,
    "series": {
     "Inbound": {
      "1": {
@@ -11720,8 +11736,8 @@
    "familia": "Rede neural",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 117.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 130.9,
    "series": {
     "Inbound": {
      "1": {
@@ -11825,7 +11841,7 @@
    "familia": "Prophet",
    "pos_hoc": false,
    "minimo_treino": 24,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.0,
    "nao_se_aplica": "a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12"
   },
@@ -11837,7 +11853,7 @@
    "familia": "Prophet",
    "pos_hoc": false,
    "minimo_treino": 24,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.0,
    "nao_se_aplica": "a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12"
   },
@@ -11849,8 +11865,8 @@
    "familia": "Prophet",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 3.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 4.3,
    "series": {
     "Inbound": {
      "1": {
@@ -11954,7 +11970,7 @@
    "familia": "Prophet",
    "pos_hoc": false,
    "minimo_treino": 24,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.0,
    "nao_se_aplica": "a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12"
   },
@@ -11966,8 +11982,8 @@
    "familia": "Prophet",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 29.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 41.7,
    "series": {
     "Inbound": {
      "1": {
@@ -12071,8 +12087,8 @@
    "familia": "Referência simples",
    "pos_hoc": false,
    "minimo_treino": 1,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.2,
    "series": {
     "Inbound": {
      "1": {
@@ -12168,9 +12184,9 @@
       "n": 4
      },
      "2": {
-      "wape": 0.1350210970464135,
-      "mae": 24.0,
-      "vies": -0.07032348804500703,
+      "wape": 0.13642756680731363,
+      "mae": 24.25,
+      "vies": -0.07172995780590717,
       "cobertura": null,
       "largura": null,
       "n": 4
@@ -12184,9 +12200,9 @@
       "n": 4
      },
      "todos": {
-      "wape": 0.17112048757618378,
-      "mae": 30.416666666666668,
-      "vies": -0.11017346460384435,
+      "wape": 0.17158931082981715,
+      "mae": 30.5,
+      "vies": -0.11064228785747773,
       "cobertura": null,
       "largura": null,
       "n": 12
@@ -12252,8 +12268,8 @@
    "familia": "Referência simples",
    "pos_hoc": false,
    "minimo_treino": 3,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.2,
    "series": {
     "Inbound": {
      "1": {
@@ -12341,35 +12357,35 @@
     },
     "Mercado exclusivos": {
      "1": {
-      "wape": 0.17112048757618376,
-      "mae": 30.41666666666666,
-      "vies": -0.11017346460384435,
+      "wape": 0.17158931082981713,
+      "mae": 30.499999999999996,
+      "vies": -0.11064228785747773,
       "cobertura": 0.3333333333333333,
-      "largura": 0.6289480736097631,
+      "largura": 0.6152143705710599,
       "n": 4
      },
      "2": {
-      "wape": 0.2259728082512893,
-      "mae": 40.16666666666667,
-      "vies": -0.21378340365682139,
+      "wape": 0.2255039849976559,
+      "mae": 40.083333333333336,
+      "vies": -0.21425222691045478,
       "cobertura": 0.0,
-      "largura": 0.7828779786617871,
+      "largura": 0.7721438791457171,
       "n": 4
      },
      "3": {
-      "wape": 0.35583684950773553,
-      "mae": 63.24999999999999,
-      "vies": -0.35583684950773553,
+      "wape": 0.3558368495077356,
+      "mae": 63.25,
+      "vies": -0.3558368495077356,
       "cobertura": 0.0,
-      "largura": 0.6136423448677358,
+      "largura": 0.6040849409646842,
       "n": 4
      },
      "todos": {
       "wape": 0.2509767151117362,
       "mae": 44.61111111111111,
-      "vies": -0.2265979059228004,
+      "vies": -0.22691045475855603,
       "cobertura": 0.16666666666666666,
-      "largura": 0.6777070871701,
+      "largura": 0.6656693018282164,
       "n": 12
      },
      "verificacao": {
@@ -12433,7 +12449,7 @@
    "familia": "Referência simples",
    "pos_hoc": false,
    "minimo_treino": 6,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.1,
    "series": {
     "Inbound": {
@@ -12538,8 +12554,8 @@
    "familia": "Referência simples",
    "pos_hoc": false,
    "minimo_treino": 12,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
-   "segundos": 0.0,
+   "carga": "2026-11-03 12:02:39.240344+00:00",
+   "segundos": 0.1,
    "series": {
     "Inbound": {
      "1": {
@@ -12643,7 +12659,7 @@
    "familia": "Referência simples",
    "pos_hoc": false,
    "minimo_treino": 6,
-   "carga": "2026-10-26 12:01:46.659042+00:00",
+   "carga": "2026-11-03 12:02:39.240344+00:00",
    "segundos": 0.1,
    "series": {
     "Inbound": {

@@ -21,9 +21,9 @@ COPY ml/saida/previsao.json ./ml/saida/previsao.json
 # F01 (auditoria de 31/10/2026): com o corte ligado (CORTE_DADOS, padrão do código), o build PARA se a base congelada
 # estiver ausente, incompleta ou incoerente com o manifesto, se a Previsão não for do mesmo corte e da mesma carga, ou se
 # a LIA não for até o corte. Sem rede e sem BigQuery. O arranque em produção confere a base de novo (congelamento.exigir)
-# D66 (Caio, 31/10/2026): até a carga de segunda 02/11 o site publicado lê a gold AO VIVO (CORTE_DADOS=off no deploy e
-# aqui, só no build). Na segunda, depois de congelar: trocar para 2026-10-31 (docs/congelar_outubro.md, passo do deploy)
-ARG CORTE_DADOS=off
+# D67 (Caio, 03/11/2026): base congelada da carga de 03/11 (dados até 02/11; folga de 2 dias no config.py). O build
+# volta a conferir a base, a Previsão e a LIA. Descongelar: off (docs/congelar_outubro.md)
+ARG CORTE_DADOS=2026-10-31
 RUN python -m app.conferir_base
 
 # roda sem privilégios de root

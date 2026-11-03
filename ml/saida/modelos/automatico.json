@@ -1,24 +1,24 @@
 {
  "modulo": "automatico",
  "carga": {
-  "processado_em": "2026-10-26 12:01:46.659042+00:00",
-  "dados_ate": "2026-10-25",
+  "processado_em": "2026-11-03 12:02:39.240344+00:00",
+  "dados_ate": "2026-11-02",
   "parcial": {
    "Inbound": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 133.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 4.0
    },
    "Mercado": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 304.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    },
    "Mercado exclusivos": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 87.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    },
    "Mercado não exclusivos": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 185.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    }
   },
   "recortes": {
@@ -28,8 +28,8 @@
     "grupo": null,
     "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",
     "inicio": "2024-10",
-    "fim": "2026-09",
-    "meses": 24,
+    "fim": "2026-10",
+    "meses": 25,
     "treino_1o_teste": 12,
     "curta": false
    },
@@ -39,8 +39,8 @@
     "grupo": null,
     "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Mercado",
     "inicio": "2024-10",
-    "fim": "2026-09",
-    "meses": 24,
+    "fim": "2026-10",
+    "meses": 25,
     "treino_1o_teste": 12,
     "curta": false
    },
@@ -48,10 +48,10 @@
     "chave": "mercado_exclusivos",
     "tipo": "Mercado",
     "grupo": "exclusivos",
-    "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento exclusivo",
+    "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado exclusivos",
     "inicio": "2026-01",
-    "fim": "2026-09",
-    "meses": 9,
+    "fim": "2026-10",
+    "meses": 10,
     "treino_1o_teste": 5,
     "curta": true
    },
@@ -59,15 +59,15 @@
     "chave": "mercado_nao_exclusivos",
     "tipo": "Mercado",
     "grupo": "nao_exclusivos",
-    "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento não exclusivo",
+    "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado não exclusivos",
     "inicio": "2026-01",
-    "fim": "2026-09",
-    "meses": 9,
+    "fim": "2026-10",
+    "meses": 10,
     "treino_1o_teste": 5,
     "curta": true
    }
   },
-  "mes_fechado": "2026-09"
+  "mes_fechado": "2026-10"
  },
  "protocolo": "D56",
  "modelos": {
@@ -527,42 +527,42 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 159.16,
-      "p10": 120.35,
-      "p90": 197.97
-     },
-     {
       "mes": "2026-11",
-      "valor": 162.18,
-      "p10": 94.96,
-      "p90": 229.39
+      "valor": 157.39,
+      "p10": 101.73,
+      "p90": 202.19
      },
      {
       "mes": "2026-12",
-      "valor": 165.19,
-      "p10": 78.42,
-      "p90": 251.97
+      "valor": 159.07,
+      "p10": 103.16,
+      "p90": 203.62
+     },
+     {
+      "mes": "2027-01",
+      "valor": 160.47,
+      "p10": 104.35,
+      "p90": 204.82
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 0.0,
-      "p10": 0.0,
-      "p90": 0.0
-     },
-     {
       "mes": "2026-11",
-      "valor": 0.0,
-      "p10": 0.0,
-      "p90": 0.0
+      "valor": 505.47,
+      "p10": 452.32,
+      "p90": 560.33
      },
      {
       "mes": "2026-12",
-      "valor": 0.0,
-      "p10": 0.0,
-      "p90": 0.0
+      "valor": 538.84,
+      "p10": 485.83,
+      "p90": 593.83
+     },
+     {
+      "mes": "2027-01",
+      "valor": 573.35,
+      "p10": 520.47,
+      "p90": 628.48
      }
     ]
    },
@@ -612,7 +612,7 @@
       ],
       "posicao": 1,
       "nota": 10.113865663805948,
-      "segundos": 10.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -627,7 +627,7 @@
       ],
       "posicao": 1,
       "nota": 2.497036097897855,
-      "segundos": 13.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -643,7 +643,7 @@
       ],
       "posicao": 1,
       "nota": 49.60713480585025,
-      "segundos": 11.3,
+      "segundos": 12.2,
       "n_familias": 17
      },
      {
@@ -658,7 +658,7 @@
       ],
       "posicao": 1,
       "nota": 19.94518312300491,
-      "segundos": 14.7,
+      "segundos": 14.9,
       "n_familias": 17
      },
      {
@@ -672,7 +672,7 @@
       ],
       "posicao": 1,
       "nota": 338.845221546584,
-      "segundos": 14.0,
+      "segundos": 16.0,
       "n_familias": 17
      },
      {
@@ -687,7 +687,7 @@
       ],
       "posicao": 1,
       "nota": 14.156044185011156,
-      "segundos": 23.5,
+      "segundos": 17.1,
       "n_familias": 16
      },
      {
@@ -702,7 +702,7 @@
       ],
       "posicao": 1,
       "nota": 52.02645952764482,
-      "segundos": 13.7,
+      "segundos": 14.0,
       "n_familias": 17
      },
      {
@@ -717,7 +717,7 @@
       ],
       "posicao": 1,
       "nota": 43.67600111167746,
-      "segundos": 13.5,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -732,22 +732,23 @@
       ],
       "posicao": 1,
       "nota": 8.68167857327823,
-      "segundos": 13.3,
+      "segundos": 14.4,
       "n_familias": 17
      },
      {
       "serie": "Inbound",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
-      "modelo": "Theta",
+      "modelo": "ETS",
       "transformacoes": [
-       "ShiftFirstValue",
-       "MaxAbsScaler"
+       "ClipOutliers",
+       "Detrend",
+       "MinMaxScaler"
       ],
       "posicao": 1,
-      "nota": 70.01024596684728,
-      "segundos": 12.8,
+      "nota": 79.45595629586576,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -761,7 +762,7 @@
       ],
       "posicao": 1,
       "nota": 10.743791343184803,
-      "segundos": 18.5,
+      "segundos": 20.2,
       "n_familias": 14
      },
      {
@@ -777,7 +778,7 @@
       ],
       "posicao": 1,
       "nota": 6.766666666666667,
-      "segundos": 11.8,
+      "segundos": 15.8,
       "n_familias": 17
      },
      {
@@ -792,7 +793,7 @@
       ],
       "posicao": 1,
       "nota": 10.340358530347856,
-      "segundos": 12.7,
+      "segundos": 14.3,
       "n_familias": 17
      },
      {
@@ -807,7 +808,7 @@
       ],
       "posicao": 1,
       "nota": 45.13354631081222,
-      "segundos": 14.4,
+      "segundos": 15.9,
       "n_familias": 17
      },
      {
@@ -823,7 +824,7 @@
       ],
       "posicao": 1,
       "nota": 17.429838022791298,
-      "segundos": 9.1,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -837,7 +838,7 @@
       ],
       "posicao": 1,
       "nota": 38.53048467146062,
-      "segundos": 8.9,
+      "segundos": 9.9,
       "n_familias": 17
      },
      {
@@ -851,7 +852,7 @@
       ],
       "posicao": 1,
       "nota": 44.34763251841692,
-      "segundos": 14.7,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -866,7 +867,7 @@
       ],
       "posicao": 1,
       "nota": 142.41858927114967,
-      "segundos": 9.9,
+      "segundos": 10.0,
       "n_familias": 17
      },
      {
@@ -880,27 +881,29 @@
       ],
       "posicao": 1,
       "nota": 16.666666666666668,
-      "segundos": 11.7,
+      "segundos": 13.9,
       "n_familias": 17
      },
      {
       "serie": "Mercado",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
-      "modelo": "ARIMA",
+      "modelo": "GLS",
       "transformacoes": [
-       "bkfilter"
+       "ClipOutliers",
+       "Detrend",
+       "StandardScaler"
       ],
       "posicao": 1,
-      "nota": 24.66453080589169,
-      "segundos": 11.7,
+      "nota": 140.38890659671324,
+      "segundos": 12.2,
       "n_familias": 17
      }
     ]
    },
-   "segundos": 326.2,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 403.4,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "autots_2": {
    "descricao": "AutoTS: o 2º colocado da busca automática em cada janela de 12 meses",
@@ -1358,42 +1361,42 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 159.12,
-      "p10": 123.32,
-      "p90": 186.72
-     },
-     {
       "mes": "2026-11",
-      "valor": 165.15,
-      "p10": 129.35,
-      "p90": 192.75
+      "valor": 170.98,
+      "p10": 157.79,
+      "p90": 215.82
      },
      {
       "mes": "2026-12",
-      "valor": 171.18,
-      "p10": 135.38,
-      "p90": 198.78
+      "valor": 178.85,
+      "p10": 165.66,
+      "p90": 223.69
+     },
+     {
+      "mes": "2027-01",
+      "valor": 186.98,
+      "p10": 173.79,
+      "p90": 231.82
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 326.52,
-      "p10": 257.13,
-      "p90": 409.41
-     },
-     {
       "mes": "2026-11",
-      "valor": 326.52,
-      "p10": 257.13,
-      "p90": 409.41
+      "valor": 505.33,
+      "p10": 505.33,
+      "p90": 505.33
      },
      {
       "mes": "2026-12",
-      "valor": 326.52,
-      "p10": 257.13,
-      "p90": 409.41
+      "valor": 538.7,
+      "p10": 538.7,
+      "p90": 538.7
+     },
+     {
+      "mes": "2027-01",
+      "valor": 573.17,
+      "p10": 573.17,
+      "p90": 573.17
      }
     ]
    },
@@ -1443,7 +1446,7 @@
       ],
       "posicao": 2,
       "nota": 12.052574499330708,
-      "segundos": 10.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -1459,7 +1462,7 @@
       ],
       "posicao": 2,
       "nota": 3.0131558006313086,
-      "segundos": 13.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -1473,7 +1476,7 @@
       ],
       "posicao": 2,
       "nota": 49.71397929742437,
-      "segundos": 11.3,
+      "segundos": 12.2,
       "n_familias": 17
      },
      {
@@ -1487,7 +1490,7 @@
       ],
       "posicao": 2,
       "nota": 25.0,
-      "segundos": 14.7,
+      "segundos": 14.9,
       "n_familias": 17
      },
      {
@@ -1502,7 +1505,7 @@
       ],
       "posicao": 2,
       "nota": 510.50704456360626,
-      "segundos": 14.0,
+      "segundos": 16.0,
       "n_familias": 17
      },
      {
@@ -1516,7 +1519,7 @@
       ],
       "posicao": 2,
       "nota": 20.774631909244864,
-      "segundos": 23.5,
+      "segundos": 17.1,
       "n_familias": 16
      },
      {
@@ -1532,7 +1535,7 @@
       ],
       "posicao": 2,
       "nota": 62.222222222222804,
-      "segundos": 13.7,
+      "segundos": 14.0,
       "n_familias": 17
      },
      {
@@ -1548,7 +1551,7 @@
       ],
       "posicao": 2,
       "nota": 107.91665588327142,
-      "segundos": 13.5,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -1563,21 +1566,23 @@
       ],
       "posicao": 2,
       "nota": 14.646416985229147,
-      "segundos": 13.3,
+      "segundos": 14.4,
       "n_familias": 17
      },
      {
       "serie": "Inbound",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
       "modelo": "UnobservedComponents",
       "transformacoes": [
-       "RobustScaler"
+       "ClipOutliers",
+       "Detrend",
+       "bkfilter"
       ],
       "posicao": 2,
-      "nota": 75.92272235237735,
-      "segundos": 12.8,
+      "nota": 85.70169538595013,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -1592,7 +1597,7 @@
       ],
       "posicao": 2,
       "nota": 10.743791343184803,
-      "segundos": 18.5,
+      "segundos": 20.2,
       "n_familias": 14
      },
      {
@@ -1606,7 +1611,7 @@
       ],
       "posicao": 2,
       "nota": 7.287878787878789,
-      "segundos": 11.8,
+      "segundos": 15.8,
       "n_familias": 17
      },
      {
@@ -1622,7 +1627,7 @@
       ],
       "posicao": 2,
       "nota": 10.788888888888886,
-      "segundos": 12.7,
+      "segundos": 14.3,
       "n_familias": 17
      },
      {
@@ -1636,7 +1641,7 @@
       ],
       "posicao": 2,
       "nota": 45.49537937725216,
-      "segundos": 14.4,
+      "segundos": 15.9,
       "n_familias": 17
      },
      {
@@ -1651,7 +1656,7 @@
       ],
       "posicao": 2,
       "nota": 25.05278117873363,
-      "segundos": 9.1,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -1667,7 +1672,7 @@
       ],
       "posicao": 2,
       "nota": 39.02240911049709,
-      "segundos": 8.9,
+      "segundos": 9.9,
       "n_familias": 17
      },
      {
@@ -1681,7 +1686,7 @@
       ],
       "posicao": 2,
       "nota": 45.0,
-      "segundos": 14.7,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -1697,7 +1702,7 @@
       ],
       "posicao": 2,
       "nota": 147.09650538247473,
-      "segundos": 9.9,
+      "segundos": 10.0,
       "n_familias": 17
      },
      {
@@ -1711,28 +1716,29 @@
       ],
       "posicao": 2,
       "nota": 16.666666666666668,
-      "segundos": 11.7,
+      "segundos": 13.9,
       "n_familias": 17
      },
      {
       "serie": "Mercado",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
-      "modelo": "LastValueNaive",
+      "modelo": "AverageValueNaive",
       "transformacoes": [
-       "PositiveShift",
-       "bkfilter"
+       "ClipOutliers",
+       "Detrend",
+       "RollingMeanTransformer"
       ],
       "posicao": 2,
-      "nota": 32.18397543348336,
-      "segundos": 11.7,
+      "nota": 140.53332885162573,
+      "segundos": 12.2,
       "n_familias": 17
      }
     ]
    },
-   "segundos": 0.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "autots_3": {
    "descricao": "AutoTS: o 3º colocado da busca automática em cada janela de 12 meses",
@@ -2190,42 +2196,42 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 157.79,
-      "p10": 104.4,
-      "p90": 198.94
-     },
-     {
       "mes": "2026-11",
-      "valor": 163.22,
-      "p10": 108.96,
-      "p90": 203.5
+      "valor": 160.68,
+      "p10": 125.65,
+      "p90": 195.71
      },
      {
       "mes": "2026-12",
-      "valor": 168.57,
-      "p10": 113.45,
-      "p90": 207.98
+      "valor": 164.67,
+      "p10": 111.14,
+      "p90": 218.21
+     },
+     {
+      "mes": "2027-01",
+      "valor": 168.66,
+      "p10": 101.54,
+      "p90": 235.78
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 438.61,
-      "p10": 263.97,
-      "p90": 555.23
-     },
-     {
       "mes": "2026-11",
-      "valor": 465.38,
-      "p10": 286.29,
-      "p90": 577.54
+      "valor": 505.33,
+      "p10": 462.33,
+      "p90": 534.78
      },
      {
       "mes": "2026-12",
-      "valor": 492.15,
-      "p10": 308.6,
-      "p90": 599.85
+      "valor": 538.7,
+      "p10": 495.7,
+      "p90": 568.14
+     },
+     {
+      "mes": "2027-01",
+      "valor": 573.17,
+      "p10": 530.18,
+      "p90": 602.62
      }
     ]
    },
@@ -2276,7 +2282,7 @@
       ],
       "posicao": 3,
       "nota": 12.521928917093078,
-      "segundos": 10.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -2291,7 +2297,7 @@
       ],
       "posicao": 3,
       "nota": 3.083663432211097,
-      "segundos": 13.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -2306,7 +2312,7 @@
       ],
       "posicao": 3,
       "nota": 50.97829181827862,
-      "segundos": 11.3,
+      "segundos": 12.2,
       "n_familias": 17
      },
      {
@@ -2322,7 +2328,7 @@
       ],
       "posicao": 3,
       "nota": 26.666666666666668,
-      "segundos": 14.7,
+      "segundos": 14.9,
       "n_familias": 17
      },
      {
@@ -2338,7 +2344,7 @@
       ],
       "posicao": 3,
       "nota": 517.182797108933,
-      "segundos": 14.0,
+      "segundos": 16.0,
       "n_familias": 17
      },
      {
@@ -2353,7 +2359,7 @@
       ],
       "posicao": 4,
       "nota": 25.52368160767486,
-      "segundos": 23.5,
+      "segundos": 17.1,
       "n_familias": 16
      },
      {
@@ -2368,7 +2374,7 @@
       ],
       "posicao": 3,
       "nota": 71.12391792047761,
-      "segundos": 13.7,
+      "segundos": 14.0,
       "n_familias": 17
      },
      {
@@ -2382,7 +2388,7 @@
       ],
       "posicao": 3,
       "nota": 109.73350914795567,
-      "segundos": 13.5,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -2398,23 +2404,22 @@
       ],
       "posicao": 3,
       "nota": 14.755851166773382,
-      "segundos": 13.3,
+      "segundos": 14.4,
       "n_familias": 17
      },
      {
       "serie": "Inbound",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
-      "modelo": "ETS",
+      "modelo": "Theta",
       "transformacoes": [
-       "ClipOutliers",
-       "Detrend",
-       "MinMaxScaler"
+       "ShiftFirstValue",
+       "MaxAbsScaler"
       ],
       "posicao": 3,
-      "nota": 76.2418572797735,
-      "segundos": 12.8,
+      "nota": 86.34550621425849,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -2428,7 +2433,7 @@
       ],
       "posicao": 3,
       "nota": 10.743791343184803,
-      "segundos": 18.5,
+      "segundos": 20.2,
       "n_familias": 14
      },
      {
@@ -2444,7 +2449,7 @@
       ],
       "posicao": 3,
       "nota": 7.291111111111111,
-      "segundos": 11.8,
+      "segundos": 15.8,
       "n_familias": 17
      },
      {
@@ -2459,7 +2464,7 @@
       ],
       "posicao": 3,
       "nota": 11.662754735288402,
-      "segundos": 12.7,
+      "segundos": 14.3,
       "n_familias": 17
      },
      {
@@ -2474,7 +2479,7 @@
       ],
       "posicao": 3,
       "nota": 54.45714784871169,
-      "segundos": 14.4,
+      "segundos": 15.9,
       "n_familias": 17
      },
      {
@@ -2489,7 +2494,7 @@
       ],
       "posicao": 3,
       "nota": 25.066513048109613,
-      "segundos": 9.1,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -2503,7 +2508,7 @@
       ],
       "posicao": 3,
       "nota": 58.962210113420554,
-      "segundos": 8.9,
+      "segundos": 9.9,
       "n_familias": 17
      },
      {
@@ -2517,7 +2522,7 @@
       ],
       "posicao": 3,
       "nota": 45.0,
-      "segundos": 14.7,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -2531,7 +2536,7 @@
       ],
       "posicao": 3,
       "nota": 150.1342936860694,
-      "segundos": 9.9,
+      "segundos": 10.0,
       "n_familias": 17
      },
      {
@@ -2546,27 +2551,28 @@
       ],
       "posicao": 3,
       "nota": 16.666666666666668,
-      "segundos": 11.7,
+      "segundos": 13.9,
       "n_familias": 17
      },
      {
       "serie": "Mercado",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
-      "modelo": "ETS",
+      "modelo": "UnobservedComponents",
       "transformacoes": [
-       "ClipOutliers"
+       "ClipOutliers",
+       "Detrend"
       ],
       "posicao": 3,
-      "nota": 33.30870558547673,
-      "segundos": 11.7,
+      "nota": 140.5333288516283,
+      "segundos": 12.2,
       "n_familias": 17
      }
     ]
    },
    "segundos": 0.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   }
  }
 }

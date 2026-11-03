@@ -1,5 +1,14 @@
 # Iniciativas de automação e IA (V2)
 
+**Atualização de 03/11/2026 (Caio):** 13 iniciativas. Em produção: **MIA** (Monitoramento Inteligente
+Automatizado; robô que revisa o board do Backlog todo dia, corrige no monday.com o que foi preenchido errado, guarda o
+valor original e manda para revisão o que tem dúvida). FILA virou "Priorização da demanda" (sem Raio-X). Na esteira:
+**Raio-X dos talentos** (características e dados de cada talento; texto proposto pelo Claude, a confirmar). G1.IA:
+"Revisão de matérias publicitárias", descrição do Caio ("Agente de IA que revisa e valida textos de branded content e
+conteúdos publicitários publicados nos ambientes Globo (Branded Content Afiliadas)"). Mudança no `catalogo.py` e aplicada
+no banco local com `tools/iniciativas_admin.py restaurar-catalogo` (backup antes). **Produção (Firestore) não muda
+sozinha:** a semente só roda em banco vazio; incluir lá pela tela do link restrito ou restaurar o catálogo no Firestore.
+
 **Estado (31/10/2026, dados no servidor):** a página virou ferramenta com **dados persistentes no servidor**, anexos
 e galeria, a pedido do Caio e do gerente. Criar, editar, mover, excluir e anexar ficam salvos no servidor, sobrevivem
 a recarregar, a fechar o navegador e aparecem em qualquer outro navegador. Rota `/viu-agenciamento/iniciativas#1`.

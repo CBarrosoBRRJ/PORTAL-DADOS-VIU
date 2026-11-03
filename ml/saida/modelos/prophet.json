@@ -1,24 +1,24 @@
 {
  "modulo": "prophet",
  "carga": {
-  "processado_em": "2026-10-26 12:01:46.659042+00:00",
-  "dados_ate": "2026-10-25",
+  "processado_em": "2026-11-03 12:02:39.240344+00:00",
+  "dados_ate": "2026-11-02",
   "parcial": {
    "Inbound": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 133.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 4.0
    },
    "Mercado": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 304.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    },
    "Mercado exclusivos": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 87.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    },
    "Mercado não exclusivos": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 185.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    }
   },
   "recortes": {
@@ -28,8 +28,8 @@
     "grupo": null,
     "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",
     "inicio": "2024-10",
-    "fim": "2026-09",
-    "meses": 24,
+    "fim": "2026-10",
+    "meses": 25,
     "treino_1o_teste": 12,
     "curta": false
    },
@@ -39,8 +39,8 @@
     "grupo": null,
     "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Mercado",
     "inicio": "2024-10",
-    "fim": "2026-09",
-    "meses": 24,
+    "fim": "2026-10",
+    "meses": 25,
     "treino_1o_teste": 12,
     "curta": false
    },
@@ -48,10 +48,10 @@
     "chave": "mercado_exclusivos",
     "tipo": "Mercado",
     "grupo": "exclusivos",
-    "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento exclusivo",
+    "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado exclusivos",
     "inicio": "2026-01",
-    "fim": "2026-09",
-    "meses": 9,
+    "fim": "2026-10",
+    "meses": 10,
     "treino_1o_teste": 5,
     "curta": true
    },
@@ -59,15 +59,15 @@
     "chave": "mercado_nao_exclusivos",
     "tipo": "Mercado",
     "grupo": "nao_exclusivos",
-    "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento não exclusivo",
+    "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado não exclusivos",
     "inicio": "2026-01",
-    "fim": "2026-09",
-    "meses": 9,
+    "fim": "2026-10",
+    "meses": 10,
     "treino_1o_teste": 5,
     "curta": true
    }
   },
-  "mes_fechado": "2026-09"
+  "mes_fechado": "2026-10"
  },
  "protocolo": "D56",
  "modelos": {
@@ -77,7 +77,7 @@
    "nao_se_aplica": "a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12",
    "modulo": "prophet",
    "segundos": 0.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "prophet_natural": {
    "descricao": "Prophet, escala natural, tendência por partes (prior 0.1), anual fraca",
@@ -85,7 +85,7 @@
    "nao_se_aplica": "a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12",
    "modulo": "prophet",
    "segundos": 0.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "prophet_log_sem_sazonal": {
    "descricao": "Prophet, escala log, tendência por partes (prior 0.1)",
@@ -543,48 +543,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 166.38,
-      "p10": 116.66,
-      "p90": 244.55
-     },
-     {
       "mes": "2026-11",
-      "valor": 176.6,
-      "p10": 120.89,
-      "p90": 248.61
+      "valor": 191.62,
+      "p10": 140.23,
+      "p90": 268.94
      },
      {
       "mes": "2026-12",
-      "valor": 187.08,
-      "p10": 130.99,
-      "p90": 264.65
+      "valor": 206.55,
+      "p10": 148.0,
+      "p90": 279.1
+     },
+     {
+      "mes": "2027-01",
+      "valor": 223.19,
+      "p10": 163.14,
+      "p90": 302.86
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 508.65,
-      "p10": 382.07,
-      "p90": 694.23
-     },
-     {
       "mes": "2026-11",
-      "valor": 575.39,
-      "p10": 425.62,
-      "p90": 761.99
+      "valor": 595.58,
+      "p10": 475.62,
+      "p90": 760.53
      },
      {
       "mes": "2026-12",
-      "valor": 648.28,
-      "p10": 483.36,
-      "p90": 864.74
+      "valor": 676.45,
+      "p10": 531.99,
+      "p90": 840.91
+     },
+     {
+      "mes": "2027-01",
+      "valor": 771.57,
+      "p10": 615.72,
+      "p90": 961.37
      }
     ]
    },
    "modulo": "prophet",
-   "segundos": 3.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 4.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "prophet_log_degrau2026": {
    "descricao": "Prophet, escala log, tendência por partes (prior 0.1), anual fraca, degrau 2026",
@@ -592,7 +592,7 @@
    "nao_se_aplica": "a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12",
    "modulo": "prophet",
    "segundos": 0.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "prophet_auto": {
    "descricao": "Prophet com escala, rigidez da tendência e sazonalidade escolhidas por validação no próprio passado de cada origem",
@@ -1050,48 +1050,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 159.03,
-      "p10": 123.15,
-      "p90": 198.05
-     },
-     {
       "mes": "2026-11",
-      "valor": 165.17,
-      "p10": 126.85,
-      "p90": 199.82
+      "valor": 175.55,
+      "p10": 143.12,
+      "p90": 210.82
      },
      {
       "mes": "2026-12",
-      "valor": 171.1,
-      "p10": 135.05,
-      "p90": 206.26
+      "valor": 183.41,
+      "p10": 148.77,
+      "p90": 214.74
+     },
+     {
+      "mes": "2027-01",
+      "valor": 191.53,
+      "p10": 158.95,
+      "p90": 223.31
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 475.8,
-      "p10": 343.03,
-      "p90": 678.95
-     },
-     {
       "mes": "2026-11",
-      "valor": 529.22,
-      "p10": 373.19,
-      "p90": 725.71
+      "valor": 511.34,
+      "p10": 464.23,
+      "p90": 562.58
      },
      {
       "mes": "2026-12",
-      "valor": 586.61,
-      "p10": 422.32,
-      "p90": 808.03
+      "valor": 546.11,
+      "p10": 496.44,
+      "p90": 592.4
+     },
+     {
+      "mes": "2027-01",
+      "valor": 582.04,
+      "p10": 533.54,
+      "p90": 629.34
      }
     ]
    },
    "modulo": "prophet",
-   "segundos": 29.3,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 41.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   }
  }
 }

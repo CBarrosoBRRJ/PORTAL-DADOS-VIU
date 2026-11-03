@@ -1,5 +1,13 @@
 # Roadmap da área (V2)
 
+**Proposta nova (03/11/2026, a aprovar pelo Caio):** `/viu-agenciamento/roadmap-novo` (seção oculta; `roadmap_novo/template.html`, `static/roadmap_novo.css` escopado em `.rmn`, `tests/test_roadmap_novo.py`): mesmo painel claro e dados; 01–06 com nó cheio, 07 em destaque (amarelo, selo junto do número), 08 vazado, cartões de destino retos em duas colunas, miniaturas com lupa. Uma versão em painel marinho foi recusada pelo Caio ("cores pesadas"). Validado guardado em `_descartados/2026-11-03/roadmap_validado/`.
+
+**Atualização de 03/11/2026 (Caio):** imagens **sem desfoque** (dados internos da equipe; `DESFOCAR = False` em
+`tools/gerar_imagens_roadmap.py`, caixas mantidas como registro). Fluxo regerado do "Viu Agenciamento - Fluxo 2.pdf" (o
+recorte do fluxo é igual ao do Fluxo 1); dashboards regerados dos prints originais; **Raio-X dos talentos** entrou como 3ª
+imagem dos dashboards (pilha de 3, `nth-child(3)` no CSS). Originais em `_descartados/2026-11-03/app/static/roadmap/`
+(fora de `static/`, que é público). Limite de peso das imagens no teste: 400 KB (a alta do fluxo tem ~345 KB).
+
 **Estado (31/10/2026, noite): 5ª versão, "a linha do tempo linear em Y", num painel flutuante.** O Roadmap é a tela
 que abre a reunião e o **hub de navegação**: o gerente do Caio apresenta a partir dela, clica num destino e volta pelo ✕
 do cabeçalho das páginas. A 4ª versão ("a linha que desemboca nos destinos", leque de curvas e miniaturas espalhadas)

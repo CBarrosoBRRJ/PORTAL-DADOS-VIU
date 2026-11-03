@@ -1,0 +1,122 @@
+/* Roadmap da área, PROPOSTA (03/11/2026, 3ª rodada; template em roadmap_novo/template.html, galeria em roadmap_novo.js).
+   Aprovada pelo Caio (painel claro) com ajustes: os destinos voltam à colagem do validado (rotação alternada, leve
+   deslocamento e flutuação) com o acabamento novo (ícone, nome, seta); o 07 deixa o disco amarelo chapado por um anel
+   amarelo fino em volta de um nó branco, e o selo "Você está aqui" fica menor, ao lado do nó, abaixo da trilha e longe
+   do título; a galeria abre a imagem inteira; e a abertura ganha uma entrada coreografada.
+   O bloco .rm-* de estilo.css continua valendo (painel, geometria, trilhas, pulso, gestos dos ícones, deriva dos
+   botões, celular); este arquivo só ajusta o acabamento, sempre escopado em .rmn (ou .rmn-dialogo), sem tocar no
+   validado. Amarelo só como fundo ou anel; âmbar só no "Aguardando". Contrastes no painel (#f8f8fe): números #4552b8
+   6,3:1; títulos na tinta do portal; texto dos cartões sobre branco.
+   Movimento (tese: "o caminho se acende até o agora"): a linha se desenha da esquerda para a direita em 900 ms; cada nó
+   acende quando ela chega (--rmn-d, proporcional à posição, vem do <style> com nonce) e o texto dele sobe logo depois;
+   o 07 acende por último e o selo desliza para o lado dele; os cartões entram em cascata (60 ms entre eles) e então
+   começam a flutuar. Depois, o pulso contínuo do validado. Só transform, opacity e o recorte da linha; com movimento
+   reduzido (ou sem JS), tudo aparece pronto e parado */
+
+/* ---------- nós: concluídos cheios em marinho; o agora branco com anel amarelo fino; o em curso vazado ---------- */
+.rmn .rm-no { background: #1e2a78; border: 1.5px solid #1e2a78; color: #ffffff; box-shadow: 0 0 0 0.3em #f8f8fe; }
+.rmn .rm-atual .rm-no { width: 2.5em; height: 2.5em; left: calc(var(--R) - 1.25em); top: calc(var(--ry) - 1.25em);
+  background: #ffffff; border: 2px solid #1e2a78; color: #1e2a78;
+  box-shadow: 0 0 0 0.2em #ffffff, 0 0 0 0.38em var(--amarelo), 0 0 0 0.44em rgba(30, 42, 120, 0.3), 0 4px 12px -4px rgba(30, 42, 120, 0.3); }
+.rmn .rm-atual .rm-no-ic { width: 1.25em; height: 1.25em; stroke-width: 1.8; }
+.rmn .rm-atual .rm-no::after { inset: -0.62em; border-color: #5566cc; }
+.rmn .rmn-curso .rm-no, .rmn .rm-futuro .rm-no { background: #f8f8fe; border: 1.5px dashed #5566cc; color: #3d4b9a; }
+
+/* ---------- textos: número discreto em azul médio; títulos na tinta; o agora um pouco maior ---------- */
+.rmn .rm-num { margin-bottom: 0.36em; font-size: 0.64em; font-weight: 600; letter-spacing: 0.06em; color: #4552b8; }
+.rmn .rm-titulo { line-height: 1.18; }
+.rmn .rm-atual .rm-texto { top: calc(var(--topo-baixo) + 0.3em); left: calc(var(--t) - 1.6em); width: calc(var(--w) + 3.2em); }
+.rmn .rm-atual .rm-num { color: #1e2a78; }
+.rmn .rm-atual .rm-titulo { font-size: 1.14em; font-weight: 500; }
+.rmn .rmn-curso .rm-titulo { color: var(--tinta-2); }
+
+/* "Você está aqui": selo pequeno à direita do nó, abaixo da trilha tracejada (respiro de ~0,7 em) e bem acima do título
+   (~1,2 em); o bico aponta para o nó */
+.rmn .rm-abaixo .rm-aqui { top: calc(var(--ry) + 0.78em); bottom: auto; left: calc(var(--R) + 2.15em); }
+.rmn .rm-aqui-tag { position: relative; padding: 0.24em 0.7em 0.26em; font-size: 0.68em; font-weight: 600; letter-spacing: 0.01em; color: #14142b;
+  box-shadow: 0 0 0 1px rgba(30, 42, 120, 0.14), 0 2px 6px -2px rgba(30, 42, 120, 0.22); }
+.rmn .rm-aqui-tag::after { content: ""; position: absolute; left: -0.2em; top: 0.25em; width: 0.5em; height: 0.5em;
+  background: var(--amarelo); transform: rotate(45deg); border-radius: 0 0 0 2px; box-shadow: -1px 1px 0 rgba(30, 42, 120, 0.1); }
+
+/* ---------- miniaturas: moldura branca reta, sombra curta, lupa no canto ---------- */
+.rmn .rm-mini { rotate: 0deg; margin-top: 0.8em; }
+.rmn .rm-mini-img { width: 5.4em; height: 3.3em; padding: 0.18em; border: 1px solid #d5d8e8; border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(20, 20, 43, 0.06), 0 6px 14px -8px rgba(30, 42, 120, 0.3); }
+.rmn .rm-mini-pilha .rm-mini-img + .rm-mini-img { left: 0.6em; top: 0.4em; rotate: 0deg; }
+.rmn .rm-mini-pilha .rm-mini-img:nth-child(3) { left: 1.2em; top: 0.8em; rotate: 0deg; }
+.rmn-mini-lupa { position: absolute; right: -0.5em; bottom: -0.5em; display: grid; place-items: center; width: 1.45em; height: 1.45em;
+  border-radius: 50%; background: #ffffff; color: #2f3fb8; border: 1px solid #d5d8e8; box-shadow: 0 2px 5px -2px rgba(30, 42, 120, 0.3); }
+.rmn-mini-lupa-ic { width: 0.9em; height: 0.9em; stroke-width: 2; }
+.rmn .rm-mini:hover, .rmn .rm-mini:focus-visible { rotate: 0deg; translate: 0 -2px; }
+.rmn .rm-mini:hover .rmn-mini-lupa, .rmn .rm-mini:focus-visible .rmn-mini-lupa { border-color: #2f3fb8; }
+
+/* ---------- destinos: a colagem do validado (rotação alternada, leve deslocamento, flutuação), com o acabamento novo:
+   cartão branco, ícone, nome e seta ---------- */
+.rmn .rm-categorias { margin-top: 0.85em; margin-left: 1.2em; }
+.rmn .rm-cat-tit { margin-bottom: 0.5em; font-size: 0.7em; letter-spacing: 0.03em; }
+.rmn .rm-destino { gap: 0.5em; padding: 0 0.4em 0 0.3em; background: #ffffff; border-radius: 9px; }
+.rmn .rm-destino-circ { width: 1.75em; height: 1.75em; }
+.rmn .rm-proximo { font-size: 0.56em; padding: 0.14em 0.55em; border-style: solid; border-color: transparent; background: var(--f); }
+.rmn-destino-seta { display: grid; place-items: center; flex: none; width: 1.2em; height: 1.2em; margin-left: auto; border-radius: 50%;
+  color: var(--c); opacity: 0.5; }
+.rmn-seta-ic { width: 0.85em; height: 0.85em; stroke-width: 2; }
+.rmn .rm-destino:hover .rmn-destino-seta, .rmn .rm-destino:focus-visible .rmn-destino-seta { opacity: 1; background: var(--f); }
+.rmn .rm-mini:focus-visible, .rmn .rm-botao:focus-visible { outline: 2px solid var(--azul); outline-offset: 3px; }
+
+/* ---------- galeria: a imagem abre INTEIRA, contida na área (sem cortar); no 100%, tamanho real com rolagem ---------- */
+.rmn-dialogo { height: 88vh; }
+.rmn-dialogo .rm-dlg-caixa { box-sizing: border-box; height: 100%; max-height: none; }
+.rmn-dialogo .rm-dlg-quadro { position: relative; display: block; overflow: hidden; }
+.rmn-dialogo .rm-dlg-img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; object-fit: contain;
+  padding: 0.6em; box-sizing: border-box; user-select: none; }
+.rmn-dialogo .rm-dlg-quadro.rm-dlg-real { overflow: auto; cursor: grab; }
+.rmn-dialogo .rm-dlg-quadro.rm-dlg-real .rm-dlg-img { position: static; width: auto; height: auto; max-width: none; max-height: none;
+  margin: 0 auto; padding: 0; object-fit: none; cursor: zoom-out; }
+
+/* ---------- movimento: entrada coreografada (uma vez) e respostas ao toque; só sem movimento reduzido ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* a linha se desenha; a entrada geral do validado (o nó inteiro surgindo) dá lugar à sequência por nó */
+  html.js .slide.entrou:not(.revisto) .rmn .rm-trilha { animation: rmn-desenha 900ms cubic-bezier(0.45, 0, 0.2, 1) both; }
+  html.js .slide.entrou:not(.revisto) .rmn .rm-marco { animation: none; }
+  html.js .slide.entrou:not(.revisto) .rmn .rm-no { animation: rmn-acende 420ms var(--ease-entra) backwards; animation-delay: var(--rmn-d); }
+  html.js .slide.entrou:not(.revisto) .rmn .rm-texto, html.js .slide.entrou:not(.revisto) .rmn .rm-pendente,
+  html.js .slide.entrou:not(.revisto) .rmn .rm-soltos, html.js .slide.entrou:not(.revisto) .rmn .rm-haste,
+  html.js .slide.entrou:not(.revisto) .rmn .rm-espera { animation: rmn-sobe 420ms var(--ease-entra) backwards; animation-delay: calc(var(--rmn-d) + 120ms); }
+  html.js .slide.entrou:not(.revisto) .rmn .rm-aqui { animation: rmn-desliza 380ms var(--ease-entra) backwards; animation-delay: calc(var(--rmn-d) + 280ms); }
+  html.js .slide.entrou:not(.revisto) .rmn .rm-retro-rotulo, html.js .slide.entrou:not(.revisto) .rmn .rm-continuo { animation: rmn-aparece 400ms ease-out 850ms backwards; }
+  /* os cartões entram em cascata por categoria (60 ms entre eles) e então flutuam (a deriva do validado segue no <li>) */
+  html.js .slide:not(.entrou) .rmn .rm-botoes > li, html.js .slide:not(.entrou) .rmn .rm-cat-tit { opacity: 0; scale: 0.92; }
+  html.js .rmn .rm-botoes > li, html.js .rmn .rm-cat-tit { --rmn-c: calc(820ms + (var(--rmn-g) * 2 + var(--rmn-k)) * 60ms);
+    transition: opacity 380ms ease-out var(--rmn-c), scale 480ms var(--ease-entra) var(--rmn-c); }
+  html.js .slide.revisto .rmn .rm-botoes > li, html.js .slide.revisto .rmn .rm-cat-tit { transition: none; }
+  /* respostas ao toque */
+  html.js .rmn-destino-seta { transition: transform var(--dur-s) var(--ease-entra), opacity var(--dur-s), background-color var(--dur-s); }
+  html.js .rmn .rm-destino:hover .rmn-destino-seta, html.js .rmn .rm-destino:focus-visible .rmn-destino-seta { transform: translateX(2px); }
+  html.js .rmn-mini-lupa { transition: border-color var(--dur-s); }
+}
+.rmn .rm-cat { --rmn-g: 0; }
+.rmn .rm-cat:nth-child(2) { --rmn-g: 1; }
+.rmn .rm-cat:nth-child(3) { --rmn-g: 2; }
+.rmn .rm-cat:nth-child(4) { --rmn-g: 3; }
+.rmn .rm-botoes > li, .rmn .rm-cat-tit { --rmn-k: 0; }
+.rmn .rm-botoes > li:nth-child(2) { --rmn-k: 1; }
+.rmn .rm-botoes > li:nth-child(3) { --rmn-k: 2; }
+.rmn .rm-botoes > li:nth-child(n+4) { --rmn-k: 3; }
+@keyframes rmn-desenha { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes rmn-acende { from { opacity: 0; transform: scale(0.4); } }
+@keyframes rmn-sobe { from { opacity: 0; translate: 0 0.4em; } }
+@keyframes rmn-desliza { from { opacity: 0; translate: -0.5em 0; } }
+@keyframes rmn-aparece { from { opacity: 0; } }
+
+/* ---------- celular e telas estreitas: a mesma lista vertical do validado; a entrada segue a ordem da lista ---------- */
+@media (max-width: 900px) {
+  .rmn .rm-marco { --rmn-d: calc(var(--i) * 80ms) !important; }
+  .rmn .rm-marco::before { border-left-color: #1e2a78; }
+  .rmn .rm-atual .rm-no { left: -0.1em; top: -0.1em; }
+  .rmn .rm-atual .rm-texto { left: auto; width: auto; }
+  .rmn .rm-categorias, .rmn .rm-atual .rm-categorias { margin-left: 0; }
+  .rmn .rm-abaixo .rm-aqui { margin-top: 0.4em; }
+  .rmn .rm-aqui-tag::after { display: none; }
+  .rmn .rm-atual .rm-titulo { font-size: 1.1em; }
+  .rmn .rm-mini-img { width: 8em; height: 4.8em; }
+}

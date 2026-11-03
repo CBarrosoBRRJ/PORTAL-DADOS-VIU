@@ -1063,3 +1063,28 @@
   mostrar(doEndereco());
 
 })();
+
+// Estudo "Como medimos", slide 2 (Caio, 03/11/2026): a lupa do "Fora da curva" abre a lista dos pedidos num pop-up
+// (<dialog> #estudo-fora, showModal: o navegador prende o foco). Fecha com o botão Fechar, Esc ou clique no fundo; o
+// foco volta à lupa. As setas e o espaço dentro do pop-up não trocam de slide. Sem JS a lupa fica escondida.
+(function () {
+  "use strict";
+  var dlg = document.getElementById("estudo-fora");
+  var botao = document.querySelector("[data-ef-abrir]");
+  if (!botao) return;
+  if (!dlg || typeof dlg.showModal !== "function") { botao.hidden = true; return; }
+  var fechar = dlg.querySelector("[data-ef-fechar]");
+  var rolagem = dlg.querySelector(".ef-rolagem");
+
+  botao.addEventListener("click", function () {
+    dlg.showModal();
+    if (rolagem) rolagem.scrollTop = 0;
+    fechar.focus();
+  });
+  fechar.addEventListener("click", function () { dlg.close(); });
+  dlg.addEventListener("click", function (ev) { if (ev.target === dlg) dlg.close(); });  // clique no fundo
+  dlg.addEventListener("close", function () { botao.focus(); });
+  dlg.addEventListener("keydown", function (ev) {  // dentro do pop-up as teclas não navegam entre slides
+    if (ev.key !== "Escape") ev.stopPropagation();
+  });
+})();
