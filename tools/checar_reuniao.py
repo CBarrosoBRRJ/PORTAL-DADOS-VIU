@@ -32,10 +32,10 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ))
 
-import pandas as pd  # noqa: E402
-from google.cloud import bigquery  # noqa: E402
+import pandas as pd
+from google.cloud import bigquery
 
-from app import config, corte  # noqa: E402
+from app import config, corte
 
 IDENTIDADE = "caio.barroso@viu.com.br"
 PROJETO = "gglobo-viu-dados-hdg-prd"
@@ -122,7 +122,7 @@ def main() -> int:
     client = bigquery.Client(project=config.PROJETO)
 
     def identidade():
-        email = list(client.query("SELECT SESSION_USER()").result())[0][0]
+        email = next(iter(client.query("SELECT SESSION_USER()").result()))[0]
         if email != IDENTIDADE or client.project != PROJETO:
             raise RuntimeError("Identidade ou projeto corporativo divergente; operação interrompida.")
         return email
@@ -166,6 +166,10 @@ def main() -> int:
         (ok if int(q1[c]) == 0 else falha)(f"Q1 {c} = {int(q1[c])}")
     print(f"      Q1 fim {q1['fim']} · total do ano {int(q1['total_ano'])} · 'não seguiu' sem data {int(q1['nao_seguiu_sem_data_ano'])}"
           " (comparar com o dia anterior: não pode cair o total nem subir o sem data)")
+    # D68: Q1/Q2 auditam a carga inteira (até o fim, E3); as telas mostram só até a data de exibição (mês fechado)
+    exibe = corte.data_exibicao(q1["fim"])
+    print(f"      recorte de exibição ({config.RECORTE_EXIBICAO}): as telas mostram até {exibe}"
+          + ("" if exibe == pd.Timestamp(q1["fim"]).date() else f"; a situação dos pedidos é a de {q1['fim']}"))
     q2 = consulta(Q2.format(**tabs))
     (ok if q2["ok_fecha"].all() else falha)(f"Q2 ok_fecha em {len(q2)} meses")
     enc = q2.iloc[1:]
@@ -175,7 +179,7 @@ def main() -> int:
     # 4) estudo nos 3 grupos
     if not args.sem_estudo:
         saida = RAIZ / "docs" / "validacao" / f"estudo_{date.today():%Y-%m-%d}.json"
-        r = subprocess.run([sys.executable, str(RAIZ / "tools" / "conferir_estudo.py"), "--output", str(saida)], cwd=RAIZ)
+        r = subprocess.run([sys.executable, str(RAIZ / "tools" / "conferir_estudo.py"), "--output", str(saida)], check=False, cwd=RAIZ)
         (ok if r.returncode == 0 else falha)(f"estudo 'Como medimos' nos 3 grupos ({saida.name})")
 
     # 5) previsão: mesma carga e retrato do último mês fechado (E3)

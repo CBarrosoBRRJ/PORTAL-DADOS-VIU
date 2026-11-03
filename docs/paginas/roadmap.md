@@ -1,5 +1,7 @@
 # Roadmap da área (V2)
 
+**Dashboards (Caio, 03/11/2026, 2ª rodada):** o Raio-X saiu do Roadmap (foi para o card Raio-X das Iniciativas); entraram a **Central de qualidade** (`dashboard-qualidade`, do "Central de Qualidade.png") e o **e-mail semanal da MIA** (`dashboard-qualidade-email`, do "Central de Qualidade - email.png"), sem desfoque. A pilha mostra até 3 miniaturas; a galeria abre as 4. As imagens da galeria levam `?v=` com a versão do arquivo (o navegador mostrava a cópia antiga, desfocada).
+
 **Proposta nova (03/11/2026, a aprovar pelo Caio):** `/viu-agenciamento/roadmap-novo` (seção oculta; `roadmap_novo/template.html`, `static/roadmap_novo.css` escopado em `.rmn`, `tests/test_roadmap_novo.py`): mesmo painel claro e dados; 01–06 com nó cheio, 07 em destaque (amarelo, selo junto do número), 08 vazado, cartões de destino retos em duas colunas, miniaturas com lupa. Uma versão em painel marinho foi recusada pelo Caio ("cores pesadas"). Validado guardado em `_descartados/2026-11-03/roadmap_validado/`.
 
 **Atualização de 03/11/2026 (Caio):** imagens **sem desfoque** (dados internos da equipe; `DESFOCAR = False` em

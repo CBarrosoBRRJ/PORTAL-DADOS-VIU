@@ -23,7 +23,10 @@ def densidade(n: int) -> int:
 
 
 def tela() -> dict:
-    from app.apresentacoes.gestao_orcamentos.iniciativas.api import anexo_publico
+    from app.apresentacoes.gestao_orcamentos.iniciativas.api import (
+        anexo_publico,
+        fotos_fixas,
+    )
 
     n = len(catalogo.GRUPOS)
     aviso, na_semente = None, False
@@ -34,7 +37,7 @@ def tela() -> dict:
         dados.log("ERROR", "quadro das iniciativas indisponível; página com o catálogo", erro=str(e))
         itens, anexos = repositorio.Quadro.itens_da_semente(), []
         aviso = "Não foi possível ler o quadro salvo agora. Mostrando o catálogo, só para leitura."
-    por_item: dict[str, list] = {}
+    por_item: dict[str, list] = {i: fotos_fixas(i) for i in catalogo.FOTOS}  # fotos fixas primeiro (Caio, 03/11/2026)
     for a in anexos:
         por_item.setdefault(a["iniciativa_id"], []).append(anexo_publico(a))
     grupos = []

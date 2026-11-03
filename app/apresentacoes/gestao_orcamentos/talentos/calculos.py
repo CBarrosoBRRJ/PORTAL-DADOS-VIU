@@ -54,6 +54,76 @@ NIVEIS = 6  # T10: tons do mapa de calor (1 a 6; 0 = mês sem pedido)
 NOME_MIN, NOME_MAX = 10, 30  # T11: faixa da classe de largura da coluna dos nomes (mapa-nomes-10 … mapa-nomes-30)
 
 
+def recortar(agregado: pd.DataFrame, ranking: pd.DataFrame, ate, removidos: int) -> tuple[pd.DataFrame, pd.DataFrame, bool]:
+    """D68 (03/11/2026): o recorte de exibição do mês fechado (só mostra até `ate`, ex.: 31/10) nas duas golds de Talentos,
+    sem refazer regra da gold (D57): só se tiram os pedidos dos meses depois de `ate`.
+
+    Ranking (T6/T10/T12): saem as linhas dos meses depois de `ate`; `n` de cada talento = o da gold menos os `n_mes` que saem
+    (o mapa confere que os meses somam o `n`); `pos` = nova ordem por `n` (desempate: a ordem da gold); `ultimo_pedido` depois de `ate` fica
+    vazio (a gold só guarda o último dia); `talentos_grupo` perde quem ficou sem pedido; `empate_fora` (empate no 10º lugar)
+    é o da gold se o 10º e os 10 não mudaram, senão é contado entre os talentos do arquivo (aviso no log).
+    Divisão do ano (T1), que não tem mês: exclusivos e não exclusivos perdem os `n_mes` depois de `ate` dos grupos
+    `exclusivo` e `nao-exclusivo` do ranking, só quando eles somam exatamente os `removidos` (pedidos do ano depois de
+    `ate` na gold de entradas, a mesma base do Início): então nenhum pedido sem talento nem do Squad (fora do ranking)
+    saiu. Se não fecharem, a divisão fica a da carga e a página mostra o aviso de diferença da T5 (`ok` = False).
+    Sem nada depois de `ate`, as duas tabelas voltam como vieram."""
+    if ranking.empty or "mes" not in ranking or "n_mes" not in ranking:
+        return agregado, ranking, removidos == 0
+    mes_ate = pd.Timestamp(ate).to_period("M")
+    meses = pd.to_datetime(ranking["mes"]).dt.to_period("M")
+    depois = meses.notna() & (meses > mes_ate)
+    if not depois.any():
+        return agregado, ranking, removidos == 0
+    fora = ranking.loc[depois].groupby("grupo")["n_mes"].sum()
+    r = ranking.loc[~depois].copy()
+    chave = ["grupo", "talento"]
+    tirados = ranking.loc[depois].groupby(chave)["n_mes"].sum()
+    r["n"] = (r["n"] - pd.Series([int(tirados.get(tuple(x), 0)) for x in r[chave].itertuples(index=False)],
+                                 index=r.index)).astype("Int64")
+    tocados = set(map(tuple, ranking.loc[depois, chave].drop_duplicates().itertuples(index=False)))
+    tocado = pd.Series([tuple(x) in tocados for x in r[chave].itertuples(index=False)], index=r.index)
+    if "ultimo_pedido" in r:
+        r["ultimo_pedido"] = r["ultimo_pedido"].astype(object).where(~tocado, None)
+    r = r.loc[r["n"] > 0]
+    partes = []
+    for grupo, d in r.groupby("grupo", sort=False):
+        antes = ranking.loc[ranking["grupo"] == grupo]
+        ordem = (d.drop_duplicates("talento").sort_values(["n", "pos"], ascending=[False, True])["talento"].tolist()
+                 if "pos" in d else d.drop_duplicates("talento").sort_values("n", ascending=False)["talento"].tolist())
+        d = d.assign(pos=d["talento"].map({t: i + 1 for i, t in enumerate(ordem)}).astype("Int64"))
+        if "talentos_grupo" in d:
+            sumiram = antes["talento"].nunique() - d["talento"].nunique()
+            d["talentos_grupo"] = (d["talentos_grupo"] - sumiram).astype("Int64")
+        if "empate_fora" in d and "pos" in antes:
+            top_antes = antes.drop_duplicates("talento").sort_values("pos").head(10)
+            top_agora = d.drop_duplicates("talento").sort_values("pos").head(10)
+            if (set(top_antes["talento"]) != set(top_agora["talento"])
+                    or int(top_antes["n"].min()) != int(top_agora["n"].min())):
+                decimo = int(top_agora["n"].iloc[-1]) if len(top_agora) == 10 else None
+                outros = d.drop_duplicates("talento")
+                empate = int(((outros["pos"] > 10) & (outros["n"] == decimo)).sum()) if decimo is not None else 0
+                log.warning("Talentos (D68): empate no 10º lugar de %s recontado só entre os talentos do ranking: %s",
+                            grupo, empate)
+                d["empate_fora"] = pd.array([empate] * len(d), dtype="Int64")
+        partes.append(d)
+    r = pd.concat(partes) if partes else r.iloc[0:0]
+    tirar = {"Exclusivos": int(fora.get("exclusivo", 0)), "Não exclusivos": int(fora.get("nao-exclusivo", 0))}
+    if sum(tirar.values()) != removidos or agregado.empty:
+        log.warning("Talentos (D68): divisão do ano sem recorte (ranking tira %s depois de %s; a gold de entradas, %s)",
+                    tirar, mes_ate, removidos)
+        return agregado, r, False
+    a = agregado.copy()
+    do_ano = a["ano"] == pd.Timestamp(ate).year
+    for categoria, n in tirar.items():
+        linha = do_ano & (a["categoria"] == categoria)
+        a.loc[linha, "n"] = a.loc[linha, "n"] - n
+    if "total" in a:
+        a.loc[do_ano, "total"] = a.loc[do_ano, "total"] - removidos
+    if "pct" in a:
+        a.loc[do_ano, "pct"] = (a.loc[do_ano, "n"] / a.loc[do_ano, "total"] * 100).astype(float).round(1)
+    return a, r, True
+
+
 def divisao(df: pd.DataFrame, total_inicio: int, ano: int) -> dict | None:
     linhas = df[df["ano"] == ano].set_index("categoria") if not df.empty else df
     if linhas.empty:

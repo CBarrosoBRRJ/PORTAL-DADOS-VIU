@@ -6,7 +6,7 @@
 | **Responsável** | Caio Barroso (dados; administrador). Quem apresenta na reunião é o **gerente do Caio** |
 | **Reunião** | Diretoria, **04/11/2026**, com os dados congelados em **31/10/2026** (D65) |
 | **Escrito em** | 31/10/2026, a partir do código atual (não da memória). Onde o código e uma ficha divergem, vale o código; a divergência está na seção 10 |
-| **Carga vigente** | **base congelada (D67):** gold processada em **03/11/2026 09:02 (São Paulo)**, dados até **02/11/2026** (seção 0.6). Até 31/10: carga de 30/10, dados até 29/10 |
+| **Carga vigente** | **base congelada (D67):** gold processada em **03/11/2026 09:02 (São Paulo)**, dados até **02/11/2026** (seção 0.6); telas até **31/10/2026** (recorte do mês fechado, D68). Até 31/10: carga de 30/10, dados até 29/10 |
 | **Endereço** | `/viu-agenciamento/...` desde 31/10/2026 (antes `/gestao-orcamentos/...`, que responde 301; 308 para POST/PUT/PATCH/DELETE). Aba do navegador: só "ViU Agenciamento" |
 | **Estado de publicação** | 31/10/2026: dois serviços no Cloud Run **no ar, mas trancados pela organização**; espelho temporário na VPS. Ver **seção 0** |
 | **Testes** | **635 passam** em 03/11/2026 (`tests/`, dados sintéticos, sem BigQuery) |
@@ -148,6 +148,21 @@ recusaria essa carga. **D67 (Caio, 03/11/2026):** congelar a carga de 03/11, com
 
 **Decisão aberta:** na Previsão do Inbound, a faixa provável não contém o ponto em dez (150; 158–206) e jan/27 (150;
 167–239). Já acontecia no retrato de setembro. Ver `docs/paginas/previsao.md` (topo).
+
+**D68 (Caio, 03/11/2026; o gerente quer sempre o mês fechado): recorte de exibição do mês fechado.** As telas de dados
+mostram só até o último dia do mês anterior ao fim da carga (fim 02/11 → **31/10**; fim no último dia do mês → ele
+mesmo); a situação de cada pedido continua a da carga (D57). `RECORTE_EXIBICAO` em `app/config.py` (`mes_fechado` por
+padrão; `off` volta ao comportamento anterior); regra em `app/corte.py` (`data_exibicao`, `mes_fechado_ligado`), aplicada
+em `entrada.ultimo_dia` (Demanda, Talentos, Atendimento), `sla.data_corte` + `sla/calculos.entrega` (SLA sem barra de
+novembro), `talentos.recortar` (ranking por mês; divisão do ano só quando o ranking explica os pedidos que saem, senão o
+aviso da T5) e `previsao.tela` (sem acompanhamento de novembro; nov, dez e jan/27 como previsão; `previsao.json` intacto).
+Rodapé: "Dados até 31/10/2026 · situação dos pedidos em 02/11/2026 · atualizados em 03/11/2026, 09:02 · base congelada
+para a apresentação" (`formato.recorte` e `situacao_carga`); no estudo, o rodapé quebra em 2 linhas antes dos botões
+(`app/static/recorte.css`). Números (base congelada de 03/11, antes × depois): Demanda 5.789 → **5.785** (2025 no mesmo
+período: 3.052 nos dois; +90%; Inbound 1.365 → 1.361); Talentos exclusivos 3.548 → **3.544** (61%), não exclusivos
+2.084, sem talento 157; 10 mais pedidos 1.851 → 1.848 (32%; Beatriz Reis 248 → 247, Gilberto Nogueira 194 → 192); SLA e
+estudo iguais (14 / 12 / 20 h, 2.716 orçamentos jan–out; só some a barra de novembro, que tinha 1 entrega); Previsão sem
+"4 até 02/11". Testes: `tests/test_recorte_exibicao.py` (30); suíte inteira 703 passam em 03/11/2026. `app.conferir_base`: "Pacote conferido".
 
 ## 1. Visão geral
 

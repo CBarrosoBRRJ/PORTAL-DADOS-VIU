@@ -1,5 +1,15 @@
 # Ficha — Início (entrada de pedidos de orçamento)
 
+## Recorte do mês fechado (D68, 03/11/2026) — ler primeiro
+
+> A tela mostra só até **31/10/2026** (último dia do mês anterior ao fim da carga, 02/11; `RECORTE_EXIBICAO`,
+> `entrada.ultimo_dia`). Na base congelada de 03/11/2026 09:02: **5.785** pedidos em 2026 até 31 de outubro (antes,
+> 5.789 até 2 de novembro; os 4 de 02/11 são Inbound) × **3.052** em 2025 até 31/10/2025 (**+90%**; 01 e 02/11/2025 não
+> tinham pedido). Por tipo: Mercado 3.149, Inbound **1.361** (era 1.365), Internos 776, Proativo 415, Sem tipo 84.
+> Novembro aparece como mês futuro (sem coluna parcial); o extrato vai até outubro. Situação de cada safra = a da carga
+> (02/11). Conferido na base congelada (parquet, só leitura): `SUM(quantidade + quantidade_estimada)` 2026 até 31/10 =
+> 5.785; 2025 até 31/10 = 3.052. Rodapé: "Dados até 31/10/2026 · situação dos pedidos em 02/11/2026 · …".
+
 ## Retrato da carga da reunião de 04/11 (carga congelada de **03/11/2026 09:02** (dados até **02/11/2026**; D67, `docs/PRD_V2.md` seção 0.6))
 
 > Página Demanda (`/viu-agenciamento`): **5.789** pedidos em 2026 até 02/11 × **3.052** em 2025 no mesmo período

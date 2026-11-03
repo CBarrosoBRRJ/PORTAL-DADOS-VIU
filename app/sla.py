@@ -39,8 +39,11 @@ def mes_parcial(mov: pd.DataFrame) -> str:
 
 def data_corte(mov: pd.DataFrame):
     """Último dia coberto pelos números (São Paulo): a véspera do `_processado_em`, a mesma regra do rodapé ("Dados até",
-    E3). Sem o metadado (bases de teste), o dia do último movimento registrado."""
+    E3). Sem o metadado (bases de teste), o dia do último movimento registrado. D68 (03/11/2026): com o recorte do mês
+    fechado, o último dia MOSTRADO (fim 02/11 → 31/10, `corte.data_exibicao`)."""
+    from app import corte
+
     if "_processado_em" in mov and mov["_processado_em"].notna().any():
         processado = pd.to_datetime(mov["_processado_em"], utc=True).max().tz_convert(config.FUSO)
-        return processado.date() - timedelta(days=1)
-    return max(mov["entrada"].max(), mov["saida"].max()).date()
+        return corte.data_exibicao(processado.date() - timedelta(days=1))
+    return corte.data_exibicao(max(mov["entrada"].max(), mov["saida"].max()).date())

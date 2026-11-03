@@ -1,5 +1,17 @@
 # Ficha — Talentos (divisão anual da demanda)
 
+## Recorte do mês fechado (D68, 03/11/2026) — ler primeiro
+
+> A tela mostra só até **31/10/2026** (`talentos.recortar`). Os 4 pedidos de 02/11 eram todos de exclusivos (Giovanna
+> Pitel 1, Gilberto Nogueira 2, Beatriz Reis 1, pelo `n_mes` de novembro do ranking), o que fecha com os 4 da gold de
+> entradas: a divisão do ano fica **3.544** exclusivos (61%; era 3.548), **2.084** não exclusivos (36%), **157** sem
+> talento (3%) = **5.785**. 10 mais pedidos: **1.848** (32%; era 1.851); Beatriz Reis 247, Gilberto Nogueira 192; ordem
+> igual. Mapa sem coluna "nov até 2" (novembro e dezembro futuros). Regra: o ranking perde as linhas dos meses depois do
+> recorte (`n` = o da gold menos os `n_mes` que saem; `pos` refeito; `ultimo_pedido` vazio para quem tinha pedido
+> depois); a divisão do ano (a gold não tem mês) só é recortada quando os `n_mes` de exclusivos + não exclusivos que saem
+> somam os pedidos que saem da gold de entradas; se não somarem (pedido sem talento ou do Squad depois do recorte), a
+> divisão fica a da carga e a página mostra o aviso de diferença da T5.
+
 ## Retrato da carga da reunião de 04/11 (carga congelada de **03/11/2026 09:02** (dados até **02/11/2026**; D67, `docs/PRD_V2.md` seção 0.6))
 
 > Exclusivos **3.548** (61%), não exclusivos **2.084** (36%), talento não informado **157** (3%) = 5.789. Os 10 mais

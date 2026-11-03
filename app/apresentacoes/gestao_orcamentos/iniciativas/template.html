@@ -20,7 +20,7 @@
     <button type="button" class="ini-gal-seta" data-ini-gal-passo="-1" aria-label="Rolar os anexos para a esquerda" hidden>{{ icone("recolher", "icone ini-gal-seta-ic") }}</button>
     <ul class="ini-galeria-lista" data-ini-galeria-lista>
       {%- for a in anexos %}
-      <li><a class="ini-mini{% if not a.imagem %} ini-mini-doc{% endif %}" href="{{ a.url }}" data-ini-anexo="{{ a.id }}" data-ini-anexo-tipo="{{ a.tipo }}" data-ini-anexo-nome="{{ a.nome }}" aria-label="{{ 'Imagem' if a.imagem else 'Documento' }} {{ loop.index }} de {{ anexos|length }}: {{ a.nome }}">
+      <li><a class="ini-mini{% if not a.imagem %} ini-mini-doc{% endif %}" href="{{ a.url }}" data-ini-anexo="{{ a.id }}" data-ini-anexo-tipo="{{ a.tipo }}" data-ini-anexo-nome="{{ a.nome }}"{% if a.fixo %} data-ini-anexo-fixo{% endif %} aria-label="{{ 'Imagem' if a.imagem else 'Documento' }} {{ loop.index }} de {{ anexos|length }}: {{ a.nome }}">
         {%- if a.imagem %}<img src="{{ a.url }}" alt="" loading="lazy" decoding="async">{% else %}{{ icone("documento", "icone ini-mini-ic") }}<span class="ini-mini-nome">{{ a.nome }}</span>{% endif -%}
       </a></li>
       {%- endfor %}

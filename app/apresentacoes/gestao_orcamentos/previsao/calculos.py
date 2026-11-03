@@ -295,16 +295,17 @@ def grafico(f: dict, acompanhamento: dict | None, mes_fechado: str, prefixo: str
 
 # ---------------------------------------------------------------- tela
 
-def _cartoes_mes(s: dict, ac: dict | None, dados_ate) -> list[dict]:
-    """P10: mês vigente + 2 seguintes a partir da data da carga."""
+def _cartoes_mes(s: dict, ac: dict | None, dados_ate, vigente: bool = True) -> list[dict]:
+    """P10: mês vigente + 2 seguintes a partir da data da carga. D68: com o recorte do mês fechado (`vigente` False), os
+    três são previsão (o mês seguinte ao último dia mostrado ainda não começou na tela)."""
     fut = {x["mes"]: x for x in s["futuro"]}
     saida = []
     for i, m in enumerate(meses_dos_cartoes(dados_ate)):
         x = fut.get(m)
-        c = {"mes": m, "rotulo": _mes_nome(m), "curto": _curto(m), "vigente": i == 0, "valor": x and x["valor"],
+        c = {"mes": m, "rotulo": _mes_nome(m), "curto": _curto(m), "vigente": i == 0 and vigente, "valor": x and x["valor"],
              "p10": x and x.get("p10"), "p90": x and x.get("p90"), "sem_previsao": x is None, "realizado": None,
              "situacao": None, "barra": None}
-        if i == 0 and ac and ac.get("mes") == m and s["nome"] in (ac.get("pedidos") or {}):
+        if c["vigente"] and ac and ac.get("mes") == m and s["nome"] in (ac.get("pedidos") or {}):
             c["realizado"] = ac["pedidos"][s["nome"]]
             c["situacao"] = situacao(c["realizado"], x, ac["dias_uteis_decorridos"], ac["dias_uteis_mes"])
             if x and x["valor"] > 0:
@@ -328,7 +329,7 @@ def _por_que(s: dict, ac: dict | None, vig: dict) -> str | None:
             f"{formato.inteiro(me['em_lote'])}) e {formato.inteiro(va['avulsos'])} avulsos ({formato.inteiro(me['avulsos'])})")
 
 
-def _coluna(p: dict, item: dict) -> dict:
+def _coluna(p: dict, item: dict, ate=None, vigente: bool = True) -> dict:
     if item.get("serie") is None:  # P4: Inbound não exclusivo não existe (erro de cadastro, PD24)
         return {"nao_se_aplica": True, "titulo": item.get("tipo", ""), "recorte": "", "texto": item["nao_se_aplica"],
                 "chave": chave_css(item.get("tipo", "")), "serie": None}
@@ -339,7 +340,7 @@ def _coluna(p: dict, item: dict) -> dict:
         acomp = {"mes": ac["mes"], "valor": ac["pedidos"][s["nome"]]}
     mt = metricas(teste_h1(s["backtest"]))
     confiavel = s.get("confiavel", True)
-    meses = _cartoes_mes(s, ac, p["carga"]["dados_ate"])
+    meses = _cartoes_mes(s, ac, ate or p["carga"]["dados_ate"], vigente)
     teste = {b["alvo"]: b for b in teste_h1(s["backtest"])}
     fut = {x["mes"]: x for x in s["futuro"]}
     acessivel = []
@@ -439,8 +440,19 @@ def tela(p: dict | None, grupo: str = "todos") -> dict | None:
     if p is None:
         return None
     grupo = grupo if grupo in GRUPOS else "todos"
+    # D68 (03/11/2026): recorte de exibição do mês fechado. Com a carga até 02/11, a tela mostra até 31/10: o acompanhamento
+    # de novembro ("4 até 02/11") sai e novembro, dezembro e jan/27 aparecem como previsão. Só exibição: o retrato e o
+    # previsao.json não mudam (o job e o ML seguem a regra E3)
+    from app import corte  # import tardio, como em coerencia()
+
+    fechado = corte.mes_fechado_ligado()
+    ate = corte.data_exibicao(p["carga"]["dados_ate"])
+    mes_ac = (p.get("acompanhamento") or {}).get("mes")
+    if fechado and ate is not None and mes_ac and _per(mes_ac) > pd.Timestamp(ate).to_period("M"):
+        p = {**p, "acompanhamento": None}
     itens = p["filtros"][GRUPOS[grupo][1]]
-    colunas = [_coluna(p, i) for i in itens if i.get("serie") is None or i["serie"] in p["series"]]
+    colunas = [_coluna(p, i, ate, vigente=not fechado)
+               for i in itens if i.get("serie") is None or i["serie"] in p["series"]]
     if not any(not c["nao_se_aplica"] for c in colunas):
         return None
     ac = p.get("acompanhamento")

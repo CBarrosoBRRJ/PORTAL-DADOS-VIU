@@ -14,6 +14,7 @@
   <link rel="preload" href="/static/fontes/playfair-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/static/fontes/ibm-plex-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/static/estilo.css?v={{ v() }}">
+  <link rel="stylesheet" href="/static/recorte.css?v={{ v() }}">
   <script src="/static/inicio.js?v={{ v() }}"></script>
   {% if anterior %}<link rel="prev" href="{{ anterior.href }}">{% endif %}
 </head>
@@ -108,7 +109,7 @@
     {# Caio, 03/11/2026: a capa nova não mostra o rodapé datado (sem_rodape; exceção à regra 9, só na capa) #}
     {% if sem_rodape %}
     {% elif rodape_texto %}<p class="rodape-dados">{{ rodape_texto }}</p>
-    {% elif momento %}<p class="rodape-dados">Dados até {{ momento | recorte }} · atualizados em {{ momento | atualizado }}{% if base_congelada %} · base congelada para a apresentação{% endif %}{% if rodape_extra %} · {{ rodape_extra }}{% endif %}{% if rodape_aviso %} · <span class="rodape-aviso">{{ icone("alerta", "icone rodape-aviso-icone") }}{{ rodape_aviso }}</span>{% endif %}</p>{% endif %}
+    {% elif momento %}<p class="rodape-dados">Dados até {{ momento | recorte }}{% if momento | situacao_carga %} · situação dos pedidos em {{ momento | situacao_carga }}{% endif %} · atualizados em {{ momento | atualizado }}{% if base_congelada %} · base congelada para a apresentação{% endif %}{% if rodape_extra %} · {{ rodape_extra }}{% endif %}{% if rodape_aviso %} · <span class="rodape-aviso">{{ icone("alerta", "icone rodape-aviso-icone") }}{{ rodape_aviso }}</span>{% endif %}</p>{% endif %}
 
     {% if not sem_controles %}
     <nav class="controles" aria-label="Navegação dos slides"{% if controles_sempre %} data-sempre{% endif %}>

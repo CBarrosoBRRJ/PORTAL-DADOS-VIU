@@ -1,5 +1,7 @@
 # Iniciativas de automação e IA (V2)
 
+**Foto fixa do Raio-X (Caio, 03/11/2026):** o print do painel Raio-X dos talentos saiu do Roadmap e virou foto do card Raio-X: arquivo do site (`app/static/iniciativas/raio-x.webp` e `-mini`), declarado em `catalogo.FOTOS` (chave = id do item), sem passar pelo banco, então aparece igual no computador, na VPS e no Cloud Run. Entra como 1º anexo na galeria e no visor (`api.fotos_fixas`, com `?v=` da versão do arquivo), marcado `fixo` (sem "Remover" na edição). Testes `tests/test_iniciativas_fotos.py`.
+
 **Atualização de 03/11/2026 (Caio):** 13 iniciativas. Em produção: **MIA** (Monitoramento Inteligente
 Automatizado; robô que revisa o board do Backlog todo dia, corrige no monday.com o que foi preenchido errado, guarda o
 valor original e manda para revisão o que tem dúvida). FILA virou "Priorização da demanda" (sem Raio-X). Na esteira:

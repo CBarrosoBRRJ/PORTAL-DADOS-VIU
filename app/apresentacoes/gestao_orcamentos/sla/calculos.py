@@ -60,7 +60,9 @@ from statistics import NormalDist, correlation
 import pandas as pd
 from markupsafe import escape
 
+# D68: `corte_regra` = app/corte.py (o nome `corte` já é o dia de corte dentro das funções)
 from app import config, formato
+from app import corte as corte_regra
 from app.dados import versao_de
 
 HORAS_DIA = 8  # C5: 10h–13h + 14h–19h
@@ -245,16 +247,21 @@ def entrega(mov: pd.DataFrame, mes_parcial: str, grupo: str = "todos") -> dict:
     completos = e.loc[_completos(e, mes_parcial)]  # C7
     corte = sla.data_corte(mov)
     ate = corte.strftime("%d/%m") if corte.strftime("%Y-%m") == mes_parcial else None  # A2: "até 22/10"
+    # D68: com o recorte do mês fechado, o mês da carga (novembro) ainda não começou na tela: sem barra de mês parcial,
+    # e nenhuma entrega depois do último dia mostrado entra no gráfico
+    sem_parcial = corte_regra.mes_fechado_ligado()
+    if sem_parcial:
+        e = e.loc[e["mes"] <= corte.strftime("%Y-%m")]
     meses = []
     for m in range(1, 13):
         chave = f"{ano}-{m:02d}"
         f = _faixas(e.loc[e["mes"] == chave, "h_trabalho"])
-        parcial = chave == mes_parcial
+        parcial = chave == mes_parcial and not sem_parcial
         meses.append({
             "chave": chave,
             "rotulo": formato.MESES[m - 1],
             "parcial": parcial,
-            "futuro": chave > mes_parcial,
+            "futuro": chave > mes_parcial or (sem_parcial and chave == mes_parcial),
             "ate": ate if parcial else None,
             # A2/A3: mês parcial com poucas entregas: sem %, sem mediana ("aguardando entregas")
             "aguardando": parcial and f["n"] < MIN_PARCIAL,
