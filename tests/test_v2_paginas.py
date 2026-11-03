@@ -394,7 +394,7 @@ def test_lia_botao_e_popup_do_video(cliente, monkeypatch):
     assert "/viu-agenciamento/lia-na-pratica" not in nav and cliente.get("/viu-agenciamento/lia-na-pratica").status_code == 200
     monkeypatch.setattr(lia_na_pratica, "ARQUIVO", "lia-na-pratica.mp4")
     html = cliente.get("/viu-agenciamento/lia").text
-    assert 'src="/static/video/lia-na-pratica.mp4"' in html and 'preload="metadata"' in html and "autoplay" not in html
+    assert 'src="/static/video/lia-na-pratica.mp4?v=' in html and 'preload="metadata"' in html and "autoplay" not in html
 
 
 def test_video_reservado_sem_arquivo(cliente, monkeypatch):
@@ -418,7 +418,7 @@ def test_video_publicado_e_situacao_das_etapas(cliente):
     assert situacao == [("LIA", True, ""), ("LIA", True, ""), ("LIA", True, ""), ("GPS", True, ""),
                         ("Orça+AI", False, "Em teste"), ("COP.IA", False, "Em teste")]
     html = cliente.get("/viu-agenciamento/lia").text
-    assert 'src="/static/video/lia-na-pratica.mp4"' in html and "Vídeo a incluir" not in html
+    assert 'src="/static/video/lia-na-pratica.mp4?v=' in html and "Vídeo a incluir" not in html
     assert html.count('<li class="fn-feita">') == 4 and html.count('<li class="fn-andamento">') == 2
     assert html.count('<span class="fn-selo">Em teste</span>') == 2
 
