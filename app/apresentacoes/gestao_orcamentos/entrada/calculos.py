@@ -47,8 +47,11 @@ E5  Composição de cada grupo (dica da legenda): os valores de `tipo_de_input` 
 
 import pandas as pd
 
-from app import config, estatistica, formato
-from app.dados import data_carga, versao_de  # data_carga: regra E3, compartilhada com Talentos e Atendimento (TAL-D9)
+from app import corte, estatistica, formato
+from app.dados import (  # data_carga: regra E3, compartilhada com Talentos e Atendimento (TAL-D9)
+    data_carga,
+    versao_de,
+)
 
 GRUPOS = ("Mercado", "Inbound", "Proativo", "Internos", "Sem tipo")  # E2: também a ordem da pilha (de baixo para cima)
 CLASSES = {"Mercado": "mercado", "Inbound": "inbound", "Proativo": "proativo", "Internos": "internos", "Sem tipo": "sem-tipo"}
@@ -109,11 +112,13 @@ def _comparacao(atual: int, anterior: int) -> dict | None:
 
 def ultimo_dia(df: pd.DataFrame, b: pd.DataFrame) -> pd.Timestamp:
     """E3: último dia coberto pela carga. A carga cobre até ontem, inclusive dias sem entradas: não confundir ausência de
-    pedidos no fim do mês com uma carga ainda do mês anterior."""
+    pedidos no fim do mês com uma carga ainda do mês anterior.
+
+    D68 (03/11/2026): com o recorte do mês fechado, o último dia MOSTRADO (fim 02/11 → 31/10, `corte.data_exibicao`);
+    tudo o que a página soma e escreve ("até 31 de outubro", o mesmo período de 2025) segue este dia."""
     carga = data_carga(df)
-    if carga is not None:
-        return pd.Timestamp(carga) - pd.Timedelta(days=1)
-    return b["data"].max()
+    fim = pd.Timestamp(carga) - pd.Timedelta(days=1) if carga is not None else b["data"].max()
+    return pd.Timestamp(corte.data_exibicao(fim)) if pd.notna(fim) else fim
 
 
 def meses_extrato(b: pd.DataFrame, ultimo: pd.Timestamp) -> list[str]:
@@ -140,6 +145,9 @@ def entrada(df: pd.DataFrame, ano: int | None = None) -> dict:
         ano = ultimo.year if ultimo.year in anos else anos[-1]
     corte_ano = min(ultimo, pd.Timestamp(ano, 12, 31))
     mes_parcial = (corte_ano + pd.Timedelta(days=1)).strftime("%Y-%m")
+    # D68: com o recorte do mês fechado, o mês seguinte ao último dia mostrado ainda não começou na tela: futuro, sem
+    # coluna de mês parcial (com "off", a regra E3 de antes: o mês da carga é o parcial)
+    sem_parcial = corte.mes_fechado_ligado()
     anterior, compara, limite_anterior = regua_anterior(b, ano, ultimo)  # E8
     do_ano = b.loc[(b["data"].dt.year == ano) & (b["data"] <= ultimo)]
     por_mes = do_ano.pivot_table(index=do_ano["data"].dt.month, columns="grupo", values="n", aggfunc="sum", fill_value=0)
@@ -151,7 +159,8 @@ def entrada(df: pd.DataFrame, ano: int | None = None) -> dict:
         total = sum(valores.values())
         meses.append({
             "chave": chave, "rotulo": formato.MESES[m - 1], "extenso": formato.MESES_EXTENSO[m - 1],
-            "parcial": chave == mes_parcial, "futuro": chave > mes_parcial, "total": total,
+            "parcial": chave == mes_parcial and not sem_parcial,
+            "futuro": chave > mes_parcial or (sem_parcial and chave == mes_parcial), "total": total,
             "detalhavel": bool(total and chave in extrataveis),  # E7
             "estimados": int(estimados.get(m, 0)),
             "grupos": [{"nome": g, "classe": CLASSES[g], "n": valores[g], "pct": p}

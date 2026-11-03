@@ -125,12 +125,12 @@ def test_tres_galerias_e_dialogo(html):
     links = re.findall(r'<a class="rm-mini( rm-mini-pilha)?" href="([^"]+)" data-rm-galeria=\'([^\']+)\' aria-haspopup="dialog">(.*?)</a>', html, re.DOTALL)
     galerias = [json.loads(g) for _, _, g, _ in links]
     assert [[x["imagem"] for x in g] for g in galerias] == [
-        ["fluxo-processo"], ["dashboard-pagamento", "dashboard-contratos", "dashboard-raiox"], ["bigquery"]]
+        ["fluxo-processo"], ["dashboard-pagamento", "dashboard-contratos", "dashboard-qualidade", "dashboard-qualidade-email"], ["bigquery"]]
     assert [bool(p) for p, *_ in links] == [False, True, False]
     assert all(h.startswith(g[0]["src"]) for (_, h, _, _), g in zip(links, galerias))  # sem JS, abre a 1ª imagem
-    assert "(3 imagens; abre ampliada)" in html
+    assert "(4 imagens; abre ampliada)" in html
     imgs = re.findall(r'<img class="rm-mini-img"[^>]*>', html)
-    assert len(imgs) == 5
+    assert len(imgs) == 6
     for img in imgs:
         assert re.search(r'alt="[^"]{20,}"', img) and 'width="' in img and 'height="' in img and 'loading="lazy"' in img
     for _, _, _, miolo in links:  # a lupa é enfeite
@@ -160,8 +160,8 @@ def test_galeria_abre_inteira_e_100_com_a_alta():
     galerias = [x for e in roadmap.tela()["marcos"] for x in e["galeria"]]
     fluxo = next(x for x in galerias if x["imagem"] == "fluxo-processo")
     assert fluxo["alta"].split("?v=")[0].endswith("-alta.webp") and "?v=" in fluxo["alta"] and (fluxo["aw"], fluxo["ah"]) == (9486, 1899)
-    raiox = next(x for x in galerias if x["imagem"] == "dashboard-raiox")
-    assert (raiox["aw"], raiox["ah"]) == (1672, 941)
+    qualidade = next(x for x in galerias if x["imagem"] == "dashboard-qualidade")  # Raio-X saiu (03/11)
+    assert (qualidade["aw"], qualidade["ah"]) == (960, 805)
 
 
 def test_entrada_coreografada(html):

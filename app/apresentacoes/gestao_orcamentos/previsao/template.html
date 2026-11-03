@@ -52,7 +52,8 @@
     <p class="pv-legenda" aria-hidden="true">
       <span><span class="pv-chave pv-chave-real"></span>entraram</span>
       <span><span class="pv-chave pv-chave-prev"></span>previsto no teste</span>
-      <span><span class="pv-chave pv-chave-parcial"></span>mês em andamento</span>
+      {# D68: com o recorte do mês fechado não há mês em andamento na tela (sem acompanhamento) #}
+      {% if ac %}<span><span class="pv-chave pv-chave-parcial"></span>mês em andamento</span>{% endif %}
       <span><span class="pv-chave pv-chave-faixa"></span>previsão e faixa provável</span>
     </p>
     <button type="button" class="pv-modelos-botao" data-dialogo="pv-dialogo" commandfor="pv-dialogo" command="show-modal" aria-haspopup="dialog">{{ icone("lista") }}<span>Modelos comparados</span></button>
@@ -75,7 +76,7 @@
     <section class="pv-coluna" aria-labelledby="pv-t-{{ c.chave }}">
       <h3 class="pv-tipo" id="pv-t-{{ c.chave }}">{{ c.titulo }}{% if c.recorte %}<span class="pv-recorte">{{ c.recorte }}</span>{% endif %}<span class="so-leitor">{{ t.de_quem }}</span></h3>
       {% if c.confiavel %}
-      <ul class="pv-meses" aria-label="{{ c.titulo }}{% if c.recorte %} ({{ c.recorte }}){% endif %}: mês em andamento e os dois seguintes">
+      <ul class="pv-meses" aria-label="{{ c.titulo }}{% if c.recorte %} ({{ c.recorte }}){% endif %}: {% if ac %}mês em andamento e os dois seguintes{% else %}previsão dos próximos três meses{% endif %}">
         {% for n in c.meses %}
         <li class="pv-mes{% if n.vigente %} pv-mes-vigente{% endif %}">
           <span class="pv-mes-nome">{{ n.rotulo }}{% if n.vigente %}<small> · em andamento</small>{% endif %}</span>

@@ -11,7 +11,7 @@ Arquivos dos anexos: servidos pelo app (no Cloud Run, lidos do bucket privado), 
 
 from __future__ import annotations
 
-from typing import Optional
+from pathlib import Path as PathLib
 from urllib.parse import quote, urlsplit
 
 from fastapi import APIRouter, Depends, HTTPException, Path, Request
@@ -21,6 +21,7 @@ from starlette.concurrency import run_in_threadpool
 
 from app import config, dados
 from app.apresentacoes.gestao_orcamentos import SLUG, endereco_atual
+from app.apresentacoes.gestao_orcamentos.iniciativas import catalogo
 from app.apresentacoes.gestao_orcamentos.iniciativas import repositorio as repo
 
 PREFIXO = f"/{SLUG}/iniciativas/api"
@@ -57,13 +58,13 @@ class Criar(_Base):
 
 
 class Editar(_Base):
-    sigla: Optional[str] = Field(None, max_length=repo.MAX["sigla"])
-    nome: Optional[str] = Field(None, max_length=repo.MAX["nome"])
-    fase: Optional[str] = None
-    responsavel: Optional[str] = Field(None, max_length=repo.MAX["responsavel"])
-    descricao: Optional[str] = Field(None, max_length=repo.MAX["descricao"])
-    status: Optional[str] = Field(None, max_length=repo.MAX["status"])
-    proximo: Optional[str] = Field(None, max_length=repo.MAX["proximo"])
+    sigla: str | None = Field(None, max_length=repo.MAX["sigla"])
+    nome: str | None = Field(None, max_length=repo.MAX["nome"])
+    fase: str | None = None
+    responsavel: str | None = Field(None, max_length=repo.MAX["responsavel"])
+    descricao: str | None = Field(None, max_length=repo.MAX["descricao"])
+    status: str | None = Field(None, max_length=repo.MAX["status"])
+    proximo: str | None = Field(None, max_length=repo.MAX["proximo"])
     valida_fase = field_validator("fase")(classmethod(lambda cls, v: _fase_valida(v)))
 
 
@@ -85,6 +86,22 @@ def publico(i: dict) -> dict:
     link = {"rotulo": i["link_rotulo"], "href": endereco_atual(i["link_href"])} if i.get("link_href") else None
     return {k: i.get(k, "") for k in ("id", "sigla", "nome", "fase", "ordem", "responsavel", "descricao", "status",
                                       "proximo", "atualizado_em")} | {"link": link}
+
+
+def fotos_fixas(ident: str) -> list[dict]:
+    """Caio, 03/11/2026: fotos fixas do catálogo (catalogo.FOTOS), no mesmo formato dos anexos, com fixo=True e a
+    versão do arquivo no endereço (o navegador não fica com a cópia antiga)."""
+    pasta = PathLib(__file__).resolve().parents[3] / "static" / "iniciativas"
+    saida = []
+    for k, f in enumerate(catalogo.FOTOS.get(ident, ()), 1):
+        arq = pasta / f["arquivo"]
+        if not arq.is_file():
+            continue
+        info = arq.stat()
+        saida.append({"id": f"foto-{ident}-{k}", "iniciativa_id": ident, "nome": f["nome"], "tipo": "image/webp",
+                      "tamanho": info.st_size, "imagem": True, "fixo": True,
+                      "url": f"/static/iniciativas/{f['arquivo']}?v={info.st_size:x}{info.st_mtime_ns // 1_000_000_000:x}"})
+    return saida
 
 
 def anexo_publico(a: dict) -> dict:
@@ -141,9 +158,13 @@ def listar():
 
     def fn():
         anexos: dict[str, list] = {}
+        itens = q.listar()
+        for i in itens:  # fotos fixas do catálogo primeiro (Caio, 03/11/2026)
+            if catalogo.FOTOS.get(i["id"]):
+                anexos[i["id"]] = fotos_fixas(i["id"])
         for a in q.anexos():
             anexos.setdefault(a["iniciativa_id"], []).append(anexo_publico(a))
-        return {"iniciativas": [publico(i) for i in q.listar()], "anexos": anexos,
+        return {"iniciativas": [publico(i) for i in itens], "anexos": anexos,
                 "na_semente": q.na_semente(), "edicao": config.INICIATIVAS_EDICAO}
     return _rodar(fn)
 
@@ -151,7 +172,7 @@ def listar():
 @router.get("/iniciativas/{ident}/anexos")
 def listar_anexos(ident: str = Path(pattern=ID)):
     q = _q()
-    return _rodar(lambda: (q.obter(ident), [anexo_publico(a) for a in q.anexos(ident)])[1])
+    return _rodar(lambda: (q.obter(ident), fotos_fixas(ident) + [anexo_publico(a) for a in q.anexos(ident)])[1])
 
 
 @router.get("/anexos/{aid}/arquivo")

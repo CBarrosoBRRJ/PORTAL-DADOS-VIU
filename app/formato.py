@@ -7,15 +7,20 @@ from datetime import datetime
 HORAS_DIA_UTIL = 9  # 10h–19h (ficha da gold, R13)
 
 
+
+def _nulo(valor) -> bool:
+    """None ou NaN (float/numpy): a tela mostra "—"."""
+    return valor is None or (isinstance(valor, numbers.Real) and math.isnan(valor))
+
 def inteiro(valor) -> str:
     """Inteiro com ponto de milhar; arredonda meio para cima (8,5 → 9), como os percentuais da tela."""
-    if valor is None or valor != valor:
+    if _nulo(valor):
         return "—"
     return f"{math.floor(valor + 0.5):,}".replace(",", ".")
 
 
 def decimal(valor, casas: int = 1) -> str:
-    if valor is None or valor != valor:
+    if _nulo(valor):
         return "—"
     return f"{valor:,.{casas}f}".replace(",", "#").replace(".", ",").replace("#", ".")
 
@@ -58,7 +63,7 @@ def parcelas_100(valores: list[int]) -> list[int]:
 
 def pct(valor, casas: int = 0) -> str:
     """Percentual para a tela ('13%', '87,5%'), meio para cima (F13)."""
-    return "—" if valor is None or valor != valor else f"{decimal(arredondar(valor * 100, casas), casas)}%"
+    return "—" if _nulo(valor) else f"{decimal(arredondar(valor * 100, casas), casas)}%"
 
 
 def _pct_inteiro(valor) -> int:
@@ -69,7 +74,7 @@ def _pct_inteiro(valor) -> int:
 def variacao(valor, sinal: bool = True) -> str:
     """Variação para a tela: '+91%', '−13%' (sinal de menos tipográfico) ou '0%'. O sinal sai do número já
     arredondado, para a frase nunca contradizer o que está escrito. sinal=False devolve só o tamanho ('91%')."""
-    if valor is None or valor != valor:
+    if _nulo(valor):
         return "—"
     n = _pct_inteiro(valor)
     if not sinal:
@@ -79,14 +84,14 @@ def variacao(valor, sinal: bool = True) -> str:
 
 def sentido(valor) -> str | None:
     """'alta', 'queda' ou 'igual' pelo percentual arredondado; None sem variação (base pequena ou sem régua)."""
-    if valor is None or valor != valor:
+    if _nulo(valor):
         return None
     n = _pct_inteiro(valor)
     return "alta" if n > 0 else "queda" if n < 0 else "igual"
 
 
 def dias_uteis(horas, casas: int = 1) -> str:
-    return "—" if horas is None or horas != horas else decimal(horas / HORAS_DIA_UTIL, casas)
+    return "—" if _nulo(horas) else decimal(horas / HORAS_DIA_UTIL, casas)
 
 
 def data_hora(valor: datetime | None) -> str:
@@ -102,15 +107,34 @@ def atualizado(valor: datetime | None) -> str:
     return valor.astimezone(FUSO).strftime("%d/%m/%Y, %H:%M")
 
 
-def recorte(valor: datetime | None) -> str:
-    """Último dia coberto pelos números: a véspera da atualização (a gold fecha o dia anterior; regra E3)."""
-    if valor is None:
-        return "—"
+def _fim_da_carga(valor: datetime):
+    """Regra E3: a véspera (São Paulo) da atualização da gold."""
     from datetime import timedelta
 
     from app.config import FUSO
 
-    return (valor.astimezone(FUSO) - timedelta(days=1)).strftime("%d/%m/%Y")
+    return (valor.astimezone(FUSO) - timedelta(days=1)).date()
+
+
+def recorte(valor: datetime | None) -> str:
+    """Último dia coberto pelos números MOSTRADOS: a véspera da atualização (a gold fecha o dia anterior; regra E3) ou,
+    com o recorte do mês fechado (D68), o último dia do mês anterior a ela (fim 02/11 → 31/10)."""
+    if valor is None:
+        return "—"
+    from app import corte
+
+    return corte.data_exibicao(_fim_da_carga(valor)).strftime("%d/%m/%Y")
+
+
+def situacao_carga(valor: datetime | None) -> str:
+    """D68: dia da situação dos pedidos (o fim da carga, E3) quando o recorte do mês fechado mostra menos que a carga
+    ("situação dos pedidos em 02/11/2026"); "" quando os dois coincidem (sem recorte ou carga no fim do mês)."""
+    if valor is None:
+        return ""
+    from app import corte
+
+    fim = _fim_da_carga(valor)
+    return fim.strftime("%d/%m/%Y") if corte.data_exibicao(fim) != fim else ""
 
 
 def quando(valor: datetime | None, agora: datetime | None = None) -> str:
@@ -155,6 +179,7 @@ FILTROS_JINJA = {
     "quando": quando,
     "atualizado": atualizado,
     "recorte": recorte,
+    "situacao_carga": situacao_carga,
     "mes": mes,
     "parcela": parcela,
 }

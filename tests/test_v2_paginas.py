@@ -627,7 +627,7 @@ def test_roadmap_registros(cliente):
 
     t = roadmap.tela()
     gal = {e["chave"]: [x["imagem"] for x in e["galeria"]] for e in t["marcos"] if e["galeria"]}
-    assert gal == {"mapa": ["fluxo-processo"], "dashboards": ["dashboard-pagamento", "dashboard-contratos", "dashboard-raiox"],
+    assert gal == {"mapa": ["fluxo-processo"], "dashboards": ["dashboard-pagamento", "dashboard-contratos", "dashboard-qualidade", "dashboard-qualidade-email"],
                    "centralizar": ["bigquery"]}
     estaticos = Path(__file__).resolve().parents[1] / "app" / "static"
     for x in [x for e in t["marcos"] for x in e["galeria"]]:
@@ -639,14 +639,14 @@ def test_roadmap_registros(cliente):
     links = re.findall(r'<a class="rm-mini( rm-mini-pilha)?" href="([^"]+)" data-rm-galeria=\'([^\']+)\' aria-haspopup="dialog">(.*?)</a>', html, re.DOTALL)
     assert [bool(p) for p, *_ in links] == [False, True, False]
     galerias = [json.loads(g) for _, _, g, _ in links]
-    assert [[x["imagem"] for x in g] for g in galerias] == [["fluxo-processo"], ["dashboard-pagamento", "dashboard-contratos", "dashboard-raiox"], ["bigquery"]]
+    assert [[x["imagem"] for x in g] for g in galerias] == [["fluxo-processo"], ["dashboard-pagamento", "dashboard-contratos", "dashboard-qualidade", "dashboard-qualidade-email"], ["bigquery"]]
     assert all(h.startswith(g[0]["src"]) for (_, h, _, _), g in zip(links, galerias))  # sem JS, abre a 1ª imagem
     imgs = re.findall(r'<img class="rm-mini-img"[^>]*>', html)
-    assert len(imgs) == 5
+    assert len(imgs) == 6
     for img in imgs:  # alt descritivo, tamanho declarado e carga preguiçosa
         assert re.search(r'alt="[^"]{20,}"', img) and 'width="' in img and 'height="' in img and 'loading="lazy"' in img
         assert re.search(r'src="/static/roadmap/[a-z-]+-mini\.webp', img)
-    assert "(3 imagens; abre ampliada)" in html and re.fullmatch(r"/static/roadmap/fluxo-processo-alta\.webp\?v=[0-9a-f]+", galerias[0][0]["alta"])
+    assert "(4 imagens; abre ampliada)" in html and re.fullmatch(r"/static/roadmap/fluxo-processo-alta\.webp\?v=[0-9a-f]+", galerias[0][0]["alta"])
     assert '<div class="rm-dlg-quadro" role="region"' in html and "data-rm-fechar" in html and "data-rm-zoom" in html
     assert 'data-rm-anterior aria-label="Imagem anterior"' in html and 'data-rm-proxima aria-label="Próxima imagem"' in html
     assert "data-rm-navegacao hidden" in html and 'data-rm-contador aria-live="polite"' in html

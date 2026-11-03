@@ -1,0 +1,6 @@
+/* D68 (03/11/2026): o rodapé ganhou "situação dos pedidos em …" (recorte de exibição do mês fechado). No estudo, os botões
+   Anterior / N de 5 / Próximo ficam no meio da mesma faixa: o rodapé quebra em duas linhas antes de chegar neles. Arquivo
+   próprio (o estilo.css está em edição por outro agente). Celular (até 900 px): o rodapé já é estático, nada muda */
+@media (min-width: 901px) {
+  .palco:has(.controles) .rodape-dados { max-width: min(36vw, calc(50vw - 12rem)); }
+}

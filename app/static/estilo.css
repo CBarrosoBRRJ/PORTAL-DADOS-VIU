@@ -4060,6 +4060,8 @@ html.ini-arrastando, html.ini-arrastando * { cursor: grabbing !important; }
 .rm-mini-pilha .rm-mini-img + .rm-mini-img { position: absolute; z-index: -1; left: 0.8em; top: 0.55em; rotate: 5deg; }
 /* 03/11/2026: 3ª imagem da pilha (Raio-X nos dashboards) um passo além da 2ª */
 .rm-mini-pilha .rm-mini-img:nth-child(3) { z-index: -2; left: 1.5em; top: 1.05em; rotate: 9deg; }
+/* 03/11/2026: a partir da 4ª imagem a pilha não cresce (a galeria mostra todas) */
+.rm-mini-pilha .rm-mini-img:nth-child(n+4) { display: none; }
 .rm-mini:hover, .rm-mini:focus-visible { rotate: 0deg; translate: 0 -2px; }
 .rm-mini:hover .rm-mini-img, .rm-mini:focus-visible .rm-mini-img { border-color: #a3ace4; }
 .rm-mini:focus-visible { outline: 2px solid var(--azul); outline-offset: 3px; }

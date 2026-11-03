@@ -104,6 +104,10 @@ DASHBOARDS = {
     ), 1.0),
     # Caio, 03/11/2026: print "0. Raio-X - Visão Geral 2.png" publicado SEM desfoque, por decisão dele
     "dashboard-raiox": ((), 1.0),
+    # Caio, 03/11/2026: "Central de Qualidade.png" (Central de qualidade do Backlog, com a MIA), sem desfoque
+    "dashboard-qualidade": ((), 1.0),
+    # Caio, 03/11/2026: "Central de Qualidade - email.png" (o e-mail semanal da MIA), sem desfoque
+    "dashboard-qualidade-email": ((), 1.0),
 }
 
 

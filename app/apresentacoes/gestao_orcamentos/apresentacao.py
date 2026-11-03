@@ -12,7 +12,7 @@ import threading
 
 import pandas as pd
 
-from app import config, dados, sla
+from app import config, corte, dados, sla
 from app.apresentacoes import Apresentacao, Secao
 from app.apresentacoes.gestao_orcamentos import (
     SLUG,
@@ -60,7 +60,8 @@ def medida_capa() -> float | None:
 def _estudo_slides(mov: pd.DataFrame, parcial: str, grupo: str) -> dict:
     """Slides 2–8 do estudo (só dependem da carga, do mês parcial e do grupo). Guardados por carga e grupo (B-N7, batalha
     de agentes, 25/10/2026): o clique no seletor ou no passo não refaz as contas; a carga nova chega já aquecida."""
-    chave = (dados.versao_de(mov), id(mov), len(mov), parcial, grupo)  # o objeto da carga no ar (o mesmo do aquecimento)
+    # o objeto da carga no ar (o mesmo do aquecimento); D68: o recorte de exibição também muda os slides
+    chave = (dados.versao_de(mov), id(mov), len(mov), parcial, grupo, config.RECORTE_EXIBICAO)
     with _trava_estudo:
         if chave in _cache_estudo:
             return _cache_estudo[chave]
@@ -109,7 +110,8 @@ def _carga(df):
 def _ambiente_calculo() -> tuple:
     """O que muda o resultado além da carga e dos parâmetros da URL: corte e congelamento (D65, também o estado de cada
     tabela), modo e a base mínima da variação (E9). Vai em toda chave de `_cache_telas` (F18)."""
-    return (config.CORTE_DADOS, config.CONGELAR, config.DEV, config.MODO_APRESENTACAO, entrada.BASE_MINIMA_VARIACAO,
+    return (config.CORTE_DADOS, config.RECORTE_EXIBICAO, config.CONGELAR, config.DEV, config.MODO_APRESENTACAO,
+            entrada.BASE_MINIMA_VARIACAO,
             tuple(bool(getattr(t, "congelada", False)) for t in dados.TABELAS.values()))
 
 
@@ -258,6 +260,9 @@ def _mesma_fotografia(diaria, fluxo):
         obtido = fluxo.quantidade.groupby(
             pd.to_datetime(fluxo.mes_entrada).dt.to_period("M")
         ).sum()
+        # D68: com o recorte do mês fechado, as safras depois do último dia mostrado (novembro) ficam fora dos dois lados
+        if corte.mes_fechado_ligado():
+            obtido = obtido[obtido.index <= ultimo.to_period("M")]
         a, b = esperado.align(obtido, fill_value=0)
         diverge = a.index[a.ne(b)]
         if len(diverge):
@@ -286,11 +291,13 @@ def montar_talentos(params: dict) -> dict:
 
 def _talentos(diaria: pd.DataFrame, agregado: pd.DataFrame, ranking: pd.DataFrame, filtro: str) -> dict:
     e = entrada.entrada(diaria)
+    base = entrada._base(diaria)
+    ultimo = entrada.ultimo_dia(diaria, base)  # D68: o último dia mostrado (31/10 com o recorte do mês fechado)
+    # D68: pedidos do ano depois do último dia mostrado (os 4 de 02/11 na carga de 03/11) saem também de Talentos
+    removidos = int(base.loc[(base["data"].dt.year == e["ano"]) & (base["data"] > ultimo), "n"].sum())
+    agregado, ranking, _ = talentos.recortar(agregado, ranking, ultimo, removidos)
     t = talentos.divisao(agregado, e["total"], e["ano"])
-    fim = min(
-        entrada.ultimo_dia(diaria, entrada._base(diaria)),
-        pd.Timestamp(e["ano"], 12, 31),
-    ).date()
+    fim = min(ultimo, pd.Timestamp(e["ano"], 12, 31)).date()
     # T5 (D57): as três tabelas gold saem do mesmo job; o dia da carga precisa ser o do Início (E3)
     carga_inicio = entrada.data_carga(diaria)
     carga = entrada.data_carga(agregado) if not agregado.empty else carga_inicio
@@ -345,9 +352,12 @@ def montar_previsao(params: dict) -> dict:
     # F03 (auditoria de 31/10/2026): o acompanhamento tem a sua data no rodapé e, se ele ou o retrato forem de outra carga
     # que a da gold de entradas (a do rodapé), um aviso discreto; nada volta ao topo da página (pedido do Caio, 31/10)
     c = previsao.coerencia(p, dados.entrada.processado_em()) if p else None
-    return {"t": previsao.tela(p, grupo), "previsao_acao": qual if p and rodando else None,
+    t = previsao.tela(p, grupo)
+    # D68: com o recorte do mês fechado o acompanhamento do mês seguinte não aparece; o rodapé não fala dele
+    acompanha = c and c["acompanhamento_ate"] and t and t["acompanhamento"]
+    return {"t": t, "previsao_acao": qual if p and rodando else None,
             "previsao_falha": falha if p else None, "sem_controles": True,
-            "rodape_extra": f"acompanhamento até {c['acompanhamento_ate']}" if c and c["acompanhamento_ate"] else None,
+            "rodape_extra": f"acompanhamento até {c['acompanhamento_ate']}" if acompanha else None,
             "rodape_aviso": c["aviso"] if c else None}
 
 

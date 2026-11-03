@@ -1,5 +1,12 @@
 # Ficha: Previsão de demanda (`/viu-agenciamento/previsao`)
 
+## Recorte do mês fechado (D68, 03/11/2026) — ler primeiro
+
+> Só exibição (`previsao.tela`): com a carga até 02/11 e a tela até 31/10, o acompanhamento de novembro sai ("4 até
+> 02/11" no Inbound, "0" no Mercado) e os três cartões são previsão: **Inbound** 150 · 150 · 150 (nov · dez · jan/27);
+> **Mercado** 525 · 563 · 702. Sem a coluna hachurada de novembro no gráfico, sem "mês em andamento" na legenda e sem
+> "acompanhamento até 02/11" no rodapé. O `ml/saida/previsao.json` e o retrato de outubro não mudam.
+
 ## Retrato da carga da reunião de 04/11 (carga congelada de **03/11/2026 09:02** (dados até **02/11/2026**; D67, `docs/PRD_V2.md` seção 0.6))
 
 > Retrato de **outubro** (`ml.rodar --rotina`, 03/11; retrato e acompanhamento da mesma carga). **Inbound**: 150/mês

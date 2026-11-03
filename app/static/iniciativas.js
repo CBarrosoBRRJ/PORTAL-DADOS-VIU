@@ -96,7 +96,7 @@
     return todos("[data-ini-anexo]", li).map(function (a) {
       var tipo = a.getAttribute("data-ini-anexo-tipo");
       return { id: a.getAttribute("data-ini-anexo"), nome: a.getAttribute("data-ini-anexo-nome"), tipo: tipo,
-               url: a.getAttribute("href"), imagem: tipo.indexOf("image/") === 0 };
+               url: a.getAttribute("href"), imagem: tipo.indexOf("image/") === 0, fixo: a.hasAttribute("data-ini-anexo-fixo") };
     });
   }
   raias.forEach(function (r) {
@@ -159,6 +159,7 @@
     link.setAttribute("data-ini-anexo", a.id);
     link.setAttribute("data-ini-anexo-tipo", a.tipo);
     link.setAttribute("data-ini-anexo-nome", a.nome);
+    if (a.fixo) link.setAttribute("data-ini-anexo-fixo", "");
     link.setAttribute("aria-label", (a.imagem ? "Imagem " : "Documento ") + (k + 1) + " de " + n + ": " + a.nome);
     if (a.imagem) {
       var img = document.createElement("img");
@@ -567,7 +568,7 @@
       b.setAttribute("aria-label", "Remover anexo: " + a.nome);
       b.addEventListener("click", function () { removerAnexo(id, a, b); });
       item.appendChild(nome);
-      item.appendChild(b);
+      if (!a.fixo) item.appendChild(b);  // foto fixa do catálogo (Caio, 03/11/2026): não sai pela tela
       listaAnexosD.appendChild(item);
     });
     listaAnexosD.hidden = !lst.length;

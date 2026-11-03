@@ -62,8 +62,7 @@ CATEGORIAS = {
 FLUXO = {"titulo": "Fluxo ponta a ponta", "imagem": "fluxo-processo",
          "alt": "Fluxo da área em raias: entrada do pedido e orçamento, execução, pagamento, contratos e aquisição de talentos",
          "legenda": "Do pedido à proposta, à execução, ao contrato e ao pagamento, com os pontos de atenção marcados."}
-# Caio, 03/11/2026: imagens sem desfoque (dados internos da equipe; tools/gerar_imagens_roadmap.py, DESFOCAR) e o
-# Raio-X dos talentos incluído
+# Caio, 03/11/2026: imagens sem desfoque (dados internos da equipe; tools/gerar_imagens_roadmap.py, DESFOCAR)
 DASHBOARDS = (
     {"titulo": "Controle do processo de pagamento", "imagem": "dashboard-pagamento",
      "alt": "Painel de controle do processo de pagamento",
@@ -71,10 +70,13 @@ DASHBOARDS = (
     {"titulo": "Contratos e bloqueios", "imagem": "dashboard-contratos",
      "alt": "Painel de contratos e bloqueios dos talentos",
      "legenda": "Contratos vigentes, renovações e a linha do tempo dos contratos."},
-    {"titulo": "Raio-X dos talentos", "imagem": "dashboard-raiox",
-     "alt": "Painel Raio-X dos talentos: visão 360° do talento e da relação com a ViU",
-     "legenda": "Resultados comerciais, valor gerado pela ViU, saúde operacional, financeiro, bloqueios, audiência e "
-                "satisfação de cada talento."},
+    # Caio, 03/11/2026: o Raio-X saiu daqui (foi para o card Raio-X das Iniciativas) e entrou a Central de qualidade
+    {"titulo": "Central de qualidade", "imagem": "dashboard-qualidade",
+     "alt": "Painel Central de qualidade do Backlog: erros registrados, correções da MIA e pendências em aberto por semana",
+     "legenda": "Erros de preenchimento do Backlog por semana, o que a MIA corrigiu e as pendências em aberto."},
+    {"titulo": "Central de qualidade: e-mail da MIA", "imagem": "dashboard-qualidade-email",
+     "alt": "E-mail semanal da MIA com o resumo da qualidade de dados do Backlog: erros mapeados, corrigidos e em aberto",
+     "legenda": "O alerta semanal da MIA: erros mapeados, o que ela corrigiu e o que falta ajustar no monday."},
 )
 BIGQUERY = {"titulo": "Camada ouro no BigQuery", "imagem": "bigquery",
             "alt": "Camada ouro no BigQuery: tabelas e views do dataset gold_monday",

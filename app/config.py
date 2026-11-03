@@ -87,6 +87,16 @@ CORTE_DADOS = None if _CORTE_TXT in ("", "off", "false", "0", "nao", "não") els
 # congelar; a gold só guarda a carga atual. Rodapé honesto: "Dados até 02/11/2026"
 CORTE_FOLGA_DIAS = int(os.environ.get("CORTE_FOLGA_DIAS", "2"))
 BASE_CONGELADA_DIR = Path(os.environ.get("BASE_CONGELADA_DIR", str(RAIZ / "app" / "base_congelada")))
+# D68 (Caio, 03/11/2026; o gerente quer sempre o mês fechado): recorte de EXIBIÇÃO. As telas de dados (Demanda, Talentos,
+# SLA e estudo, Previsão) mostram só até o último dia do mês anterior ao fim da carga (fim 02/11 → 31/10; fim no último
+# dia do mês → ele mesmo). A situação de cada pedido continua a da carga (D57: o site não refaz regra da gold); o recorte
+# só escolhe quais dias e meses entram. "off" volta ao comportamento anterior (até o fim da carga). Regra: app/corte.py
+_RECORTE_TXT = os.environ.get("RECORTE_EXIBICAO", "mes_fechado").strip().lower()
+if _RECORTE_TXT in ("off", "false", "0", "nao", "não"):
+    _RECORTE_TXT = "off"
+if _RECORTE_TXT not in ("mes_fechado", "off"):
+    raise ValueError(f"RECORTE_EXIBICAO inválido: {_RECORTE_TXT!r} (use mes_fechado ou off)")
+RECORTE_EXIBICAO = _RECORTE_TXT
 # previsão de demanda (D47): a página só lê o JSON que o job de ML grava (ml/saida/previsao.json); o site não depende
 # das bibliotecas de ML. No computador, a carga nova da gold de entradas dispara o job em segundo plano
 # (PREVISAO_JOB=off desliga; PREVISAO_PYTHON = o Python que tem as bibliotecas). Em produção o job é separado.

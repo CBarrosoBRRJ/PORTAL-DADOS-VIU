@@ -74,11 +74,10 @@ A28 (D53) "Deixamos coisas para trás?": no Saldo, a variação do que ficou par
     (▲ cresceu, ▼ caiu; igual, nada).
 """
 
-import math
 
 import pandas as pd
 
-from app import estatistica, formato
+from app import corte, estatistica, formato
 from app.apresentacoes.gestao_orcamentos.entrada import calculos as entrada
 
 
@@ -116,6 +115,10 @@ def atendimento(df: pd.DataFrame, fluxo: pd.DataFrame | None = None, mensal: pd.
     # Quando o ano da carga ainda não tem pedidos, o ano mostrado está completo.
     corte_ano = min(ultimo, pd.Timestamp(ano, 12, 31))
     mes_parcial = (corte_ano + pd.Timedelta(days=1)).strftime("%Y-%m")
+    # D68 (03/11/2026): com o recorte do mês fechado (`ultimo` = 31/10), o mês da carga ainda não começou na tela: futuro,
+    # sem mês parcial; eventos (respondidos, saídas) só até o mês do último dia mostrado. Com "off", a regra de antes
+    sem_parcial = corte.mes_fechado_ligado()
+    ate_mes = corte_ano.strftime("%Y-%m") if sem_parcial else mes_parcial
     do_ano = b.loc[(b["data"].dt.year == ano) & (b["data"] <= ultimo)]
     anterior, compara, limite_anterior = entrada.regua_anterior(b, ano, ultimo)  # E8
     completos = f"{ano}-01" < mes_parcial  # há ao menos um mês completo no ano?
@@ -125,13 +128,14 @@ def atendimento(df: pd.DataFrame, fluxo: pd.DataFrame | None = None, mensal: pd.
         f = fluxo.loc[fluxo["evento"] == "nao_seguiu"]
         meses_ev = pd.to_datetime(f["mes_evento"]).dt.strftime("%Y-%m")
         encerrados = f.groupby(meses_ev)["quantidade"].sum().astype(int).to_dict()
-        encerrados = {k: v for k, v in encerrados.items() if k.startswith(str(ano)) and k <= mes_parcial}
+        encerrados = {k: v for k, v in encerrados.items() if k.startswith(str(ano)) and k <= ate_mes}
     meses = []
     for m in range(1, 13):
         chave = f"{ano}-{m:02d}"
         atual = _numeros(do_ano.loc[do_ano["data"].dt.month == m])
         mes = {"chave": chave, "rotulo": formato.MESES[m - 1], "extenso": formato.MESES_EXTENSO[m - 1],
-               "parcial": chave == mes_parcial, "futuro": chave > mes_parcial, **atual, "anterior": None}
+               "parcial": chave == mes_parcial and not sem_parcial,
+               "futuro": chave > mes_parcial or (sem_parcial and chave == mes_parcial), **atual, "anterior": None}
         mes["encerrados"] = encerrados.get(chave, 0)  # A11
         mes["respondidos"] = mes["entregas"] + mes["encerrados"]
         por_tipo = do_ano.loc[do_ano["data"].dt.month == m].groupby("grupo")["saidas"].sum()  # A9
@@ -164,7 +168,7 @@ def atendimento(df: pd.DataFrame, fluxo: pd.DataFrame | None = None, mensal: pd.
     respondidos_ano, entregues_ano, fila_mes, sem_data_n = {}, {}, {}, 0
     if mensal is not None and not mensal.empty:
         m_ = mensal.assign(chave=pd.to_datetime(mensal["mes"]).dt.strftime("%Y-%m"))
-        m_ = m_.loc[m_["chave"].str.startswith(str(ano)) & (m_["chave"] <= mes_parcial)]
+        m_ = m_.loc[m_["chave"].str.startswith(str(ano)) & (m_["chave"] <= ate_mes)]
         respondidos_ano = dict(zip(m_["chave"], m_["respondidos"].astype(int)))
         entregues_ano = dict(zip(m_["chave"], m_["entregues"].astype(int)))
         fila_mes = dict(zip(m_["chave"], m_["ficou"].astype(int)))
@@ -420,7 +424,7 @@ def analise_ritmo(resultado: dict, status: dict | None = None) -> dict | None:
         media_pct, lic_pct = (comp_pct[0] if comp_pct else 80), 0
     # Caio, 24/10/2026: as referências do gráfico voltam a ser o OBJETIVO — 100% (equilíbrio: resolver tudo o que havia
     # para atender) e o corte de 90% —, agora sobre a demanda total. A média e o limite XmR ficam só calculados.
-    media_xmr, lic_xmr = media_pct, lic_pct
+    _media_xmr, _lic_xmr = media_pct, lic_pct  # só calculados (ficam para a ficha)
     # D53 (Caio, 26/10/2026): o visual do gráfico fica como estava (equilíbrio 100%, corte 90%, cores por faixa); só o
     # eixo vertical e o % passam a ser a ENTREGA (entregues ao cliente ÷ para atender). corte_pct = None desliga o corte
     # e as cores (todos os pontos neutros), se um dia a régua deixar de valer
@@ -648,6 +652,7 @@ def analise_ritmo(resultado: dict, status: dict | None = None) -> dict | None:
     #    trabalho no represado = represado no fim do mês ÷ ritmo do mês: quantos dias a equipe levaria para zerar a fila
     #    no ritmo daquele mês. Referência fixa: 5 dias úteis (uma semana de trabalho).
     import datetime as _dt
+
     from app.expediente import sem_expediente
     ultimo_dia = resultado["ultimo"].date() if hasattr(resultado["ultimo"], "date") else resultado["ultimo"]
     feriados = sem_expediente(resultado["ano"])

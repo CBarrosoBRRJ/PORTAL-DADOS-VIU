@@ -16,6 +16,7 @@ import pandas as pd
 
 from app import config
 
+
 def dia_da_carga(processado_em) -> date | None:
     """Dia (São Paulo) do processamento; aceita Timestamp, texto ISO ou uma Series de `_processado_em`."""
     if processado_em is None:
@@ -49,3 +50,20 @@ def mes_fechado(fim_da_carga) -> str | None:
         return None
     dia = pd.Timestamp(fim_da_carga).normalize() + timedelta(days=1)
     return str(dia.to_period("M") - 1)
+
+
+def mes_fechado_ligado() -> bool:
+    """D68: recorte de exibição do mês fechado ligado (config.RECORTE_EXIBICAO = "mes_fechado")."""
+    return config.RECORTE_EXIBICAO == "mes_fechado"
+
+
+def data_exibicao(fim_da_carga) -> date | None:
+    """D68 (Caio, 03/11/2026): último dia que as telas de dados mostram. Com o recorte do mês fechado, o último dia do mês
+    anterior ao do dia seguinte ao fim da carga (fim 02/11 → 31/10; fim 31/10 → 31/10; fim 31/12 → 31/12); com "off", o
+    próprio fim da carga (E3). A situação de cada pedido continua a da carga: o recorte só escolhe os dias que entram."""
+    if fim_da_carga is None or pd.isna(fim_da_carga):
+        return None
+    dia = pd.Timestamp(fim_da_carga).date()
+    if not mes_fechado_ligado():
+        return dia
+    return (dia + timedelta(days=1)).replace(day=1) - timedelta(days=1)

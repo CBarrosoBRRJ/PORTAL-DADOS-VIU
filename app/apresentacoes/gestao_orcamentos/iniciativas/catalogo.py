@@ -60,5 +60,11 @@ GRUPOS = (
     )},
 )
 
+# Caio, 03/11/2026: fotos fixas de um card (arquivo do site em app/static/iniciativas/, como as imagens do Roadmap; não
+# passam pelo banco). Chave = id do item (slug da sigla). Aparecem na galeria e no visor do card, sem botão de remover
+FOTOS = {
+    "raio-x": ({"arquivo": "raio-x.webp", "nome": "Painel Raio-X dos talentos"},),
+}
+
 # nota no rodapé do slide (RF9); vazia = sem nota
 REFERENCIA = ""

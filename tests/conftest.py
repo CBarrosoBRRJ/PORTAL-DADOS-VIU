@@ -32,6 +32,9 @@ os.environ["CONGELAR"] = "false"
 # D65: o corte de 31/10 vem ligado por padrão; os testes rodam sem ele e nunca leem nem gravam a base congelada real
 # (app/base_congelada); quem testa o corte liga CORTE_DADOS e usa uma pasta própria (tests/test_corte.py)
 os.environ["CORTE_DADOS"] = "off"
+# D68: o recorte de exibição do mês fechado vem ligado por padrão; os testes antigos rodam sem ele (comportamento E3, até
+# o fim da carga); quem testa o recorte liga config.RECORTE_EXIBICAO no próprio teste (tests/test_recorte_exibicao.py)
+os.environ["RECORTE_EXIBICAO"] = "off"
 os.environ["BASE_CONGELADA_DIR"] = tempfile.mkdtemp(prefix="base_congelada_teste_")
 _PREVISAO_ARQ = Path(tempfile.gettempdir()) / f"previsao_teste_{os.getpid()}.json"
 os.environ["PREVISAO_ARQ"] = str(_PREVISAO_ARQ)
@@ -44,7 +47,7 @@ os.environ["INICIATIVAS_ANEXOS"] = str(_INI_TMP / "anexos")
 os.environ.pop("INICIATIVAS_EDICAO", None)
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-import gold_simulada  # noqa: E402  (as views da gold, montadas sobre os dados sintéticos)
+import gold_simulada
 
 
 def _passos(projeto_id, exclusivo, passos):
@@ -200,8 +203,10 @@ def sem_bigquery(monkeypatch, movimentos, entrada_diaria, fluxo_mensal):
         "verificada_em": data, "linhas": len(entrada_diaria), "bytes_lidos": 0, "segundos_carga": 0.0,
         "atrasada": False, "estado": "em_dia", "erro": None})
     # o cache da entrada usa id(df) sem versão: limpar entre testes evita reaproveitar a base de um DataFrame já liberado
+    from app.apresentacoes.gestao_orcamentos import (
+        apresentacao as _ap,  # B-N7: estudo guardado por carga e grupo
+    )
     from app.apresentacoes.gestao_orcamentos.entrada import calculos as ent
-    from app.apresentacoes.gestao_orcamentos import apresentacao as _ap  # B-N7: estudo guardado por carga e grupo
     calculos._cache.clear()
     ent._cache.clear()
     _ap.limpar_caches()  # estudo e telas guardados por carga (B-N7; desempenho, 31/10/2026)
@@ -250,7 +255,9 @@ def previsao_sintetica() -> dict:
     reta dos últimos 6 meses, para o desempate pelo mais simples; "mlp_auto" = cópia da média 6m de outra carga;
     "boost_lgbm" falhou; "prophet_log" não se aplica. Mês em andamento (out/2026): Inbound 70, Mercado 190, Mercado
     exclusivos 60 (abaixo da faixa) e não exclusivos 87, com o diagnóstico de lotes do Mercado exclusivos."""
-    from ml import dados as mld, previsao as mp, regua, rodar
+    from ml import dados as mld
+    from ml import previsao as mp
+    from ml import regua, rodar
     from ml.modelos import referencia
 
     series = series_sinteticas()
