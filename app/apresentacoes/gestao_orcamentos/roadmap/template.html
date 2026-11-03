@@ -11,7 +11,7 @@
    aqui); acabamento em /static/roadmap_novo.css (escopado em .rmn) e galeria em /static/roadmap_novo.js (a imagem abre
    inteira; "Ver em 100%" mostra a alta com rolagem). Abaixo de 900 px, a linha fica vertical. #}
 {% macro miniatura(e) %}
-  {%- if e.galeria %}<a class="rm-mini{% if e.galeria|length > 1 %} rm-mini-pilha{% endif %}" href="{{ e.galeria[0].src }}?v={{ v() }}" data-rm-galeria='{{ e.galeria|tojson }}' aria-haspopup="dialog">
+  {%- if e.galeria %}<a class="rm-mini{% if e.galeria|length > 1 %} rm-mini-pilha{% endif %}" href="{{ e.galeria[0].src }}" data-rm-galeria='{{ e.galeria|tojson }}' aria-haspopup="dialog">
     {%- for x in e.galeria %}<img class="rm-mini-img" src="{{ x.mini }}?v={{ v() }}" alt="{{ x.alt }}" width="{{ x.mw }}" height="{{ x.mh }}" loading="lazy" decoding="async">{% endfor -%}
     <span class="rmn-mini-lupa" aria-hidden="true">{{ icone("ampliar", "icone rmn-mini-lupa-ic") }}</span>
     <span class="so-leitor"> ({% if e.galeria|length > 1 %}{{ e.galeria|length }} imagens; {% endif %}abre ampliada)</span></a>{% endif %}

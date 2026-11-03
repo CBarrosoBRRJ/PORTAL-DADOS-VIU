@@ -159,7 +159,7 @@ def test_galeria_abre_inteira_e_100_com_a_alta():
     assert "prefers-reduced-motion" in js  # abre e fecha sem animação com movimento reduzido
     galerias = [x for e in roadmap.tela()["marcos"] for x in e["galeria"]]
     fluxo = next(x for x in galerias if x["imagem"] == "fluxo-processo")
-    assert fluxo["alta"].endswith("-alta.webp") and (fluxo["aw"], fluxo["ah"]) == (9486, 1899)
+    assert fluxo["alta"].split("?v=")[0].endswith("-alta.webp") and "?v=" in fluxo["alta"] and (fluxo["aw"], fluxo["ah"]) == (9486, 1899)
     raiox = next(x for x in galerias if x["imagem"] == "dashboard-raiox")
     assert (raiox["aw"], raiox["ah"]) == (1672, 941)
 
@@ -255,3 +255,12 @@ def test_movimento_reduzido_e_sem_mola():
     # fora do bloco de movimento só há transform/opacity estáticos: nenhuma animação nem transição
     fora = css[:ini] + css[fim:]
     assert "animation:" not in fora.replace("animation: none", "") and "transition:" not in fora
+
+
+def test_imagens_da_galeria_levam_a_versao_do_arquivo(html):
+    """Caio, 03/11/2026: a galeria abre as imagens grandes pelo JSON; sem ?v= o navegador mostrava a cópia antiga
+    (desfocada) por até um dia depois da troca. Cada src/alta leva a versão do próprio arquivo."""
+    for g in re.findall(r"data-rm-galeria='([^']+)'", html):
+        for x in json.loads(g):
+            assert re.fullmatch(r"/static/roadmap/[a-z-]+\.webp\?v=[0-9a-f]+", x["src"]), x["src"]
+            assert re.fullmatch(r"/static/roadmap/[a-z-]+\.webp\?v=[0-9a-f]+", x["alta"]), x["alta"]

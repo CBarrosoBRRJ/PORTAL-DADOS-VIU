@@ -632,7 +632,7 @@ def test_roadmap_registros(cliente):
     estaticos = Path(__file__).resolve().parents[1] / "app" / "static"
     for x in [x for e in t["marcos"] for x in e["galeria"]]:
         for chave in ("mini", "src", "alta"):
-            arquivo = estaticos / x[chave].removeprefix("/static/")
+            arquivo = estaticos / x[chave].removeprefix("/static/").split("?")[0]
             assert arquivo.is_file() and arquivo.stat().st_size < 400_000  # 03/11/2026: sem desfoque, a alta do fluxo tem ~345 KB (só carrega ao ampliar)
         assert x["w"] > 0 and x["mw"] > 0 and len(x["alt"]) >= 20
     html = cliente.get("/viu-agenciamento/roadmap").text
@@ -646,7 +646,7 @@ def test_roadmap_registros(cliente):
     for img in imgs:  # alt descritivo, tamanho declarado e carga preguiçosa
         assert re.search(r'alt="[^"]{20,}"', img) and 'width="' in img and 'height="' in img and 'loading="lazy"' in img
         assert re.search(r'src="/static/roadmap/[a-z-]+-mini\.webp', img)
-    assert "(3 imagens; abre ampliada)" in html and galerias[0][0]["alta"] == "/static/roadmap/fluxo-processo-alta.webp"
+    assert "(3 imagens; abre ampliada)" in html and re.fullmatch(r"/static/roadmap/fluxo-processo-alta\.webp\?v=[0-9a-f]+", galerias[0][0]["alta"])
     assert '<div class="rm-dlg-quadro" role="region"' in html and "data-rm-fechar" in html and "data-rm-zoom" in html
     assert 'data-rm-anterior aria-label="Imagem anterior"' in html and 'data-rm-proxima aria-label="Próxima imagem"' in html
     assert "data-rm-navegacao hidden" in html and 'data-rm-contador aria-live="polite"' in html
