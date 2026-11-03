@@ -1,0 +1,3 @@
+/* Previsão: ajustes de 03/11/2026 (arquivo próprio da página, para não mexer no estilo.css comum).
+   Linha tracejada da virada de ano no gráfico, quando a previsão passa de dez/2026 (jan/27). */
+.pv-svg .pv-virada { stroke: var(--tinta-3); stroke-width: 1; stroke-dasharray: 3 3; }

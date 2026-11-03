@@ -11,7 +11,7 @@ testes em _descartados/2026-10-31/congelamento_por_tabela/."""
 import json
 import os
 import time
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 
 import pandas as pd
 import pytest
@@ -217,9 +217,8 @@ def test_arranque_em_producao_falha_sem_base(gold, monkeypatch):
     from app.main import app
 
     monkeypatch.setattr(config, "EM_PRODUCAO", True)
-    with pytest.raises(congelamento.BaseInvalida):
-        with TestClient(app):
-            pass
+    with pytest.raises(congelamento.BaseInvalida), TestClient(app):
+        pass
 
 
 def test_arquivo_alterado_invalida_a_base_inteira(gold, tmp_path, monkeypatch):
@@ -332,7 +331,8 @@ def test_recuperar_congelamento_interrompido(gold, tmp_path):
     nova_tabela("p.gold_monday.gld_b").df()
     pasta = manifesto(tmp_path)["pasta"]
     (tmp_path / congelamento.MANIFESTO).rename(tmp_path / "manifesto_perdido.json")  # caiu antes de publicar
-    (tmp_path / "v-20261031-20261102T090000-aaaaaa").mkdir()  # outra gravação, interrompida no meio
+    # outra gravação, interrompida no meio; data no futuro para ser sempre a mais nova, seja qual for o relógio
+    (tmp_path / "v-20261031-20991231T000000-aaaaaa").mkdir()
     reiniciar_processo()
     assert congelamento.ler(nova_tabela("p.gold_monday.gld_a")) is None  # sem manifesto, nada vale
     relato = congelamento.recuperar()
@@ -364,7 +364,7 @@ def test_conferencia_do_build_reprova_sem_base_e_aprova_o_pacote_coerente(gold, 
                                 "acompanhamento": {"mes": "2026-11", "ate": "2026-11-01",
                                                    "processado_em": "2026-11-02 12:04:00+00:00"}}), encoding="utf-8")
     monkeypatch.setattr(config, "PREVISAO_ARQ", prev)
-    monkeypatch.setattr(congelamento, "conferir_lia", lambda: [])
+    monkeypatch.setattr(congelamento, "conferir_lia", list)
     assert conferir_base.main() == 0
     assert "Pacote conferido" in capsys.readouterr().out
     # F03: acompanhamento de outra carga reprova o pacote
@@ -387,7 +387,7 @@ def test_tipos_da_gold_voltam_iguais_do_arquivo(gold):
         "data": pd.Series(pd.to_datetime(["2026-10-30", "2026-10-31"]).date, dtype="dbdate"),
         "entrada": pd.to_datetime(["2026-10-30 10:00", None]), "texto": pd.Series(["a", None], dtype="string"),
         "flag": pd.Series([True, None], dtype="boolean"), "inteiro": pd.Series([1, None], dtype="Int64")})
-    gold.modified = datetime(2026, 11, 1, 12, 2, tzinfo=timezone.utc)
+    gold.modified = datetime(2026, 11, 1, 12, 2, tzinfo=UTC)
     original = nova_tabela().df().copy()
     lido, _, _ = congelamento.ler(nova_tabela())
     pd.testing.assert_frame_equal(lido, original)

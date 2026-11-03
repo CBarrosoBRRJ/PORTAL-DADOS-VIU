@@ -48,14 +48,14 @@ import json
 import math
 import os
 import shutil
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 import pandas as pd
 
+from app.expediente import sem_expediente
 from ml import dados, regua
 from ml.calendario import dias_uteis
-from app.expediente import sem_expediente
 
 VERSAO = 3
 PROTOCOLO = "D56"
@@ -106,7 +106,7 @@ def complexidade(nome: str, modulo: str | None) -> tuple[int, int]:
 ROTULO = {
     "ref_ultimo_mes": "Último mês", "ref_media_3m": "Média de 3 meses", "ref_media_6m": "Média de 6 meses",
     "ref_mesmo_mes_ano_anterior": "Mesmo mês do ano anterior", "ref_tendencia_6m": "Reta dos últimos 6 meses",
-    "comb_ses": "Suavização exponencial", "comb_holt_amort": "Holt simples", "comb_theta": "Theta simples",
+    "comb_ses": "Suavização exponencial", "comb_holt_amort": "Holt amortecido simples", "comb_theta": "Theta simples",
     "comb_drift": "Último mês + crescimento médio", "comb_sazonal": "Patamar × mesmo mês do ano anterior",
     "comb_mediana": "Combinação de 6", "comb_media": "Média de 3 métodos", "comb_selecao": "Seleção pelo passado",
     "comb_ponderada": "Combinação ponderada", "comb_drift_log": "Crescimento % médio",
@@ -246,16 +246,20 @@ def comparados(modelos: dict, serie: str, vencedor: str, alternativa: str | None
 
 # ---------------------------------------------------------------- mês em andamento (P10)
 
-def _lotes(lotes: pd.DataFrame | None, processado_em: str) -> dict:
-    """S6: por série, o mês vigente e a média dos meses fechados anteriores (até o mesmo dia do mês)."""
+def _lotes(lotes: pd.DataFrame | None, processado_em: str, mes: str) -> dict:
+    """S6: por série, o mês do acompanhamento (`mes`) e a média dos meses anteriores a ele (até o mesmo dia do mês).
+    Correção de 03/11/2026: o vigente é o mês do acompanhamento, não o último mês presente na base de lotes; série sem
+    linha desse mês (nenhum pedido até o dia) ou sem mês anterior fica sem diagnóstico."""
     if lotes is None or lotes.empty or str(lotes["processado_em"].iloc[0]) != str(processado_em):
         return {}
     saida = {}
     for chave, r in dados.RECORTES.items():
         d = lotes[lotes["recorte"] == chave].sort_values("mes")
-        if len(d) < 2:
+        meses = d["mes"].astype(str)
+        vigente, ant = d[meses == str(mes)], d[meses < str(mes)]
+        if vigente.empty or ant.empty:
             continue
-        vig, ant = d.iloc[-1], d.iloc[:-1]
+        vig = vigente.iloc[-1]
         saida[r["serie"]] = {
             "ate_dia": int(vig["ate_dia"]), "mes": str(vig["mes"]), "meses_anteriores": [str(m) for m in ant["mes"]],
             "vigente": {k: int(vig[k]) for k in ("pedidos", "em_lote", "avulsos")},
@@ -283,7 +287,7 @@ def _acompanhamento(meta: dict, excl: pd.DataFrame, lotes: pd.DataFrame | None =
     return {"mes": str(mes), "ate": str(ate), "processado_em": meta["processado_em"],
             "dias_uteis_decorridos": decorridos, "dias_uteis_mes": dias_uteis(mes),
             "pedidos": {s: v["pedidos_ate_agora"] for s, v in p.items() if v["mes"] == str(mes)},
-            "sem_talento": sem_talento, "lotes": _lotes(lotes, meta["processado_em"])}
+            "sem_talento": sem_talento, "lotes": _lotes(lotes, meta["processado_em"], str(mes))}
 
 
 def _exclusividade(excl: pd.DataFrame) -> dict:
@@ -401,7 +405,7 @@ def montar(resultados: dict, excl: pd.DataFrame, lotes: pd.DataFrame | None = No
     longas = {n: e for n, e in escolha.items() if not series[n]["curta"]}
     return {
         "versao": VERSAO, "protocolo": PROTOCOLO,
-        "gerado_em": (gerado_em or datetime.now(timezone.utc)).isoformat(timespec="seconds"),
+        "gerado_em": (gerado_em or datetime.now(UTC)).isoformat(timespec="seconds"),
         "carga": {"processado_em": carga["processado_em"], "dados_ate": carga["dados_ate"]},
         "retrato": {"mes_fechado": mes_fechado, "processado_em": carga["processado_em"], "dados_ate": carga["dados_ate"]},
         "regua": resultados.get("regua"),
@@ -422,7 +426,7 @@ def montar(resultados: dict, excl: pd.DataFrame, lotes: pd.DataFrame | None = No
 
 
 def _limpo(o):
-    if isinstance(o, float) and o != o:
+    if isinstance(o, float) and math.isnan(o):
         return None
     if isinstance(o, dict):
         return {k: _limpo(v) for k, v in o.items()}

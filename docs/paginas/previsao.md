@@ -1,5 +1,15 @@
 # Ficha: Previsão de demanda (`/viu-agenciamento/previsao`)
 
+## Retrato da carga da reunião de 04/11 (carga congelada de **03/11/2026 09:02** (dados até **02/11/2026**; D67, `docs/PRD_V2.md` seção 0.6))
+
+> Retrato de **outubro** (`ml.rodar --rotina`, 03/11; retrato e acompanhamento da mesma carga). **Inbound**: 150/mês
+> (nov, dez, jan/27), modelo Média de 6 meses, erro médio 14% em jun–set. **Mercado**: 525 · 563 · 702 (nov · dez ·
+> jan/27), modelo Rede neural (1 neurônio), erro médio 13%. O retrato de setembro ficou em
+> `_descartados/2026-11-03/ml/saida/`.
+> **Ponto aberto (decisão do Caio):** no Inbound a faixa provável **não contém o ponto** em dez (150; faixa 158–206) e
+> jan/27 (150; faixa 167–239). Já acontecia no retrato de setembro (nov e dez). Os quantis p10/p90 vêm de outra conta
+> que o valor do modelo vencedor; ver `ml/` antes de mudar (regra do protocolo D48).
+
 ## Retrato da carga da reunião (26/10/2026)
 
 > **Estado (26/10/2026, D56 — vigente; revisa a D48 e a D55 na escolha das séries e na tela):** **uma série e um modelo
@@ -148,7 +158,7 @@ que não estica a lâmina no celular).
 | P4 | Filtros: cada filtro e tipo usa a abordagem de menor erro no teste (C2) |
 | P5 | Sem confiança (C3): média do filtro no teste < 30 pedidos/mês ou WAPE > 40% → mensagem no lugar do número |
 | P6 | Execução mensal: retrato refeito quando o mês fecha; o mês em andamento mostra a previsão de fechamento do retrato e o realizado até a véspera da carga (acompanhamento, atualizado a cada carga) |
-| P7 | Eixo fixo jan–dez/2026 |
+| P7 | Eixo de jan/2026 a dez/2026 ou, se a previsão passar de dezembro, até o último mês dela (jan/27 desde 03/11/2026) |
 | P8 | WAPE = Σ\|prev − real\| ÷ Σ real ("errou X%"); MAE em pedidos/mês (igual à régua R3) |
 | P9 | (2ª leva, G4-N8) Pé do cartão no filtro Todos com as duas medidas: WAPE h1 do teste (`metricas.1`) e da verificação jan–mai (`series[t].metricas.verificacao`), MAE das duas como faixa, e a ingênua (`series[t].ingenua.wape` e `.verificacao`); painel `palpite()` com 3 linhas (vencedor `series[t].metricas.1.wape`, `ref_media_3m` e `ingenua`). A conta e o vencedor não mudam |
 | P10 (D56) | Cartões do mês vigente + 2 seguintes a partir da carga (`meses_dos_cartoes`), situação do vigente (`situacao`: esperado = previsão × dias úteis decorridos ÷ do mês; fora da faixa proporcional = abaixo/acima) |
@@ -231,7 +241,7 @@ roda (usa o 1º mês da janela), mas sem faixa (a faixa empírica pede 12 meses 
   e tipo só vai para o log (hoje: Mercado mar 252 × 251, abr 228 × 229). CSVs gravados por troca atômica. Consultas com
   `config.PROJETO` e `config.LABELS`. Histórico (`historico_previsoes.jsonl`): toda linha com `retrato` e `protocolo`
   (`linhas_do_historico`); o registro da D47 já está em `ml/saida/d47/`.
-- **Rótulos:** mês de outro ano que não o do gráfico sai com o ano ("jan/27"); o eixo segue jan–dez/2026 (PD22).
+- **Rótulos:** mês de outro ano que não o do gráfico sai com o ano ("jan/27"); o eixo vai de jan/2026 até dez/2026 ou até o último mês da previsão (jan/27 desde 03/11/2026; PD22).
 - Observado em 26/10: com o `previsao.json` ainda na versão 1, a página aberta disparou uma rotina completa (J1 sem retrato
   válido) — comportamento esperado; levou ~9 min (569 s somando os modelos).
 
@@ -838,6 +848,9 @@ alternativa é encadear ao job da gold. Custo estimado: ~10 min uma vez por mês
 
 | Data | Mudança |
 |---|---|
+| 03/11/2026 | **Rótulo corrigido:** `comb_holt_amort` é Holt com tendência amortecida (`ml/modelos/combinacao.py`), não "Holt simples"; passou a "Holt amortecido simples" (`ml/previsao.py`, `ROTULO`; o clássico `cls_holt_amortecido` segue "Holt amortecido"). No `ml/saida/previsao.json` publicado só o texto foi trocado (7 ocorrências, inclusive o motivo do Mercado não exclusivos), sem rodar modelos; `python -m app.conferir_base` segue "Pacote conferido". O retrato `ml/saida/retratos/2026-10.json` e os textos históricos desta ficha (D56, retrato de setembro) ficaram como estavam (registro). Teste `test_rotulo_do_holt_amortecido_simples` |
+| 03/11/2026 | **Diagnóstico de lotes (S6/P11) usa o mês do acompanhamento:** `ml/previsao.py::_lotes` pegava o último mês presente na base de lotes como "vigente"; na carga de 03/11 o Mercado (sem pedido em novembro até 02/11) saía com out/26 como vigente. Agora o vigente é `acompanhamento.mes`; série sem linha desse mês ou sem mês anterior fica sem diagnóstico, e meses posteriores não entram na média. O `previsao.json` publicado não foi regerado: o campo só aparece na tela no "Por quê" de mês fora da faixa, que hoje não sai (novembro com 0 dia útil decorrido); corrige na próxima `ml.rodar --acompanhamento`. Teste `test_lotes_usa_o_mes_do_acompanhamento` |
+| 03/11/2026 | **Gráfico e tabela até jan/27:** com o retrato de outubro o horizonte chega a jan/27, que só aparecia no cartão (e a zona "previsão" sumia, porque o fim dela caía fora do eixo). O eixo agora vai de jan/26 ao último mês da previsão (`calculos.meses_do_eixo`; com previsão até dez, segue jan–dez), com a coluna de jan/27 no mesmo estilo da previsão, linha tracejada na virada do ano (`app/static/previsao_ajustes.css`), rótulo "jan/27" nos gráficos largo e XL e "jan" no estreito (23 unidades por mês não comportam "jan/27"), ano inteiro nas dicas e na tabela do leitor de tela (legenda "de jan/2026 a jan/2027"). Conferido em 1440×900 (sem rolagem) e 390×844 por emulação (sem rolagem lateral). Teste `test_eixo_vai_ate_jan_27_quando_a_previsao_passa_de_dezembro` |
 | 31/10/2026 | **Auditoria do Codex, F03:** o rodapé leva a data própria do acompanhamento ("· acompanhamento até dd/mm") e, quando o retrato (`carga.processado_em`) ou o acompanhamento (`acompanhamento.processado_em`) são de outra carga que a da gold de entradas (a do rodapé; na reunião, a base congelada), um aviso discreto com ícone e texto ("acompanhamento de outra carga (dd/mm/aaaa)"). Nada volta ao topo (pedido do Caio). Regra em `previsao.coerencia`; o `tools/congelar_base.py --conferir` e o build (`python -m app.conferir_base`) reprovam a incoerência. Testes em `tests/test_auditoria_dados.py` |
 | 26/10/2026 | **D56** (Caio): uma série e um modelo por recorte (Inbound, Mercado, Mercado exclusivos, Mercado não exclusivos), sem repartição (`ml/filtros.py` saiu); 61 modelos × 4 séries na régua D48 + R7 (janela expansiva e mínimo por modelo nas séries só de 2026); vencedores: média de 6 meses, rede de 1 neurônio (não robusta; alternativa ARIMA com tendência), combinação de 6 e Holt simples; tela com cartões do mês vigente + 2 seguintes, gráfico em cartão flutuante e o diálogo "Modelos comparados"; outubro do Mercado exclusivos explicado (lotes e avulsos); silver 2025 avaliada e não usada; contrato v3; histórico com a linha D56 do retrato de setembro; 463 testes |
 | 26/10/2026 | **D55** (Caio): tela só com os dois gráficos largos (nome simples do modelo, previsões, erro médio); saíram "Vale mais que o palpite simples?" e "Regras e modelos" (documentação só na ficha e no PRD); Inbound não exclusivo = "Não se aplica", Inbound exclusivos = Inbound inteiro, casos contados (PD24); AutoTS (`ml/modelos/automatico.py`, 3 colocados por janela) dentro da régua D48 — não venceu (Inbound 15,0% × 14,4%; Mercado 26,7% × 12,6%); rotina completa refeita; 459 testes |

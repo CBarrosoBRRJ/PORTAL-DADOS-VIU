@@ -16,7 +16,7 @@ P5  Sem confiança: média da série no teste abaixo de 30 pedidos/mês ou erro 
     para prever com confiança" (ou "erro alto demais") no lugar do número; o erro aparece mesmo assim.
 P6  Execução mensal: o retrato (modelos e previsões) é refeito quando um mês fecha; o mês em andamento mostra a
     previsão de fechamento do retrato e o realizado até a véspera da carga (acompanhamento, atualizado a cada carga).
-P7  Eixo fixo jan–dez/2026: meses sem dado ficam vazios até a previsão; nada de 2024/2025 na tela.
+P7  Eixo de jan/2026 a dez/2026 (ou até o último mês da previsão, se passar de dezembro: jan/27): meses sem dado ficam vazios até a previsão; nada de 2024/2025 na tela.
 P8  Métricas (iguais à régua R3): WAPE = Σ|previsto − real| ÷ Σ real ("errou X%"); MAE em pedidos por mês.
 P9  Pé do gráfico: o erro no teste jun–set (onde o modelo foi escolhido, otimista) e na verificação jan–mai (fora da
     escolha), com o que erraria repetir o último mês; série curta (só 2026) = "sem verificação · confiança menor";
@@ -35,8 +35,8 @@ P12 Diálogo "Modelos comparados" (D56 item 4): <dialog> nativo com todos os mod
     motivo no title. Sem painel lateral (D55).
 """
 
-import json
 import hashlib
+import json
 import math
 import re
 import threading
@@ -64,8 +64,8 @@ _trava = threading.Lock()
 def _valido(p) -> bool:
     try:
         return (p.get("versao") == VERSAO and "mes_fechado" in p["retrato"] and "processado_em" in p["carga"]
-                and all(len(s["futuro"]) >= 1 for s in p["series"].values()) and set(p["filtros"]) == set(
-                    x[1] for x in GRUPOS.values()))
+                and all(len(s["futuro"]) >= 1 for s in p["series"].values()) and set(p["filtros"]) == {
+                    x[1] for x in GRUPOS.values()})
     except (AttributeError, KeyError, TypeError):
         return False
 
@@ -138,6 +138,18 @@ def _curto(m: str) -> str:
     return formato.MESES[int(m[5:]) - 1] + _ano(m)
 
 
+def _mes_ano(m: str) -> str:
+    """Mês com o ano inteiro ("jan/2027"), para dicas e a tabela do leitor de tela."""
+    return f"{formato.MESES[int(m[5:]) - 1]}/{m[:4]}"
+
+
+def meses_do_eixo(futuro: list[dict] | None) -> list[str]:
+    """P7: eixo de jan a dez/2026 e, se a previsão passar de dezembro (horizonte de 3 meses a partir de out/26), os
+    meses dela no ano seguinte (03/11/2026: jan/27 só aparecia no cartão)."""
+    fim = max([f"{ANO}-12"] + [str(x["mes"]) for x in futuro or []])
+    return [str(m) for m in pd.period_range(f"{ANO}-01", fim, freq="M")]
+
+
 def chave_css(serie: str) -> str:
     return {"Inbound": "inbound", "Mercado": "mercado", "Mercado exclusivos": "mercado-excl",
             "Mercado não exclusivos": "mercado-nao-excl"}.get(serie, "serie")
@@ -207,9 +219,9 @@ def _teto(v: float) -> tuple[float, float]:
 
 def grafico(f: dict, acompanhamento: dict | None, mes_fechado: str, prefixo: str, mostra_previsao: bool,
             w: int = W, h: int = H) -> dict:
-    """Geometria de um gráfico (P7): eixo jan–dez/2026; colunas do real, pontos vazios do teste (P2), mês em andamento
+    """Geometria de um gráfico (P7): eixo de jan/2026 ao fim da previsão; colunas do real, pontos vazios do teste (P2), mês em andamento
     hachurado e a previsão com a faixa (só se `mostra_previsao`, P5)."""
-    meses = [str(m) for m in pd.period_range(f"{ANO}-01", f"{ANO}-12", freq="M")]
+    meses = meses_do_eixo(f["futuro"])
     hist = {m: v for m, v in f["historico"].items() if m.startswith(str(ANO))}
     teste = {b["alvo"]: b for b in teste_h1(f["backtest"])} if mostra_previsao else {}
     futuro = {x["mes"]: x for x in f["futuro"]} if mostra_previsao else {}
@@ -225,25 +237,27 @@ def grafico(f: dict, acompanhamento: dict | None, mes_fechado: str, prefixo: str
         return round(TOPO + altura * (1 - v / topo), 1)
 
     base = TOPO + altura
-    grade = [{"y": y(i * passo), "t": formato.inteiro(i * passo)} for i in range(int(round(topo / passo)) + 1)]
+    grade = [{"y": y(i * passo), "t": formato.inteiro(i * passo)} for i in range(round(topo / passo) + 1)]
     barra = unidade * 0.6
     colunas, pontos, faixas, rotulos, linha = [], [], [], [], []
     for i, m in enumerate(meses):
         cx = round(ESQ + unidade * (i + 0.5), 1)
         x0 = round(cx - barra / 2, 1)
-        nome = _curto(m)
-        rotulos.append({"x": cx, "t": nome})
+        nome = _mes_ano(m)
+        # mês de outro ano leva o ano no eixo ("jan/27") se couber; no gráfico estreito, só "jan" (a virada de ano
+        # fica na linha tracejada e o ano completo nas dicas e na tabela)
+        rotulos.append({"x": cx, "t": _curto(m) if unidade >= 30 else formato.MESES[int(m[5:]) - 1]})
         if m in hist and m <= mes_fechado:
             v = hist[m]
             colunas.append({"x": x0, "y": y(v), "w": round(barra, 1), "h": round(base - y(v), 1), "classe": "pv-real",
-                            "dica": f"{nome}/{ANO}: {formato.inteiro(v)} pedidos"})
+                            "dica": f"{nome}: {formato.inteiro(v)} pedidos"})
         if m == mes_and and parcial is not None:
             colunas.append({"x": x0, "y": y(parcial), "w": round(barra, 1), "h": round(base - y(parcial), 1),
-                            "classe": "pv-real-parcial", "dica": f"{nome}/{ANO}: {formato.inteiro(parcial)} até agora"})
+                            "classe": "pv-real-parcial", "dica": f"{nome}: {formato.inteiro(parcial)} até agora"})
         if m in teste:
             b = teste[m]
             pontos.append({"cx": cx, "cy": y(b["valor"]), "classe": "pv-prev",
-                           "dica": f"{nome}/{ANO}: previsto no fim do mês anterior {formato.inteiro(b['valor'])}, "
+                           "dica": f"{nome}: previsto no fim do mês anterior {formato.inteiro(b['valor'])}, "
                                    f"entraram {formato.inteiro(b['real'])}"})
         if m in futuro:
             x = futuro[m]
@@ -252,7 +266,7 @@ def grafico(f: dict, acompanhamento: dict | None, mes_fechado: str, prefixo: str
                                "h": round(max(y(x["p10"]) - y(x["p90"]), 0), 1)})
             linha.append(f"{cx},{y(x['valor'])}")
             pontos.append({"cx": cx, "cy": y(x["valor"]), "classe": "pv-fut",
-                           "dica": f"{nome}/{ANO}: previsão {formato.inteiro(x['valor'])}"
+                           "dica": f"{nome}: previsão {formato.inteiro(x['valor'])}"
                                    + (f" (faixa {formato.inteiro(x['p10'])} a {formato.inteiro(x['p90'])})"
                                       if x.get("p10") is not None else "")})
     if linha and mes_fechado in hist:  # a linha da previsão sai do último mês fechado
@@ -266,6 +280,9 @@ def grafico(f: dict, acompanhamento: dict | None, mes_fechado: str, prefixo: str
         return {"x": round(ESQ + unidade * a, 1), "w": round(unidade * (b - a + 1), 1), "t": texto,
                 "tx": round(ESQ + unidade * (a + b + 1) / 2, 1)}
 
+    virada = None  # linha tracejada entre dez/2026 e o 1º mês do ano seguinte
+    if meses[-1][:4] != str(ANO):
+        virada = round(ESQ + unidade * meses.index(f"{ANO + 1}-01"), 1)
     zonas = []
     if teste:
         zonas.append(zona(min(teste), max(teste), "teste"))
@@ -273,7 +290,7 @@ def grafico(f: dict, acompanhamento: dict | None, mes_fechado: str, prefixo: str
         zonas.append(zona(min(futuro), max(futuro), "previsão"))
     return {"w": w, "h": h, "esq": ESQ, "dir": w - DIR, "base": base, "topo_y": TOPO, "grade": grade, "colunas": colunas,
             "pontos": pontos, "faixas": faixas, "linha": " ".join(linha) if len(linha) > 1 else "", "rotulos": rotulos,
-            "zonas": [z for z in zonas if z], "y_mes": base + 16, "prefixo": prefixo}
+            "zonas": [z for z in zonas if z], "y_mes": base + 16, "prefixo": prefixo, "virada": virada}
 
 
 # ---------------------------------------------------------------- tela
@@ -326,8 +343,8 @@ def _coluna(p: dict, item: dict) -> dict:
     teste = {b["alvo"]: b for b in teste_h1(s["backtest"])}
     fut = {x["mes"]: x for x in s["futuro"]}
     acessivel = []
-    for m in map(str, pd.period_range(f"{ANO}-01", f"{ANO}-12", freq="M")):
-        acessivel.append({"mes": f"{_curto(m)}/{ANO}", "real": s["historico"].get(m) if m <= p["retrato"]["mes_fechado"] else None,
+    for m in meses_do_eixo(s["futuro"]):
+        acessivel.append({"mes": _mes_ano(m), "real": s["historico"].get(m) if m <= p["retrato"]["mes_fechado"] else None,
                           "previsto": teste[m]["valor"] if m in teste and confiavel else None,
                           "parcial": acomp["valor"] if acomp and m == acomp["mes"] else None,
                           "futuro": fut.get(m) if confiavel else None})

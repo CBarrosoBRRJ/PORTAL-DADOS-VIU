@@ -51,8 +51,10 @@ C8  Arredondamento na tela: "até 1 dia" e o total "até 2 dias" arredondados di
 
 import hashlib
 import math
+import re
 import threading
 from datetime import datetime, time
+from itertools import pairwise
 from statistics import NormalDist, correlation
 
 import pandas as pd
@@ -141,6 +143,8 @@ def _contar_entregas(mov: pd.DataFrame) -> tuple:
         "mes": pd.to_datetime(bruto["mes"]).dt.strftime("%Y-%m"),
         "mes_entrada": pd.to_datetime(bruto["mes_entrada"]).dt.strftime("%Y-%m"),
         "entregue_em": pd.to_datetime(bruto["entregue_em"]),
+        # Caio, 03/11/2026: entrada do pedido (coluna `inicio` da view), para a lista dos fora da curva
+        "inicio": pd.to_datetime(bruto["inicio"]) if "inicio" in bruto else pd.NaT,
         "exclusivo": bruto["exclusivo"].astype(object).where(bruto["exclusivo"].notna(), None),  # C10: NA vira None
         **{c: bruto[c].astype(float) for c in ("h_trabalho", "h_fila", "h_elaboracao", "h_revisao", "h_calendario",
                                                "dias_uteis_fr")},
@@ -271,7 +275,7 @@ def entrega(mov: pd.DataFrame, mes_parcial: str, grupo: str = "todos") -> dict:
     mes_num = int(mes_parcial[5:])
     return {
         "leitura": leitura,
-        "n_ano": int(len(completos)),
+        "n_ano": len(completos),
         "ano_num": ano,
         "invalidos": todos.attrs.get("invalidos", 0),
         "mediana_h_trabalho": _mediana(completos["h_trabalho"]),
@@ -314,7 +318,7 @@ FAIXAS_CAUDA = ((0, 8, "até 1 dia"), (8, 16, "1 a 2 dias"), (16, 24, "2 a 3 dia
 
 
 def _indicadores(h: pd.Series) -> dict:
-    return {"n": int(len(h)), "mediana": _mediana(h),
+    return {"n": len(h), "mediana": _mediana(h),
             "ate2": _pontos((h <= META_H).mean()) if len(h) else None,
             "cauda_pct": _pontos((h > CAUDA_H).mean()) if len(h) else None}
 
@@ -349,7 +353,7 @@ def leituras(mov: pd.DataFrame, mes_parcial: str) -> dict | None:
         grupos.append({"chave": chave, "rotulo": rot, **_indicadores(g["h_trabalho"]),
                        "elaboracao_mediana": _mediana(elab)})
     return {
-        "n": int(len(c)),
+        "n": len(c),
         "periodo": f"{formato.MESES[0]} a {formato.MESES[mes_num - 2]}" if mes_num > 2 else formato.MESES[0],
         "periodo_etapas": f"{formato.MESES[int(MES_ETAPAS) - 1]} a {formato.MESES[mes_num - 2]}",
         "todos": _indicadores(h),
@@ -486,6 +490,40 @@ def _quando(t: pd.Timestamp) -> str:
     return t.strftime("%d/%m · %H:%M")
 
 
+LINK_MONDAY = re.compile(r"https://[a-z0-9-]+\.monday\.com/boards/\d+/pulses/\d+")
+
+
+def fora_da_curva(mov: pd.DataFrame, u: pd.DataFrame, fora_mask) -> list[dict]:
+    """Caio, 03/11/2026: os pedidos fora da curva do estudo (acima do limite de Tukey, X6), do mais longo ao mais curto,
+    para a lupa do slide 2: nome, marca e talento (movimentos), entrada (`inicio` da view; sem ela, a 1ª entrada nos
+    movimentos), 1ª entrega e horas de trabalho, e o link do item no monday. Só junta colunas da gold (D57); o link só
+    entra se for um endereço de item do monday (entrada externa tratada como não confiável)."""
+    fora = u.loc[getattr(fora_mask, "values", fora_mask)]
+    if fora.empty:
+        return []
+    m = mov.assign(projeto_id=mov["projeto_id"].astype(str))
+    info = m.drop_duplicates("projeto_id").set_index("projeto_id")
+    entrada = pd.to_datetime(m.groupby("projeto_id")["entrada"].min()) if "entrada" in m else pd.Series(dtype="datetime64[ns]")
+    lista = []
+    for r in fora.sort_values(["h_trabalho", "projeto_id"], ascending=[False, True]).itertuples(index=False):
+        pid = str(r.projeto_id)
+        i = info.loc[pid] if pid in info.index else None
+        ini = getattr(r, "inicio", pd.NaT)
+        ini = entrada.get(pid, pd.NaT) if pd.isna(ini) else ini
+        link = str(i["link_projeto"]) if i is not None and "link_projeto" in i and pd.notna(i["link_projeto"]) else ""
+        lista.append({
+            "id": pid,
+            "nome": (str(i["nome_projeto"]) if i is not None and pd.notna(i.get("nome_projeto")) else f"Projeto {pid}"),
+            "marca": str(i["marca"]) if i is not None and pd.notna(i.get("marca")) else "",
+            "talento": str(i["talento"]) if i is not None and pd.notna(i.get("talento")) else "",
+            "entrada": _quando(pd.Timestamp(ini)) if pd.notna(ini) else "–",
+            "entrega": _quando(pd.Timestamp(r.entregue_em)) if pd.notna(r.entregue_em) else "–",
+            "horas": float(r.h_trabalho), "horas_txt": _h(float(r.h_trabalho)), "dias_txt": _dias_trabalho(float(r.h_trabalho)),
+            "link": link if LINK_MONDAY.fullmatch(link) else "",
+        })
+    return lista
+
+
 def _caminho(passos: pd.DataFrame, pronto: int):
     """Etapas antes da 1ª entrega, na ordem E2, ou None se o caminho não for limpo (E1)."""
     antes = passos.loc[passos["passo"] < pronto]
@@ -614,8 +652,11 @@ def _montar_exemplo(passos, caminho, c1, depois, agora, entrega: pd.Series) -> d
 # três quadros à direita (assimetria, Q-Q, boxplot); cada quadro "acende" a marcação do histograma.
 # X1  Universo: entregues dos meses completos de entrega do ano (C4, C7/A1), no grupo de talentos (C10, só pela URL);
 #     h = tempo da equipe (C2). Cards de pacote ficam na base (só identificados, X6).
-# X2  Histograma: faixas de 4 h — (0, 4], (4, 8], …, (56, 60] e "60 h ou mais" (> 60); h = 0 entra na 1ª. Alturas =
-#     quantidade de orçamentos. Eixo x: 0, 8, 16, … h e "60 h ou mais".
+# X2  Histograma (Caio, 03/11/2026): faixas de 4 h — (0, 4], (4, 8], … — de 0 até o limite de Tukey do grupo (X6); se
+#     o limite não é múltiplo de 4, a última faixa vai do último múltiplo até ele (mais estreita, rótulo próprio; resto
+#     < 1 h entra na faixa anterior). Depois, uma barra só "acima de <limite>" (> limite), toda vermelha: o número dela é
+#     o n_fora do cartão "Fora da curva". h = 0 entra na 1ª. Alturas = quantidade de orçamentos. Eixo x: 0, 8, 16, … h
+#     e "acima de <limite>". Limite escrito com 1 casa quando não é inteiro (`_h_lim`: 69,7 h, não "70 h").
 # X3  Faixas do topo (quadros 1 e 2): na meta, até 2 dias (≤ 16 h, C6/D38), de 2 a 5 dias (16–40 h) e mais de 5 dias
 #     (> 40 h, C12), em % pelo maior resto (E8c); o 3º bloco leva o maior tempo do grupo ("até N h"). A faixa do pé do
 #     quadro 1 diz se o típico (mediana exata) está dentro da meta ou quantas horas passa dela.
@@ -638,7 +679,8 @@ def _montar_exemplo(passos, caminho, c1, depois, agora, entrega: pd.Series) -> d
 #     outliers e sem os cards de pacote.
 # X9  P50, P80 e P90 (quantis lineares) em horas: só cálculo e ficha. O quadro 4 (curva acumulada) saiu da tela a pedido
 #     do Caio (25/10/2026); a curva acumulada vai para outra página.
-BIN_H, BINS = 4, 15  # X2: 15 faixas de 4 h até 60 h + "60 h ou mais"
+BIN_H = 4  # X2: faixas de 4 h até o limite de Tukey + "acima de <limite>"
+RESTO_MIN_H = 1.0  # X2: resto do limite (acima do último múltiplo de 4) menor que isso entra na faixa anterior
 NORMAL_R = 0.95  # X5: aderência mínima para dizer que segue a curva
 # X3: o corte de 2 dias do slide 2 é a própria META_H (16 h); a constante duplicada saiu em 26/10/2026 (G3-13)
 QQ_K = 200  # X5: quantis do Q-Q
@@ -651,6 +693,16 @@ def _br(x: float, casas: int = 1) -> str:
 
 def _h(x: float) -> str:
     return f"{math.floor(x + 0.5)} h"
+
+
+def _n_lim(x: float) -> str:
+    """X2/X6 (Caio, 03/11/2026): horas do limite de Tukey e das bordas do histograma com 1 casa, sem ",0" (59,2; 56;
+    69,7). O inteiro arredondado enganava: "acima de 70 h" para 69,7 h, com um pedido de 69,9 h na lista."""
+    return _br(x).removesuffix(",0")
+
+
+def _h_lim(x: float) -> str:
+    return f"{_n_lim(x)} h"
 
 
 def _larg(texto: str, fonte: float) -> float:
@@ -741,7 +793,7 @@ def _frases(h: pd.Series, bx: dict, n_fora: int, n_pac: int = 0) -> dict:
     (`pct_horas_outliers`), fora da tela. Variantes: sem demorados, sem outliers, singular e "menos de 1%"."""
     r, c, d, f = bx["pcts"]
     rc = r + c
-    q3, lim = _h(bx["q3"]), _h(bx["limite"])
+    q3, lim = _h(bx["q3"]), _h_lim(bx["limite"])
     horas = _pontos(float(h[h > bx["limite"]].sum() / h.sum())) if h.sum() else 0
     p = _pontos(float((h <= META_H).mean()))
     partes = [f"<strong>{_pct(rc)} dos orçamentos {'sai' if rc <= 1 else 'saem'} em até {q3}</strong>: os rápidos e os comuns."]
@@ -798,7 +850,7 @@ def _insight_unico(med: float, media: float, bx: dict, n_fora: int, relevante: b
     muito e puxam a média; o típico (mediana exata, C6) é a medida. F = % fora da curva (`bx.pcts[3]`), acima do limite
     estatístico escrito no gráfico; média relevante = X4/D12 (a mesma regra do rótulo da média). Variantes: média perto
     do típico; ninguém fora da curva; 1% no singular."""
-    tip, med_txt, lim = _h_meta(med), _h(media), _h(bx["limite"])
+    tip, med_txt, lim = _h_meta(med), _h(media), _h_lim(bx["limite"])
     if not relevante:
         return (f"A média ({med_txt}) fica perto do típico ({tip}): aqui as duas contam a mesma história. "
                 "<em>Seguimos com o típico (a mediana)</em>, que não se deixa levar pelos casos longos.")
@@ -844,7 +896,7 @@ def _influencia(h: pd.Series, fora: pd.Series, pacote: pd.Series | None) -> dict
     """X8: o quanto os outliers mexem nos números (com todos × sem eles × sem os cards de pacote). Só ficha."""
     def _numeros(v: pd.Series) -> dict:
         v = v.astype(float)
-        return {"n": int(len(v)), "mediana": float(v.median()), "media": float(v.mean()), "p90": float(v.quantile(0.9)),
+        return {"n": len(v), "mediana": float(v.median()), "media": float(v.mean()), "p90": float(v.quantile(0.9)),
                 "pct_2d": _pontos(float((v <= META_H).mean())),
                 "mediana_txt": _h(float(v.median())), "media_txt": _h(float(v.mean())), "p90_txt": _h(float(v.quantile(0.9)))}
 
@@ -903,7 +955,7 @@ def _caixa(h: pd.Series, bx: dict) -> dict:
     numeros = [{"x": round(c_, 1), "t": f"{p}%"} for c_, p in zip(centros, bx["pcts"])]  # D38: % do total
     if not tem_fora:
         nomes_rot, numeros = nomes_rot[:3], numeros[:3]
-    valores = [{"x": x_q1, "t": _h(bx["q1"])}, {"x": x_q3, "t": _h(bx["q3"])}, {"x": x_lim, "t": _h(bx["limite"])}]
+    valores = [{"x": x_q1, "t": _h(bx["q1"])}, {"x": x_q3, "t": _h(bx["q3"])}, {"x": x_lim, "t": _h_lim(bx["limite"])}]
     for i in range(1, len(valores)):  # perto demais: o da direita anda
         a, b = valores[i - 1], valores[i]
         minimo = a["x"] + (_larg(a["t"], 11.5) + _larg(b["t"], 11.5)) / 2 + 6
@@ -936,7 +988,6 @@ def _qq(teo: list[float], obs: list[float], lim: float, h: pd.Series | None = No
     sy = lambda v: H - B - (H - B - T) * min(max(v, 0.0), hy) / hy
     passo_y = next(p for p in (10, 20, 25, 50, 100, 200) if hy / p <= 4)
     marcas = [{"v": f"{v} h", "y": round(sy(v), 1)} for v in range(0, int(hy) + 1, passo_y)]
-    passo_x = next(p for p in (5, 10, 20, 25, 50) if hx / p <= 6)
     # 25/10 (Caio): na reta, os mesmos cortes das faixas do histograma (2 dias e 5 dias de trabalho), não horas soltas
     rotulos = [{"v": t, "x": round(sx(v), 1), "y": round(sy(v), 1)}
                for v, t in ((META_H, "2 dias"), (CAUDA_H, "5 dias")) if v <= hx]
@@ -1025,57 +1076,62 @@ def exploracao(mov: pd.DataFrame, mes_parcial: str, grupo: str = "todos") -> dic
     W, H, E, D = 580, 312, 28, 2  # 25/10: +20 da legenda retirada (Caio), o painel ao lado mantém a altura
     YF, HF = 0, 22  # faixa do topo
     T, base = 64, H - 20  # topo da barra mais alta; linha de base
-    larg = (W - E - D) / (BINS + 1)
-    cont = [int(((h > i * BIN_H) & (h <= (i + 1) * BIN_H)).sum()) + (int((h <= 0).sum()) if i == 0 else 0) for i in range(BINS)]
-    cont.append(int((h > BINS * BIN_H).sum()))
+    lim = bx["limite"]
+    lim_txt = _h_lim(lim)
+    # X2 (Caio, 03/11/2026): faixas de 4 h de 0 até o limite de Tukey; a última pode ser mais estreita (do último
+    # múltiplo de 4 até o limite) e, depois, uma barra só "acima de <limite>", toda vermelha, com o n_fora do cartão.
+    # Nenhuma barra de duas cores (antes, faixas fixas até 60 h com a parte acima do limite pintada à parte)
+    bordas = [float(v) for v in range(0, int(lim // BIN_H) * BIN_H + 1, BIN_H)]
+    if len(bordas) == 1 or lim - bordas[-1] >= RESTO_MIN_H:
+        bordas.append(lim)
+    else:  # resto pequeno (ou limite múltiplo de 4): a faixa anterior vai até o limite, para não virar um fio
+        bordas[-1] = lim
+    trechos = list(pairwise(bordas))
+    cont = [int(((h > lo) & (h <= hi)).sum()) for lo, hi in trechos]
+    cont[0] += int((h <= 0).sum())
+    cont.append(n_fora)
+    larg = (W - E - D) / (lim / BIN_H + 1)  # px por 4 h; a barra "acima de" tem a largura de uma faixa cheia
+    x_h = lambda hr: E + min(max(hr, 0.0), lim) / BIN_H * larg  # horas → x; acima do limite, o começo da última
+    fim = W - D
+    xs = [(x_h(lo), x_h(hi)) for lo, hi in trechos] + [(x_h(lim), fim)]
     topo = max(cont)
     passo_y = 100 if topo > 300 else (50 if topo > 120 else 20)
     y = lambda v: base - (base - T) * v / topo
-    x_h = lambda hr: E + min(max(hr, 0.0), BINS * BIN_H) / BIN_H * larg  # horas → x; acima de 60 h, o começo da última
-    fim = E + (BINS + 1) * larg
     x_med = round(x_h(med), 1)
-    x_media = round(E + min(media, BINS * BIN_H + BIN_H / 2) / BIN_H * larg, 1)
-    y_lin1 = YF + HF + 18  # 1ª linha dos rótulos do alto (alfinetes do passo 3)
+    x_media = round(E + min(max(media, 0.0), lim + BIN_H / 2) / BIN_H * larg, 1)  # acima do limite: meio da última
+    y_lin1 = YF + HF + 18  # 1ª linha dos rótulos do alto (alfinetes)
 
     def zona_c3(hi):  # X3
         return "rapido" if hi <= META_H else ("medio" if hi <= CAUDA_H else "lento")
 
-    def zona_box(centro):  # X6
-        return ("box-rapido" if centro <= bx["q1"] else "box-comum" if centro <= bx["q3"]
-                else "box-demorado" if centro <= bx["limite"] else "box-fora")
-
-    def topo_coberto(x0, x1):  # o y mais alto (menor) das barras e dos seus números entre x0 e x1
-        ys = [y(c) - 18 for i, c in enumerate(cont) if E + (i + 1) * larg >= x0 and E + i * larg <= x1]
-        return min(ys) if ys else base
+    def zona_box(centro):  # X6 (só faixas até o limite: o centro nunca passa dele)
+        return "box-rapido" if centro <= bx["q1"] else "box-comum" if centro <= bx["q3"] else "box-demorado"
 
     barras = []
-    for i, c in enumerate(cont):
-        lo, hi = i * BIN_H, (i + 1) * BIN_H
-        cx = round(E + (i + 0.5) * larg, 1)
-        tx, ancora = _rotulo_livre(cx, str(c), [x_med, x_media], 11.5, folga=max((larg - len(str(c)) * 6.9) / 2, 0) + 3)
-        barra = {"x": round(E + i * larg + 1.5, 1), "w": round(larg - 3, 1), "y": round(y(c), 1), "h": round(base - y(c), 1),
-                 "n": c, "cx": cx, "tx": tx, "ancora": ancora,
-                 "zona": zona_c3(hi if i < BINS else math.inf), "zona_box": zona_box(lo + BIN_H / 2 if i < BINS else math.inf),
-                 "rotulo": (f"{lo} a {hi} h" if i < BINS else f"mais de {BINS * BIN_H} h"), "fora": None}
-        if i == BINS:  # X6: a barra "60 h ou mais" junta demorados e outliers; a parte de cima (> limite) à parte
-            n_ult = int((h > max(bx["limite"], BINS * BIN_H)).sum())
-            barra["zona_box"] = "box-demorado" if bx["limite"] > BINS * BIN_H else "box-fora"
-            if n_ult and bx["limite"] > BINS * BIN_H:
-                barra["fora"] = {"y": round(y(c), 1), "h": round(y(c - n_ult) - y(c), 1), "n": n_ult}
-        barras.append(barra)
-    # eixo x: 0, 8, 16, … h e "60 h ou mais" encostado na borda direita; a marca que encostaria nele sai
-    t_ult = f"{BINS * BIN_H} h ou mais"
+    for i, (c, (x0, x1)) in enumerate(zip(cont, xs)):
+        cx = round((x0 + x1) / 2, 1)
+        tx, ancora = _rotulo_livre(cx, str(c), [x_med, x_media], 11.5, folga=max((x1 - x0 - len(str(c)) * 6.9) / 2, 0) + 3)
+        if i == len(trechos):  # a última: toda fora da curva
+            zona, zbox, rotulo = zona_c3(math.inf), "box-fora", f"acima de {lim_txt}"
+        else:
+            lo, hi = trechos[i]
+            zona, zbox, rotulo = zona_c3(hi), zona_box((lo + hi) / 2), f"{_n_lim(lo)} a {_n_lim(hi)} h"
+        barras.append({"x": round(x0 + 1.5, 1), "w": round(max(x1 - x0 - 3, 1.0), 1), "y": round(y(c), 1),
+                       "h": round(base - y(c), 1), "n": c, "cx": cx, "tx": tx, "ancora": ancora,
+                       "zona": zona, "zona_box": zbox, "rotulo": rotulo})
+    # eixo x: 0, 8, 16, … h e "acima de <limite>" encostado na borda direita; a marca que encostaria nele sai
+    t_ult = f"acima de {lim_txt}"
     ini_ult = fim - _larg(t_ult, 11.5) * 0.92
-    marcas_x = [{"x": round(E + i * larg, 1), "t": f"{i * BIN_H} h"} for i in range(0, BINS, 2)
-                if i == 0 or E + i * larg + _larg(f"{i * BIN_H} h", 11.5) / 2 + 6 < ini_ult]
+    marcas_x = [{"x": round(x_h(v), 1), "t": f"{v} h"} for v in range(0, int(lim) + 1, 2 * BIN_H)
+                if v == 0 or x_h(v) + _larg(f"{v} h", 11.5) / 2 + 6 < ini_ult]
     marcas_x.append({"x": round(fim, 1), "t": t_ult})
     grade = [{"y": round(y(v), 1), "t": str(v)} for v in range(0, topo + 1, passo_y) if v <= 0.62 * topo]
 
-    # X3 faixas do topo (quadros 1, 2 e 4) e X6 zonas do boxplot (quadro 3), como trechos do eixo x. O texto encolhe
+    # X3 faixas do topo (só cálculo) e X6 zonas do boxplot (na tela), como trechos do eixo x. O texto encolhe
     # (opções da mais longa à mais curta) até caber na largura do bloco; no mínimo, só o %
     c3 = [int((h <= META_H).sum()), int(((h > META_H) & (h <= CAUDA_H)).sum()), int((h > CAUDA_H).sum())]
     p3 = _pcts(c3)
-    q1t, q3t, limt = _h(bx["q1"]).removesuffix(" h"), _h(bx["q3"]), _h(bx["limite"])
+    q1t, q3t = _h(bx["q1"]).removesuffix(" h"), _h(bx["q3"])
     faixas = [
         {"x0": E, "x1": x_h(META_H), "zona": "rapido", "pct": p3[0],
          "opcoes": ["prontos em até 2 dias (16 h)", "prontos em até 2 dias", "até 2 dias"]},  # D38; G3-8: o pedido não "está na meta"
@@ -1085,9 +1141,9 @@ def exploracao(mov: pd.DataFrame, mes_parcial: str, grupo: str = "todos") -> dic
     zonas = [
         {"x0": E, "x1": x_h(bx["q1"]), "zona": "box-rapido", "pct": bx["pcts"][0], "opcoes": [f"rápidos: até {_h(bx['q1'])}", "rápidos"]},
         {"x0": x_h(bx["q1"]), "x1": x_h(bx["q3"]), "zona": "box-comum", "pct": bx["pcts"][1], "opcoes": [f"comuns: de {q1t} a {q3t}", "comuns"]},
-        {"x0": x_h(bx["q3"]), "x1": x_h(bx["limite"]), "zona": "box-demorado", "pct": bx["pcts"][2],
-         "opcoes": [f"demorados, no padrão: até {limt}", f"demorados: até {limt}", "demorados"]},  # D38
-        {"x0": x_h(bx["limite"]), "x1": fim, "zona": "box-fora", "pct": bx["pcts"][3], "opcoes": ["fora da curva"]},
+        {"x0": x_h(bx["q3"]), "x1": x_h(lim), "zona": "box-demorado", "pct": bx["pcts"][2],
+         "opcoes": [f"demorados, no padrão: até {lim_txt}", f"demorados: até {lim_txt}", "demorados"]},  # D38
+        {"x0": x_h(lim), "x1": fim, "zona": "box-fora", "pct": bx["pcts"][3], "opcoes": ["fora da curva"]},  # = a última barra
     ]
     for f in faixas + zonas:
         f["x0"], f["x1"] = round(f["x0"] + 1, 1), round(f["x1"] - 1, 1)
@@ -1097,61 +1153,14 @@ def exploracao(mov: pd.DataFrame, mes_parcial: str, grupo: str = "todos") -> dic
         f["txt"] = next((t for t in f["opcoes"] if base_pct + len(t) * 0.5 * 10.8 <= f["w"]), "")
         f["mostra_pct"] = base_pct <= f["w"] + 2
     zonas = [z for z in zonas if z["w"] > 0]
-    guias_c3 = [round(x_h(META_H), 1), round(x_h(CAUDA_H), 1)]
-    guias_box = [round(x_h(v), 1) for v in (bx["q1"], bx["q3"], bx["limite"]) if v < BINS * BIN_H]
-
-    # passo 1: mediana e média com rótulo de duas linhas, ao lado da linha (vira para a esquerda se não couber à direita)
-    def _rot2(xl, textos, y1, fonte2):
-        w = max(_larg(textos[0], 11.5), _larg(textos[1], fonte2))
-        if xl + 6 + w <= W - D:
-            x0, x1, xt, anc = xl + 6, xl + 6 + w, xl + 6, "start"
-        else:
-            x0, x1, xt, anc = xl - 6 - w, xl - 6, xl - 6, "end"
-        y2 = y1 + 16
-        livre = topo_coberto(x0, x1)
-        if y2 + 4 > livre:  # encostaria nos números: sobe até a faixa do topo
-            y2 = max(livre - 4, YF + HF + 30)
-            y1 = y2 - 16
-        return {"x": round(xt, 1), "ancora": anc, "y1": round(y1, 1), "y2": round(y2, 1)}
+    guias_box = [round(x_h(v), 1) for v in (bx["q1"], bx["q3"], lim)]
 
     media_relevante = _arred(media) > _arred(med) * 1.1 and _arred(media) - _arred(med) >= 2  # D12: "e não X h"
-    rot_med = _rot2(x_med, ["mediana", _h_meta(med)], YF + HF + 22, 15)
-    rot_media = _rot2(x_media, ["média, puxada pela cauda" if media_relevante else "média", _h(media)],
-                      rot_med["y2"] + 26, 15)
+    _, banda = kde_silverman(h, [0.0])  # X5: a banda segue no cálculo e na ficha (a curva saiu da tela, D38)
 
-    # passo 1: seta pontilhada "a cauda se estende para a direita →", da barra depois da média até a penúltima
-    i0 = min(int(min(media, 56) // BIN_H) + 1, BINS - 4)
-    i1 = BINS - 1
-    x0c, x1c = E + (i0 + 0.5) * larg, E + (i1 + 0.5) * larg
-    y0c = min(y(max(cont[i0:i0 + 3])) - 22, base - 30)
-    y1c = min(y(max(cont[i1 - 1:i1 + 1])) - 20, base - 16)
-    y0c = max(y0c, rot_media["y2"] + 26)
-    xcc = x0c + 0.6 * (x1c - x0c)
-    t_cauda = "a cauda se estende para a direita →"
-    tx_c = x0c + 0.55 * (x1c - x0c)
-    w_c = _larg(t_cauda, 11.5)
-    tx_c = min(tx_c, W - D - w_c / 2)
-    ty_c = min(y0c + 0.3 * (y1c - y0c) - 8, topo_coberto(tx_c - w_c / 2, tx_c + w_c / 2) - 2)
-    cauda = {"d": f"M{x0c:.1f},{y0c:.1f} Q{xcc:.1f},{y0c:.1f} {x1c:.1f},{y1c:.1f}", "tx": round(tx_c, 1), "ty": round(ty_c, 1)}
-
-    # passo 2 (D38): o sino do meio da reta do Q-Q (mediana e IQR/1,349) e o KDE de Silverman, na escala das barras
-    # (n × 4 h × densidade)
-    y_curva = lambda dens: max(y(n * BIN_H * dens), YF + HF + 6)
-    hs_n = [k * (BINS + 1) * BIN_H / 160 for k in range(161)]
-    curva = " ".join(f"{E + hr / BIN_H * larg:.1f},{y_curva(sino_meio.pdf(hr)):.1f}" for hr in hs_n)
-    hs_k = [k * BINS * BIN_H / 150 for k in range(151)]
-    dens_k, banda = kde_silverman(h, hs_k)
-    kde = " ".join(f"{E + hr / BIN_H * larg:.1f},{y_curva(d_):.1f}" for hr, d_ in zip(hs_k, dens_k))
-    # legenda do sino (D38: um item só; o KDE saiu da tela), no alto à direita, acima das barras e dos números que ela cobre
-    t_sino, t_kde = "se fosse um sino em volta do típico", "os nossos tempos, numa curva suavizada"
-    w_leg = 26 + _larg(t_sino, 11.5)
-    lx = max(W - D - w_leg, x_h(META_H) + 2)
-    ly2 = min(YF + HF + 46, topo_coberto(lx, lx + w_leg) - 4)
-    legenda_curvas = {"x": round(lx, 1), "y1": round(ly2 - 18, 1), "y2": round(ly2, 1)}
-
-    # passo 3: mediana e média discretas ("mediana · 14 h"), alfinetes do alto até logo acima da barra
+    # típico e média discretos ("típico · 14 h"), alfinetes do alto até logo acima da barra
     def _alfinete(xl, texto, yl):
-        i = min(int(min(xl - E, (BINS + 1) * larg - 0.01) // larg), BINS)
+        i = next((k for k, (_, x1) in enumerate(xs) if xl <= x1), len(xs) - 1)
         w = _larg(texto, 11.5)
         anc, tx = ("start", xl + 5) if xl + 5 + w <= W - D else ("end", xl - 5)
         return {"x": round(xl, 1), "tx": round(tx, 1), "ancora": anc, "ty": round(yl, 1), "y1": round(yl + 4, 1),
@@ -1176,7 +1185,7 @@ def exploracao(mov: pd.DataFrame, mes_parcial: str, grupo: str = "todos") -> dic
         if len(gg) < 30:
             continue
         bg = _boxplot(gg)
-        comparacao.append({"chave": k, "rotulo": rot, "n": int(len(gg)), "atual": k == grupo,
+        comparacao.append({"chave": k, "rotulo": rot, "n": len(gg), "atual": k == grupo,
                            "pct_regua_todos": _pcts([int((gg <= lim_todos).sum()), int((gg > lim_todos).sum())])[1],
                            "pct_propria": bg["pcts"][3], "limite_proprio": _h(bg["limite"]),
                            "pct_5dias": _pontos((gg > CAUDA_H).mean()), "fora": int((gg > bg["limite"]).sum()),
@@ -1194,6 +1203,7 @@ def exploracao(mov: pd.DataFrame, mes_parcial: str, grupo: str = "todos") -> dic
         "media_relevante": media_relevante, "puxao_txt": _puxao(med, media), "normal": normal, "r_normal": r_normal, "r_normal_txt": _br(r_normal, 2),
         "faixas3": {"contagens": c3, "pcts": p3},
         "n_fora": n_fora, "pacotes_fora": pac_fora, "frases": (fr := _frases(h, bx, n_fora, pac_fora)),
+        "fora_lista": fora_da_curva(mov, u, fora_mask),  # Caio, 03/11/2026: lupa do slide 2
         # D38: um insight por passo (regras, sem LLM), em % do total
         "insights": {"1": _insight_p1(med, media, _pontos(float((h <= META_H).mean())), media_relevante),
                      "2": (i2 := _insight_p2(h, sino_meio, normal))["texto"], "3": fr["fora_rodape"]},
@@ -1201,21 +1211,19 @@ def exploracao(mov: pd.DataFrame, mes_parcial: str, grupo: str = "todos") -> dic
         "insight": _insight_unico(med, media, bx, n_fora, media_relevante),
         "p90_sino": i2["sino_p90"],
         "pct_horas_outliers": fr["pct_horas_outliers"], "pct_meta": fr["pct_meta"], "tipico": meta_tipico(med),
-        "box": {**bx, "q1_txt": _h(bx["q1"]), "q3_txt": _h(bx["q3"]), "med_txt": _h_meta(bx["mediana"]), "lim_txt": _h(bx["limite"]),
+        "box": {**bx, "q1_txt": _h(bx["q1"]), "q3_txt": _h(bx["q3"]), "med_txt": _h_meta(bx["mediana"]), "lim_txt": _h_lim(bx["limite"]),
                 # D09: a conta escrita fecha com os termos mostrados (1 casa)
                 "conta": f"{_br(q3r)} + 1,5 × {_br(iqrr)} = {_br(q3r + 1.5 * iqrr)} h",
                 "dentro": 100 - fora_pct, "fora": fora_pct},
         "p50": p50, "p80": p80, "p90": p90, "p50_txt": _h(p50), "p80_txt": _h(p80), "p90_txt": _h(p90),
         "kde_banda": banda,
         "hist": {"w": W, "h": H, "e": E, "dir": W - D, "base": base, "topo": T, "barras": barras, "marcas_x": marcas_x,
-                 "grade": grade, "x_med": x_med, "x_media": x_media, "rot_med": rot_med, "rot_media": rot_media,
-                 "curva": curva, "kde": kde, "legenda_curvas": legenda_curvas, "teto_txt": f"{BINS * BIN_H} h", "t_sino": t_sino, "t_kde": t_kde,
-                 "alf_med": alf_med, "alf_media": alf_media,
-                 "faixas": faixas, "zonas": zonas, "guias_c3": guias_c3, "guias_box": guias_box, "y_faixa": YF, "h_faixa": HF,
-                 "fim": round(fim, 1), "cauda": cauda, "t_cauda": t_cauda,
+                 "grade": grade, "x_med": x_med, "x_media": x_media, "alf_med": alf_med, "alf_media": alf_media,
+                 "faixas": faixas, "zonas": zonas, "guias_box": guias_box, "y_faixa": YF, "h_faixa": HF,
+                 "fim": round(fim, 1),
                  "texto": "; ".join(f"{b['rotulo']}: {b['n']}" for b in barras)},
         "qq": _qq([sino_meio.inv_cdf(p) for p in ps], obs, bx["limite"], h, i2), "espelho": _espelho(h), "caixa": _caixa(h, bx),
-        "influencia": _influencia(h, fora_mask, u["pacote"] if "pacote" in u else None),
+        "influencia": _influencia(h, fora_mask, u.get("pacote")),
         "comparacao": comparacao, "regua_todos": _h(lim_todos),
     }
 
@@ -1262,7 +1270,7 @@ def recorte(mov: pd.DataFrame, mes_parcial: str, grupo: str = "todos") -> dict |
     seletor (C10). `proximo` = o mês parcial por extenso ("outubro"), que entra quando fechar (slide 8)."""
     if int(mes_parcial[5:]) < 2:
         return None
-    n = int(len(_universo_df(mov, mes_parcial, grupo)))
+    n = len(_universo_df(mov, mes_parcial, grupo))
     ano, fim = mes_parcial[:4], int(mes_parcial[5:]) - 1
     periodo = f"{formato.MESES[0]} de {ano}" if fim == 1 else f"{formato.MESES[0]} a {formato.MESES[fim - 1]} de {ano}"
     rotulo = GRUPOS[grupo][0] if grupo in GRUPOS else GRUPOS["todos"][0]
@@ -1638,7 +1646,7 @@ def _mes_textos(meses: list[dict]) -> dict:
     """U7, U8: leitura (sazonal × padrão), título, faixa do pé e gancho, só com números que aparecem no gráfico."""
     com = [m for m in meses if not m.get("vazio") and m["n"]]
     destoam = _destoam(com)
-    pct = lambda p: f"{p}%"  # noqa: E731
+    pct = lambda p: f"{p}%"
 
     def resumo(ms):
         bs = [m["b"] for m in ms]
@@ -1729,7 +1737,7 @@ def _meses(d: pd.DataFrame, mes_parcial: str) -> dict | None:
                 continue
             classe = "ate2" if v <= META_H else ("de2a5" if v <= CAUDA_H else "mais5")
             pontos[classe].append(f"M{x} {sy(v)}h0")
-        m["n"] = int(len(h))
+        m["n"] = len(h)
         if len(h):
             q1, med, q3 = (float(h.quantile(q)) for q in (0.25, 0.5, 0.75))
             m.update({"mediana": med, "q1": q1, "q3": q3, "tipico": _h_meta(med), "b": _faixas(h)["tela"]["acima2"],
@@ -1864,7 +1872,7 @@ def _travas(u: pd.DataFrame, ps: pd.DataFrame, mes_parcial: str) -> dict | None:
         lim = q3 + 1.5 * (q3 - q1)  # K3
         trav = h > lim
         ate = str(g["mes"].max())
-        st.append({"etapa": etapa, "nome": nome, "n": int(len(h)), "mediana": med, "tipico": _h1(med), "q1": q1,
+        st.append({"etapa": etapa, "nome": nome, "n": len(h), "mediana": med, "tipico": _h1(med), "q1": q1,
                    "q3": q3, "limite": lim, "limite_txt": _h1(lim), "travaram": int(trav.sum()),
                    "travado": float(h[trav].sum()),  # K4 (Caio, 25/10/2026): o tempo inteiro de quem travou
                    "projetos": set(g.loc[trav, "projeto_id"]),
@@ -1920,7 +1928,7 @@ def _travas(u: pd.DataFrame, ps: pd.DataFrame, mes_parcial: str) -> dict | None:
     # B-N3 (25/10/2026): base comum dos % — o tempo travado como parte de TODAS as horas da equipe do recorte
     horas = float(u["h_trabalho"].astype(float).sum())
     pct_horas = _pontos(total / horas) if horas else None
-    return {"n": int(len(u)), "status": [cartao(s) for s in ordem], "etapas": etapas, "total_h": total,
+    return {"n": len(u), "status": [cartao(s) for s in ordem], "etapas": etapas, "total_h": total,
             "horas_total": horas, "pct_horas": pct_horas,
             "numero_entrega": len(etapas) + 1, **_trava_textos(ordem, pct_horas)}
 
@@ -2034,7 +2042,7 @@ def _tipos(u: pd.DataFrame, ps: pd.DataFrame, mes_parcial: str) -> dict | None:
         a = _faixas(h)["tela"]["ate2"]  # J4 (C8)
         lentos = u.loc[mask & (u["h_trabalho"] > META_H), "projeto_id"]
         return {"tipo": nome, "n": int(mask.sum()), "pct_txt": _pct1(int(mask.sum()), n), "a": a, "b": 100 - a,
-                "mediana": float(h.median()), "tipico": _h_meta(float(h.median())), "n_lentos": int(len(lentos)),
+                "mediana": float(h.median()), "tipico": _h_meta(float(h.median())), "n_lentos": len(lentos),
                 "trava": _onde_trava(lentos, ps), "destaque": False}
 
     geral = linha(pd.Series(True, index=u.index), "Todos os pedidos")
@@ -2214,7 +2222,7 @@ def _conclusao(h: pd.Series, tempo: dict | None, meses: dict | None, trava: dict
     # Z4
     if meses:
         r, tp = meses.get("resumo", {}), meses["tipo"]
-        faixa = lambda x, y: f"{x}%" if x == y else f"de {x}% a {y}%"  # noqa: E731
+        faixa = lambda x, y: f"{x}%" if x == y else f"de {x}% a {y}%"
         if tp == "raro":
             achado("O prazo se mantém", "todo mês", f"só {faixa(r['b0'], r['b1'])} passam de 2 dias.", False)
         elif tp == "padrao":
@@ -2276,7 +2284,7 @@ def _conclusao(h: pd.Series, tempo: dict | None, meses: dict | None, trava: dict
     olhar.append({"titulo": "Pedidos acima de 5 dias",
                   "texto": (f"São {_pct(p5)} ({_orcamentos(n5).replace('orçamento', 'pedido')}). Abrir caso a caso e "
                             "achar o que eles têm em comum.") if n5 else "Nenhum pedido passa de 5 dias de trabalho."})
-    return {"n": int(len(h)), "achados": achados, "olhar": olhar, "acima5": p5, "n_acima5": n5,
+    return {"n": len(h), "achados": achados, "olhar": olhar, "acima5": p5, "n_acima5": n5,
             "pede": ("Agir nos poucos pedidos que travam, <strong>no momento em que travam</strong>. Para isso, o Monday "
                      "precisa mostrar em que etapa cada pedido está e há quanto tempo. <em>E isso depende de como usamos "
                      "o Monday.</em>")}

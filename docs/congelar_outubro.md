@@ -1,5 +1,10 @@
 # Congelar outubro para a reunião de 04/11/2026 (D65)
 
+> **O que aconteceu de fato (03/11/2026, D67):** o roteiro de segunda não foi rodado a tempo; na terça a carga das 09:02
+> (dados até 02/11) já tinha substituído a de 02/11. Decisão do Caio: congelar essa carga com folga de 2 dias
+> (`CORTE_FOLGA_DIAS` padrão 2) e rodapé "Dados até 02/11/2026". Passos 2 a 5 executados em 03/11; o deploy (passo 6)
+> fica com o Caio. Registro em `docs/PRD_V2.md`, seção 0.6.
+
 Roteiro para o Caio. O objetivo é que o portal mostre **outubro completo** e não mude mais entre 01/11 e 04/11, no
 computador e no link publicado. A regra está em `app/congelamento.py` (K1–K7 e, desde a auditoria de 31/10, B1–B5), a
 configuração em `app/config.py` (`CORTE_DADOS`, `CORTE_FOLGA_DIAS`, `BASE_CONGELADA_DIR`) e a ferramenta em

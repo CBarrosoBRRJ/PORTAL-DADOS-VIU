@@ -74,7 +74,7 @@
           <section class="lia-bloco lia-bloco-inbound" aria-labelledby="lia-quando-tit">
             <h3 class="lia-bloco-tit" id="lia-quando-tit">Quando o inbound chega</h3>
             {# Caio, 30/10/2026: base = os e-mails do período (somam o total); turnos alinhados ao expediente do SLA; "fora" é
-               a mesma regra dos 54% acima. Dia da semana: média inteira por dia (barra e destaque) e o total do período ao
+               a mesma regra do "fora do expediente" do bloco acima (e.pct_fora). Dia da semana: média inteira por dia (barra e destaque) e o total do período ao
                lado; sem frase de padrão #}
             {% set rc = e.recebimento %}{% set fora = rc.turnos | selectattr("chave", "equalto", "fora") | first %}
             <div class="lia-quando">
@@ -173,7 +173,7 @@
         <p class="fn-etapas-tit">O que o vídeo mostra</p>
         <ol>
           {% for et in f.etapas %}
-          <li><span class="fn-n" aria-hidden="true">{{ loop.index }}</span><span class="fn-tit">{{ et.titulo }}</span><span class="fn-txt">{{ et.texto }} <span class="fn-sigla">{{ et.sigla }}{% if et.fase %}, {{ et.fase | lower }}{% endif %}</span></span></li>
+          <li class="{{ 'fn-feita' if et.concluida else 'fn-andamento' }}"><span class="fn-n" aria-hidden="true">{{ icone("ok" if et.concluida else "ampulheta", "icone fn-n-ic") }}</span><span class="fn-tit">{{ et.titulo }}{% if et.selo %} <span class="fn-selo">{{ et.selo }}</span>{% endif %}</span><span class="fn-txt">{{ et.texto }} <span class="fn-sigla">{{ et.sigla }}{% if et.fase %}, {{ et.fase | lower }}{% endif %}</span></span></li>
           {% endfor %}
         </ol>
       </div>

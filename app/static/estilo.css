@@ -3919,6 +3919,14 @@ html.ini-arrastando, html.ini-arrastando * { cursor: grabbing !important; }
 .fn-tit { font-size: 0.86em; color: var(--tinta); }
 .fn-txt { font-size: 0.74em; line-height: 1.4; color: var(--tinta-2); }
 .fn-sigla { display: block; color: var(--tinta-3); }
+/* Caio, 03/11/2026: situação de cada etapa — concluída (iniciativa em produção: ✓ no círculo azul cheio) ou em andamento
+   (ampulheta, contorno tracejado e selo com texto, no tom do selo "parcial"); nunca só cor */
+.fn-n-ic { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.fn-feita .fn-n { background: var(--azul); border-color: var(--azul); color: #fff; }
+.fn-andamento .fn-n { background: var(--amarelo-claro); border: 1px dashed var(--oliva); color: var(--oliva); }
+.fn-andamento .fn-n-ic { stroke-width: 1.6; }
+.fn-selo { display: inline-block; margin-left: 0.4em; padding: 0.1em 0.55em; border-radius: 999px; background: var(--amarelo-claro);
+  color: var(--oliva); font-size: 0.78em; font-weight: 500; vertical-align: 0.1em; }
 @media (prefers-reduced-motion: no-preference) {
   html.js .fn-video, html.js .fn-etapas { animation: ini-entra var(--dur-l) var(--ease-entra) both; }
   html.js .fn-etapas { animation-delay: 120ms; }
@@ -4050,6 +4058,8 @@ html.ini-arrastando, html.ini-arrastando * { cursor: grabbing !important; }
 .rm-e-mapa .rm-mini-img { object-position: center; }
 .rm-mini-pilha { margin-right: 0.9em; }
 .rm-mini-pilha .rm-mini-img + .rm-mini-img { position: absolute; z-index: -1; left: 0.8em; top: 0.55em; rotate: 5deg; }
+/* 03/11/2026: 3ª imagem da pilha (Raio-X nos dashboards) um passo além da 2ª */
+.rm-mini-pilha .rm-mini-img:nth-child(3) { z-index: -2; left: 1.5em; top: 1.05em; rotate: 9deg; }
 .rm-mini:hover, .rm-mini:focus-visible { rotate: 0deg; translate: 0 -2px; }
 .rm-mini:hover .rm-mini-img, .rm-mini:focus-visible .rm-mini-img { border-color: #a3ace4; }
 .rm-mini:focus-visible { outline: 2px solid var(--azul); outline-offset: 3px; }
@@ -4736,6 +4746,40 @@ svg.lia-botao-ic { fill: currentColor; }
    elemento inline aumenta a área clicável sem mover a linha (nada muda no desenho) */
 .gancho-link { padding-block: 0.3em; }
 
+/* Estudo, slide 2 (Caio, 03/11/2026): lupa do "Fora da curva" e o pop-up com a lista dos pedidos (~70% da tela, como o
+   vídeo da LIA). Tabela com cabeçalho fixo e rolagem só dentro do painel; nomes longos quebram linha */
+.ef-lupa { display: inline-flex; align-items: center; gap: 0.4em; margin-top: 0.45em; padding: 0.32em 0.75em; border: 1px solid #d5d8e8;
+  border-radius: 999px; background: #fff; color: var(--azul); font: inherit; font-size: 0.82em; cursor: pointer;
+  box-shadow: 0 1px 2px rgba(20, 20, 43, 0.06); }
+.ef-lupa:hover { border-color: var(--azul); }
+.ef-lupa:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
+.ef-lupa-ic { width: 1.05em; height: 1.05em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+html:not(.js) .ef-lupa { display: none; }
+.ef-dlg { width: min(70vw, 84rem); height: min(70vh, 52rem); max-width: none; max-height: none; padding: 0; border: 0; border-radius: 16px;
+  overflow: hidden; box-shadow: 0 24px 60px -20px rgba(14, 14, 34, 0.45); }
+.ef-dlg::backdrop { background: rgba(14, 14, 34, 0.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.ef-caixa { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100%; gap: 0.8em; padding: 1.1em 1.3em 1.2em; box-sizing: border-box; }
+.ef-topo { display: flex; align-items: flex-start; justify-content: space-between; gap: 1em; }
+.ef-titulo { margin: 0; font: 400 1.35em/1.2 var(--serifa); color: var(--tinta); }
+.ef-sub { margin: 0.25em 0 0; font-size: 0.8em; color: var(--tinta-2); }
+.ef-rolagem { overflow: auto; border: 1px solid var(--linha); border-radius: 10px; }
+.ef-rolagem:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
+.ef-tabela { width: 100%; border-collapse: collapse; font-size: 0.82em; }
+.ef-tabela thead th { position: sticky; top: 0; z-index: 1; background: var(--fundo); text-align: left; font-weight: 500; color: var(--tinta-2);
+  padding: 0.6em 0.8em; border-bottom: 1px solid var(--linha); }
+.ef-tabela td, .ef-tabela tbody th { padding: 0.55em 0.8em; border-bottom: 1px solid var(--linha); vertical-align: top; text-align: left; font-weight: 400; color: var(--tinta); }
+.ef-tabela tbody tr:hover { background: #f6f7ff; }
+.ef-tabela td { white-space: nowrap; }
+.ef-nome { display: block; }
+.ef-quem { display: block; font-size: 0.9em; color: var(--tinta-3); }
+.ef-num { text-align: right !important; }
+.ef-dias { display: block; font-size: 0.88em; color: var(--tinta-3); }
+.ef-link { display: inline-flex; align-items: center; gap: 0.25em; color: var(--azul); }
+.ef-link-ic { width: 0.95em; height: 0.95em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+@media (max-width: 860px) {
+  .ef-dlg { width: 94vw; height: 86vh; }
+  .ef-tabela td:nth-child(2), .ef-tabela td:nth-child(3), .ef-tabela thead th:nth-child(2), .ef-tabela thead th:nth-child(3) { display: none; }
+}
 /* ---------- D46 (25/10/2026): movimento do estudo "Como medimos" (debate entre três linhas de movimento) ----------
    Síntese: um gesto de dado por slide, na ordem de leitura (régua → dado → cor de alerta); títulos, textos e números
    ficam visíveis desde o 1º quadro (nada conta até o valor); uma curva só (--ease-entra), sem mola, sem loop, nada
@@ -4854,4 +4898,4 @@ svg.lia-botao-ic { fill: currentColor; }
 /* impressão e PDF: nada se move, tudo no estado final */
 @media print {
   .slide-estudo, .slide-estudo *, .slide-estudo *::before, .slide-estudo *::after { animation: none !important; transition: none !important; }
-}
+}

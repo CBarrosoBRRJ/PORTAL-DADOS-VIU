@@ -31,7 +31,7 @@
       <p class="fn-etapas-tit">O que o vídeo mostra</p>
       <ol>
         {% for e in f.etapas %}
-        <li><span class="fn-n" aria-hidden="true">{{ loop.index }}</span><span class="fn-tit">{{ e.titulo }}</span><span class="fn-txt">{{ e.texto }} <span class="fn-sigla">{{ e.sigla }}{% if e.fase %} · {{ e.fase | lower }}{% endif %}</span></span></li>
+        <li class="{{ 'fn-feita' if e.concluida else 'fn-andamento' }}"><span class="fn-n" aria-hidden="true">{{ icone("ok" if e.concluida else "ampulheta", "icone fn-n-ic") }}</span><span class="fn-tit">{{ e.titulo }}{% if e.selo %} <span class="fn-selo">{{ e.selo }}</span>{% endif %}</span><span class="fn-txt">{{ e.texto }} <span class="fn-sigla">{{ e.sigla }}{% if e.fase %} · {{ e.fase | lower }}{% endif %}</span></span></li>
         {% endfor %}
       </ol>
     </div>

@@ -9,7 +9,7 @@ mostram o espaço reservado ("Vídeo a incluir"), sem player quebrado.
 """
 
 PASTA = "video"  # app/static/video/
-ARQUIVO = ""  # "lia-na-pratica.mp4" (em app/static/video/)
+ARQUIVO = "lia-na-pratica.mp4"  # Caio, 03/11/2026: "fluxo LIA.mp4" renomeado (H.264 1920×1080, 1min47s, 40 MB)
 CAPA = ""  # ex.: "lia-na-pratica.jpg" (opcional)
 LEGENDAS = ""  # ex.: "lia-na-pratica.vtt" (opcional, pt-BR)
 
@@ -27,7 +27,13 @@ ETAPAS = (
 def tela() -> dict:
     from app.apresentacoes.gestao_orcamentos.iniciativas import catalogo
 
-    fases = {i["sigla"]: g["titulo"] for g in catalogo.GRUPOS for i in g["itens"]}
-    etapas = [{**e, "fase": fases.get(e["sigla"], "")} for e in ETAPAS]
-    caminho = lambda nome: f"/static/{PASTA}/{nome}" if nome else ""  # noqa: E731 (só arquivos do próprio site)
+    grupo = {i["sigla"]: g for g in catalogo.GRUPOS for i in g["itens"]}
+    # Caio, 03/11/2026: etapa de iniciativa em produção = concluída (ícone ✓); as demais = em andamento (ampulheta e
+    # selo com texto: "Em teste" na fase de testes)
+    etapas = []
+    for e in ETAPAS:
+        chave = grupo[e["sigla"]]["chave"] if e["sigla"] in grupo else ""
+        etapas.append({**e, "fase": grupo[e["sigla"]]["titulo"] if chave else "", "concluida": chave == "producao",
+                       "selo": "" if chave == "producao" else "Em teste" if chave == "testes" else "Em andamento"})
+    caminho = lambda nome: f"/static/{PASTA}/{nome}" if nome else ""
     return {"arquivo": caminho(ARQUIVO), "capa": caminho(CAPA), "legendas": caminho(LEGENDAS), "etapas": etapas}

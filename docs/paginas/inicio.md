@@ -1,5 +1,12 @@
 # Ficha — Início (entrada de pedidos de orçamento)
 
+## Retrato da carga da reunião de 04/11 (carga congelada de **03/11/2026 09:02** (dados até **02/11/2026**; D67, `docs/PRD_V2.md` seção 0.6))
+
+> Página Demanda (`/viu-agenciamento`): **5.789** pedidos em 2026 até 02/11 × **3.052** em 2025 no mesmo período
+> (**+90%**). Por tipo: Mercado 3.149 (54%), Inbound 1.365 (24%), Internos 776 (13%), Proativo 415 (7%), Sem tipo 84 (2%).
+> Conferido por `tools/checar_reuniao.py` (Q1/Q2 ok, total do ano 5.789; registro `docs/validacao/reuniao_2026-11-03.json`).
+> O retrato de 26/10 abaixo é histórico.
+
 ## Retrato da carga da reunião (26/10/2026)
 
 > **Estado (26/10/2026):** ENTREGUE (D28), regras inalteradas. Batalha de 26/10 (D49): números prontos desde o 1º quadro

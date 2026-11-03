@@ -1,5 +1,10 @@
 # Ficha — Talentos (divisão anual da demanda)
 
+## Retrato da carga da reunião de 04/11 (carga congelada de **03/11/2026 09:02** (dados até **02/11/2026**; D67, `docs/PRD_V2.md` seção 0.6))
+
+> Exclusivos **3.548** (61%), não exclusivos **2.084** (36%), talento não informado **157** (3%) = 5.789. Os 10 mais
+> pedidos somam 1.851 (32%); 1º Tatiana Machado (283). O retrato de 26/10 abaixo é histórico.
+
 ## Retrato da carga da reunião (26/10/2026)
 
 > **Estado (26/10/2026, D50):** página com **seletor Todos / Exclusivos / Não exclusivos**, resposta por recorte e

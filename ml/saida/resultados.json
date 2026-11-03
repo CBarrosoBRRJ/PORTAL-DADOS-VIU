@@ -1,23 +1,23 @@
 {
  "carga": {
-  "processado_em": "2026-10-26 12:01:46.659042+00:00",
-  "dados_ate": "2026-10-25",
+  "processado_em": "2026-11-03 12:02:39.240344+00:00",
+  "dados_ate": "2026-11-02",
   "parcial": {
    "Inbound": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 133.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 4.0
    },
    "Mercado": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 304.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    },
    "Mercado exclusivos": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 87.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    },
    "Mercado não exclusivos": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 185.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    }
   },
   "recortes": {
@@ -27,8 +27,8 @@
     "grupo": null,
     "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",
     "inicio": "2024-10",
-    "fim": "2026-09",
-    "meses": 24,
+    "fim": "2026-10",
+    "meses": 25,
     "treino_1o_teste": 12,
     "curta": false
    },
@@ -38,8 +38,8 @@
     "grupo": null,
     "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Mercado",
     "inicio": "2024-10",
-    "fim": "2026-09",
-    "meses": 24,
+    "fim": "2026-10",
+    "meses": 25,
     "treino_1o_teste": 12,
     "curta": false
    },
@@ -47,10 +47,10 @@
     "chave": "mercado_exclusivos",
     "tipo": "Mercado",
     "grupo": "exclusivos",
-    "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento exclusivo",
+    "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado exclusivos",
     "inicio": "2026-01",
-    "fim": "2026-09",
-    "meses": 9,
+    "fim": "2026-10",
+    "meses": 10,
     "treino_1o_teste": 5,
     "curta": true
    },
@@ -58,15 +58,15 @@
     "chave": "mercado_nao_exclusivos",
     "tipo": "Mercado",
     "grupo": "nao_exclusivos",
-    "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento não exclusivo",
+    "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado não exclusivos",
     "inicio": "2026-01",
-    "fim": "2026-09",
-    "meses": 9,
+    "fim": "2026-10",
+    "meses": 10,
     "treino_1o_teste": 5,
     "curta": true
    }
   },
-  "mes_fechado": "2026-09"
+  "mes_fechado": "2026-10"
  },
  "regua": {
   "nome": "D56",
@@ -128,7 +128,8 @@
    "2026-06": 112.0,
    "2026-07": 165.0,
    "2026-08": 156.0,
-   "2026-09": 129.0
+   "2026-09": 129.0,
+   "2026-10": 167.0
   },
   "Mercado": {
    "2024-10": 37.0,
@@ -154,18 +155,20 @@
    "2026-06": 339.0,
    "2026-07": 404.0,
    "2026-08": 322.0,
-   "2026-09": 477.0
+   "2026-09": 477.0,
+   "2026-10": 479.0
   },
   "Mercado exclusivos": {
    "2026-01": 62.0,
    "2026-02": 81.0,
-   "2026-03": 81.0,
-   "2026-04": 134.0,
+   "2026-03": 82.0,
+   "2026-04": 133.0,
    "2026-05": 164.0,
    "2026-06": 177.0,
    "2026-07": 186.0,
    "2026-08": 154.0,
-   "2026-09": 194.0
+   "2026-09": 194.0,
+   "2026-10": 144.0
   },
   "Mercado não exclusivos": {
    "2026-01": 60.0,
@@ -176,7 +179,8 @@
    "2026-06": 155.0,
    "2026-07": 213.0,
    "2026-08": 158.0,
-   "2026-09": 272.0
+   "2026-09": 272.0,
+   "2026-10": 278.0
   }
  },
  "modelos": {
@@ -636,48 +640,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 136.07,
-      "p10": 84.65,
-      "p90": 218.37
-     },
-     {
       "mes": "2026-11",
-      "valor": 136.07,
-      "p10": 82.48,
-      "p90": 224.07
+      "valor": 150.48,
+      "p10": 95.47,
+      "p90": 236.84
      },
      {
       "mes": "2026-12",
-      "valor": 136.07,
-      "p10": 80.47,
-      "p90": 229.62
+      "valor": 150.48,
+      "p10": 91.44,
+      "p90": 247.21
+     },
+     {
+      "mes": "2027-01",
+      "valor": 150.48,
+      "p10": 87.88,
+      "p90": 257.16
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 495.33,
-      "p10": 336.68,
-      "p90": 728.5
-     },
-     {
       "mes": "2026-11",
-      "valor": 495.33,
-      "p10": 279.7,
-      "p90": 876.59
+      "valor": 477.57,
+      "p10": 333.7,
+      "p90": 683.27
      },
      {
       "mes": "2026-12",
-      "valor": 495.33,
-      "p10": 243.49,
-      "p90": 1006.56
+      "valor": 477.57,
+      "p10": 293.68,
+      "p90": 776.19
+     },
+     {
+      "mes": "2027-01",
+      "valor": 477.57,
+      "p10": 265.57,
+      "p90": 858.15
      }
     ]
    },
    "modulo": "arimax",
-   "segundos": 1.3,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 2.0,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "arimax_011": {
    "descricao": "ARIMAX(0, 1, 1) em log + dias úteis, nov/dez e degrau de 2026",
@@ -1135,48 +1139,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 138.33,
-      "p10": 111.27,
-      "p90": 171.92
-     },
-     {
       "mes": "2026-11",
-      "valor": 78.1,
-      "p10": 62.73,
-      "p90": 97.16
+      "valor": 81.1,
+      "p10": 64.41,
+      "p90": 102.05
      },
      {
       "mes": "2026-12",
-      "valor": 85.99,
-      "p10": 69.09,
-      "p90": 106.97
+      "valor": 89.83,
+      "p10": 71.36,
+      "p90": 113.0
+     },
+     {
+      "mes": "2027-01",
+      "valor": 104.22,
+      "p10": 82.83,
+      "p90": 131.07
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 458.86,
-      "p10": 323.87,
-      "p90": 649.94
-     },
-     {
       "mes": "2026-11",
-      "valor": 313.28,
-      "p10": 196.1,
-      "p90": 500.13
+      "valor": 421.1,
+      "p10": 297.08,
+      "p90": 596.72
      },
      {
       "mes": "2026-12",
-      "valor": 319.41,
-      "p10": 181.85,
-      "p90": 560.46
+      "valor": 429.31,
+      "p10": 267.22,
+      "p90": 689.34
+     },
+     {
+      "mes": "2027-01",
+      "valor": 450.82,
+      "p10": 254.3,
+      "p90": 798.6
      }
     ]
    },
    "modulo": "arimax",
-   "segundos": 1.6,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 2.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "arima_110": {
    "descricao": "ARIMA(1, 1, 0) em log, sem variáveis externas",
@@ -1634,48 +1638,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 145.22,
-      "p10": 90.35,
-      "p90": 233.04
-     },
-     {
       "mes": "2026-11",
-      "valor": 134.89,
-      "p10": 81.2,
-      "p90": 223.65
+      "valor": 137.16,
+      "p10": 95.68,
+      "p90": 196.43
      },
      {
       "mes": "2026-12",
-      "valor": 141.24,
-      "p10": 75.65,
-      "p90": 262.95
+      "valor": 159.38,
+      "p10": 110.12,
+      "p90": 230.47
+     },
+     {
+      "mes": "2027-01",
+      "valor": 142.14,
+      "p10": 88.54,
+      "p90": 227.82
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 496.99,
-      "p10": 337.89,
-      "p90": 730.78
-     },
-     {
       "mes": "2026-11",
-      "valor": 499.12,
-      "p10": 280.85,
-      "p90": 886.44
+      "valor": 478.79,
+      "p10": 334.68,
+      "p90": 684.78
      },
      {
       "mes": "2026-12",
-      "valor": 499.35,
-      "p10": 243.43,
-      "p90": 1023.23
+      "valor": 478.82,
+      "p10": 295.93,
+      "p90": 774.36
+     },
+     {
+      "mes": "2027-01",
+      "valor": 478.81,
+      "p10": 267.86,
+      "p90": 855.29
      }
     ]
    },
    "modulo": "arimax",
-   "segundos": 0.2,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "arimax_110": {
    "descricao": "ARIMAX(1, 1, 0) em log + dias úteis, nov/dez e degrau de 2026",
@@ -2133,48 +2137,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 152.92,
-      "p10": 127.12,
-      "p90": 183.91
-     },
-     {
       "mes": "2026-11",
-      "valor": 56.88,
-      "p10": 47.13,
-      "p90": 68.6
+      "valor": 93.52,
+      "p10": 77.48,
+      "p90": 112.83
      },
      {
       "mes": "2026-12",
-      "valor": 66.71,
-      "p10": 51.83,
-      "p90": 85.8
+      "valor": 117.96,
+      "p10": 97.68,
+      "p90": 142.39
+     },
+     {
+      "mes": "2027-01",
+      "valor": 126.58,
+      "p10": 98.14,
+      "p90": 163.19
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 459.25,
-      "p10": 324.1,
-      "p90": 650.58
-     },
-     {
       "mes": "2026-11",
-      "valor": 315.18,
-      "p10": 196.92,
-      "p90": 504.13
+      "valor": 422.79,
+      "p10": 298.24,
+      "p90": 599.18
      },
      {
       "mes": "2026-12",
-      "valor": 321.01,
-      "p10": 181.87,
-      "p90": 566.03
+      "valor": 430.88,
+      "p10": 267.67,
+      "p90": 693.24
+     },
+     {
+      "mes": "2027-01",
+      "valor": 452.44,
+      "p10": 254.13,
+      "p90": 804.88
      }
     ]
    },
    "modulo": "arimax",
-   "segundos": 0.5,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "arima_011_t": {
    "descricao": "ARIMA(0, 1, 1) com deriva em log, sem variáveis externas",
@@ -2632,48 +2636,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 184.71,
-      "p10": 123.28,
-      "p90": 276.51
-     },
-     {
       "mes": "2026-11",
-      "valor": 207.5,
-      "p10": 138.53,
-      "p90": 310.57
+      "valor": 208.86,
+      "p10": 141.16,
+      "p90": 308.81
      },
      {
       "mes": "2026-12",
-      "valor": 235.19,
-      "p10": 157.06,
-      "p90": 351.94
+      "valor": 240.17,
+      "p10": 162.36,
+      "p90": 355.03
+     },
+     {
+      "mes": "2027-01",
+      "valor": 279.12,
+      "p10": 188.74,
+      "p90": 412.53
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 582.19,
-      "p10": 405.7,
-      "p90": 835.28
-     },
-     {
       "mes": "2026-11",
-      "valor": 719.1,
-      "p10": 429.4,
-      "p90": 1203.8
+      "valor": 612.16,
+      "p10": 446.49,
+      "p90": 839.17
      },
      {
       "mes": "2026-12",
-      "valor": 902.7,
-      "p10": 479.18,
-      "p90": 1699.78
+      "valor": 754.61,
+      "p10": 520.89,
+      "p90": 1092.98
+     },
+     {
+      "mes": "2027-01",
+      "valor": 945.22,
+      "p10": 621.98,
+      "p90": 1436.17
      }
     ]
    },
    "modulo": "arimax",
-   "segundos": 0.9,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 1.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "arimax_011_t": {
    "descricao": "ARIMAX(0, 1, 1) com deriva em log + dias úteis, nov/dez e degrau de 2026",
@@ -3131,48 +3135,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 142.08,
-      "p10": 114.32,
-      "p90": 176.53
-     },
-     {
       "mes": "2026-11",
-      "valor": 80.31,
-      "p10": 64.53,
-      "p90": 99.89
+      "valor": 96.18,
+      "p10": 76.94,
+      "p90": 120.15
      },
      {
       "mes": "2026-12",
-      "valor": 88.88,
-      "p10": 71.44,
-      "p90": 110.52
+      "valor": 108.14,
+      "p10": 86.54,
+      "p90": 135.07
+     },
+     {
+      "mes": "2027-01",
+      "valor": 130.48,
+      "p10": 104.46,
+      "p90": 162.92
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 602.72,
-      "p10": 462.48,
-      "p90": 785.4
-     },
-     {
       "mes": "2026-11",
-      "valor": 412.3,
-      "p10": 316.29,
-      "p90": 537.36
+      "valor": 526.69,
+      "p10": 398.87,
+      "p90": 695.37
      },
      {
       "mes": "2026-12",
-      "valor": 529.68,
-      "p10": 406.4,
-      "p90": 690.27
+      "valor": 671.24,
+      "p10": 508.4,
+      "p90": 886.14
+     },
+     {
+      "mes": "2027-01",
+      "valor": 923.8,
+      "p10": 699.78,
+      "p90": 1219.44
      }
     ]
    },
    "modulo": "arimax",
-   "segundos": 2.4,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 3.6,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "arima_100_ct": {
    "descricao": "ARIMA(1, 0, 0) com nível e reta em log, sem variáveis externas",
@@ -3630,48 +3634,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 201.11,
-      "p10": 147.49,
-      "p90": 274.11
-     },
-     {
       "mes": "2026-11",
-      "valor": 178.04,
-      "p10": 125.64,
-      "p90": 252.11
+      "valor": 198.38,
+      "p10": 149.84,
+      "p90": 262.54
      },
      {
       "mes": "2026-12",
-      "valor": 210.41,
-      "p10": 147.16,
-      "p90": 300.65
+      "valor": 204.8,
+      "p10": 150.22,
+      "p90": 279.1
+     },
+     {
+      "mes": "2027-01",
+      "valor": 225.82,
+      "p10": 164.65,
+      "p90": 309.58
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 515.37,
-      "p10": 384.94,
-      "p90": 689.88
-     },
-     {
       "mes": "2026-11",
-      "valor": 569.77,
-      "p10": 417.68,
-      "p90": 777.12
+      "valor": 618.22,
+      "p10": 499.78,
+      "p90": 764.69
      },
      {
       "mes": "2026-12",
-      "valor": 635.21,
-      "p10": 464.56,
-      "p90": 868.42
+      "valor": 703.94,
+      "p10": 568.92,
+      "p90": 870.95
+     },
+     {
+      "mes": "2027-01",
+      "valor": 807.02,
+      "p10": 652.25,
+      "p90": 998.45
      }
     ]
    },
    "modulo": "arimax",
-   "segundos": 0.5,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "arimax_100_ct": {
    "descricao": "ARIMAX(1, 0, 0) com nível e reta em log + dias úteis, nov/dez e degrau de 2026",
@@ -4129,48 +4133,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 193.6,
-      "p10": 174.85,
-      "p90": 214.36
-     },
-     {
       "mes": "2026-11",
-      "valor": 57.12,
-      "p10": 49.7,
-      "p90": 65.64
+      "valor": 3120.25,
+      "p10": 2806.37,
+      "p90": 3469.23
      },
      {
       "mes": "2026-12",
-      "valor": 81.61,
-      "p10": 69.4,
-      "p90": 95.93
+      "valor": 3697.87,
+      "p10": 3213.07,
+      "p90": 4255.81
+     },
+     {
+      "mes": "2027-01",
+      "valor": 152.9,
+      "p10": 129.91,
+      "p90": 179.93
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 535.81,
-      "p10": 426.75,
-      "p90": 672.68
-     },
-     {
       "mes": "2026-11",
-      "valor": 323.12,
-      "p10": 257.27,
-      "p90": 405.77
+      "valor": 19848.93,
+      "p10": 16103.26,
+      "p90": 24465.8
      },
      {
       "mes": "2026-12",
-      "valor": 371.74,
-      "p10": 296.01,
-      "p90": 466.78
+      "valor": 22645.69,
+      "p10": 18363.19,
+      "p90": 27926.86
+     },
+     {
+      "mes": "2027-01",
+      "valor": 743.65,
+      "p10": 602.83,
+      "p90": 917.3
      }
     ]
    },
    "modulo": "arimax",
-   "segundos": 3.5,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 3.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "arimax_100_ct_fimdeano": {
    "descricao": "ARIMAX(1,0,0) com nível e reta em log + só nov/dez; variável escolhida após ver o backtest de 2026 (resultado otimista)",
@@ -4628,48 +4632,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 171.21,
-      "p10": 144.15,
-      "p90": 203.33
-     },
-     {
       "mes": "2026-11",
-      "valor": 86.83,
-      "p10": 70.3,
-      "p90": 107.2
+      "valor": 95.3,
+      "p10": 85.06,
+      "p90": 106.75
      },
      {
       "mes": "2026-12",
-      "valor": 101.48,
-      "p10": 80.87,
-      "p90": 127.29
+      "valor": 106.93,
+      "p10": 92.12,
+      "p90": 124.1
+     },
+     {
+      "mes": "2027-01",
+      "valor": 176.49,
+      "p10": 148.96,
+      "p90": 209.07
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 498.41,
-      "p10": 380.29,
-      "p90": 653.12
-     },
-     {
       "mes": "2026-11",
-      "valor": 413.61,
-      "p10": 309.43,
-      "p90": 552.74
+      "valor": 556.21,
+      "p10": 450.74,
+      "p90": 686.31
      },
      {
       "mes": "2026-12",
-      "valor": 453.1,
-      "p10": 338.04,
-      "p90": 607.19
+      "valor": 629.34,
+      "p10": 509.76,
+      "p90": 776.92
+     },
+     {
+      "mes": "2027-01",
+      "valor": 780.02,
+      "p10": 631.85,
+      "p90": 962.88
      }
     ]
    },
    "modulo": "arimax",
-   "segundos": 1.5,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 1.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "arima_auto": {
    "descricao": "ARIMA em log; ordem escolhida por validação dentro do treino, sem variáveis externas",
@@ -5127,48 +5131,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 145.22,
-      "p10": 90.35,
-      "p90": 233.04
-     },
-     {
       "mes": "2026-11",
-      "valor": 134.89,
-      "p10": 81.2,
-      "p90": 223.65
+      "valor": 150.48,
+      "p10": 95.47,
+      "p90": 236.84
      },
      {
       "mes": "2026-12",
-      "valor": 141.24,
-      "p10": 75.65,
-      "p90": 262.95
+      "valor": 150.48,
+      "p10": 91.44,
+      "p90": 247.21
+     },
+     {
+      "mes": "2027-01",
+      "valor": 150.48,
+      "p10": 87.88,
+      "p90": 257.16
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 515.37,
-      "p10": 384.94,
-      "p90": 689.88
-     },
-     {
       "mes": "2026-11",
-      "valor": 569.77,
-      "p10": 417.68,
-      "p90": 777.12
+      "valor": 477.57,
+      "p10": 333.7,
+      "p90": 683.27
      },
      {
       "mes": "2026-12",
-      "valor": 635.21,
-      "p10": 464.56,
-      "p90": 868.42
+      "valor": 477.57,
+      "p10": 293.68,
+      "p90": 776.19
+     },
+     {
+      "mes": "2027-01",
+      "valor": 477.57,
+      "p10": 265.57,
+      "p90": 858.15
      }
     ]
    },
    "modulo": "arimax",
-   "segundos": 4.7,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 5.6,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "arimax_auto": {
    "descricao": "ARIMAX em log; ordem e variáveis externas escolhidas por validação dentro do treino (pode escolher nenhuma)",
@@ -5626,48 +5630,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 138.33,
-      "p10": 111.27,
-      "p90": 171.92
-     },
-     {
       "mes": "2026-11",
-      "valor": 78.1,
-      "p10": 62.73,
-      "p90": 97.16
+      "valor": 81.1,
+      "p10": 64.41,
+      "p90": 102.05
      },
      {
       "mes": "2026-12",
-      "valor": 85.99,
-      "p10": 69.09,
-      "p90": 106.97
+      "valor": 89.83,
+      "p10": 71.36,
+      "p90": 113.0
+     },
+     {
+      "mes": "2027-01",
+      "valor": 104.22,
+      "p10": 82.83,
+      "p90": 131.07
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 498.41,
-      "p10": 380.29,
-      "p90": 653.12
-     },
-     {
       "mes": "2026-11",
-      "valor": 413.61,
-      "p10": 309.43,
-      "p90": 552.74
+      "valor": 477.57,
+      "p10": 333.7,
+      "p90": 683.27
      },
      {
       "mes": "2026-12",
-      "valor": 453.1,
-      "p10": 338.04,
-      "p90": 607.19
+      "valor": 477.57,
+      "p10": 293.68,
+      "p90": 776.19
+     },
+     {
+      "mes": "2027-01",
+      "valor": 477.57,
+      "p10": 265.57,
+      "p90": 858.15
      }
     ]
    },
    "modulo": "arimax",
-   "segundos": 45.8,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 46.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "autots_1": {
    "descricao": "AutoTS: o 1º colocado da busca automática em cada janela de 12 meses",
@@ -6125,42 +6129,42 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 159.16,
-      "p10": 120.35,
-      "p90": 197.97
-     },
-     {
       "mes": "2026-11",
-      "valor": 162.18,
-      "p10": 94.96,
-      "p90": 229.39
+      "valor": 157.39,
+      "p10": 101.73,
+      "p90": 202.19
      },
      {
       "mes": "2026-12",
-      "valor": 165.19,
-      "p10": 78.42,
-      "p90": 251.97
+      "valor": 159.07,
+      "p10": 103.16,
+      "p90": 203.62
+     },
+     {
+      "mes": "2027-01",
+      "valor": 160.47,
+      "p10": 104.35,
+      "p90": 204.82
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 0.0,
-      "p10": 0.0,
-      "p90": 0.0
-     },
-     {
       "mes": "2026-11",
-      "valor": 0.0,
-      "p10": 0.0,
-      "p90": 0.0
+      "valor": 505.47,
+      "p10": 452.32,
+      "p90": 560.33
      },
      {
       "mes": "2026-12",
-      "valor": 0.0,
-      "p10": 0.0,
-      "p90": 0.0
+      "valor": 538.84,
+      "p10": 485.83,
+      "p90": 593.83
+     },
+     {
+      "mes": "2027-01",
+      "valor": 573.35,
+      "p10": 520.47,
+      "p90": 628.48
      }
     ]
    },
@@ -6210,7 +6214,7 @@
       ],
       "posicao": 1,
       "nota": 10.113865663805948,
-      "segundos": 10.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -6225,7 +6229,7 @@
       ],
       "posicao": 1,
       "nota": 2.497036097897855,
-      "segundos": 13.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -6241,7 +6245,7 @@
       ],
       "posicao": 1,
       "nota": 49.60713480585025,
-      "segundos": 11.3,
+      "segundos": 12.2,
       "n_familias": 17
      },
      {
@@ -6256,7 +6260,7 @@
       ],
       "posicao": 1,
       "nota": 19.94518312300491,
-      "segundos": 14.7,
+      "segundos": 14.9,
       "n_familias": 17
      },
      {
@@ -6270,7 +6274,7 @@
       ],
       "posicao": 1,
       "nota": 338.845221546584,
-      "segundos": 14.0,
+      "segundos": 16.0,
       "n_familias": 17
      },
      {
@@ -6285,7 +6289,7 @@
       ],
       "posicao": 1,
       "nota": 14.156044185011156,
-      "segundos": 23.5,
+      "segundos": 17.1,
       "n_familias": 16
      },
      {
@@ -6300,7 +6304,7 @@
       ],
       "posicao": 1,
       "nota": 52.02645952764482,
-      "segundos": 13.7,
+      "segundos": 14.0,
       "n_familias": 17
      },
      {
@@ -6315,7 +6319,7 @@
       ],
       "posicao": 1,
       "nota": 43.67600111167746,
-      "segundos": 13.5,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -6330,22 +6334,23 @@
       ],
       "posicao": 1,
       "nota": 8.68167857327823,
-      "segundos": 13.3,
+      "segundos": 14.4,
       "n_familias": 17
      },
      {
       "serie": "Inbound",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
-      "modelo": "Theta",
+      "modelo": "ETS",
       "transformacoes": [
-       "ShiftFirstValue",
-       "MaxAbsScaler"
+       "ClipOutliers",
+       "Detrend",
+       "MinMaxScaler"
       ],
       "posicao": 1,
-      "nota": 70.01024596684728,
-      "segundos": 12.8,
+      "nota": 79.45595629586576,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -6359,7 +6364,7 @@
       ],
       "posicao": 1,
       "nota": 10.743791343184803,
-      "segundos": 18.5,
+      "segundos": 20.2,
       "n_familias": 14
      },
      {
@@ -6375,7 +6380,7 @@
       ],
       "posicao": 1,
       "nota": 6.766666666666667,
-      "segundos": 11.8,
+      "segundos": 15.8,
       "n_familias": 17
      },
      {
@@ -6390,7 +6395,7 @@
       ],
       "posicao": 1,
       "nota": 10.340358530347856,
-      "segundos": 12.7,
+      "segundos": 14.3,
       "n_familias": 17
      },
      {
@@ -6405,7 +6410,7 @@
       ],
       "posicao": 1,
       "nota": 45.13354631081222,
-      "segundos": 14.4,
+      "segundos": 15.9,
       "n_familias": 17
      },
      {
@@ -6421,7 +6426,7 @@
       ],
       "posicao": 1,
       "nota": 17.429838022791298,
-      "segundos": 9.1,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -6435,7 +6440,7 @@
       ],
       "posicao": 1,
       "nota": 38.53048467146062,
-      "segundos": 8.9,
+      "segundos": 9.9,
       "n_familias": 17
      },
      {
@@ -6449,7 +6454,7 @@
       ],
       "posicao": 1,
       "nota": 44.34763251841692,
-      "segundos": 14.7,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -6464,7 +6469,7 @@
       ],
       "posicao": 1,
       "nota": 142.41858927114967,
-      "segundos": 9.9,
+      "segundos": 10.0,
       "n_familias": 17
      },
      {
@@ -6478,27 +6483,29 @@
       ],
       "posicao": 1,
       "nota": 16.666666666666668,
-      "segundos": 11.7,
+      "segundos": 13.9,
       "n_familias": 17
      },
      {
       "serie": "Mercado",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
-      "modelo": "ARIMA",
+      "modelo": "GLS",
       "transformacoes": [
-       "bkfilter"
+       "ClipOutliers",
+       "Detrend",
+       "StandardScaler"
       ],
       "posicao": 1,
-      "nota": 24.66453080589169,
-      "segundos": 11.7,
+      "nota": 140.38890659671324,
+      "segundos": 12.2,
       "n_familias": 17
      }
     ]
    },
-   "segundos": 326.2,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 403.4,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "autots_2": {
    "descricao": "AutoTS: o 2º colocado da busca automática em cada janela de 12 meses",
@@ -6956,42 +6963,42 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 159.12,
-      "p10": 123.32,
-      "p90": 186.72
-     },
-     {
       "mes": "2026-11",
-      "valor": 165.15,
-      "p10": 129.35,
-      "p90": 192.75
+      "valor": 170.98,
+      "p10": 157.79,
+      "p90": 215.82
      },
      {
       "mes": "2026-12",
-      "valor": 171.18,
-      "p10": 135.38,
-      "p90": 198.78
+      "valor": 178.85,
+      "p10": 165.66,
+      "p90": 223.69
+     },
+     {
+      "mes": "2027-01",
+      "valor": 186.98,
+      "p10": 173.79,
+      "p90": 231.82
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 326.52,
-      "p10": 257.13,
-      "p90": 409.41
-     },
-     {
       "mes": "2026-11",
-      "valor": 326.52,
-      "p10": 257.13,
-      "p90": 409.41
+      "valor": 505.33,
+      "p10": 505.33,
+      "p90": 505.33
      },
      {
       "mes": "2026-12",
-      "valor": 326.52,
-      "p10": 257.13,
-      "p90": 409.41
+      "valor": 538.7,
+      "p10": 538.7,
+      "p90": 538.7
+     },
+     {
+      "mes": "2027-01",
+      "valor": 573.17,
+      "p10": 573.17,
+      "p90": 573.17
      }
     ]
    },
@@ -7041,7 +7048,7 @@
       ],
       "posicao": 2,
       "nota": 12.052574499330708,
-      "segundos": 10.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -7057,7 +7064,7 @@
       ],
       "posicao": 2,
       "nota": 3.0131558006313086,
-      "segundos": 13.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -7071,7 +7078,7 @@
       ],
       "posicao": 2,
       "nota": 49.71397929742437,
-      "segundos": 11.3,
+      "segundos": 12.2,
       "n_familias": 17
      },
      {
@@ -7085,7 +7092,7 @@
       ],
       "posicao": 2,
       "nota": 25.0,
-      "segundos": 14.7,
+      "segundos": 14.9,
       "n_familias": 17
      },
      {
@@ -7100,7 +7107,7 @@
       ],
       "posicao": 2,
       "nota": 510.50704456360626,
-      "segundos": 14.0,
+      "segundos": 16.0,
       "n_familias": 17
      },
      {
@@ -7114,7 +7121,7 @@
       ],
       "posicao": 2,
       "nota": 20.774631909244864,
-      "segundos": 23.5,
+      "segundos": 17.1,
       "n_familias": 16
      },
      {
@@ -7130,7 +7137,7 @@
       ],
       "posicao": 2,
       "nota": 62.222222222222804,
-      "segundos": 13.7,
+      "segundos": 14.0,
       "n_familias": 17
      },
      {
@@ -7146,7 +7153,7 @@
       ],
       "posicao": 2,
       "nota": 107.91665588327142,
-      "segundos": 13.5,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -7161,21 +7168,23 @@
       ],
       "posicao": 2,
       "nota": 14.646416985229147,
-      "segundos": 13.3,
+      "segundos": 14.4,
       "n_familias": 17
      },
      {
       "serie": "Inbound",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
       "modelo": "UnobservedComponents",
       "transformacoes": [
-       "RobustScaler"
+       "ClipOutliers",
+       "Detrend",
+       "bkfilter"
       ],
       "posicao": 2,
-      "nota": 75.92272235237735,
-      "segundos": 12.8,
+      "nota": 85.70169538595013,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -7190,7 +7199,7 @@
       ],
       "posicao": 2,
       "nota": 10.743791343184803,
-      "segundos": 18.5,
+      "segundos": 20.2,
       "n_familias": 14
      },
      {
@@ -7204,7 +7213,7 @@
       ],
       "posicao": 2,
       "nota": 7.287878787878789,
-      "segundos": 11.8,
+      "segundos": 15.8,
       "n_familias": 17
      },
      {
@@ -7220,7 +7229,7 @@
       ],
       "posicao": 2,
       "nota": 10.788888888888886,
-      "segundos": 12.7,
+      "segundos": 14.3,
       "n_familias": 17
      },
      {
@@ -7234,7 +7243,7 @@
       ],
       "posicao": 2,
       "nota": 45.49537937725216,
-      "segundos": 14.4,
+      "segundos": 15.9,
       "n_familias": 17
      },
      {
@@ -7249,7 +7258,7 @@
       ],
       "posicao": 2,
       "nota": 25.05278117873363,
-      "segundos": 9.1,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -7265,7 +7274,7 @@
       ],
       "posicao": 2,
       "nota": 39.02240911049709,
-      "segundos": 8.9,
+      "segundos": 9.9,
       "n_familias": 17
      },
      {
@@ -7279,7 +7288,7 @@
       ],
       "posicao": 2,
       "nota": 45.0,
-      "segundos": 14.7,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -7295,7 +7304,7 @@
       ],
       "posicao": 2,
       "nota": 147.09650538247473,
-      "segundos": 9.9,
+      "segundos": 10.0,
       "n_familias": 17
      },
      {
@@ -7309,28 +7318,29 @@
       ],
       "posicao": 2,
       "nota": 16.666666666666668,
-      "segundos": 11.7,
+      "segundos": 13.9,
       "n_familias": 17
      },
      {
       "serie": "Mercado",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
-      "modelo": "LastValueNaive",
+      "modelo": "AverageValueNaive",
       "transformacoes": [
-       "PositiveShift",
-       "bkfilter"
+       "ClipOutliers",
+       "Detrend",
+       "RollingMeanTransformer"
       ],
       "posicao": 2,
-      "nota": 32.18397543348336,
-      "segundos": 11.7,
+      "nota": 140.53332885162573,
+      "segundos": 12.2,
       "n_familias": 17
      }
     ]
    },
-   "segundos": 0.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "autots_3": {
    "descricao": "AutoTS: o 3º colocado da busca automática em cada janela de 12 meses",
@@ -7788,42 +7798,42 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 157.79,
-      "p10": 104.4,
-      "p90": 198.94
-     },
-     {
       "mes": "2026-11",
-      "valor": 163.22,
-      "p10": 108.96,
-      "p90": 203.5
+      "valor": 160.68,
+      "p10": 125.65,
+      "p90": 195.71
      },
      {
       "mes": "2026-12",
-      "valor": 168.57,
-      "p10": 113.45,
-      "p90": 207.98
+      "valor": 164.67,
+      "p10": 111.14,
+      "p90": 218.21
+     },
+     {
+      "mes": "2027-01",
+      "valor": 168.66,
+      "p10": 101.54,
+      "p90": 235.78
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 438.61,
-      "p10": 263.97,
-      "p90": 555.23
-     },
-     {
       "mes": "2026-11",
-      "valor": 465.38,
-      "p10": 286.29,
-      "p90": 577.54
+      "valor": 505.33,
+      "p10": 462.33,
+      "p90": 534.78
      },
      {
       "mes": "2026-12",
-      "valor": 492.15,
-      "p10": 308.6,
-      "p90": 599.85
+      "valor": 538.7,
+      "p10": 495.7,
+      "p90": 568.14
+     },
+     {
+      "mes": "2027-01",
+      "valor": 573.17,
+      "p10": 530.18,
+      "p90": 602.62
      }
     ]
    },
@@ -7874,7 +7884,7 @@
       ],
       "posicao": 3,
       "nota": 12.521928917093078,
-      "segundos": 10.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -7889,7 +7899,7 @@
       ],
       "posicao": 3,
       "nota": 3.083663432211097,
-      "segundos": 13.4,
+      "segundos": 12.8,
       "n_familias": 17
      },
      {
@@ -7904,7 +7914,7 @@
       ],
       "posicao": 3,
       "nota": 50.97829181827862,
-      "segundos": 11.3,
+      "segundos": 12.2,
       "n_familias": 17
      },
      {
@@ -7920,7 +7930,7 @@
       ],
       "posicao": 3,
       "nota": 26.666666666666668,
-      "segundos": 14.7,
+      "segundos": 14.9,
       "n_familias": 17
      },
      {
@@ -7936,7 +7946,7 @@
       ],
       "posicao": 3,
       "nota": 517.182797108933,
-      "segundos": 14.0,
+      "segundos": 16.0,
       "n_familias": 17
      },
      {
@@ -7951,7 +7961,7 @@
       ],
       "posicao": 4,
       "nota": 25.52368160767486,
-      "segundos": 23.5,
+      "segundos": 17.1,
       "n_familias": 16
      },
      {
@@ -7966,7 +7976,7 @@
       ],
       "posicao": 3,
       "nota": 71.12391792047761,
-      "segundos": 13.7,
+      "segundos": 14.0,
       "n_familias": 17
      },
      {
@@ -7980,7 +7990,7 @@
       ],
       "posicao": 3,
       "nota": 109.73350914795567,
-      "segundos": 13.5,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -7996,23 +8006,22 @@
       ],
       "posicao": 3,
       "nota": 14.755851166773382,
-      "segundos": 13.3,
+      "segundos": 14.4,
       "n_familias": 17
      },
      {
       "serie": "Inbound",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
-      "modelo": "ETS",
+      "modelo": "Theta",
       "transformacoes": [
-       "ClipOutliers",
-       "Detrend",
-       "MinMaxScaler"
+       "ShiftFirstValue",
+       "MaxAbsScaler"
       ],
       "posicao": 3,
-      "nota": 76.2418572797735,
-      "segundos": 12.8,
+      "nota": 86.34550621425849,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -8026,7 +8035,7 @@
       ],
       "posicao": 3,
       "nota": 10.743791343184803,
-      "segundos": 18.5,
+      "segundos": 20.2,
       "n_familias": 14
      },
      {
@@ -8042,7 +8051,7 @@
       ],
       "posicao": 3,
       "nota": 7.291111111111111,
-      "segundos": 11.8,
+      "segundos": 15.8,
       "n_familias": 17
      },
      {
@@ -8057,7 +8066,7 @@
       ],
       "posicao": 3,
       "nota": 11.662754735288402,
-      "segundos": 12.7,
+      "segundos": 14.3,
       "n_familias": 17
      },
      {
@@ -8072,7 +8081,7 @@
       ],
       "posicao": 3,
       "nota": 54.45714784871169,
-      "segundos": 14.4,
+      "segundos": 15.9,
       "n_familias": 17
      },
      {
@@ -8087,7 +8096,7 @@
       ],
       "posicao": 3,
       "nota": 25.066513048109613,
-      "segundos": 9.1,
+      "segundos": 14.1,
       "n_familias": 17
      },
      {
@@ -8101,7 +8110,7 @@
       ],
       "posicao": 3,
       "nota": 58.962210113420554,
-      "segundos": 8.9,
+      "segundos": 9.9,
       "n_familias": 17
      },
      {
@@ -8115,7 +8124,7 @@
       ],
       "posicao": 3,
       "nota": 45.0,
-      "segundos": 14.7,
+      "segundos": 14.6,
       "n_familias": 17
      },
      {
@@ -8129,7 +8138,7 @@
       ],
       "posicao": 3,
       "nota": 150.1342936860694,
-      "segundos": 9.9,
+      "segundos": 10.0,
       "n_familias": 17
      },
      {
@@ -8144,27 +8153,28 @@
       ],
       "posicao": 3,
       "nota": 16.666666666666668,
-      "segundos": 11.7,
+      "segundos": 13.9,
       "n_familias": 17
      },
      {
       "serie": "Mercado",
-      "treino_inicio": "2025-10",
-      "treino_fim": "2026-09",
+      "treino_inicio": "2025-11",
+      "treino_fim": "2026-10",
       "n_meses": 12,
-      "modelo": "ETS",
+      "modelo": "UnobservedComponents",
       "transformacoes": [
-       "ClipOutliers"
+       "ClipOutliers",
+       "Detrend"
       ],
       "posicao": 3,
-      "nota": 33.30870558547673,
-      "segundos": 11.7,
+      "nota": 140.5333288516283,
+      "segundos": 12.2,
       "n_familias": 17
      }
     ]
    },
    "segundos": 0.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "boost_lgbm": {
    "descricao": "LightGBM sobre a razão entre o mês e a média dos últimos 3 meses (defasagens 1-3 e 12, momento, mês, dias úteis, nov/dez); previsão direta de 1 a 3 meses",
@@ -8622,48 +8632,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 169.19,
-      "p10": 99.4,
-      "p90": 169.68
-     },
-     {
       "mes": "2026-11",
-      "valor": 163.2,
-      "p10": 111.58,
-      "p90": 164.7
+      "valor": 152.18,
+      "p10": 125.41,
+      "p90": 155.87
      },
      {
       "mes": "2026-12",
-      "valor": 169.19,
-      "p10": 115.68,
-      "p90": 170.75
+      "valor": 157.21,
+      "p10": 120.39,
+      "p90": 163.32
+     },
+     {
+      "mes": "2027-01",
+      "valor": 158.62,
+      "p10": 121.46,
+      "p90": 164.78
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 539.58,
-      "p10": 369.47,
-      "p90": 588.32
-     },
-     {
       "mes": "2026-11",
-      "valor": 556.42,
-      "p10": 365.39,
-      "p90": 553.71
+      "valor": 538.94,
+      "p10": 384.71,
+      "p90": 549.65
      },
      {
       "mes": "2026-12",
-      "valor": 573.54,
-      "p10": 376.64,
-      "p90": 570.75
+      "valor": 547.42,
+      "p10": 345.95,
+      "p90": 569.29
+     },
+     {
+      "mes": "2027-01",
+      "valor": 686.41,
+      "p10": 433.78,
+      "p90": 713.83
      }
     ]
    },
    "modulo": "boosting",
-   "segundos": 1.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 1.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "boost_xgb": {
    "descricao": "XGBoost sobre a razão entre o mês e a média dos últimos 3 meses (defasagens 1-3 e 12, momento, mês, dias úteis, nov/dez); previsão direta de 1 a 3 meses",
@@ -9121,48 +9131,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 169.51,
-      "p10": 99.38,
-      "p90": 171.1
-     },
-     {
       "mes": "2026-11",
-      "valor": 165.67,
-      "p10": 113.27,
-      "p90": 167.2
+      "valor": 149.4,
+      "p10": 123.46,
+      "p90": 150.99
      },
      {
       "mes": "2026-12",
-      "valor": 171.14,
-      "p10": 117.01,
-      "p90": 172.72
+      "valor": 156.12,
+      "p10": 119.96,
+      "p90": 160.42
+     },
+     {
+      "mes": "2027-01",
+      "valor": 159.26,
+      "p10": 122.36,
+      "p90": 163.63
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 526.45,
-      "p10": 359.16,
-      "p90": 581.07
-     },
-     {
       "mes": "2026-11",
-      "valor": 562.76,
-      "p10": 369.15,
-      "p90": 562.17
+      "valor": 549.49,
+      "p10": 392.24,
+      "p90": 549.75
      },
      {
       "mes": "2026-12",
-      "valor": 571.28,
-      "p10": 374.75,
-      "p90": 570.69
+      "valor": 549.49,
+      "p10": 347.25,
+      "p90": 554.25
+     },
+     {
+      "mes": "2027-01",
+      "valor": 691.74,
+      "p10": 437.15,
+      "p90": 697.74
      }
     ]
    },
    "modulo": "boosting",
-   "segundos": 1.3,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 2.0,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "boost_lgbm_n1": {
    "descricao": "LightGBM sobre a razão entre o mês e o último mês fechado (defasagens 1-3 e 12, momento, mês, dias úteis, nov/dez); previsão direta de 1 a 3 meses",
@@ -9620,48 +9630,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 113.74,
-      "p10": 66.4,
-      "p90": 119.5
-     },
-     {
       "mes": "2026-11",
-      "valor": 111.43,
-      "p10": 65.22,
-      "p90": 114.81
+      "valor": 135.74,
+      "p10": 101.68,
+      "p90": 189.31
      },
      {
       "mes": "2026-12",
-      "valor": 115.85,
-      "p10": 67.81,
-      "p90": 119.36
+      "valor": 156.19,
+      "p10": 119.36,
+      "p90": 191.14
+     },
+     {
+      "mes": "2027-01",
+      "valor": 144.47,
+      "p10": 110.4,
+      "p90": 176.79
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 513.76,
-      "p10": 343.26,
-      "p90": 533.34
-     },
-     {
       "mes": "2026-11",
-      "valor": 537.19,
-      "p10": 337.95,
-      "p90": 542.95
+      "valor": 679.55,
+      "p10": 421.57,
+      "p90": 690.15
      },
      {
       "mes": "2026-12",
-      "valor": 570.21,
-      "p10": 358.72,
-      "p90": 576.32
+      "valor": 719.93,
+      "p10": 413.92,
+      "p90": 711.66
+     },
+     {
+      "mes": "2027-01",
+      "valor": 742.59,
+      "p10": 426.95,
+      "p90": 734.05
      }
     ]
    },
    "modulo": "boosting",
    "segundos": 0.9,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "boost_auto": {
    "descricao": "LightGBM, XGBoost ou só a âncora (média 3m ou último mês) — escolhido em cada origem por validação no próprio passado (4 últimas origens do treino)",
@@ -10119,48 +10129,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 150.0,
-      "p10": 88.12,
-      "p90": 150.43
-     },
-     {
       "mes": "2026-11",
-      "valor": 150.0,
-      "p10": 102.56,
-      "p90": 151.38
+      "valor": 149.4,
+      "p10": 123.12,
+      "p90": 153.03
      },
      {
       "mes": "2026-12",
-      "valor": 150.0,
-      "p10": 102.56,
-      "p90": 151.38
+      "valor": 156.12,
+      "p10": 119.55,
+      "p90": 162.19
+     },
+     {
+      "mes": "2027-01",
+      "valor": 159.26,
+      "p10": 121.95,
+      "p90": 165.45
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 401.0,
-      "p10": 274.58,
-      "p90": 437.22
-     },
-     {
       "mes": "2026-11",
-      "valor": 401.0,
-      "p10": 263.33,
-      "p90": 399.05
+      "valor": 549.49,
+      "p10": 392.24,
+      "p90": 560.41
      },
      {
       "mes": "2026-12",
-      "valor": 401.0,
-      "p10": 263.33,
-      "p90": 399.05
+      "valor": 549.49,
+      "p10": 347.25,
+      "p90": 571.43
+     },
+     {
+      "mes": "2027-01",
+      "valor": 691.74,
+      "p10": 437.15,
+      "p90": 719.37
      }
     ]
    },
    "modulo": "boosting",
-   "segundos": 0.4,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_ets_aicc": {
    "descricao": "ETS em log: nível, tendência ou tendência amortecida, escolhido por AICc",
@@ -10618,48 +10628,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 132.81,
-      "p10": 84.44,
-      "p90": 208.57
-     },
-     {
       "mes": "2026-11",
-      "valor": 132.81,
-      "p10": 83.07,
-      "p90": 211.97
+      "valor": 149.21,
+      "p10": 96.57,
+      "p90": 230.23
      },
      {
       "mes": "2026-12",
-      "valor": 132.81,
-      "p10": 81.77,
-      "p90": 215.31
+      "valor": 149.21,
+      "p10": 93.23,
+      "p90": 238.44
+     },
+     {
+      "mes": "2027-01",
+      "valor": 149.21,
+      "p10": 90.22,
+      "p90": 246.34
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 476.98,
-      "p10": 329.05,
-      "p90": 691.22
-     },
-     {
       "mes": "2026-11",
-      "valor": 476.98,
-      "p10": 282.12,
-      "p90": 805.96
+      "valor": 477.32,
+      "p10": 338.66,
+      "p90": 672.58
      },
      {
       "mes": "2026-12",
-      "valor": 476.98,
-      "p10": 250.69,
-      "p90": 906.74
+      "valor": 477.32,
+      "p10": 300.2,
+      "p90": 758.59
+     },
+     {
+      "mes": "2027-01",
+      "valor": 477.32,
+      "p10": 272.95,
+      "p90": 834.14
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 0.5,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_holt_amortecido": {
    "descricao": "Holt com tendência amortecida, em log",
@@ -11117,48 +11127,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 162.7,
-      "p10": 112.9,
-      "p90": 234.27
-     },
-     {
       "mes": "2026-11",
-      "valor": 171.05,
-      "p10": 118.71,
-      "p90": 246.28
+      "valor": 160.38,
+      "p10": 119.49,
+      "p90": 215.15
      },
      {
       "mes": "2026-12",
-      "valor": 179.66,
-      "p10": 124.7,
-      "p90": 258.64
+      "valor": 162.6,
+      "p10": 121.15,
+      "p90": 218.11
+     },
+     {
+      "mes": "2027-01",
+      "valor": 164.39,
+      "p10": 122.48,
+      "p90": 220.51
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 457.99,
-      "p10": 325.74,
-      "p90": 643.79
-     },
-     {
       "mes": "2026-11",
-      "valor": 500.9,
-      "p10": 356.28,
-      "p90": 704.06
+      "valor": 551.39,
+      "p10": 439.04,
+      "p90": 692.43
      },
      {
       "mes": "2026-12",
-      "valor": 546.84,
-      "p10": 388.98,
-      "p90": 768.59
+      "valor": 607.28,
+      "p10": 483.56,
+      "p90": 762.59
+     },
+     {
+      "mes": "2027-01",
+      "valor": 666.2,
+      "p10": 530.49,
+      "p90": 836.56
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 0.3,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_arima_aicc": {
    "descricao": "ARIMA pequeno em log (p,q<=2, d<=1, drift), escolhido por AICc",
@@ -11616,48 +11626,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 113.65,
-      "p10": 72.63,
-      "p90": 177.53
-     },
-     {
       "mes": "2026-11",
-      "valor": 113.65,
-      "p10": 72.63,
-      "p90": 177.53
+      "valor": 137.16,
+      "p10": 95.68,
+      "p90": 196.43
      },
      {
       "mes": "2026-12",
-      "valor": 113.65,
-      "p10": 72.63,
-      "p90": 177.53
+      "valor": 159.38,
+      "p10": 110.12,
+      "p90": 230.47
+     },
+     {
+      "mes": "2027-01",
+      "valor": 142.14,
+      "p10": 88.54,
+      "p90": 227.82
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 477.0,
-      "p10": 323.67,
-      "p90": 702.73
-     },
-     {
       "mes": "2026-11",
-      "valor": 477.0,
-      "p10": 275.61,
-      "p90": 825.02
+      "valor": 479.0,
+      "p10": 334.21,
+      "p90": 686.33
      },
      {
       "mes": "2026-12",
-      "valor": 477.0,
-      "p10": 243.61,
-      "p90": 933.07
+      "valor": 479.0,
+      "p10": 287.89,
+      "p90": 796.54
+     },
+     {
+      "mes": "2027-01",
+      "valor": 479.0,
+      "p10": 256.73,
+      "p90": 892.95
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 4.5,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 6.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_theta": {
    "descricao": "método Theta (tendência linear + suavização exponencial), em log",
@@ -12115,48 +12125,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 173.96,
-      "p10": 118.71,
-      "p90": 254.69
-     },
-     {
       "mes": "2026-11",
-      "valor": 179.05,
-      "p10": 92.33,
-      "p90": 346.37
+      "valor": 163.84,
+      "p10": 117.12,
+      "p90": 229.06
      },
      {
       "mes": "2026-12",
-      "valor": 184.3,
-      "p10": 78.33,
-      "p90": 431.83
+      "valor": 170.2,
+      "p10": 102.06,
+      "p90": 283.39
+     },
+     {
+      "mes": "2027-01",
+      "valor": 176.81,
+      "p10": 93.17,
+      "p90": 334.74
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 502.5,
-      "p10": 344.12,
-      "p90": 733.57
-     },
-     {
       "mes": "2026-11",
-      "valor": 529.4,
-      "p10": 309.9,
-      "p90": 903.86
+      "valor": 512.6,
+      "p10": 402.31,
+      "p90": 653.05
      },
      {
       "mes": "2026-12",
-      "valor": 557.73,
-      "p10": 289.46,
-      "p90": 1073.78
+      "valor": 546.98,
+      "p10": 388.11,
+      "p90": 770.72
+     },
+     {
+      "mes": "2027-01",
+      "valor": 583.67,
+      "p10": 383.34,
+      "p90": 888.43
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 1.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 1.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_combinado": {
    "descricao": "mediana de ETS, ARIMA e Theta (em log)",
@@ -12614,48 +12624,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 132.81,
-      "p10": 84.44,
-      "p90": 208.57
-     },
-     {
       "mes": "2026-11",
-      "valor": 132.81,
-      "p10": 83.07,
-      "p90": 211.97
+      "valor": 149.21,
+      "p10": 96.57,
+      "p90": 229.06
      },
      {
       "mes": "2026-12",
-      "valor": 132.81,
-      "p10": 78.33,
-      "p90": 215.31
+      "valor": 159.38,
+      "p10": 102.06,
+      "p90": 238.44
+     },
+     {
+      "mes": "2027-01",
+      "valor": 149.21,
+      "p10": 90.22,
+      "p90": 246.34
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 477.0,
-      "p10": 329.05,
-      "p90": 702.73
-     },
-     {
       "mes": "2026-11",
-      "valor": 477.0,
-      "p10": 282.12,
-      "p90": 825.02
+      "valor": 479.0,
+      "p10": 338.66,
+      "p90": 672.58
      },
      {
       "mes": "2026-12",
-      "valor": 477.0,
-      "p10": 250.69,
-      "p90": 933.07
+      "valor": 479.0,
+      "p10": 300.2,
+      "p90": 770.72
+     },
+     {
+      "mes": "2027-01",
+      "valor": 479.0,
+      "p10": 272.95,
+      "p90": 888.43
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 6.3,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 7.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_validado": {
    "descricao": "candidato clássico escolhido pelo menor erro num backtest dentro do próprio treino",
@@ -13113,48 +13123,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 132.81,
-      "p10": 84.44,
-      "p90": 208.57
-     },
-     {
       "mes": "2026-11",
-      "valor": 132.81,
-      "p10": 83.07,
-      "p90": 211.97
+      "valor": 160.38,
+      "p10": 119.49,
+      "p90": 215.15
      },
      {
       "mes": "2026-12",
-      "valor": 132.81,
-      "p10": 81.77,
-      "p90": 215.31
+      "valor": 162.6,
+      "p10": 121.15,
+      "p90": 218.11
+     },
+     {
+      "mes": "2027-01",
+      "valor": 164.39,
+      "p10": 122.48,
+      "p90": 220.51
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 457.99,
-      "p10": 325.74,
-      "p90": 643.79
-     },
-     {
       "mes": "2026-11",
-      "valor": 500.9,
-      "p10": 356.28,
-      "p90": 704.06
+      "valor": 551.39,
+      "p10": 439.04,
+      "p90": 692.43
      },
      {
       "mes": "2026-12",
-      "valor": 546.84,
-      "p10": 388.98,
-      "p90": 768.59
+      "valor": 607.28,
+      "p10": 483.56,
+      "p90": 762.59
+     },
+     {
+      "mes": "2027-01",
+      "valor": 666.2,
+      "p10": 530.49,
+      "p90": 836.56
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 11.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 12.2,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_arima_aicc_faixa_erros": {
    "descricao": "ARIMA pequeno em log escolhido por AICc; faixa pelos erros do próprio passado",
@@ -13612,48 +13622,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 113.65,
-      "p10": null,
-      "p90": null
-     },
-     {
       "mes": "2026-11",
-      "valor": 113.65,
+      "valor": 137.16,
       "p10": null,
       "p90": null
      },
      {
       "mes": "2026-12",
-      "valor": 113.65,
+      "valor": 159.38,
+      "p10": null,
+      "p90": null
+     },
+     {
+      "mes": "2027-01",
+      "valor": 142.14,
       "p10": null,
       "p90": null
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 477.0,
-      "p10": null,
-      "p90": null
-     },
-     {
       "mes": "2026-11",
-      "valor": 477.0,
+      "valor": 479.0,
       "p10": null,
       "p90": null
      },
      {
       "mes": "2026-12",
-      "valor": 477.0,
+      "valor": 479.0,
+      "p10": null,
+      "p90": null
+     },
+     {
+      "mes": "2027-01",
+      "valor": 479.0,
       "p10": null,
       "p90": null
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 7.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 7.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "cls_holt_amortecido_faixa_erros": {
    "descricao": "Holt amortecido em log; faixa pelos erros do próprio passado",
@@ -14111,48 +14121,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 162.7,
-      "p10": null,
-      "p90": null
-     },
-     {
       "mes": "2026-11",
-      "valor": 171.05,
+      "valor": 160.38,
       "p10": null,
       "p90": null
      },
      {
       "mes": "2026-12",
-      "valor": 179.66,
+      "valor": 162.6,
+      "p10": null,
+      "p90": null
+     },
+     {
+      "mes": "2027-01",
+      "valor": 164.39,
       "p10": null,
       "p90": null
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 457.99,
-      "p10": null,
-      "p90": null
-     },
-     {
       "mes": "2026-11",
-      "valor": 500.9,
+      "valor": 551.39,
       "p10": null,
       "p90": null
      },
      {
       "mes": "2026-12",
-      "valor": 546.84,
+      "valor": 607.28,
+      "p10": null,
+      "p90": null
+     },
+     {
+      "mes": "2027-01",
+      "valor": 666.2,
       "p10": null,
       "p90": null
      }
     ]
    },
    "modulo": "classico",
-   "segundos": 0.7,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.8,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_ses": {
    "descricao": "suavização exponencial simples (alfa ajustado no próprio passado)",
@@ -14613,9 +14623,9 @@
       },
       "2": {
        "n": 4,
-       "wape": 0.1350210970464135,
-       "mae": 24.0,
-       "vies": -0.07032348804500703,
+       "wape": 0.13642756680731363,
+       "mae": 24.25,
+       "vies": -0.07172995780590717,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
@@ -14631,9 +14641,9 @@
       },
       "todos": {
        "n": 12,
-       "wape": 0.17112048757618378,
-       "mae": 30.416666666666668,
-       "vies": -0.11017346460384435,
+       "wape": 0.17158931082981715,
+       "mae": 30.5,
+       "vies": -0.11064228785747773,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
@@ -14655,8 +14665,8 @@
        "horizonte": 1,
        "origem": "2026-04",
        "trecho": "verificacao",
-       "real": 134.0,
-       "valor": 81.0,
+       "real": 133.0,
+       "valor": 82.0,
        "p10": null,
        "p90": null
       },
@@ -14666,7 +14676,7 @@
        "origem": "2026-04",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 81.0,
+       "valor": 82.0,
        "p10": null,
        "p90": null
       },
@@ -14676,7 +14686,7 @@
        "origem": "2026-05",
        "trecho": "verificacao",
        "real": 164.0,
-       "valor": 134.0,
+       "valor": 133.0,
        "p10": null,
        "p90": null
       },
@@ -14686,7 +14696,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 134.0,
+       "valor": 133.0,
        "p10": null,
        "p90": null
       },
@@ -14696,7 +14706,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 134.0,
+       "valor": 133.0,
        "p10": null,
        "p90": null
       },
@@ -14988,88 +14998,88 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 123.26,
-      "p10": 111.38,
-      "p90": 178.09
-     },
-     {
       "mes": "2026-11",
-      "valor": 123.26,
-      "p10": 126.09,
-      "p90": 177.83
+      "valor": 150.51,
+      "p10": 127.54,
+      "p90": 222.0
      },
      {
       "mes": "2026-12",
-      "valor": 123.26,
-      "p10": 124.87,
-      "p90": 174.9
+      "valor": 150.51,
+      "p10": 147.56,
+      "p90": 187.33
+     },
+     {
+      "mes": "2027-01",
+      "valor": 150.51,
+      "p10": 161.95,
+      "p90": 219.99
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 455.37,
-      "p10": 387.47,
-      "p90": 672.81
-     },
-     {
       "mes": "2026-11",
-      "valor": 455.37,
-      "p10": 474.58,
-      "p90": 649.1
+      "valor": 472.94,
+      "p10": 427.06,
+      "p90": 690.78
      },
      {
       "mes": "2026-12",
-      "valor": 455.37,
-      "p10": 489.25,
-      "p90": 757.03
+      "valor": 472.94,
+      "p10": 492.9,
+      "p90": 696.9
+     },
+     {
+      "mes": "2027-01",
+      "valor": 472.94,
+      "p10": 485.49,
+      "p90": 786.26
      }
     ],
     "Mercado exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 194.0,
-      "p10": 164.71,
-      "p90": 228.51
-     },
-     {
       "mes": "2026-11",
-      "valor": 194.0,
-      "p10": 164.71,
-      "p90": 228.51
+      "valor": 148.63,
+      "p10": 114.14,
+      "p90": 177.92
      },
      {
       "mes": "2026-12",
-      "valor": 194.0,
-      "p10": 164.71,
-      "p90": 228.51
+      "valor": 148.63,
+      "p10": 114.12,
+      "p90": 167.77
+     },
+     {
+      "mes": "2027-01",
+      "valor": 148.63,
+      "p10": 114.12,
+      "p90": 167.77
      }
     ],
     "Mercado não exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 231.25,
-      "p10": 215.91,
-      "p90": 392.69
-     },
-     {
       "mes": "2026-11",
-      "valor": 231.25,
-      "p10": 215.91,
-      "p90": 392.69
+      "valor": 263.39,
+      "p10": 246.77,
+      "p90": 405.99
      },
      {
       "mes": "2026-12",
-      "valor": 231.25,
-      "p10": 215.91,
-      "p90": 392.69
+      "valor": 263.39,
+      "p10": 263.37,
+      "p90": 438.99
+     },
+     {
+      "mes": "2027-01",
+      "valor": 263.39,
+      "p10": 263.37,
+      "p90": 438.99
      }
     ]
    },
    "modulo": "combinacao",
-   "segundos": 0.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.2,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_holt_amort": {
    "descricao": "Holt com tendência amortecida (parâmetros ajustados no próprio passado)",
@@ -15521,36 +15531,36 @@
      "metricas": {
       "1": {
        "n": 4,
-       "wape": 0.11363628860801736,
-       "mae": 20.198850300075087,
-       "vies": 0.08656282709833012,
+       "wape": 0.11270368989571043,
+       "mae": 20.03308087896253,
+       "vies": 0.07784639785104304,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "2": {
        "n": 4,
-       "wape": 0.19795800112430917,
-       "mae": 35.18703469984595,
-       "vies": 0.12165929143789646,
+       "wape": 0.19158497152563692,
+       "mae": 34.05422868868196,
+       "vies": 0.112081041170603,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "3": {
        "n": 4,
-       "wape": 0.31517383972519275,
-       "mae": 56.022150011153016,
-       "vies": -0.020641891926272346,
+       "wape": 0.30978605897792144,
+       "mae": 55.06447198332554,
+       "vies": -0.02691329881289513,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "todos": {
        "n": 12,
-       "wape": 0.20892270981917307,
-       "mae": 37.136011670358016,
-       "vies": 0.06252674220331807,
+       "wape": 0.20469157346642292,
+       "mae": 36.383927183656674,
+       "vies": 0.0543380467362503,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
@@ -15572,8 +15582,8 @@
        "horizonte": 1,
        "origem": "2026-04",
        "trecho": "verificacao",
-       "real": 134.0,
-       "valor": 81.0,
+       "real": 133.0,
+       "valor": 82.0,
        "p10": null,
        "p90": null
       },
@@ -15583,7 +15593,7 @@
        "origem": "2026-04",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 81.0,
+       "valor": 82.0,
        "p10": null,
        "p90": null
       },
@@ -15593,7 +15603,7 @@
        "origem": "2026-05",
        "trecho": "verificacao",
        "real": 164.0,
-       "valor": 135.72,
+       "valor": 134.77,
        "p10": null,
        "p90": null
       },
@@ -15603,7 +15613,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 149.88,
+       "valor": 148.74,
        "p10": null,
        "p90": null
       },
@@ -15613,7 +15623,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 162.62,
+       "valor": 161.3,
        "p10": null,
        "p90": null
       },
@@ -15623,7 +15633,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 174.05,
+       "valor": 172.64,
        "p10": null,
        "p90": null
       },
@@ -15633,7 +15643,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 195.27,
+       "valor": 193.58,
        "p10": null,
        "p90": null
       },
@@ -15643,7 +15653,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 216.08,
+       "valor": 214.1,
        "p10": null,
        "p90": null
       },
@@ -15653,7 +15663,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 195.43,
+       "valor": 193.81,
        "p10": null,
        "p90": null
       },
@@ -15663,7 +15673,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 216.24,
+       "valor": 214.34,
        "p10": null,
        "p90": null
       },
@@ -15673,7 +15683,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 236.63,
+       "valor": 234.46,
        "p10": null,
        "p90": null
       },
@@ -15683,7 +15693,7 @@
        "origem": "2026-08",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 215.74,
+       "valor": 213.93,
        "p10": null,
        "p90": null
       },
@@ -15693,7 +15703,7 @@
        "origem": "2026-08",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 236.11,
+       "valor": 234.03,
        "p10": null,
        "p90": null
       },
@@ -15703,7 +15713,7 @@
        "origem": "2026-09",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 187.33,
+       "valor": 185.97,
        "p10": null,
        "p90": null
       }
@@ -15905,88 +15915,88 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 144.59,
-      "p10": 124.59,
-      "p90": 203.31
-     },
-     {
       "mes": "2026-11",
-      "valor": 146.64,
-      "p10": 138.04,
-      "p90": 201.63
+      "valor": 172.29,
+      "p10": 134.77,
+      "p90": 239.71
      },
      {
       "mes": "2026-12",
-      "valor": 148.64,
-      "p10": 145.17,
-      "p90": 204.65
+      "valor": 179.6,
+      "p10": 156.49,
+      "p90": 189.81
+     },
+     {
+      "mes": "2027-01",
+      "valor": 186.77,
+      "p10": 160.98,
+      "p90": 242.12
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 458.5,
-      "p10": 368.0,
-      "p90": 651.32
-     },
-     {
       "mes": "2026-11",
-      "valor": 476.79,
-      "p10": 449.95,
-      "p90": 627.7
+      "valor": 511.01,
+      "p10": 448.22,
+      "p90": 761.0
      },
      {
       "mes": "2026-12",
-      "valor": 491.42,
-      "p10": 446.58,
-      "p90": 749.86
+      "valor": 545.27,
+      "p10": 510.19,
+      "p90": 807.08
+     },
+     {
+      "mes": "2027-01",
+      "valor": 578.84,
+      "p10": 526.98,
+      "p90": 964.99
      }
     ],
     "Mercado exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 197.04,
-      "p10": 140.49,
-      "p90": 195.79
-     },
-     {
       "mes": "2026-11",
-      "valor": 205.48,
-      "p10": 146.5,
-      "p90": 204.18
+      "valor": 201.26,
+      "p10": 145.86,
+      "p90": 204.92
      },
      {
       "mes": "2026-12",
-      "valor": 213.07,
-      "p10": 151.92,
-      "p90": 211.73
+      "valor": 208.66,
+      "p10": 143.62,
+      "p90": 203.74
+     },
+     {
+      "mes": "2027-01",
+      "valor": 215.32,
+      "p10": 148.2,
+      "p90": 210.23
      }
     ],
     "Mercado não exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 243.91,
-      "p10": 193.75,
-      "p90": 317.64
-     },
-     {
       "mes": "2026-11",
-      "valor": 263.11,
-      "p10": 209.0,
-      "p90": 342.65
+      "valor": 274.14,
+      "p10": 241.69,
+      "p90": 349.5
      },
      {
       "mes": "2026-12",
-      "valor": 281.93,
-      "p10": 223.95,
-      "p90": 367.16
+      "valor": 295.41,
+      "p10": 238.79,
+      "p90": 384.23
+     },
+     {
+      "mes": "2027-01",
+      "valor": 316.26,
+      "p10": 255.64,
+      "p90": 411.35
      }
     ]
    },
    "modulo": "combinacao",
-   "segundos": 0.2,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_theta": {
    "descricao": "método Theta: suavização + metade da tendência",
@@ -16438,36 +16448,36 @@
      "metricas": {
       "1": {
        "n": 4,
-       "wape": 0.11024043935436341,
-       "mae": 19.595238095238095,
-       "vies": 0.02219878105954055,
+       "wape": 0.1102622061482821,
+       "mae": 19.599107142857143,
+       "vies": 0.02204641350210968,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "2": {
        "n": 4,
-       "wape": 0.12414104882459312,
-       "mae": 22.066071428571426,
-       "vies": 0.06394414305806707,
+       "wape": 0.12555756479807112,
+       "mae": 22.317857142857143,
+       "vies": 0.061985131605384707,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "3": {
        "n": 4,
-       "wape": 0.23978300180831824,
-       "mae": 42.62142857142857,
-       "vies": -0.0453084187261402,
+       "wape": 0.2388185654008438,
+       "mae": 42.44999999999999,
+       "vies": -0.04500703234880452,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "todos": {
        "n": 12,
-       "wape": 0.1580548299957583,
-       "mae": 28.094246031746035,
-       "vies": 0.013611501797155812,
+       "wape": 0.158212778782399,
+       "mae": 28.122321428571425,
+       "vies": 0.01300817091956329,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
@@ -16489,8 +16499,8 @@
        "horizonte": 1,
        "origem": "2026-04",
        "trecho": "verificacao",
-       "real": 134.0,
-       "valor": 85.75,
+       "real": 133.0,
+       "valor": 87.0,
        "p10": null,
        "p90": null
       },
@@ -16500,7 +16510,7 @@
        "origem": "2026-04",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 95.25,
+       "valor": 97.0,
        "p10": null,
        "p90": null
       },
@@ -16510,7 +16520,7 @@
        "origem": "2026-05",
        "trecho": "verificacao",
        "real": 164.0,
-       "valor": 144.8,
+       "valor": 143.7,
        "p10": null,
        "p90": null
       },
@@ -16520,7 +16530,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 155.6,
+       "valor": 154.4,
        "p10": null,
        "p90": null
       },
@@ -16530,7 +16540,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 166.4,
+       "valor": 165.1,
        "p10": null,
        "p90": null
       },
@@ -16540,7 +16550,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 176.85,
+       "valor": 176.8,
        "p10": null,
        "p90": null
       },
@@ -16550,7 +16560,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 189.7,
+       "valor": 189.6,
        "p10": null,
        "p90": null
       },
@@ -16560,7 +16570,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 202.55,
+       "valor": 202.4,
        "p10": null,
        "p90": null
       },
@@ -16570,7 +16580,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 189.53,
+       "valor": 189.5,
        "p10": null,
        "p90": null
       },
@@ -16580,7 +16590,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 202.06,
+       "valor": 202.0,
        "p10": null,
        "p90": null
       },
@@ -16590,7 +16600,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 214.59,
+       "valor": 214.5,
        "p10": null,
        "p90": null
       },
@@ -16600,7 +16610,7 @@
        "origem": "2026-08",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 197.55,
+       "valor": 197.54,
        "p10": null,
        "p90": null
       },
@@ -16610,7 +16620,7 @@
        "origem": "2026-08",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 209.11,
+       "valor": 209.07,
        "p10": null,
        "p90": null
       },
@@ -16620,7 +16630,7 @@
        "origem": "2026-09",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 162.85,
+       "valor": 162.84,
        "p10": null,
        "p90": null
       }
@@ -16822,88 +16832,88 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 150.98,
-      "p10": 115.07,
-      "p90": 192.32
-     },
-     {
       "mes": "2026-11",
-      "valor": 154.0,
-      "p10": 132.56,
-      "p90": 184.51
+      "valor": 160.46,
+      "p10": 124.23,
+      "p90": 211.72
      },
      {
       "mes": "2026-12",
-      "valor": 157.01,
-      "p10": 131.59,
-      "p90": 190.43
+      "valor": 164.46,
+      "p10": 139.56,
+      "p90": 177.96
+     },
+     {
+      "mes": "2027-01",
+      "valor": 168.45,
+      "p10": 152.05,
+      "p90": 201.84
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 471.11,
-      "p10": 393.05,
-      "p90": 677.72
-     },
-     {
       "mes": "2026-11",
-      "valor": 484.5,
-      "p10": 474.6,
-      "p90": 670.61
+      "valor": 494.05,
+      "p10": 426.55,
+      "p90": 686.21
      },
      {
       "mes": "2026-12",
-      "valor": 497.89,
-      "p10": 500.8,
-      "p90": 780.89
+      "valor": 510.93,
+      "p10": 487.27,
+      "p90": 683.66
+     },
+     {
+      "mes": "2027-01",
+      "valor": 527.81,
+      "p10": 475.87,
+      "p90": 761.02
      }
     ],
     "Mercado exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 202.33,
-      "p10": 155.97,
-      "p90": 219.8
-     },
-     {
       "mes": "2026-11",
-      "valor": 210.67,
-      "p10": 162.39,
-      "p90": 228.85
+      "valor": 155.57,
+      "p10": 113.89,
+      "p90": 175.55
      },
      {
       "mes": "2026-12",
-      "valor": 219.0,
-      "p10": 168.82,
-      "p90": 237.91
+      "valor": 161.82,
+      "p10": 113.26,
+      "p90": 165.62
+     },
+     {
+      "mes": "2027-01",
+      "valor": 168.06,
+      "p10": 117.63,
+      "p90": 172.01
      }
     ],
     "Mercado não exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 247.43,
-      "p10": 206.55,
-      "p90": 368.42
-     },
-     {
       "mes": "2026-11",
-      "valor": 257.14,
-      "p10": 214.65,
-      "p90": 382.88
+      "valor": 279.43,
+      "p10": 243.19,
+      "p90": 399.01
      },
      {
       "mes": "2026-12",
-      "valor": 266.85,
-      "p10": 222.76,
-      "p90": 397.34
+      "valor": 289.86,
+      "p10": 254.67,
+      "p90": 431.49
+     },
+     {
+      "mes": "2027-01",
+      "valor": 300.29,
+      "p10": 263.83,
+      "p90": 447.01
      }
     ]
    },
    "modulo": "combinacao",
-   "segundos": 0.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.2,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_drift": {
    "descricao": "último mês + crescimento médio dos últimos 12 meses",
@@ -17364,27 +17374,27 @@
       },
       "2": {
        "n": 4,
-       "wape": 0.1917487107360525,
-       "mae": 34.083333333333336,
-       "vies": 0.1917487107360525,
+       "wape": 0.18940459446788563,
+       "mae": 33.66666666666667,
+       "vies": 0.18940459446788563,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "3": {
        "n": 4,
-       "wape": 0.3178621659634318,
-       "mae": 56.5,
-       "vies": 0.1279887482419128,
+       "wape": 0.31153305203938114,
+       "mae": 55.375,
+       "vies": 0.12869198312236288,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "todos": {
        "n": 12,
-       "wape": 0.2195767195767196,
-       "mae": 39.029761904761905,
-       "vies": 0.1311030741410488,
+       "wape": 0.21668564284598044,
+       "mae": 38.51587301587302,
+       "vies": 0.13055611367847655,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
@@ -17406,8 +17416,8 @@
        "horizonte": 1,
        "origem": "2026-04",
        "trecho": "verificacao",
-       "real": 134.0,
-       "valor": 90.5,
+       "real": 133.0,
+       "valor": 92.0,
        "p10": null,
        "p90": null
       },
@@ -17417,7 +17427,7 @@
        "origem": "2026-04",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 109.5,
+       "valor": 112.0,
        "p10": null,
        "p90": null
       },
@@ -17427,7 +17437,7 @@
        "origem": "2026-05",
        "trecho": "verificacao",
        "real": 164.0,
-       "valor": 158.0,
+       "valor": 156.67,
        "p10": null,
        "p90": null
       },
@@ -17437,7 +17447,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 182.0,
+       "valor": 180.33,
        "p10": null,
        "p90": null
       },
@@ -17447,7 +17457,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 206.0,
+       "valor": 204.0,
        "p10": null,
        "p90": null
       },
@@ -17739,88 +17749,88 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 129.55,
-      "p10": 84.59,
-      "p90": 211.84
-     },
-     {
       "mes": "2026-11",
-      "valor": 130.09,
-      "p10": 104.9,
-      "p90": 175.5
+      "valor": 175.64,
+      "p10": 121.64,
+      "p90": 265.25
      },
      {
       "mes": "2026-12",
-      "valor": 130.64,
-      "p10": 97.8,
-      "p90": 220.3
+      "valor": 184.27,
+      "p10": 136.17,
+      "p90": 214.93
+     },
+     {
+      "mes": "2027-01",
+      "valor": 192.91,
+      "p10": 145.21,
+      "p90": 251.22
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 498.82,
-      "p10": 413.06,
-      "p90": 729.95
-     },
-     {
       "mes": "2026-11",
-      "valor": 520.64,
-      "p10": 501.16,
-      "p90": 741.87
+      "valor": 507.73,
+      "p10": 424.18,
+      "p90": 710.44
      },
      {
       "mes": "2026-12",
-      "valor": 542.45,
-      "p10": 528.86,
-      "p90": 897.75
+      "valor": 536.45,
+      "p10": 486.45,
+      "p90": 717.86
+     },
+     {
+      "mes": "2027-01",
+      "valor": 565.18,
+      "p10": 465.8,
+      "p90": 793.78
      }
     ],
     "Mercado exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 210.5,
-      "p10": 151.11,
-      "p90": 220.04
-     },
-     {
       "mes": "2026-11",
-      "valor": 227.0,
-      "p10": 162.96,
-      "p90": 237.29
+      "valor": 153.11,
+      "p10": 107.55,
+      "p90": 167.12
      },
      {
       "mes": "2026-12",
-      "valor": 243.5,
-      "p10": 174.8,
-      "p90": 254.54
+      "valor": 162.22,
+      "p10": 107.62,
+      "p90": 158.35
+     },
+     {
+      "mes": "2027-01",
+      "valor": 171.33,
+      "p10": 113.66,
+      "p90": 167.24
      }
     ],
     "Mercado não exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 298.5,
-      "p10": 221.06,
-      "p90": 427.51
-     },
-     {
       "mes": "2026-11",
-      "valor": 325.0,
-      "p10": 240.68,
-      "p90": 465.47
+      "valor": 302.22,
+      "p10": 224.59,
+      "p90": 445.54
      },
      {
       "mes": "2026-12",
-      "valor": 351.5,
-      "p10": 260.31,
-      "p90": 503.42
+      "valor": 326.44,
+      "p10": 257.05,
+      "p90": 493.58
+     },
+     {
+      "mes": "2027-01",
+      "valor": 350.67,
+      "p10": 276.12,
+      "p90": 530.2
      }
     ]
    },
    "modulo": "combinacao",
    "segundos": 0.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_sazonal": {
    "descricao": "patamar dos últimos 3 meses x efeito do mesmo mês no ano anterior",
@@ -17828,7 +17838,7 @@
    "nao_se_aplica": "o efeito do mesmo mês do ano anterior precisa de 15 meses (12 + os 3 que antecedem); a janela tem 12",
    "modulo": "combinacao",
    "segundos": 0.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_mediana": {
    "descricao": "mediana de 6 métodos simples e clássicos (candidato principal da família)",
@@ -18280,36 +18290,36 @@
      "metricas": {
       "1": {
        "n": 4,
-       "wape": 0.10899084992816545,
-       "mae": 19.37312357473141,
-       "vies": -0.0027270363858708725,
+       "wape": 0.10999356106189384,
+       "mae": 19.55135547875163,
+       "vies": -0.003754863051043949,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "2": {
        "n": 4,
-       "wape": 0.11715082771294337,
-       "mae": 20.823559625975683,
-       "vies": -0.007215123473441662,
+       "wape": 0.11866039086683763,
+       "mae": 21.09188447658039,
+       "vies": -0.008855287390848105,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "3": {
        "n": 4,
-       "wape": 0.23172869682687072,
-       "mae": 41.18977586097627,
-       "vies": -0.14433669361208268,
+       "wape": 0.23178384085417386,
+       "mae": 41.199577711829406,
+       "vies": -0.1447233626544552,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "todos": {
        "n": 12,
-       "wape": 0.15262345815599318,
-       "mae": 27.12881968722779,
-       "vies": -0.05142628449046507,
+       "wape": 0.15347926426096842,
+       "mae": 27.280939222387136,
+       "vies": -0.052444504365449084,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
@@ -18331,8 +18341,8 @@
        "horizonte": 1,
        "origem": "2026-04",
        "trecho": "verificacao",
-       "real": 134.0,
-       "valor": 81.0,
+       "real": 133.0,
+       "valor": 82.0,
        "p10": null,
        "p90": null
       },
@@ -18342,7 +18352,7 @@
        "origem": "2026-04",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 81.0,
+       "valor": 82.0,
        "p10": null,
        "p90": null
       },
@@ -18352,7 +18362,7 @@
        "origem": "2026-05",
        "trecho": "verificacao",
        "real": 164.0,
-       "valor": 134.86,
+       "valor": 133.89,
        "p10": null,
        "p90": null
       },
@@ -18362,7 +18372,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 141.94,
+       "valor": 140.87,
        "p10": null,
        "p90": null
       },
@@ -18372,7 +18382,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 148.31,
+       "valor": 147.15,
        "p10": null,
        "p90": null
       },
@@ -18382,7 +18392,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 169.02,
+       "valor": 168.32,
        "p10": null,
        "p90": null
       },
@@ -18392,7 +18402,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 176.85,
+       "valor": 176.8,
        "p10": null,
        "p90": null
       },
@@ -18402,7 +18412,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 183.28,
+       "valor": 183.2,
        "p10": null,
        "p90": null
       },
@@ -18412,7 +18422,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 183.26,
+       "valor": 183.25,
        "p10": null,
        "p90": null
       },
@@ -18422,7 +18432,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 189.53,
+       "valor": 189.5,
        "p10": null,
        "p90": null
       },
@@ -18432,7 +18442,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 195.79,
+       "valor": 195.75,
        "p10": null,
        "p90": null
       },
@@ -18442,7 +18452,7 @@
        "origem": "2026-08",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 191.78,
+       "valor": 191.77,
        "p10": null,
        "p90": null
       },
@@ -18452,7 +18462,7 @@
        "origem": "2026-08",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 197.55,
+       "valor": 197.54,
        "p10": null,
        "p90": null
       },
@@ -18462,7 +18472,7 @@
        "origem": "2026-09",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 165.0,
+       "valor": 164.99,
        "p10": null,
        "p90": null
       }
@@ -18664,88 +18674,88 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 137.07,
-      "p10": 108.02,
-      "p90": 196.32
-     },
-     {
       "mes": "2026-11",
-      "valor": 138.36,
-      "p10": 126.33,
-      "p90": 180.72
+      "valor": 163.73,
+      "p10": 128.62,
+      "p90": 239.42
      },
      {
       "mes": "2026-12",
-      "valor": 139.64,
-      "p10": 128.98,
-      "p90": 189.4
+      "valor": 165.73,
+      "p10": 147.63,
+      "p90": 193.39
+     },
+     {
+      "mes": "2027-01",
+      "valor": 167.72,
+      "p10": 160.82,
+      "p90": 222.84
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 464.81,
-      "p10": 391.6,
-      "p90": 676.34
-     },
-     {
       "mes": "2026-11",
-      "valor": 476.9,
-      "p10": 481.62,
-      "p90": 677.4
+      "valor": 486.52,
+      "p10": 435.16,
+      "p90": 696.74
      },
      {
       "mes": "2026-12",
-      "valor": 484.21,
-      "p10": 504.88,
-      "p90": 795.64
+      "valor": 494.97,
+      "p10": 496.33,
+      "p90": 707.83
+     },
+     {
+      "mes": "2027-01",
+      "valor": 503.41,
+      "p10": 494.68,
+      "p90": 826.15
      }
     ],
     "Mercado exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 195.52,
-      "p10": 157.94,
-      "p90": 214.16
-     },
-     {
       "mes": "2026-11",
-      "valor": 199.74,
-      "p10": 161.34,
-      "p90": 218.78
+      "valor": 154.34,
+      "p10": 117.04,
+      "p90": 174.03
      },
      {
       "mes": "2026-12",
-      "valor": 203.54,
-      "p10": 164.41,
-      "p90": 222.94
+      "valor": 162.02,
+      "p10": 118.76,
+      "p90": 169.66
+     },
+     {
+      "mes": "2027-01",
+      "valor": 166.03,
+      "p10": 121.7,
+      "p90": 173.86
      }
     ],
     "Mercado não exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 245.67,
-      "p10": 212.1,
-      "p90": 390.33
-     },
-     {
       "mes": "2026-11",
-      "valor": 260.13,
-      "p10": 224.58,
-      "p90": 413.29
+      "valor": 276.07,
+      "p10": 241.82,
+      "p90": 412.75
      },
      {
       "mes": "2026-12",
-      "valor": 269.42,
-      "p10": 232.6,
-      "p90": 428.06
+      "valor": 283.93,
+      "p10": 261.65,
+      "p90": 447.26
+     },
+     {
+      "mes": "2027-01",
+      "valor": 289.14,
+      "p10": 266.46,
+      "p90": 455.47
      }
     ]
    },
    "modulo": "combinacao",
    "segundos": 0.3,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_media": {
    "descricao": "média de suavização, Holt amortecido e Theta",
@@ -19197,36 +19207,36 @@
      "metricas": {
       "1": {
        "n": 4,
-       "wape": 0.11025614326359717,
-       "mae": 19.598029465104396,
-       "vies": 0.022189171776955546,
+       "wape": 0.10995253262413436,
+       "mae": 19.544062673939884,
+       "vies": 0.019232906175382796,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "2": {
        "n": 4,
-       "wape": 0.1327081815436614,
-       "mae": 23.588879269385814,
-       "vies": 0.03842664881698557,
+       "wape": 0.13320467804442893,
+       "mae": 23.67713152239724,
+       "vies": 0.034112071656693506,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "3": {
        "n": 4,
-       "wape": 0.2510896926068103,
-       "mae": 44.63119286086053,
-       "vies": -0.0946510411973114,
+       "wape": 0.24897228688856174,
+       "mae": 44.25482399444185,
+       "vies": -0.0966410480337404,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "todos": {
        "n": 12,
-       "wape": 0.16468467247135626,
-       "mae": 29.272700531783574,
-       "vies": -0.011345073534456762,
+       "wape": 0.164043165852375,
+       "mae": 29.158672730259653,
+       "vies": -0.014432023400554703,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
@@ -19248,8 +19258,8 @@
        "horizonte": 1,
        "origem": "2026-04",
        "trecho": "verificacao",
-       "real": 134.0,
-       "valor": 82.58,
+       "real": 133.0,
+       "valor": 83.67,
        "p10": null,
        "p90": null
       },
@@ -19259,7 +19269,7 @@
        "origem": "2026-04",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 85.75,
+       "valor": 87.0,
        "p10": null,
        "p90": null
       },
@@ -19269,7 +19279,7 @@
        "origem": "2026-05",
        "trecho": "verificacao",
        "real": 164.0,
-       "valor": 138.17,
+       "valor": 137.16,
        "p10": null,
        "p90": null
       },
@@ -19279,7 +19289,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 146.49,
+       "valor": 145.38,
        "p10": null,
        "p90": null
       },
@@ -19289,7 +19299,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 154.34,
+       "valor": 153.13,
        "p10": null,
        "p90": null
       },
@@ -19299,7 +19309,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 171.63,
+       "valor": 171.15,
        "p10": null,
        "p90": null
       },
@@ -19309,7 +19319,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 182.99,
+       "valor": 182.39,
        "p10": null,
        "p90": null
       },
@@ -19319,7 +19329,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 194.21,
+       "valor": 193.5,
        "p10": null,
        "p90": null
       },
@@ -19329,7 +19339,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 187.32,
+       "valor": 186.77,
        "p10": null,
        "p90": null
       },
@@ -19339,7 +19349,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 198.43,
+       "valor": 197.78,
        "p10": null,
        "p90": null
       },
@@ -19349,7 +19359,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 209.41,
+       "valor": 208.65,
        "p10": null,
        "p90": null
       },
@@ -19359,7 +19369,7 @@
        "origem": "2026-08",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 199.77,
+       "valor": 199.16,
        "p10": null,
        "p90": null
       },
@@ -19369,7 +19379,7 @@
        "origem": "2026-08",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 210.41,
+       "valor": 209.7,
        "p10": null,
        "p90": null
       },
@@ -19379,7 +19389,7 @@
        "origem": "2026-09",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 168.06,
+       "valor": 167.6,
        "p10": null,
        "p90": null
       }
@@ -19581,88 +19591,88 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 139.61,
-      "p10": 116.98,
-      "p90": 191.33
-     },
-     {
       "mes": "2026-11",
-      "valor": 141.3,
-      "p10": 132.79,
-      "p90": 187.92
+      "valor": 161.09,
+      "p10": 128.85,
+      "p90": 224.09
      },
      {
       "mes": "2026-12",
-      "valor": 142.97,
-      "p10": 133.85,
-      "p90": 190.02
+      "valor": 164.86,
+      "p10": 148.5,
+      "p90": 184.95
+     },
+     {
+      "mes": "2027-01",
+      "valor": 168.57,
+      "p10": 158.15,
+      "p90": 220.67
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 461.66,
-      "p10": 382.6,
-      "p90": 667.16
-     },
-     {
       "mes": "2026-11",
-      "valor": 472.22,
-      "p10": 466.59,
-      "p90": 648.6
+      "valor": 492.67,
+      "p10": 433.81,
+      "p90": 710.77
      },
      {
       "mes": "2026-12",
-      "valor": 481.56,
-      "p10": 478.6,
-      "p90": 761.33
+      "valor": 509.71,
+      "p10": 496.74,
+      "p90": 726.52
+     },
+     {
+      "mes": "2027-01",
+      "valor": 526.53,
+      "p10": 495.72,
+      "p90": 832.92
      }
     ],
     "Mercado exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 197.79,
-      "p10": 152.99,
-      "p90": 212.36
-     },
-     {
       "mes": "2026-11",
-      "valor": 203.38,
-      "p10": 157.31,
-      "p90": 218.36
+      "valor": 168.49,
+      "p10": 125.16,
+      "p90": 186.86
      },
      {
       "mes": "2026-12",
-      "valor": 208.69,
-      "p10": 161.42,
-      "p90": 224.06
+      "valor": 173.04,
+      "p10": 123.66,
+      "p90": 177.92
+     },
+     {
+      "mes": "2027-01",
+      "valor": 177.34,
+      "p10": 126.74,
+      "p90": 182.34
      }
     ],
     "Mercado não exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 240.86,
-      "p10": 204.54,
-      "p90": 355.99
-     },
-     {
       "mes": "2026-11",
-      "valor": 250.5,
-      "p10": 212.73,
-      "p90": 370.23
+      "valor": 272.32,
+      "p10": 243.82,
+      "p90": 382.87
      },
      {
       "mes": "2026-12",
-      "valor": 260.01,
-      "p10": 220.8,
-      "p90": 384.28
+      "valor": 282.89,
+      "p10": 251.22,
+      "p90": 413.98
+     },
+     {
+      "mes": "2027-01",
+      "valor": 293.31,
+      "p10": 260.48,
+      "p90": 429.24
      }
     ]
    },
    "modulo": "combinacao",
    "segundos": 0.3,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_selecao": {
    "descricao": "o método que mais acertou nos últimos 6 meses do próprio passado",
@@ -20120,48 +20130,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 150.98,
-      "p10": 117.0,
-      "p90": 218.14
-     },
-     {
       "mes": "2026-11",
-      "valor": 154.0,
-      "p10": 138.56,
-      "p90": 203.56
+      "valor": 160.46,
+      "p10": 124.23,
+      "p90": 233.4
      },
      {
       "mes": "2026-12",
-      "valor": 157.01,
-      "p10": 142.79,
-      "p90": 212.28
+      "valor": 164.46,
+      "p10": 146.74,
+      "p90": 190.16
+     },
+     {
+      "mes": "2027-01",
+      "valor": 168.45,
+      "p10": 162.68,
+      "p90": 224.0
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 458.5,
-      "p10": 379.56,
-      "p90": 663.21
-     },
-     {
       "mes": "2026-11",
-      "valor": 476.79,
-      "p10": 449.95,
-      "p90": 677.25
+      "valor": 494.05,
+      "p10": 412.76,
+      "p90": 704.16
      },
      {
       "mes": "2026-12",
-      "valor": 491.42,
-      "p10": 461.28,
-      "p90": 805.08
+      "valor": 510.93,
+      "p10": 475.18,
+      "p90": 726.51
+     },
+     {
+      "mes": "2027-01",
+      "valor": 527.81,
+      "p10": 435.0,
+      "p90": 849.19
      }
     ]
    },
    "modulo": "combinacao",
-   "segundos": 0.5,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.6,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_ponderada": {
    "descricao": "média dos 6 métodos com peso maior para quem errou menos no passado recente",
@@ -20619,48 +20629,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 139.37,
-      "p10": 107.22,
-      "p90": 199.38
-     },
-     {
       "mes": "2026-11",
-      "valor": 140.43,
-      "p10": 129.74,
-      "p90": 180.06
+      "valor": 162.2,
+      "p10": 126.24,
+      "p90": 233.32
      },
      {
       "mes": "2026-12",
-      "valor": 141.48,
-      "p10": 128.37,
-      "p90": 191.85
+      "valor": 165.51,
+      "p10": 148.01,
+      "p90": 188.17
+     },
+     {
+      "mes": "2027-01",
+      "valor": 168.79,
+      "p10": 160.94,
+      "p90": 225.29
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 462.9,
-      "p10": 397.62,
-      "p90": 672.24
-     },
-     {
       "mes": "2026-11",
-      "valor": 472.46,
-      "p10": 476.43,
-      "p90": 673.63
+      "valor": 485.21,
+      "p10": 435.11,
+      "p90": 698.36
      },
      {
       "mes": "2026-12",
-      "valor": 481.34,
-      "p10": 501.53,
-      "p90": 784.35
+      "valor": 499.88,
+      "p10": 495.52,
+      "p90": 712.16
+     },
+     {
+      "mes": "2027-01",
+      "valor": 514.43,
+      "p10": 493.56,
+      "p90": 813.71
      }
     ]
    },
    "modulo": "combinacao",
-   "segundos": 0.5,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.6,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_drift_log": {
    "descricao": "crescimento percentual médio dos últimos 12 meses",
@@ -21112,36 +21122,36 @@
      "metricas": {
       "1": {
        "n": 4,
-       "wape": 0.28294988383381753,
-       "mae": 50.29434185146107,
-       "vies": 0.28294988383381753,
+       "wape": 0.28255270461720955,
+       "mae": 50.223743245709,
+       "vies": 0.28255270461720955,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "2": {
        "n": 4,
-       "wape": 0.48718994718683795,
-       "mae": 86.59801311246045,
-       "vies": 0.48718994718683795,
+       "wape": 0.48500620998555755,
+       "mae": 86.20985382493285,
+       "vies": 0.48500620998555755,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "3": {
        "n": 4,
-       "wape": 0.659366211583841,
-       "mae": 117.20234410902773,
-       "vies": 0.517217223041871,
+       "wape": 0.6504949802180402,
+       "mae": 115.62548273375664,
+       "vies": 0.518678142245692,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
       },
       "todos": {
        "n": 12,
-       "wape": 0.47650201420149896,
-       "mae": 84.69823302431644,
-       "vies": 0.4291190180208422,
+       "wape": 0.47268463160693575,
+       "mae": 84.01969326813283,
+       "vies": 0.4287456856161531,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
@@ -21163,8 +21173,8 @@
        "horizonte": 1,
        "origem": "2026-04",
        "trecho": "verificacao",
-       "real": 134.0,
-       "valor": 96.8,
+       "real": 133.0,
+       "valor": 98.4,
        "p10": null,
        "p90": null
       },
@@ -21174,7 +21184,7 @@
        "origem": "2026-04",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 126.47,
+       "valor": 130.14,
        "p10": null,
        "p90": null
       },
@@ -21184,7 +21194,7 @@
        "origem": "2026-05",
        "trecho": "verificacao",
        "real": 164.0,
-       "valor": 160.14,
+       "valor": 159.6,
        "p10": null,
        "p90": null
       },
@@ -21194,7 +21204,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 207.05,
+       "valor": 205.83,
        "p10": null,
        "p90": null
       },
@@ -21204,7 +21214,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 267.7,
+       "valor": 265.46,
        "p10": null,
        "p90": null
       },
@@ -21214,7 +21224,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 197.11,
+       "valor": 197.42,
        "p10": null,
        "p90": null
       },
@@ -21224,7 +21234,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 251.37,
+       "valor": 251.77,
        "p10": null,
        "p90": null
       },
@@ -21234,7 +21244,7 @@
        "origem": "2026-06",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 320.58,
+       "valor": 321.09,
        "p10": null,
        "p90": null
       },
@@ -21244,7 +21254,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 239.26,
+       "valor": 238.67,
        "p10": null,
        "p90": null
       },
@@ -21254,7 +21264,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 295.11,
+       "valor": 294.38,
        "p10": null,
        "p90": null
       },
@@ -21264,7 +21274,7 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 364.0,
+       "valor": 363.1,
        "p10": null,
        "p90": null
       },
@@ -21496,88 +21506,88 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 150.49,
-      "p10": 116.32,
-      "p90": 229.84
-     },
-     {
       "mes": "2026-11",
-      "valor": 151.14,
-      "p10": 137.5,
-      "p90": 197.15
+      "valor": 174.55,
+      "p10": 121.48,
+      "p90": 223.35
      },
      {
       "mes": "2026-12",
-      "valor": 151.79,
-      "p10": 132.57,
-      "p90": 237.8
+      "valor": 188.42,
+      "p10": 133.65,
+      "p90": 186.72
+     },
+     {
+      "mes": "2027-01",
+      "valor": 203.4,
+      "p10": 139.86,
+      "p90": 218.43
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 449.59,
-      "p10": 436.52,
-      "p90": 632.2
-     },
-     {
       "mes": "2026-11",
-      "valor": 479.11,
-      "p10": 486.85,
-      "p90": 815.66
+      "valor": 509.75,
+      "p10": 431.3,
+      "p90": 635.14
      },
      {
       "mes": "2026-12",
-      "valor": 510.56,
-      "p10": 557.7,
-      "p90": 945.18
+      "valor": 562.23,
+      "p10": 480.99,
+      "p90": 666.73
+     },
+     {
+      "mes": "2027-01",
+      "valor": 620.11,
+      "p10": 479.64,
+      "p90": 804.81
      }
     ],
     "Mercado exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 235.58,
-      "p10": 124.24,
-      "p90": 194.13
-     },
-     {
       "mes": "2026-11",
-      "valor": 271.68,
-      "p10": 143.28,
-      "p90": 223.89
+      "valor": 196.14,
+      "p10": 119.53,
+      "p90": 165.41
      },
      {
       "mes": "2026-12",
-      "valor": 313.32,
-      "p10": 165.24,
-      "p90": 258.2
+      "valor": 215.39,
+      "p10": 107.14,
+      "p90": 171.8
+     },
+     {
+      "mes": "2027-01",
+      "valor": 236.53,
+      "p10": 117.66,
+      "p90": 188.66
      }
     ],
     "Mercado não exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 305.24,
-      "p10": 189.79,
-      "p90": 345.88
-     },
-     {
       "mes": "2026-11",
-      "valor": 368.72,
-      "p10": 229.26,
-      "p90": 417.81
+      "valor": 321.42,
+      "p10": 218.95,
+      "p90": 371.43
      },
      {
       "mes": "2026-12",
-      "valor": 445.39,
-      "p10": 276.94,
-      "p90": 504.7
+      "valor": 381.11,
+      "p10": 245.88,
+      "p90": 419.01
+     },
+     {
+      "mes": "2027-01",
+      "valor": 451.9,
+      "p10": 291.55,
+      "p90": 496.84
      }
     ]
    },
    "modulo": "combinacao",
    "segundos": 0.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_holt_amort_log": {
    "descricao": "Holt amortecido em escala log (crescimento percentual amortecido)",
@@ -22035,48 +22045,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 141.32,
-      "p10": 128.45,
-      "p90": 205.42
-     },
-     {
       "mes": "2026-11",
-      "valor": 143.49,
-      "p10": 139.02,
-      "p90": 208.2
+      "valor": 170.78,
+      "p10": 134.27,
+      "p90": 248.32
      },
      {
       "mes": "2026-12",
-      "valor": 145.65,
-      "p10": 147.96,
-      "p90": 208.47
+      "valor": 182.5,
+      "p10": 145.85,
+      "p90": 211.66
+     },
+     {
+      "mes": "2027-01",
+      "valor": 194.76,
+      "p10": 174.56,
+      "p90": 242.35
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 497.44,
-      "p10": 390.37,
-      "p90": 714.5
-     },
-     {
       "mes": "2026-11",
-      "valor": 522.18,
-      "p10": 472.48,
-      "p90": 665.52
+      "valor": 507.43,
+      "p10": 435.2,
+      "p90": 756.75
      },
      {
       "mes": "2026-12",
-      "valor": 542.86,
-      "p10": 457.57,
-      "p90": 800.45
+      "valor": 538.47,
+      "p10": 497.45,
+      "p90": 789.44
+     },
+     {
+      "mes": "2027-01",
+      "valor": 570.74,
+      "p10": 492.82,
+      "p90": 926.93
      }
     ]
    },
    "modulo": "combinacao",
    "segundos": 0.2,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_mediana_mult": {
    "descricao": "mediana de suavização, Theta e dois métodos de crescimento percentual",
@@ -22534,48 +22544,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 145.9,
-      "p10": 120.93,
-      "p90": 210.77
-     },
-     {
       "mes": "2026-11",
-      "valor": 147.32,
-      "p10": 137.4,
-      "p90": 197.99
+      "valor": 165.62,
+      "p10": 129.75,
+      "p90": 229.09
      },
      {
       "mes": "2026-12",
-      "valor": 148.72,
-      "p10": 140.94,
-      "p90": 204.55
+      "valor": 173.48,
+      "p10": 145.99,
+      "p90": 194.23
+     },
+     {
+      "mes": "2027-01",
+      "valor": 181.6,
+      "p10": 166.81,
+      "p90": 219.6
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 463.24,
-      "p10": 390.28,
-      "p90": 673.8
-     },
-     {
       "mes": "2026-11",
-      "valor": 481.8,
-      "p10": 480.39,
-      "p90": 676.67
+      "valor": 500.74,
+      "p10": 434.54,
+      "p90": 701.14
      },
      {
       "mes": "2026-12",
-      "valor": 504.22,
-      "p10": 523.97,
-      "p90": 809.39
+      "valor": 524.7,
+      "p10": 492.44,
+      "p90": 719.44
+     },
+     {
+      "mes": "2027-01",
+      "valor": 549.27,
+      "p10": 484.51,
+      "p90": 830.28
      }
     ]
    },
    "modulo": "combinacao",
-   "segundos": 0.2,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_mediana_corr": {
    "descricao": "mediana de 6 métodos x correção do viés recente do próprio passado",
@@ -23033,48 +23043,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 130.59,
-      "p10": 102.91,
-      "p90": 210.61
-     },
-     {
       "mes": "2026-11",
-      "valor": 158.22,
-      "p10": 134.31,
-      "p90": 206.64
+      "valor": 178.18,
+      "p10": 129.43,
+      "p90": 260.55
      },
      {
       "mes": "2026-12",
-      "valor": 147.82,
-      "p10": 136.53,
-      "p90": 200.49
+      "valor": 172.46,
+      "p10": 151.94,
+      "p90": 201.24
+     },
+     {
+      "mes": "2027-01",
+      "valor": 169.67,
+      "p10": 162.69,
+      "p90": 225.43
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 503.97,
-      "p10": 409.23,
-      "p90": 734.96
-     },
-     {
       "mes": "2026-11",
-      "valor": 558.36,
-      "p10": 495.77,
-      "p90": 793.12
+      "valor": 534.65,
+      "p10": 412.27,
+      "p90": 734.93
      },
      {
       "mes": "2026-12",
-      "valor": 646.21,
-      "p10": 673.8,
-      "p90": 1061.83
+      "valor": 585.92,
+      "p10": 587.54,
+      "p90": 800.14
+     },
+     {
+      "mes": "2027-01",
+      "valor": 616.24,
+      "p10": 605.56,
+      "p90": 1011.32
      }
     ]
    },
    "modulo": "combinacao",
-   "segundos": 0.5,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "comb_theta_corr": {
    "descricao": "Theta x correção do viés recente do próprio passado",
@@ -23532,48 +23542,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 141.15,
-      "p10": 107.58,
-      "p90": 205.47
-     },
-     {
       "mes": "2026-11",
-      "valor": 166.96,
-      "p10": 136.74,
-      "p90": 200.05
+      "valor": 171.19,
+      "p10": 125.38,
+      "p90": 225.86
      },
      {
       "mes": "2026-12",
-      "valor": 147.77,
-      "p10": 123.84,
-      "p90": 179.22
+      "valor": 166.48,
+      "p10": 141.29,
+      "p90": 180.16
+     },
+     {
+      "mes": "2027-01",
+      "valor": 165.16,
+      "p10": 149.08,
+      "p90": 197.9
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 503.45,
-      "p10": 407.55,
-      "p90": 730.67
-     },
-     {
       "mes": "2026-11",
-      "valor": 552.77,
-      "p10": 478.66,
-      "p90": 765.09
+      "valor": 535.54,
+      "p10": 422.83,
+      "p90": 726.3
      },
      {
       "mes": "2026-12",
-      "valor": 645.28,
-      "p10": 649.06,
-      "p90": 1012.05
+      "valor": 561.13,
+      "p10": 535.14,
+      "p90": 724.23
+     },
+     {
+      "mes": "2027-01",
+      "valor": 600.66,
+      "p10": 541.55,
+      "p90": 866.05
      }
     ]
    },
    "modulo": "combinacao",
    "segundos": 0.2,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "mlp_1": {
    "descricao": "rede neural com 1 neurônio(s) sobre os últimos 3 meses e o calendário; média de 5 sementes",
@@ -24031,48 +24041,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 179.06,
-      "p10": 109.07,
-      "p90": 163.65
-     },
-     {
       "mes": "2026-11",
-      "valor": 185.22,
-      "p10": 112.82,
-      "p90": 169.28
+      "valor": 174.39,
+      "p10": 112.46,
+      "p90": 155.75
      },
      {
       "mes": "2026-12",
-      "valor": 223.58,
-      "p10": 136.18,
-      "p90": 204.34
+      "valor": 200.67,
+      "p10": 129.41,
+      "p90": 179.22
+     },
+     {
+      "mes": "2027-01",
+      "valor": 230.11,
+      "p10": 148.39,
+      "p90": 205.51
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 464.25,
-      "p10": 334.1,
-      "p90": 483.27
-     },
-     {
       "mes": "2026-11",
-      "valor": 516.93,
-      "p10": 372.01,
-      "p90": 538.1
+      "valor": 525.34,
+      "p10": 406.74,
+      "p90": 550.84
      },
      {
       "mes": "2026-12",
-      "valor": 588.24,
-      "p10": 423.33,
-      "p90": 612.34
+      "valor": 562.74,
+      "p10": 435.7,
+      "p90": 590.05
+     },
+     {
+      "mes": "2027-01",
+      "valor": 701.58,
+      "p10": 543.2,
+      "p90": 735.63
      }
     ]
    },
    "modulo": "neural",
-   "segundos": 6.8,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 8.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "mlp_2": {
    "descricao": "rede neural com 2 neurônio(s) sobre os últimos 3 meses e o calendário; média de 5 sementes",
@@ -24530,48 +24540,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 179.12,
-      "p10": 107.89,
-      "p90": 161.56
-     },
-     {
       "mes": "2026-11",
-      "valor": 185.18,
-      "p10": 111.54,
-      "p90": 167.03
+      "valor": 172.83,
+      "p10": 110.83,
+      "p90": 154.32
      },
      {
       "mes": "2026-12",
-      "valor": 224.81,
-      "p10": 135.41,
-      "p90": 202.77
+      "valor": 200.68,
+      "p10": 128.69,
+      "p90": 179.19
+     },
+     {
+      "mes": "2027-01",
+      "valor": 234.28,
+      "p10": 150.24,
+      "p90": 209.19
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 460.9,
-      "p10": 331.71,
-      "p90": 473.15
-     },
-     {
       "mes": "2026-11",
-      "valor": 516.84,
-      "p10": 371.97,
-      "p90": 530.58
+      "valor": 529.18,
+      "p10": 411.46,
+      "p90": 555.4
      },
      {
       "mes": "2026-12",
-      "valor": 585.74,
-      "p10": 421.56,
-      "p90": 601.31
+      "valor": 562.66,
+      "p10": 437.48,
+      "p90": 590.53
+     },
+     {
+      "mes": "2027-01",
+      "valor": 728.16,
+      "p10": 566.17,
+      "p90": 764.24
      }
     ]
    },
    "modulo": "neural",
-   "segundos": 9.4,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 15.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "mlp_3": {
    "descricao": "rede neural com 3 neurônio(s) sobre os últimos 3 meses e o calendário; média de 5 sementes",
@@ -25029,48 +25039,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 179.12,
-      "p10": 107.89,
-      "p90": 161.5
-     },
-     {
       "mes": "2026-11",
-      "valor": 185.18,
-      "p10": 111.53,
-      "p90": 166.96
+      "valor": 172.83,
+      "p10": 110.71,
+      "p90": 154.33
      },
      {
       "mes": "2026-12",
-      "valor": 224.78,
-      "p10": 135.38,
-      "p90": 202.66
+      "valor": 200.74,
+      "p10": 128.58,
+      "p90": 179.25
+     },
+     {
+      "mes": "2027-01",
+      "valor": 234.49,
+      "p10": 150.2,
+      "p90": 209.38
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 460.82,
-      "p10": 331.65,
-      "p90": 472.8
-     },
-     {
       "mes": "2026-11",
-      "valor": 516.73,
-      "p10": 371.88,
-      "p90": 530.17
+      "valor": 529.14,
+      "p10": 411.48,
+      "p90": 555.42
      },
      {
       "mes": "2026-12",
-      "valor": 585.8,
-      "p10": 421.59,
-      "p90": 601.03
+      "valor": 561.4,
+      "p10": 436.56,
+      "p90": 589.27
+     },
+     {
+      "mes": "2027-01",
+      "valor": 730.73,
+      "p10": 568.24,
+      "p90": 767.01
      }
     ]
    },
    "modulo": "neural",
-   "segundos": 11.8,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 14.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "mlp_4": {
    "descricao": "rede neural com 4 neurônio(s) sobre os últimos 3 meses e o calendário; média de 5 sementes",
@@ -25528,48 +25538,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 179.14,
-      "p10": 107.88,
-      "p90": 161.61
-     },
-     {
       "mes": "2026-11",
-      "valor": 185.13,
-      "p10": 111.49,
-      "p90": 167.01
+      "valor": 172.82,
+      "p10": 110.57,
+      "p90": 154.32
      },
      {
       "mes": "2026-12",
-      "valor": 224.84,
-      "p10": 135.4,
-      "p90": 202.83
+      "valor": 200.73,
+      "p10": 128.43,
+      "p90": 179.25
+     },
+     {
+      "mes": "2027-01",
+      "valor": 234.5,
+      "p10": 150.03,
+      "p90": 209.4
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 460.59,
-      "p10": 331.48,
-      "p90": 472.89
-     },
-     {
       "mes": "2026-11",
-      "valor": 516.74,
-      "p10": 371.9,
-      "p90": 530.54
+      "valor": 529.27,
+      "p10": 411.56,
+      "p90": 555.59
      },
      {
       "mes": "2026-12",
-      "valor": 585.82,
-      "p10": 421.61,
-      "p90": 601.47
+      "valor": 561.47,
+      "p10": 436.6,
+      "p90": 589.4
+     },
+     {
+      "mes": "2027-01",
+      "valor": 731.22,
+      "p10": 568.6,
+      "p90": 767.6
      }
     ]
    },
    "modulo": "neural",
-   "segundos": 12.9,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 15.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "mlp_5": {
    "descricao": "rede neural com 5 neurônio(s) sobre os últimos 3 meses e o calendário; média de 5 sementes",
@@ -26027,48 +26037,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 179.13,
-      "p10": 107.87,
-      "p90": 161.59
-     },
-     {
       "mes": "2026-11",
-      "valor": 185.17,
-      "p10": 111.5,
-      "p90": 167.03
+      "valor": 172.81,
+      "p10": 110.56,
+      "p90": 154.35
      },
      {
       "mes": "2026-12",
-      "valor": 224.81,
-      "p10": 135.37,
-      "p90": 202.79
+      "valor": 200.81,
+      "p10": 128.47,
+      "p90": 179.35
+     },
+     {
+      "mes": "2027-01",
+      "valor": 234.51,
+      "p10": 150.03,
+      "p90": 209.45
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 460.72,
-      "p10": 331.57,
-      "p90": 473.0
-     },
-     {
       "mes": "2026-11",
-      "valor": 516.8,
-      "p10": 371.94,
-      "p90": 530.58
+      "valor": 529.35,
+      "p10": 411.76,
+      "p90": 555.67
      },
      {
       "mes": "2026-12",
-      "valor": 585.76,
-      "p10": 421.56,
-      "p90": 601.38
+      "valor": 560.28,
+      "p10": 435.82,
+      "p90": 588.13
+     },
+     {
+      "mes": "2027-01",
+      "valor": 731.03,
+      "p10": 568.64,
+      "p90": 767.38
      }
     ]
    },
    "modulo": "neural",
-   "segundos": 14.6,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 16.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "mlp_8": {
    "descricao": "rede neural com 8 neurônio(s) sobre os últimos 3 meses e o calendário; média de 5 sementes",
@@ -26526,48 +26536,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 179.15,
-      "p10": 107.91,
-      "p90": 161.8
-     },
-     {
       "mes": "2026-11",
-      "valor": 185.17,
-      "p10": 111.53,
-      "p90": 167.24
+      "valor": 172.85,
+      "p10": 110.58,
+      "p90": 154.4
      },
      {
       "mes": "2026-12",
-      "valor": 224.82,
-      "p10": 135.42,
-      "p90": 203.05
+      "valor": 200.8,
+      "p10": 128.47,
+      "p90": 179.37
+     },
+     {
+      "mes": "2027-01",
+      "valor": 234.59,
+      "p10": 150.08,
+      "p90": 209.55
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 460.41,
-      "p10": 331.49,
-      "p90": 473.05
-     },
-     {
       "mes": "2026-11",
-      "valor": 516.62,
-      "p10": 371.96,
-      "p90": 530.81
+      "valor": 529.59,
+      "p10": 411.99,
+      "p90": 556.04
      },
      {
       "mes": "2026-12",
-      "valor": 585.83,
-      "p10": 421.79,
-      "p90": 601.91
+      "valor": 560.29,
+      "p10": 435.87,
+      "p90": 588.27
+     },
+     {
+      "mes": "2027-01",
+      "valor": 733.51,
+      "p10": 570.63,
+      "p90": 770.15
      }
     ]
    },
    "modulo": "neural",
-   "segundos": 14.6,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 22.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "mlp_12": {
    "descricao": "rede neural com 12 neurônio(s) sobre os últimos 3 meses e o calendário; média de 5 sementes",
@@ -27025,48 +27035,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 179.12,
-      "p10": 107.87,
-      "p90": 161.82
-     },
-     {
       "mes": "2026-11",
-      "valor": 185.16,
-      "p10": 111.51,
-      "p90": 167.29
+      "valor": 172.83,
+      "p10": 110.55,
+      "p90": 154.41
      },
      {
       "mes": "2026-12",
-      "valor": 224.77,
-      "p10": 135.37,
-      "p90": 203.07
+      "valor": 200.81,
+      "p10": 128.45,
+      "p90": 179.41
+     },
+     {
+      "mes": "2027-01",
+      "valor": 234.59,
+      "p10": 150.06,
+      "p90": 209.58
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 460.15,
-      "p10": 331.31,
-      "p90": 472.9
-     },
-     {
       "mes": "2026-11",
-      "valor": 516.78,
-      "p10": 372.08,
-      "p90": 531.1
+      "valor": 529.6,
+      "p10": 412.02,
+      "p90": 556.1
      },
      {
       "mes": "2026-12",
-      "valor": 585.8,
-      "p10": 421.78,
-      "p90": 602.04
+      "valor": 560.3,
+      "p10": 435.9,
+      "p90": 588.34
+     },
+     {
+      "mes": "2027-01",
+      "valor": 733.95,
+      "p10": 571.0,
+      "p90": 770.68
      }
     ]
    },
    "modulo": "neural",
-   "segundos": 15.6,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 27.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "mlp_16": {
    "descricao": "rede neural com 16 neurônio(s) sobre os últimos 3 meses e o calendário; média de 5 sementes",
@@ -27524,48 +27534,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 179.12,
-      "p10": 107.89,
-      "p90": 161.93
-     },
-     {
       "mes": "2026-11",
-      "valor": 185.15,
-      "p10": 111.53,
-      "p90": 167.38
+      "valor": 172.87,
+      "p10": 110.59,
+      "p90": 154.45
      },
      {
       "mes": "2026-12",
-      "valor": 224.91,
-      "p10": 135.48,
-      "p90": 203.33
+      "valor": 200.73,
+      "p10": 128.42,
+      "p90": 179.34
+     },
+     {
+      "mes": "2027-01",
+      "valor": 234.63,
+      "p10": 150.1,
+      "p90": 209.63
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 460.23,
-      "p10": 331.42,
-      "p90": 473.04
-     },
-     {
       "mes": "2026-11",
-      "valor": 516.6,
-      "p10": 372.01,
-      "p90": 530.97
+      "valor": 529.92,
+      "p10": 412.31,
+      "p90": 556.42
      },
      {
       "mes": "2026-12",
-      "valor": 585.83,
-      "p10": 421.87,
-      "p90": 602.13
+      "valor": 560.24,
+      "p10": 435.91,
+      "p90": 588.26
+     },
+     {
+      "mes": "2027-01",
+      "valor": 734.63,
+      "p10": 571.59,
+      "p90": 771.37
      }
     ]
    },
    "modulo": "neural",
-   "segundos": 15.6,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 20.9,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "mlp_4x2": {
    "descricao": "rede neural com 4 + 2 neurônio(s) sobre os últimos 3 meses e o calendário; média de 5 sementes",
@@ -28023,48 +28033,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 178.86,
-      "p10": 113.48,
-      "p90": 173.06
-     },
-     {
       "mes": "2026-11",
-      "valor": 196.26,
-      "p10": 124.51,
-      "p90": 189.89
+      "valor": 180.7,
+      "p10": 117.79,
+      "p90": 158.49
      },
      {
       "mes": "2026-12",
-      "valor": 221.82,
-      "p10": 140.73,
-      "p90": 214.62
+      "valor": 200.44,
+      "p10": 130.66,
+      "p90": 175.81
+     },
+     {
+      "mes": "2027-01",
+      "valor": 214.0,
+      "p10": 139.5,
+      "p90": 187.7
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 477.84,
-      "p10": 353.38,
-      "p90": 527.41
-     },
-     {
       "mes": "2026-11",
-      "valor": 524.16,
-      "p10": 387.63,
-      "p90": 578.53
+      "valor": 510.55,
+      "p10": 393.71,
+      "p90": 534.16
      },
      {
       "mes": "2026-12",
-      "valor": 592.21,
-      "p10": 437.95,
-      "p90": 653.64
+      "valor": 566.14,
+      "p10": 436.57,
+      "p90": 592.32
+     },
+     {
+      "mes": "2027-01",
+      "valor": 604.3,
+      "p10": 466.0,
+      "p90": 632.24
      }
     ]
    },
    "modulo": "neural",
-   "segundos": 14.8,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 24.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "mlp_8x4": {
    "descricao": "rede neural com 8 + 4 neurônio(s) sobre os últimos 3 meses e o calendário; média de 5 sementes",
@@ -28522,48 +28532,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 178.87,
-      "p10": 113.48,
-      "p90": 173.01
-     },
-     {
       "mes": "2026-11",
-      "valor": 196.25,
-      "p10": 124.51,
-      "p90": 189.83
+      "valor": 180.7,
+      "p10": 117.79,
+      "p90": 158.49
      },
      {
       "mes": "2026-12",
-      "valor": 221.81,
-      "p10": 140.72,
-      "p90": 214.55
+      "valor": 200.44,
+      "p10": 130.66,
+      "p90": 175.81
+     },
+     {
+      "mes": "2027-01",
+      "valor": 213.99,
+      "p10": 139.5,
+      "p90": 187.69
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 477.85,
-      "p10": 353.22,
-      "p90": 527.43
-     },
-     {
       "mes": "2026-11",
-      "valor": 524.14,
-      "p10": 387.44,
-      "p90": 578.52
+      "valor": 510.56,
+      "p10": 393.72,
+      "p90": 534.16
      },
      {
       "mes": "2026-12",
-      "valor": 592.18,
-      "p10": 437.73,
-      "p90": 653.62
+      "valor": 566.14,
+      "p10": 436.59,
+      "p90": 592.32
+     },
+     {
+      "mes": "2027-01",
+      "valor": 604.29,
+      "p10": 466.01,
+      "p90": 632.23
      }
     ]
    },
    "modulo": "neural",
-   "segundos": 20.8,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 31.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "mlp_auto": {
    "descricao": "rede neural; o nº de neurônios (1, 2, 3, 4, 5, 8, 12, 16, 4x2, 8x4) é escolhido em cada origem pelas últimas 4 origens do próprio treino",
@@ -29021,48 +29031,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 178.86,
-      "p10": 113.48,
-      "p90": 173.06
-     },
-     {
       "mes": "2026-11",
-      "valor": 196.26,
-      "p10": 124.51,
-      "p90": 189.89
+      "valor": 172.83,
+      "p10": 110.83,
+      "p90": 154.32
      },
      {
       "mes": "2026-12",
-      "valor": 221.82,
-      "p10": 140.73,
-      "p90": 214.62
+      "valor": 200.68,
+      "p10": 128.69,
+      "p90": 179.19
+     },
+     {
+      "mes": "2027-01",
+      "valor": 234.28,
+      "p10": 150.24,
+      "p90": 209.19
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 464.25,
-      "p10": 334.1,
-      "p90": 483.27
-     },
-     {
       "mes": "2026-11",
-      "valor": 516.93,
-      "p10": 372.01,
-      "p90": 538.1
+      "valor": 525.34,
+      "p10": 406.74,
+      "p90": 550.84
      },
      {
       "mes": "2026-12",
-      "valor": 588.24,
-      "p10": 423.33,
-      "p90": 612.34
+      "valor": 562.74,
+      "p10": 435.7,
+      "p90": 590.05
+     },
+     {
+      "mes": "2027-01",
+      "valor": 701.58,
+      "p10": 543.2,
+      "p90": 735.63
      }
     ]
    },
    "modulo": "neural",
-   "segundos": 117.8,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 130.9,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "prophet_log": {
    "descricao": "Prophet, escala log, tendência por partes (prior 0.1), anual fraca",
@@ -29070,7 +29080,7 @@
    "nao_se_aplica": "a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12",
    "modulo": "prophet",
    "segundos": 0.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "prophet_natural": {
    "descricao": "Prophet, escala natural, tendência por partes (prior 0.1), anual fraca",
@@ -29078,7 +29088,7 @@
    "nao_se_aplica": "a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12",
    "modulo": "prophet",
    "segundos": 0.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "prophet_log_sem_sazonal": {
    "descricao": "Prophet, escala log, tendência por partes (prior 0.1)",
@@ -29536,48 +29546,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 166.38,
-      "p10": 116.66,
-      "p90": 244.55
-     },
-     {
       "mes": "2026-11",
-      "valor": 176.6,
-      "p10": 120.89,
-      "p90": 248.61
+      "valor": 191.62,
+      "p10": 140.23,
+      "p90": 268.94
      },
      {
       "mes": "2026-12",
-      "valor": 187.08,
-      "p10": 130.99,
-      "p90": 264.65
+      "valor": 206.55,
+      "p10": 148.0,
+      "p90": 279.1
+     },
+     {
+      "mes": "2027-01",
+      "valor": 223.19,
+      "p10": 163.14,
+      "p90": 302.86
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 508.65,
-      "p10": 382.07,
-      "p90": 694.23
-     },
-     {
       "mes": "2026-11",
-      "valor": 575.39,
-      "p10": 425.62,
-      "p90": 761.99
+      "valor": 595.58,
+      "p10": 475.62,
+      "p90": 760.53
      },
      {
       "mes": "2026-12",
-      "valor": 648.28,
-      "p10": 483.36,
-      "p90": 864.74
+      "valor": 676.45,
+      "p10": 531.99,
+      "p90": 840.91
+     },
+     {
+      "mes": "2027-01",
+      "valor": 771.57,
+      "p10": 615.72,
+      "p90": 961.37
      }
     ]
    },
    "modulo": "prophet",
-   "segundos": 3.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 4.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "prophet_log_degrau2026": {
    "descricao": "Prophet, escala log, tendência por partes (prior 0.1), anual fraca, degrau 2026",
@@ -29585,7 +29595,7 @@
    "nao_se_aplica": "a sazonalidade anual precisa de 2 ciclos completos (24 meses); a janela tem 12",
    "modulo": "prophet",
    "segundos": 0.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "prophet_auto": {
    "descricao": "Prophet com escala, rigidez da tendência e sazonalidade escolhidas por validação no próprio passado de cada origem",
@@ -30043,48 +30053,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 159.03,
-      "p10": 123.15,
-      "p90": 198.05
-     },
-     {
       "mes": "2026-11",
-      "valor": 165.17,
-      "p10": 126.85,
-      "p90": 199.82
+      "valor": 175.55,
+      "p10": 143.12,
+      "p90": 210.82
      },
      {
       "mes": "2026-12",
-      "valor": 171.1,
-      "p10": 135.05,
-      "p90": 206.26
+      "valor": 183.41,
+      "p10": 148.77,
+      "p90": 214.74
+     },
+     {
+      "mes": "2027-01",
+      "valor": 191.53,
+      "p10": 158.95,
+      "p90": 223.31
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 475.8,
-      "p10": 343.03,
-      "p90": 678.95
-     },
-     {
       "mes": "2026-11",
-      "valor": 529.22,
-      "p10": 373.19,
-      "p90": 725.71
+      "valor": 511.34,
+      "p10": 464.23,
+      "p90": 562.58
      },
      {
       "mes": "2026-12",
-      "valor": 586.61,
-      "p10": 422.32,
-      "p90": 808.03
+      "valor": 546.11,
+      "p10": 496.44,
+      "p90": 592.4
+     },
+     {
+      "mes": "2027-01",
+      "valor": 582.04,
+      "p10": 533.54,
+      "p90": 629.34
      }
     ]
    },
    "modulo": "prophet",
-   "segundos": 29.3,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 41.7,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "ref_ultimo_mes": {
    "descricao": "repete o último mês fechado",
@@ -30545,9 +30555,9 @@
       },
       "2": {
        "n": 4,
-       "wape": 0.1350210970464135,
-       "mae": 24.0,
-       "vies": -0.07032348804500703,
+       "wape": 0.13642756680731363,
+       "mae": 24.25,
+       "vies": -0.07172995780590717,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
@@ -30563,9 +30573,9 @@
       },
       "todos": {
        "n": 12,
-       "wape": 0.17112048757618378,
-       "mae": 30.416666666666668,
-       "vies": -0.11017346460384435,
+       "wape": 0.17158931082981715,
+       "mae": 30.5,
+       "vies": -0.11064228785747773,
        "cobertura_80": null,
        "n_faixa": 0,
        "largura": null
@@ -30597,7 +30607,7 @@
        "horizonte": 1,
        "origem": "2026-03",
        "trecho": "verificacao",
-       "real": 81.0,
+       "real": 82.0,
        "valor": 81.0,
        "p10": null,
        "p90": null
@@ -30607,8 +30617,8 @@
        "horizonte": 1,
        "origem": "2026-04",
        "trecho": "verificacao",
-       "real": 134.0,
-       "valor": 81.0,
+       "real": 133.0,
+       "valor": 82.0,
        "p10": null,
        "p90": null
       },
@@ -30618,7 +30628,7 @@
        "origem": "2026-04",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 81.0,
+       "valor": 82.0,
        "p10": null,
        "p90": null
       },
@@ -30628,7 +30638,7 @@
        "origem": "2026-05",
        "trecho": "verificacao",
        "real": 164.0,
-       "valor": 134.0,
+       "valor": 133.0,
        "p10": null,
        "p90": null
       },
@@ -30638,7 +30648,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 134.0,
+       "valor": 133.0,
        "p10": null,
        "p90": null
       },
@@ -30648,7 +30658,7 @@
        "origem": "2026-05",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 134.0,
+       "valor": 133.0,
        "p10": null,
        "p90": null
       },
@@ -30960,88 +30970,88 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 129.0,
-      "p10": 87.09,
-      "p90": 205.13
-     },
-     {
       "mes": "2026-11",
-      "valor": 129.0,
-      "p10": 110.89,
-      "p90": 168.37
+      "valor": 167.0,
+      "p10": 124.39,
+      "p90": 265.55
      },
      {
       "mes": "2026-12",
-      "valor": 129.0,
-      "p10": 105.96,
-      "p90": 195.07
+      "valor": 167.0,
+      "p10": 143.56,
+      "p90": 215.14
+     },
+     {
+      "mes": "2027-01",
+      "valor": 167.0,
+      "p10": 158.61,
+      "p90": 252.54
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 477.0,
-      "p10": 405.88,
-      "p90": 704.78
-     },
-     {
       "mes": "2026-11",
-      "valor": 477.0,
-      "p10": 497.12,
-      "p90": 679.93
+      "valor": 479.0,
+      "p10": 431.39,
+      "p90": 707.73
      },
      {
       "mes": "2026-12",
-      "valor": 477.0,
-      "p10": 512.49,
-      "p90": 793.0
+      "valor": 479.0,
+      "p10": 499.21,
+      "p90": 712.41
+     },
+     {
+      "mes": "2027-01",
+      "valor": 479.0,
+      "p10": 491.71,
+      "p90": 796.33
      }
     ],
     "Mercado exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 194.0,
-      "p10": 164.71,
-      "p90": 228.51
-     },
-     {
       "mes": "2026-11",
-      "valor": 194.0,
-      "p10": 164.71,
-      "p90": 228.51
+      "valor": 144.0,
+      "p10": 110.59,
+      "p90": 172.38
      },
      {
       "mes": "2026-12",
-      "valor": 194.0,
-      "p10": 164.71,
-      "p90": 228.51
+      "valor": 144.0,
+      "p10": 110.56,
+      "p90": 162.54
+     },
+     {
+      "mes": "2027-01",
+      "valor": 144.0,
+      "p10": 110.56,
+      "p90": 162.54
      }
     ],
     "Mercado não exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 272.0,
-      "p10": 239.51,
-      "p90": 472.78
-     },
-     {
       "mes": "2026-11",
-      "valor": 272.0,
-      "p10": 239.51,
-      "p90": 472.78
+      "valor": 278.0,
+      "p10": 229.59,
+      "p90": 449.62
      },
      {
       "mes": "2026-12",
-      "valor": 272.0,
-      "p10": 239.51,
-      "p90": 472.78
+      "valor": 278.0,
+      "p10": 267.95,
+      "p90": 488.1
+     },
+     {
+      "mes": "2027-01",
+      "valor": 278.0,
+      "p10": 267.95,
+      "p90": 488.1
      }
     ]
    },
    "modulo": "referencia",
-   "segundos": 0.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.2,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "ref_media_3m": {
    "descricao": "média dos últimos 3 meses",
@@ -31493,39 +31503,39 @@
      "metricas": {
       "1": {
        "n": 4,
-       "wape": 0.17112048757618376,
-       "mae": 30.41666666666666,
-       "vies": -0.11017346460384435,
+       "wape": 0.17158931082981713,
+       "mae": 30.499999999999996,
+       "vies": -0.11064228785747773,
        "cobertura_80": 0.3333333333333333,
        "n_faixa": 3,
-       "largura": 0.6289480736097631
+       "largura": 0.6152143705710599
       },
       "2": {
        "n": 4,
-       "wape": 0.2259728082512893,
-       "mae": 40.16666666666667,
-       "vies": -0.21378340365682139,
+       "wape": 0.2255039849976559,
+       "mae": 40.083333333333336,
+       "vies": -0.21425222691045478,
        "cobertura_80": 0.0,
        "n_faixa": 2,
-       "largura": 0.7828779786617871
+       "largura": 0.7721438791457171
       },
       "3": {
        "n": 4,
-       "wape": 0.35583684950773553,
-       "mae": 63.24999999999999,
-       "vies": -0.35583684950773553,
+       "wape": 0.3558368495077356,
+       "mae": 63.25,
+       "vies": -0.3558368495077356,
        "cobertura_80": 0.0,
        "n_faixa": 1,
-       "largura": 0.6136423448677358
+       "largura": 0.6040849409646842
       },
       "todos": {
        "n": 12,
        "wape": 0.2509767151117362,
        "mae": 44.61111111111111,
-       "vies": -0.2265979059228004,
+       "vies": -0.22691045475855603,
        "cobertura_80": 0.16666666666666666,
        "n_faixa": 6,
-       "largura": 0.6777070871701
+       "largura": 0.6656693018282164
       },
       "verificacao": {
        "n": 0,
@@ -31544,8 +31554,8 @@
        "horizonte": 1,
        "origem": "2026-04",
        "trecho": "verificacao",
-       "real": 134.0,
-       "valor": 74.67,
+       "real": 133.0,
+       "valor": 75.0,
        "p10": null,
        "p90": null
       },
@@ -31555,7 +31565,7 @@
        "origem": "2026-04",
        "trecho": "teste",
        "real": 177.0,
-       "valor": 74.67,
+       "valor": 75.0,
        "p10": null,
        "p90": null
       },
@@ -31625,9 +31635,9 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 186.0,
-       "valor": 158.33,
-       "p10": 242.5,
-       "p90": 361.55
+       "valor": 158.0,
+       "p10": 241.99,
+       "p90": 359.19
       },
       {
        "alvo": "2026-08",
@@ -31635,9 +31645,9 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 154.0,
-       "valor": 158.33,
-       "p10": 242.5,
-       "p90": 361.55
+       "valor": 158.0,
+       "p10": 241.99,
+       "p90": 359.19
       },
       {
        "alvo": "2026-09",
@@ -31645,9 +31655,9 @@
        "origem": "2026-07",
        "trecho": "teste",
        "real": 194.0,
-       "valor": 158.33,
-       "p10": 242.5,
-       "p90": 361.55
+       "valor": 158.0,
+       "p10": 241.99,
+       "p90": 359.19
       },
       {
        "alvo": "2026-08",
@@ -31656,8 +31666,8 @@
        "trecho": "teste",
        "real": 154.0,
        "valor": 175.67,
-       "p10": 218.29,
-       "p90": 308.28
+       "p10": 218.59,
+       "p90": 305.66
       },
       {
        "alvo": "2026-09",
@@ -31666,8 +31676,8 @@
        "trecho": "teste",
        "real": 194.0,
        "valor": 175.67,
-       "p10": 238.17,
-       "p90": 391.96
+       "p10": 238.25,
+       "p90": 390.21
       },
       {
        "alvo": "2026-09",
@@ -31676,8 +31686,8 @@
        "trecho": "teste",
        "real": 194.0,
        "valor": 172.33,
-       "p10": 171.63,
-       "p90": 300.14
+       "p10": 171.8,
+       "p90": 297.94
       }
      ]
     },
@@ -31877,88 +31887,88 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 150.0,
-      "p10": 122.38,
-      "p90": 240.49
-     },
-     {
       "mes": "2026-11",
-      "valor": 150.0,
-      "p10": 145.63,
-      "p90": 222.79
+      "valor": 150.67,
+      "p10": 122.92,
+      "p90": 232.84
      },
      {
       "mes": "2026-12",
-      "valor": 150.0,
-      "p10": 147.04,
-      "p90": 271.36
+      "valor": 150.67,
+      "p10": 146.28,
+      "p90": 223.78
+     },
+     {
+      "mes": "2027-01",
+      "valor": 150.67,
+      "p10": 147.7,
+      "p90": 248.36
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 401.0,
-      "p10": 346.76,
-      "p90": 630.21
-     },
-     {
       "mes": "2026-11",
-      "valor": 401.0,
-      "p10": 440.52,
-      "p90": 733.09
+      "valor": 426.0,
+      "p10": 483.37,
+      "p90": 669.5
      },
      {
       "mes": "2026-12",
-      "valor": 401.0,
-      "p10": 550.07,
-      "p90": 824.92
+      "valor": 426.0,
+      "p10": 532.2,
+      "p90": 778.8
+     },
+     {
+      "mes": "2027-01",
+      "valor": 426.0,
+      "p10": 542.13,
+      "p90": 876.35
      }
     ],
     "Mercado exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 178.0,
-      "p10": 178.21,
-      "p90": 307.66
-     },
-     {
       "mes": "2026-11",
-      "valor": 178.0,
-      "p10": 182.51,
-      "p90": 362.31
+      "valor": 164.0,
+      "p10": 139.33,
+      "p90": 279.89
      },
      {
       "mes": "2026-12",
-      "valor": 178.0,
-      "p10": 217.32,
-      "p90": 396.03
+      "valor": 164.0,
+      "p10": 148.44,
+      "p90": 326.41
+     },
+     {
+      "mes": "2027-01",
+      "valor": 164.0,
+      "p10": 160.63,
+      "p90": 355.89
      }
     ],
     "Mercado não exclusivos": [
      {
-      "mes": "2026-10",
-      "valor": 214.33,
-      "p10": 186.28,
-      "p90": 329.69
-     },
-     {
       "mes": "2026-11",
-      "valor": 214.33,
-      "p10": 255.3,
-      "p90": 329.38
+      "valor": 236.0,
+      "p10": 205.67,
+      "p90": 362.39
      },
      {
       "mes": "2026-12",
-      "valor": 214.33,
-      "p10": 257.43,
-      "p90": 405.38
+      "valor": 236.0,
+      "p10": 284.65,
+      "p90": 370.01
+     },
+     {
+      "mes": "2027-01",
+      "valor": 236.0,
+      "p10": 290.61,
+      "p90": 441.94
      }
     ]
    },
    "modulo": "referencia",
-   "segundos": 0.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.2,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "ref_media_6m": {
    "descricao": "média dos últimos 6 meses",
@@ -32416,48 +32426,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 138.33,
-      "p10": 130.82,
-      "p90": 211.93
-     },
-     {
       "mes": "2026-11",
-      "valor": 138.33,
-      "p10": 146.24,
-      "p90": 218.52
+      "valor": 149.67,
+      "p10": 142.28,
+      "p90": 229.29
      },
      {
       "mes": "2026-12",
-      "valor": 138.33,
-      "p10": 146.53,
-      "p90": 220.83
+      "valor": 149.67,
+      "p10": 158.22,
+      "p90": 205.67
+     },
+     {
+      "mes": "2027-01",
+      "valor": 149.67,
+      "p10": 166.89,
+      "p90": 238.92
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 351.0,
-      "p10": 418.78,
-      "p90": 623.77
-     },
-     {
       "mes": "2026-11",
-      "valor": 351.0,
-      "p10": 507.49,
-      "p90": 683.44
+      "valor": 392.83,
+      "p10": 485.39,
+      "p90": 698.11
      },
      {
       "mes": "2026-12",
-      "valor": 351.0,
-      "p10": 585.35,
-      "p90": 767.3
+      "valor": 392.83,
+      "p10": 550.5,
+      "p90": 764.89
+     },
+     {
+      "mes": "2027-01",
+      "valor": 392.83,
+      "p10": 624.86,
+      "p90": 858.75
      }
     ]
    },
    "modulo": "referencia",
    "segundos": 0.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "ref_mesmo_mes_ano_anterior": {
    "descricao": "o mesmo mês do ano anterior",
@@ -32915,12 +32925,6 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 123.0,
-      "p10": null,
-      "p90": null
-     },
-     {
       "mes": "2026-11",
       "valor": 72.0,
       "p10": null,
@@ -32931,15 +32935,15 @@
       "valor": 50.0,
       "p10": null,
       "p90": null
+     },
+     {
+      "mes": "2027-01",
+      "valor": 132.0,
+      "p10": null,
+      "p90": null
      }
     ],
     "Mercado": [
-     {
-      "mes": "2026-10",
-      "valor": 237.0,
-      "p10": null,
-      "p90": null
-     },
      {
       "mes": "2026-11",
       "valor": 163.0,
@@ -32951,12 +32955,18 @@
       "valor": 105.0,
       "p10": null,
       "p90": null
+     },
+     {
+      "mes": "2027-01",
+      "valor": 125.0,
+      "p10": null,
+      "p90": null
      }
     ]
    },
    "modulo": "referencia",
-   "segundos": 0.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.1,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "ref_tendencia_6m": {
    "descricao": "reta dos últimos 6 meses, prolongada",
@@ -33414,48 +33424,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 154.73,
-      "p10": 112.59,
-      "p90": 192.4
-     },
-     {
       "mes": "2026-11",
-      "valor": 159.42,
-      "p10": 119.35,
-      "p90": 195.55
+      "valor": 152.87,
+      "p10": 111.96,
+      "p90": 190.08
      },
      {
       "mes": "2026-12",
-      "valor": 164.1,
-      "p10": 129.25,
-      "p90": 166.97
+      "valor": 153.78,
+      "p10": 115.12,
+      "p90": 167.0
+     },
+     {
+      "mes": "2027-01",
+      "valor": 154.7,
+      "p10": 125.98,
+      "p90": 157.4
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 477.8,
-      "p10": 402.24,
-      "p90": 593.12
-     },
-     {
       "mes": "2026-11",
-      "valor": 514.03,
-      "p10": 432.74,
-      "p90": 765.27
+      "valor": 497.53,
+      "p10": 418.85,
+      "p90": 617.62
      },
      {
       "mes": "2026-12",
-      "valor": 550.26,
-      "p10": 442.58,
-      "p90": 856.19
+      "valor": 527.45,
+      "p10": 444.04,
+      "p90": 615.72
+     },
+     {
+      "mes": "2027-01",
+      "valor": 557.36,
+      "p10": 436.0,
+      "p90": 680.26
      }
     ]
    },
    "modulo": "referencia",
    "segundos": 0.1,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   }
  },
  "melhor_referencia": {
@@ -33502,7 +33512,7 @@
    },
    "2": {
     "modelo": "ref_ultimo_mes",
-    "wape": 0.1350210970464135
+    "wape": 0.13642756680731363
    },
    "3": {
     "modelo": "ref_ultimo_mes",
@@ -33510,7 +33520,7 @@
    },
    "todos": {
     "modelo": "ref_ultimo_mes",
-    "wape": 0.17112048757618378
+    "wape": 0.17158931082981715
    }
   },
   "Mercado não exclusivos": {

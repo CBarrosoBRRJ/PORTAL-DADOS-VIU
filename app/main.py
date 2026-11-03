@@ -14,8 +14,8 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from starlette.concurrency import run_in_threadpool
 from jinja2 import ChoiceLoader, Environment, FileSystemLoader, select_autoescape
+from starlette.concurrency import run_in_threadpool
 
 from app import config, congelamento, dados, formato, iap
 from app.apresentacoes import descobrir
@@ -161,7 +161,9 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 app.mount("/static", StaticFiles(directory=PASTA / "static"), name="static")
 # Iniciativas com dados no servidor (30/10/2026): API JSON em /viu-agenciamento/iniciativas/api/... (antes das rotas
 # genéricas /{slug}/{secao})
-from app.apresentacoes.gestao_orcamentos.iniciativas.api import router as iniciativas_api  # noqa: E402
+from app.apresentacoes.gestao_orcamentos.iniciativas.api import (
+    router as iniciativas_api,
+)
 
 app.include_router(iniciativas_api)
 
@@ -462,8 +464,17 @@ def capa(request: Request, slug: str):
     if a is None or not a.capa:
         raise HTTPException(404, "Página não encontrada")
     # F20 (31/10/2026): a capa da V2 não mostra o relógio da jornada (D61); a medida do SLA não é mais calculada aqui
+    # Caio, 03/11/2026: capa nova aplicada (sem subtítulo, sem textos no desenho e sem o rodapé datado: sem_rodape)
     return templates.TemplateResponse(request, "capa.html", _contexto(
-        a, None, posicao="capa", pagina_especial="capa", sem_controles=True))
+        a, None, posicao="capa", pagina_especial="capa", sem_controles=True, sem_rodape=True))
+
+
+@app.get("/{slug}/capa-nova")
+def capa_nova(request: Request, slug: str):
+    # Caio, 03/11/2026: proposta de capa nova, fora da navegação, para comparar com a validada (/capa). Aprovada, substitui
+    # capa.html e esta rota sai; a validada está em _descartados/2026-11-03/capa_validada/
+    # aprovada e aplicada em 03/11/2026: o endereço da proposta leva à capa
+    return RedirectResponse(f"/{slug}/capa", status_code=301)
 
 
 @app.get("/{slug}/encerramento")

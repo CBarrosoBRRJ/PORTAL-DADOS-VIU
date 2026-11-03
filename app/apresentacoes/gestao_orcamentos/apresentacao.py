@@ -14,7 +14,14 @@ import pandas as pd
 
 from app import config, dados, sla
 from app.apresentacoes import Apresentacao, Secao
-from app.apresentacoes.gestao_orcamentos import SLUG, iniciativas, lia, lia_na_pratica, pendencias, roadmap
+from app.apresentacoes.gestao_orcamentos import (
+    SLUG,
+    iniciativas,
+    lia,
+    lia_na_pratica,
+    pendencias,
+    roadmap,
+)
 from app.apresentacoes.gestao_orcamentos.atendimento import calculos as atendimento
 from app.apresentacoes.gestao_orcamentos.entrada import calculos as entrada
 from app.apresentacoes.gestao_orcamentos.previsao import calculos as previsao

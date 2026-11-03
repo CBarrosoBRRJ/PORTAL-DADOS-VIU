@@ -1,24 +1,24 @@
 {
  "modulo": "boosting",
  "carga": {
-  "processado_em": "2026-10-26 12:01:46.659042+00:00",
-  "dados_ate": "2026-10-25",
+  "processado_em": "2026-11-03 12:02:39.240344+00:00",
+  "dados_ate": "2026-11-02",
   "parcial": {
    "Inbound": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 133.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 4.0
    },
    "Mercado": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 304.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    },
    "Mercado exclusivos": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 87.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    },
    "Mercado não exclusivos": {
-    "mes": "2026-10",
-    "pedidos_ate_agora": 185.0
+    "mes": "2026-11",
+    "pedidos_ate_agora": 0.0
    }
   },
   "recortes": {
@@ -28,8 +28,8 @@
     "grupo": null,
     "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Inbound",
     "inicio": "2024-10",
-    "fim": "2026-09",
-    "meses": 24,
+    "fim": "2026-10",
+    "meses": 25,
     "treino_1o_teste": 12,
     "curta": false
    },
@@ -39,8 +39,8 @@
     "grupo": null,
     "fonte": "gold de entradas (gld_agenciamento_entrada_diaria), tipo Mercado",
     "inicio": "2024-10",
-    "fim": "2026-09",
-    "meses": 24,
+    "fim": "2026-10",
+    "meses": 25,
     "treino_1o_teste": 12,
     "curta": false
    },
@@ -48,10 +48,10 @@
     "chave": "mercado_exclusivos",
     "tipo": "Mercado",
     "grupo": "exclusivos",
-    "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento exclusivo",
+    "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado exclusivos",
     "inicio": "2026-01",
-    "fim": "2026-09",
-    "meses": 9,
+    "fim": "2026-10",
+    "meses": 10,
     "treino_1o_teste": 5,
     "curta": true
    },
@@ -59,15 +59,15 @@
     "chave": "mercado_nao_exclusivos",
     "tipo": "Mercado",
     "grupo": "nao_exclusivos",
-    "fonte": "silver 2026 (slv_agenciamento_2026_itens), Mercado com talento não exclusivo",
+    "fonte": "gold de exclusividade (gld_agenciamento_2026_previsao_exclusividade_mensal), Mercado não exclusivos",
     "inicio": "2026-01",
-    "fim": "2026-09",
-    "meses": 9,
+    "fim": "2026-10",
+    "meses": 10,
     "treino_1o_teste": 5,
     "curta": true
    }
   },
-  "mes_fechado": "2026-09"
+  "mes_fechado": "2026-10"
  },
  "protocolo": "D56",
  "modelos": {
@@ -527,48 +527,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 169.19,
-      "p10": 99.4,
-      "p90": 169.68
-     },
-     {
       "mes": "2026-11",
-      "valor": 163.2,
-      "p10": 111.58,
-      "p90": 164.7
+      "valor": 152.18,
+      "p10": 125.41,
+      "p90": 155.87
      },
      {
       "mes": "2026-12",
-      "valor": 169.19,
-      "p10": 115.68,
-      "p90": 170.75
+      "valor": 157.21,
+      "p10": 120.39,
+      "p90": 163.32
+     },
+     {
+      "mes": "2027-01",
+      "valor": 158.62,
+      "p10": 121.46,
+      "p90": 164.78
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 539.58,
-      "p10": 369.47,
-      "p90": 588.32
-     },
-     {
       "mes": "2026-11",
-      "valor": 556.42,
-      "p10": 365.39,
-      "p90": 553.71
+      "valor": 538.94,
+      "p10": 384.71,
+      "p90": 549.65
      },
      {
       "mes": "2026-12",
-      "valor": 573.54,
-      "p10": 376.64,
-      "p90": 570.75
+      "valor": 547.42,
+      "p10": 345.95,
+      "p90": 569.29
+     },
+     {
+      "mes": "2027-01",
+      "valor": 686.41,
+      "p10": 433.78,
+      "p90": 713.83
      }
     ]
    },
    "modulo": "boosting",
-   "segundos": 1.0,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 1.3,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "boost_xgb": {
    "descricao": "XGBoost sobre a razão entre o mês e a média dos últimos 3 meses (defasagens 1-3 e 12, momento, mês, dias úteis, nov/dez); previsão direta de 1 a 3 meses",
@@ -1026,48 +1026,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 169.51,
-      "p10": 99.38,
-      "p90": 171.1
-     },
-     {
       "mes": "2026-11",
-      "valor": 165.67,
-      "p10": 113.27,
-      "p90": 167.2
+      "valor": 149.4,
+      "p10": 123.46,
+      "p90": 150.99
      },
      {
       "mes": "2026-12",
-      "valor": 171.14,
-      "p10": 117.01,
-      "p90": 172.72
+      "valor": 156.12,
+      "p10": 119.96,
+      "p90": 160.42
+     },
+     {
+      "mes": "2027-01",
+      "valor": 159.26,
+      "p10": 122.36,
+      "p90": 163.63
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 526.45,
-      "p10": 359.16,
-      "p90": 581.07
-     },
-     {
       "mes": "2026-11",
-      "valor": 562.76,
-      "p10": 369.15,
-      "p90": 562.17
+      "valor": 549.49,
+      "p10": 392.24,
+      "p90": 549.75
      },
      {
       "mes": "2026-12",
-      "valor": 571.28,
-      "p10": 374.75,
-      "p90": 570.69
+      "valor": 549.49,
+      "p10": 347.25,
+      "p90": 554.25
+     },
+     {
+      "mes": "2027-01",
+      "valor": 691.74,
+      "p10": 437.15,
+      "p90": 697.74
      }
     ]
    },
    "modulo": "boosting",
-   "segundos": 1.3,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 2.0,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "boost_lgbm_n1": {
    "descricao": "LightGBM sobre a razão entre o mês e o último mês fechado (defasagens 1-3 e 12, momento, mês, dias úteis, nov/dez); previsão direta de 1 a 3 meses",
@@ -1525,48 +1525,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 113.74,
-      "p10": 66.4,
-      "p90": 119.5
-     },
-     {
       "mes": "2026-11",
-      "valor": 111.43,
-      "p10": 65.22,
-      "p90": 114.81
+      "valor": 135.74,
+      "p10": 101.68,
+      "p90": 189.31
      },
      {
       "mes": "2026-12",
-      "valor": 115.85,
-      "p10": 67.81,
-      "p90": 119.36
+      "valor": 156.19,
+      "p10": 119.36,
+      "p90": 191.14
+     },
+     {
+      "mes": "2027-01",
+      "valor": 144.47,
+      "p10": 110.4,
+      "p90": 176.79
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 513.76,
-      "p10": 343.26,
-      "p90": 533.34
-     },
-     {
       "mes": "2026-11",
-      "valor": 537.19,
-      "p10": 337.95,
-      "p90": 542.95
+      "valor": 679.55,
+      "p10": 421.57,
+      "p90": 690.15
      },
      {
       "mes": "2026-12",
-      "valor": 570.21,
-      "p10": 358.72,
-      "p90": 576.32
+      "valor": 719.93,
+      "p10": 413.92,
+      "p90": 711.66
+     },
+     {
+      "mes": "2027-01",
+      "valor": 742.59,
+      "p10": 426.95,
+      "p90": 734.05
      }
     ]
    },
    "modulo": "boosting",
    "segundos": 0.9,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   },
   "boost_auto": {
    "descricao": "LightGBM, XGBoost ou só a âncora (média 3m ou último mês) — escolhido em cada origem por validação no próprio passado (4 últimas origens do treino)",
@@ -2024,48 +2024,48 @@
    "futuro": {
     "Inbound": [
      {
-      "mes": "2026-10",
-      "valor": 150.0,
-      "p10": 88.12,
-      "p90": 150.43
-     },
-     {
       "mes": "2026-11",
-      "valor": 150.0,
-      "p10": 102.56,
-      "p90": 151.38
+      "valor": 149.4,
+      "p10": 123.12,
+      "p90": 153.03
      },
      {
       "mes": "2026-12",
-      "valor": 150.0,
-      "p10": 102.56,
-      "p90": 151.38
+      "valor": 156.12,
+      "p10": 119.55,
+      "p90": 162.19
+     },
+     {
+      "mes": "2027-01",
+      "valor": 159.26,
+      "p10": 121.95,
+      "p90": 165.45
      }
     ],
     "Mercado": [
      {
-      "mes": "2026-10",
-      "valor": 401.0,
-      "p10": 274.58,
-      "p90": 437.22
-     },
-     {
       "mes": "2026-11",
-      "valor": 401.0,
-      "p10": 263.33,
-      "p90": 399.05
+      "valor": 549.49,
+      "p10": 392.24,
+      "p90": 560.41
      },
      {
       "mes": "2026-12",
-      "valor": 401.0,
-      "p10": 263.33,
-      "p90": 399.05
+      "valor": 549.49,
+      "p10": 347.25,
+      "p90": 571.43
+     },
+     {
+      "mes": "2027-01",
+      "valor": 691.74,
+      "p10": 437.15,
+      "p90": 719.37
      }
     ]
    },
    "modulo": "boosting",
-   "segundos": 0.4,
-   "carga": "2026-10-26 12:01:46.659042+00:00"
+   "segundos": 0.5,
+   "carga": "2026-11-03 12:02:39.240344+00:00"
   }
  }
 }

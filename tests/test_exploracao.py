@@ -35,9 +35,12 @@ def test_exploracao_numeros():
     x = c.exploracao(_mov(), "2026-10", "todos")
     assert x["n"] == 72
     assert x["mediana_txt"] == "1 h"
-    # X2: 40 + 15 na 1ª faixa (≤ 4 h), 10 na 2ª (8 h), 5 em (36, 40], 2 em "60 h ou mais"
+    # X2 (Caio, 03/11/2026): faixas de 4 h só até o limite de Tukey (3,5 h, menor que uma faixa: "0 a 3,5 h") e uma
+    # última barra "acima de 3,5 h" com os 17 fora da curva (10 de 8 h, 5 de 40 h, 2 de 80 h)
     n = [b["n"] for b in x["hist"]["barras"]]
-    assert sum(n) == 72 and n[0] == 55 and n[1] == 10 and n[9] == 5 and n[-1] == 2
+    assert n == [55, 17] and n[-1] == x["n_fora"]
+    assert [b["rotulo"] for b in x["hist"]["barras"]] == ["0 a 3,5 h", "acima de 3,5 h"]
+    assert [b["zona_box"] for b in x["hist"]["barras"]][-1] == "box-fora"
     # X3: até 2 dias (≤ 16 h) = 65, 16–40 h = 5, > 40 h = 2 → 90/7/3 pelo maior resto; o 3º bloco leva o máximo
     assert x["faixas3"]["contagens"] == [65, 5, 2] and x["faixas3"]["pcts"] == [90, 7, 3]
     assert [f["pct"] for f in x["hist"]["faixas"]] == [90, 7, 3] and x["max_txt"] == "80 h"
@@ -104,7 +107,7 @@ def test_caixa_linear_x6():
     ini = [n["x"] - w / 2 for n, w in zip(cx["nomes"], larg)]
     assert all(ini[k + 1] >= ini[k] + larg[k] + 5 for k in range(len(ini) - 1))
     assert ini[-1] + larg[-1] <= cx["w"] + 0.5
-    assert [v["t"] for v in cx["valores"]] == ["1 h", "2 h", "4 h"]
+    assert [v["t"] for v in cx["valores"]] == ["1 h", "2 h", "3,5 h"]  # limite com 1 casa (Caio, 03/11/2026)
 
 
 def test_tela_num_passo_so(monkeypatch):
@@ -125,7 +128,7 @@ def test_tela_num_passo_so(monkeypatch):
     s2 = html.split('slide-explora"')[1].split('slide-cem-tempo"')[0]
     for t in ('class="ex-camada ex-box"', 'class="ex-camada ex-alfinetes"', 'class="explora-ler"', "Como ler",
               "Típico (mediana)", "Média", "Fora da curva", "metade dos pedidos sai antes disso",
-              "puxada para cima pelos casos longos", "17 pedidos acima de 4 h: olhar caso a caso",
+              "puxada para cima pelos casos longos", "17 pedidos acima de 3,5 h: olhar caso a caso",
               "E se olharmos para 100 pedidos, o que vemos?"):
         assert t in s2, t
     x = c.exploracao(mov, "2026-10")
@@ -134,7 +137,7 @@ def test_tela_num_passo_so(monkeypatch):
     assert f'{x["box"]["pcts"][3]}%' in s2
     for t in ("data-passo", "data-explora-ir", "explora-painel", "explora-passo", "ex-centro", "ex-sino", "ex-c3",
               "Próxima: Sino", "1 de 3", "Q-Q", "boxplot", "outlier", "assimetria", "Curva acumulada", 'class="ex-kde"'):
-        assert t not in re.sub(r'<span class="so-leitor">.*?</span>|<figcaption class="so-leitor">.*?</figcaption>', " ", s2, flags=re.S), t
+        assert t not in re.sub(r'<span class="so-leitor">.*?</span>|<figcaption class="so-leitor">.*?</figcaption>', " ", s2, flags=re.DOTALL), t
     assert 'class="grupos estudo-grupos"' in s2 and '?talentos=exclusivos#2' in s2
     assert 'style="' not in s2
     # X11 (V2, 30/10/2026): régua típico × média com o puxão e os fora da curva em 100 quadrados
@@ -154,7 +157,7 @@ def test_x10_frase_do_slide_2():
     """X10: uma frase para leigos, com as variantes (média perto do típico, ninguém fora da curva, 1%)."""
     bx = {"pcts": [25, 50, 18, 7], "limite": 59.2}
     assert c._insight_unico(14.0, 25.0, bx, 171, True) == (
-        "<strong>Poucos pedidos demoram muito:</strong> os 7% fora da curva, acima de 59 h, puxam a média para 25 h. "
+        "<strong>Poucos pedidos demoram muito:</strong> os 7% fora da curva, acima de 59,2 h, puxam a média para 25 h. "
         "O pedido típico leva 14 h. <em>Por isso medimos pelo típico (a mediana).</em>")
     assert "o 1% fora da curva" in c._insight_unico(14.0, 25.0, {**bx, "pcts": [25, 50, 24, 1]}, 3, True)
     assert c._insight_unico(14.0, 25.0, bx, 0, True).startswith("Os pedidos mais longos puxam a média para 25 h")

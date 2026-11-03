@@ -20,6 +20,9 @@ GRUPOS = (
         {"sigla": "GPS", "nome": "Geração de pastas no SharePoint", "curta": "Pastas padrão para cada lead",
          "desc": "Cria a estrutura padrão de pastas do projeto, com os modelos de carta e planilhas, após a LIA "
                  "identificar um novo lead."},
+        {"sigla": "MIA", "nome": "Monitoramento Inteligente Automatizado", "curta": "Revisa e corrige o board todo dia",
+         "desc": "Robô que revisa o board do Backlog todos os dias e corrige no monday.com o que foi preenchido "
+                 "errado. Guarda o valor original e manda para revisão o que tem dúvida."},
     )},
     {"chave": "testes", "titulo": "Fase de testes", "sub": "Validando para ir ao ar", "itens": (
         {"sigla": "Orça+AI", "nome": "Precificação automática", "curta": "Planilha de precificação preenchida",
@@ -29,15 +32,15 @@ GRUPOS = (
          "desc": "Gera a carta-orçamento a partir do escopo, dos entregáveis e dos valores já calculados."},
     )},
     {"chave": "desenvolvimento", "titulo": "Em desenvolvimento", "sub": "Sendo construídas", "itens": (
-        {"sigla": "FILA", "nome": "Fila Inteligente (Raio-X)", "curta": "Prioriza a fila de orçamentos",
-         "desc": "Cruza histórico de fechamento, relacionamento marca × talento e dados de orçamento para priorizar "
-                 "a fila."},
+        {"sigla": "FILA", "nome": "Priorização da demanda", "curta": "Prioriza a demanda de orçamentos",
+         "desc": "Prioriza a demanda de orçamentos que chega à área, cruzando histórico de fechamento, relacionamento "
+                 "marca × talento e dados de orçamento."},
         {"sigla": "CACHÊ", "nome": "Estimativa de cachê", "curta": "Estimativa de cachê a partir do e-mail",
          "desc": "Lê o e-mail, extrai escopo, marca, talento e valor, salva esses dados e gera uma estimativa de "
                  "cachê."},
-        {"sigla": "G1.IA", "nome": "Validação de pedidos do G1", "curta": "Confere pedidos de publicação do G1",
-         "desc": "Lê o e-mail de notícias que o G1 recebe para publicação, extrai o escopo e valida se segue os "
-                 "padrões propostos."},
+        {"sigla": "G1.IA", "nome": "Revisão de matérias publicitárias", "curta": "Revisa as matérias das afiliadas",
+         "desc": "Agente de IA que revisa e valida textos de branded content e conteúdos publicitários publicados nos "
+                 "ambientes Globo (Branded Content Afiliadas)."},
     )},
     {"chave": "esteira", "titulo": "Na esteira", "sub": "Próximas a entrar", "itens": (
         {"sigla": "Salesforce", "nome": "Oportunidade automática", "curta": "Oportunidade criada por frentes",
@@ -51,6 +54,9 @@ GRUPOS = (
         {"sigla": "GUIA+", "nome": "RAGs executivos e de suporte", "curta": "Assistentes de IA da base do Agenciamento",
          "desc": "Assistentes de IA que consultam a base do Agenciamento para responder a executivos e apoiar "
                  "analistas."},
+        {"sigla": "Raio-X", "nome": "Raio-X dos talentos", "curta": "Características e dados de cada talento",
+         "desc": "Reúne num só lugar as características e os dados de cada talento agenciado, para consultar o perfil "
+                 "e o histórico de cada um antes de indicar ou negociar."},
     )},
 )
 

@@ -1,15 +1,19 @@
 {% extends "apresentacao.html" %}
 {% from "macros.html" import cabecalho %}
 {% from "icones.html" import icone %}
-{# Roadmap da área (V2, Caio, 31/10/2026; 5ª versão, "a linha do tempo linear em Y"). Três trilhos horizontais: o
-   principal ao centro e os ramos acima e abaixo, com junções em curvas suaves. Depois do BigQuery, dois trilhos
-   contínuos até a borda (Análises e estudos, "Você está aqui", e Dashboards), com setas; a retroalimentação em
-   pontilhado fino. Cada nó: círculo com ícone animado, número discreto, título e uma frase; miniaturas e botões das
-   páginas (por categoria) junto do nó. Posições no <style> com nonce; geometria e catálogo em roadmap/__init__.py (a
-   mesma do bloco .rm-* do CSS). Abaixo de 900 px, a linha fica vertical. #}
+{# Roadmap da área, PROPOSTA (03/11/2026, 3ª rodada; aprovada pelo Caio para substituir roadmap/template.html). Mesma
+   ideia, dados e geometria do validado (roadmap.tela(): posições no <style> com nonce, trilhas no SVG 730 × 280) e o
+   mesmo painel claro; muda o acabamento: concluídos com nó cheio, o agora (07) com anel amarelo fino e o selo "Você está
+   aqui" ao lado do nó (respiro do título e das trilhas), o 08 vazado; destinos em colagem (rotação alternada e
+   flutuação do validado) com ícone, nome e seta; miniaturas retas com lupa. Entrada coreografada: a linha se desenha,
+   cada nó acende quando ela chega (--rmn-d, proporcional à posição do nó: 900 ms até a borda) e os cartões entram em
+   cascata; depois, o pulso do validado. Classes rm-* mantidas (o movimento contínuo do bloco .rm-* do estilo.css vale
+   aqui); acabamento em /static/roadmap_novo.css (escopado em .rmn) e galeria em /static/roadmap_novo.js (a imagem abre
+   inteira; "Ver em 100%" mostra a alta com rolagem). Abaixo de 900 px, a linha fica vertical. #}
 {% macro miniatura(e) %}
   {%- if e.galeria %}<a class="rm-mini{% if e.galeria|length > 1 %} rm-mini-pilha{% endif %}" href="{{ e.galeria[0].src }}?v={{ v() }}" data-rm-galeria='{{ e.galeria|tojson }}' aria-haspopup="dialog">
     {%- for x in e.galeria %}<img class="rm-mini-img" src="{{ x.mini }}?v={{ v() }}" alt="{{ x.alt }}" width="{{ x.mw }}" height="{{ x.mh }}" loading="lazy" decoding="async">{% endfor -%}
+    <span class="rmn-mini-lupa" aria-hidden="true">{{ icone("ampliar", "icone rmn-mini-lupa-ic") }}</span>
     <span class="so-leitor"> ({% if e.galeria|length > 1 %}{{ e.galeria|length }} imagens; {% endif %}abre ampliada)</span></a>{% endif %}
 {%- endmacro %}
 {% macro botoes(e) %}
@@ -17,20 +21,21 @@
     {%- for g in e.categorias %}<section class="rm-cat rm-cat-{{ g.tom }} rm-forma-{{ g.forma }}" aria-labelledby="rm-cat-{{ g.chave }}">
       <h4 class="rm-cat-tit" id="rm-cat-{{ g.chave }}">{{ g.rotulo }}</h4>
       <ul class="rm-botoes">
-        {%- for b in g.botoes %}<li><a class="rm-botao rm-destino{% if b.proximo %} rm-destino-proximo{% endif %}" href="{{ b.href }}"><span class="rm-destino-circ" aria-hidden="true">{{ icone(b.icone, "icone rm-destino-ic") }}</span><span class="rm-destino-nome">{{ b.rotulo }}</span>{% if b.proximo %}<span class="rm-proximo">próximo</span>{% endif %}<span class="so-leitor">: {{ b.linha }}</span></a></li>{% endfor -%}
+        {%- for b in g.botoes %}<li><a class="rm-botao rm-destino{% if b.proximo %} rm-destino-proximo{% endif %}" href="{{ b.href }}"><span class="rm-destino-circ" aria-hidden="true">{{ icone(b.icone, "icone rm-destino-ic") }}</span><span class="rm-destino-nome">{{ b.rotulo }}</span>{% if b.proximo %}<span class="rm-proximo">próximo</span>{% endif %}<span class="so-leitor">: {{ b.linha }}</span><span class="rmn-destino-seta" aria-hidden="true">{{ icone("avancar", "icone rmn-seta-ic") }}</span></a></li>{% endfor -%}
       </ul>
     </section>{% endfor -%}
   </div>{% endif %}
 {%- endmacro %}
 {% block slides %}
 {% set t = roadmap %}
+<link rel="stylesheet" href="/static/roadmap_novo.css?v={{ v() }}">
 <section class="slide" aria-roledescription="slide" aria-labelledby="s-roadmap" data-nivel="gerencial">
 <div class="lamina">
   {{ cabecalho(apresentacao, secao_atual) }}
   <div class="sobretitulo"><span class="nivel">Gerencial</span></div>
   <h2 class="slide-titulo" id="s-roadmap">{{ secao_atual.pergunta }}</h2>
-  <div class="slide-corpo rm rm-n{{ t.n }}">
-    <style nonce="{{ request.state.nonce }}">{% for e in t.marcos %}#rm-no-{{ e.chave }} { --x: {{ e.css_x }}em; --t: {{ e.css_t }}em; --w: {{ e.css_w }}em; --dy: {{ e.css_dy }}em;{% if e.css_e %} --e: {{ e.css_e }}em;{% endif %}{% if e.css_pulso is not none %} --pulso: {{ e.css_pulso }}s;{% endif %} }{% endfor %}{% for q in t.quadros %}{{ q }}{% endfor %}{% for r in t.retros %}#rm-retro-{{ loop.index }} { --rx: {{ r.x }}em; --ry: {{ r.y }}em; }{% endfor %}</style>
+  <div class="slide-corpo rm rmn rm-n{{ t.n }}">
+    <style nonce="{{ request.state.nonce }}">{% for e in t.marcos %}#rm-no-{{ e.chave }} { --rmn-d: {{ (e.x / 73 * 900)|round|int }}ms; --x: {{ e.css_x }}em; --t: {{ e.css_t }}em; --w: {{ e.css_w }}em; --dy: {{ e.css_dy }}em;{% if e.css_e %} --e: {{ e.css_e }}em;{% endif %}{% if e.css_pulso is not none %} --pulso: {{ e.css_pulso }}s;{% endif %} }{% endfor %}{% for q in t.quadros %}{{ q }}{% endfor %}{% for r in t.retros %}#rm-retro-{{ loop.index }} { --rx: {{ r.x }}em; --ry: {{ r.y }}em; }{% endfor %}</style>
     <div class="rm-palco">
       <svg class="rm-trilha" viewBox="{{ t.viewbox }}" aria-hidden="true" focusable="false">
         <defs><linearGradient id="rm-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="730" y2="0"><stop offset="0" stop-color="#1e2a78"/><stop offset="0.7" stop-color="#2f3fb8"/><stop offset="1" stop-color="#2400ff"/></linearGradient></defs>
@@ -57,7 +62,7 @@
       {%- endif %}
       <ol class="rm-marcos" aria-label="Como chegamos até aqui, etapa por etapa">
         {%- for e in t.marcos %}
-        <li id="rm-no-{{ e.chave }}" class="rm-marco rm-i{{ e.indice }} rm-t-{{ e.trilho }} rm-{{ e.lado }} rm-e-{{ e.chave }} rm-alinha-{{ e.alinhar }}{% if e.aqui %} rm-atual{% elif e.futuro %} rm-futuro{% endif %}{% if e.botoes %} rm-alvo{% endif %}{% if e.css_pulso is not none %} rm-reage{% endif %}"{% if e.aqui %} aria-current="step"{% endif %}>
+        <li id="rm-no-{{ e.chave }}" class="rm-marco rm-i{{ e.indice }} rm-t-{{ e.trilho }} rm-{{ e.lado }} rm-e-{{ e.chave }} rm-alinha-{{ e.alinhar }}{% if e.aqui %} rm-atual{% elif e.futuro %} rm-futuro{% elif e.situacao == 'em_curso' %} rmn-curso{% endif %}{% if e.botoes %} rm-alvo{% endif %}{% if e.css_pulso is not none %} rm-reage{% endif %}"{% if e.aqui %} aria-current="step"{% endif %}>
           <span class="rm-no" aria-hidden="true">{{ icone(e.icone, "icone rm-no-ic rm-ic-" ~ e.icone) }}</span>
           {%- if e.aqui %}
           <span class="rm-aqui" aria-hidden="true"><span class="rm-aqui-tag">Você está aqui</span></span>
@@ -87,7 +92,7 @@
     </div>
   </div>
 </div>
-<dialog id="rm-dialogo" class="rm-dialogo" aria-labelledby="rm-dlg-titulo" aria-describedby="rm-dlg-legenda">
+<dialog id="rm-dialogo" class="rm-dialogo rmn-dialogo" aria-labelledby="rm-dlg-titulo" aria-describedby="rm-dlg-legenda">
   <div class="rm-dlg-caixa">
     <header class="rm-dlg-topo">
       <h2 class="rm-dlg-titulo" id="rm-dlg-titulo">Imagem</h2>
@@ -102,11 +107,10 @@
       </div>
     </header>
     <div class="rm-dlg-quadro" role="region" aria-label="Imagem ampliada" tabindex="0"></div>
-    <p class="rm-dlg-dica" data-rm-dica hidden>Arraste ou role para percorrer a imagem; clique para voltar à visão inteira.</p>
+    <p class="rm-dlg-dica" data-rm-dica hidden>Arraste ou role para percorrer a imagem; clique nela para caber na tela de novo.</p>
     <p class="rm-dlg-legenda" id="rm-dlg-legenda"></p>
-    <p class="rm-dlg-pe"><a class="rm-dlg-abrir" href="/static/roadmap/" target="_blank" rel="noopener">Abrir a imagem em tamanho real</a></p>
   </div>
 </dialog>
 </section>
 {% endblock %}
-{% block scripts %}<script src="/static/roadmap.js?v={{ v() }}"></script>{% endblock %}
+{% block scripts %}<script src="/static/roadmap_novo.js?v={{ v() }}"></script>{% endblock %}
