@@ -1,5 +1,7 @@
 # Ficha — Talentos (divisão anual da demanda)
 
+**Oculta da sequência (Caio, 04/11/2026):** `oculta=True` em `apresentacao.py`; sai das abas, setas e ganchos (Capa → Roadmap → Demanda → LIA → SLA (estudo pelo botão) → Iniciativas → Previsão → Encerramento). O endereço continua abrindo e o Roadmap mantém o botão Talentos, o último das Análises.
+
 ## Recorte do mês fechado (D68, 03/11/2026) — ler primeiro
 
 > A tela mostra só até **31/10/2026** (`talentos.recortar`). Os 4 pedidos de 02/11 eram todos de exclusivos (Giovanna

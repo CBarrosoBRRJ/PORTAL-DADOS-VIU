@@ -112,8 +112,6 @@ PASSOS = (
              "botoes": (
                  {"rotulo": "Demanda", "linha": "Pedidos de orçamento em 2026", "icone": "entrada",
                   "categoria": "analises", "href": f"/{SLUG}"},
-                 {"rotulo": "Talentos", "linha": "Exclusivos e não exclusivos", "icone": "pessoas",
-                  "categoria": "analises", "href": f"/{SLUG}/talentos#1"},
                  {"rotulo": "SLA", "linha": "Tempo até a entrega do orçamento", "icone": "relogio",
                   "categoria": "analises", "href": f"/{SLUG}/sla#1"},
                  {"rotulo": "LIA", "linha": "E-mails que a LIA já leu", "icone": "envelope",
@@ -122,6 +120,9 @@ PASSOS = (
                   "categoria": "automacao", "href": f"/{SLUG}/iniciativas#1", "proximo": True},
                  {"rotulo": "Previsão", "linha": "Pedidos esperados até o fim do ano", "icone": "tendencia",
                   "categoria": "projecoes", "href": f"/{SLUG}/previsao#1", "proximo": True},
+                 # Caio, 04/11/2026: a página Talentos saiu da sequência, mas o botão fica, por último (o último das Análises)
+                 {"rotulo": "Talentos", "linha": "Exclusivos e não exclusivos", "icone": "pessoas",
+                  "categoria": "analises", "href": f"/{SLUG}/talentos#1"},
              )},
         )},
         {"lado": "cima", "nos": (

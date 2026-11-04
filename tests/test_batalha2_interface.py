@@ -112,13 +112,14 @@ def test_links_com_filtro_de_talentos(cliente):
     assert re.search(r'href="/viu-agenciamento/previsao#1"[^>]*data-filtro-talentos', html)  # aba e menu
     # o estudo abre pelo botão (fora da sequência das setas): do SLA a sequência segue para a Previsão, levando o
     # filtro; do estudo, a saída também é a Previsão
-    assert re.search(r'href="/viu-agenciamento/lia#1" rel="next" data-proxima-secao', html)  # V2: SLA → LIA
+    assert re.search(r'href="/viu-agenciamento/iniciativas#1" rel="next" data-proxima-secao', html)  # 04/11: SLA → Iniciativas
     assert not re.search(r'href="/viu-agenciamento/atendimento#1"[^>]*data-filtro-talentos', html)
     html = cliente.get("/viu-agenciamento/sla/como-medimos?talentos=exclusivos").text
     assert 'class="fechar-estudo" href="/viu-agenciamento/sla?talentos=exclusivos#1"' in html  # volta com o filtro
-    assert re.search(r'href="/viu-agenciamento/lia#1" rel="next" data-proxima-secao', html)  # V2: do estudo, à LIA
+    assert re.search(r'href="/viu-agenciamento/iniciativas#1" rel="next" data-proxima-secao', html)  # 04/11: do estudo, às Iniciativas
     assert 'class="proxima proxima-gancho so-leitor"' in html  # o estudo tem os próprios ganchos
-    from pathlib import Path  # V2: sem a conclusão, a saída fica no último slide: volta ao SLA (principal) e a próxima página
+    # V2: sem a conclusão, a saída fica no último slide: volta ao SLA (principal) e a próxima página
+    from pathlib import Path
     tpl = (Path(__file__).resolve().parent.parent / "app" / "templates" / "como_medimos.html").read_text(encoding="utf-8")
     assert '<a class="gancho-link" href="{{ volta }}">Voltar ao SLA' in tpl and 'class="gancho-link gancho-sec" href="{{ proxima.href }}"' in tpl
 

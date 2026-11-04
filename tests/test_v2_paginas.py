@@ -389,7 +389,7 @@ def test_lia_botao_e_popup_do_video(cliente, monkeypatch):
     assert 'href="/viu-agenciamento/lia-na-pratica#1" data-lia-video' in html and '<span class="lia-vc-tit">A LIA na prática</span>' in html
     assert '<dialog id="lia-video"' in html and "Vídeo a incluir" in html and "<video" not in html  # sem arquivo
     assert html.count('class="fn-n"') == len(lia_na_pratica.ETAPAS) and "lia_video.js" in html
-    assert 'href="/viu-agenciamento/iniciativas#1" rel="next"' in html  # LIA → Iniciativas
+    assert 'href="/viu-agenciamento/sla#1" rel="next"' in html  # 04/11: LIA → SLA
     nav = cliente.get("/viu-agenciamento/sla").text
     assert "/viu-agenciamento/lia-na-pratica" not in nav and cliente.get("/viu-agenciamento/lia-na-pratica").status_code == 200
     monkeypatch.setattr(lia_na_pratica, "ARQUIVO", "lia-na-pratica.mp4")
@@ -579,6 +579,8 @@ def test_roadmap_botoes(cliente):
                          r'<span class="rm-destino-nome">([^<]+)</span>(?:<span class="rm-proximo">próximo</span>)?<span class="so-leitor">: ([^<]+)</span>'
                          r'<span class="rmn-destino-seta" aria-hidden="true">\s*<svg[^>]*>.*?</svg>\s*</span></a>', ol, re.DOTALL)
     assert len(achados) == 6
+    # Caio, 04/11/2026: Talentos saiu da sequência, mas o botão fica, por último nas Análises
+    assert [rot for _, _, rot, _ in achados] == ["Demanda", "SLA", "Talentos", "LIA", "Iniciativas", "Previsão"]
     links = {rot: href for _, href, rot, _ in achados}
     assert links == {"Demanda": "/viu-agenciamento", "Talentos": "/viu-agenciamento/talentos#1",
                      "SLA": "/viu-agenciamento/sla#1", "LIA": "/viu-agenciamento/lia#1",
