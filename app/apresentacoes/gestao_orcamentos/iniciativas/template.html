@@ -57,7 +57,6 @@
                 {% if i.sigla %}<p class="ini-caixa-nome">{{ i.nome }}</p>{% endif %}
                 <p class="ini-caixa-desc">{{ i.texto or "Sem descrição." }}</p>
                 <dl class="ini-caixa-meta">
-                  <div><dt>Responsável</dt><dd>{{ i.responsavel or "a definir" }}</dd></div>
                   {%- if i.status %}<div><dt>Status</dt><dd>{{ i.status }}</dd></div>{% endif %}
                   {%- if i.proximo %}<div><dt>Próximo passo</dt><dd>{{ i.proximo }}</dd></div>{% endif %}
                 </dl>
@@ -98,7 +97,6 @@
           <p class="ini-d-campo"><label for="ini-d-fase">Fase</label><select id="ini-d-fase" name="fase">{% for g in ini.grupos %}<option value="{{ g.chave }}">{{ g.titulo }}</option>{% endfor %}</select></p>
           <p class="ini-d-campo ini-d-largo"><label for="ini-d-nome">Nome / título</label><input id="ini-d-nome" name="nome" type="text" maxlength="120" autocomplete="off"></p>
           <p class="ini-d-erro ini-d-largo" id="ini-d-erro" hidden>Preencha a sigla ou o nome.</p>
-          <p class="ini-d-campo ini-d-largo"><label for="ini-d-resp">Responsável</label><input id="ini-d-resp" name="resp" type="text" maxlength="80" autocomplete="off" placeholder="Pessoa ou área"></p>
           <p class="ini-d-campo ini-d-largo"><label for="ini-d-desc">Descrição <span class="ini-d-dica">(aparece no detalhe; Shift + Enter quebra a linha)</span></label><textarea id="ini-d-desc" name="desc" rows="3" maxlength="400"></textarea></p>
           <p class="ini-d-campo"><label for="ini-d-status">Status / observação <span class="ini-d-dica">(opcional)</span></label><input id="ini-d-status" name="status" type="text" maxlength="120" autocomplete="off"></p>
           <p class="ini-d-campo"><label for="ini-d-prox">Próximo passo <span class="ini-d-dica">(opcional)</span></label><input id="ini-d-prox" name="prox" type="text" maxlength="120" autocomplete="off"></p>
@@ -119,7 +117,7 @@
       </form>
     </dialog>
 
-    {# visão ampliada (botão "Expandir"): descrição, responsável, status, próximo passo e a galeria grande #}
+    {# visão ampliada (botão "Expandir"): descrição, status, próximo passo e a galeria grande #}
     <dialog class="ini-ampliado" data-ini-ampliado aria-labelledby="ini-a-titulo">
       <div class="ini-a-caixa">
         <div class="ini-a-topo">

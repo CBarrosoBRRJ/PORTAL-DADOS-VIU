@@ -123,7 +123,8 @@ def test_api_crud_e_pagina_renderizada_do_banco(cliente):
     r = cliente.post(f"{API}/iniciativas/{ident}/mover", json={"fase": "producao", "posicao": 0}, headers=CSRF)
     assert r.status_code == 200 and r.json()["fase"] == "producao" and r.json()["ordem"] == 0
     html = cliente.get("/viu-agenciamento/iniciativas").text  # a página lê o quadro salvo
-    assert f'data-ini-id="{ident}" data-ini-sigla="TESTE"' in html and "<dt>Responsável</dt><dd>Caio</dd>" in html
+    assert f'data-ini-id="{ident}" data-ini-sigla="TESTE"' in html
+    assert "Responsável" not in html  # Caio, 04/11/2026: fora da tela; o servidor guarda o campo (acima)
     assert html.index(f'data-ini-id="{ident}"') < html.index('data-ini-id="lia"')
     assert "14</span> iniciativas" in html and 'data-ini-semente="0"' in html and 'style="' not in html
     assert cliente.delete(f"{API}/iniciativas/{ident}", headers=CSRF).status_code == 204
@@ -523,7 +524,7 @@ def test_persistencia_de_ponta_a_ponta_sobrevive_a_reinicio(quadro_limpo):
         assert c2.get(anexo["url"]).content == PNG and dados["na_semente"] is False
         html = c2.get("/viu-agenciamento/iniciativas").text
         assert f'data-ini-id="{nova["id"]}" data-ini-sigla="PERSIST"' in html and "Fila Inteligente (RAIO-X)" in html
-        assert 'data-ini-id="auto"' not in html and "<dt>Responsável</dt><dd>Gerente</dd>" in html
+        assert 'data-ini-id="auto"' not in html and "Responsável" not in html  # 04/11: fora da tela; o valor persiste (acima)
         assert html.index('data-ini-id="lia"') < html.index(f'data-ini-id="{nova["id"]}"') < html.index('data-ini-id="gps"')
         assert 'aria-label="Imagem 1 de 2: raio-x.png"' in html and 'aria-label="Documento 2 de 2: proposta.pdf"' in html
         assert "13</span> iniciativas" in html  # 13 + 1 nova - 1 excluída

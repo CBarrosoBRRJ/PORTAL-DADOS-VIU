@@ -3727,6 +3727,8 @@ html.ini-arrastando, html.ini-arrastando * { cursor: grabbing !important; }
 .ini-caixa-meta div { display: grid; gap: 0.05em; }
 .ini-caixa-meta dt { font-size: 0.86em; color: var(--tinta-2); }
 .ini-caixa-meta dd { margin: 0; color: var(--tinta); }
+/* Caio, 04/11/2026: sem o Responsável, a lista fica vazia quando não há status nem próximo passo: some (sem o fio solto) */
+.ini-caixa-meta:not(:has(dd)) { display: none; }
 /* pop-up de edição e inclusão (<dialog> com showModal): vidro, sombra em camadas, botões de 6 px; entra só com movimento */
 .ini-dialogo { width: min(34em, calc(100vw - 32px)); max-height: calc(100dvh - 32px); box-sizing: border-box; overflow: auto; padding: 1.6em 1.7em 1.3em; margin: auto;
   color: var(--tinta); border-radius: var(--cartao-raio); border: 1px solid rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.88);
