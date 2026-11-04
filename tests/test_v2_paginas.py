@@ -551,7 +551,8 @@ def test_roadmap_enxuto(cliente):
     for ic in icones:  # cada ícone tem o seu gesto, só com movimento
         assert f"html.js .rm-ic-{ic}" in movimento, ic
     assert "@keyframes rm-desenha { from { clip-path: inset(0 100% 0 0); }" in bloco
-    assert ".palco:has(.rm-palco) > .proxima.so-leitor { top: 0; bottom: auto; }" in bloco
+    # revisão de 03/11/2026: o gancho oculto sobe ao topo por uma regra geral (todas as páginas), não mais só no Roadmap
+    assert ".palco:has(.rm-palco) > .proxima.so-leitor" not in bloco
 
 
 def test_roadmap_cliques(cliente):

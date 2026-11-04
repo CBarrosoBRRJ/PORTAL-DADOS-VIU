@@ -91,16 +91,17 @@ def publico(i: dict) -> dict:
 def fotos_fixas(ident: str) -> list[dict]:
     """Caio, 03/11/2026: fotos fixas do catálogo (catalogo.FOTOS), no mesmo formato dos anexos, com fixo=True e a
     versão do arquivo no endereço (o navegador não fica com a cópia antiga)."""
-    pasta = PathLib(__file__).resolve().parents[3] / "static" / "iniciativas"
+    estaticos = PathLib(__file__).resolve().parents[3] / "static"
     saida = []
     for k, f in enumerate(catalogo.FOTOS.get(ident, ()), 1):
-        arq = pasta / f["arquivo"]
+        pasta = f.get("pasta", "iniciativas")
+        arq = estaticos / pasta / f["arquivo"]
         if not arq.is_file():
             continue
         info = arq.stat()
         saida.append({"id": f"foto-{ident}-{k}", "iniciativa_id": ident, "nome": f["nome"], "tipo": "image/webp",
                       "tamanho": info.st_size, "imagem": True, "fixo": True,
-                      "url": f"/static/iniciativas/{f['arquivo']}?v={info.st_size:x}{info.st_mtime_ns // 1_000_000_000:x}"})
+                      "url": f"/static/{pasta}/{f['arquivo']}?v={info.st_size:x}{info.st_mtime_ns // 1_000_000_000:x}"})
     return saida
 
 

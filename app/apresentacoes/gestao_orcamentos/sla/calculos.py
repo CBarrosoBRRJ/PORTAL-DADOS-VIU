@@ -1282,7 +1282,7 @@ def recorte(mov: pd.DataFrame, mes_parcial: str, grupo: str = "todos") -> dict |
     periodo = f"{formato.MESES[0]} de {ano}" if fim == 1 else f"{formato.MESES[0]} a {formato.MESES[fim - 1]} de {ano}"
     rotulo = GRUPOS[grupo][0] if grupo in GRUPOS else GRUPOS["todos"][0]
     pedidos = "orçamento medido" if n == 1 else "orçamentos medidos"  # G3-8: glossário (pedido entra; orçamento é entregue)
-    return {"periodo": periodo, "n": n, "grupo": rotulo, "proximo": formato.MESES_EXTENSO[fim],
+    return {"periodo": periodo, "n": n, "grupo": rotulo, "proximo": formato.MESES_EXTENSO[fim % 12],  # "AAAA-13" (virada do ano, D68): janeiro
             "texto": f"{periodo} · {formato.inteiro(n)} {pedidos} · {rotulo}"}
 
 

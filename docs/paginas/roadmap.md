@@ -2,12 +2,13 @@
 
 **Dashboards (Caio, 03/11/2026, 2ª rodada):** o Raio-X saiu do Roadmap (foi para o card Raio-X das Iniciativas); entraram a **Central de qualidade** (`dashboard-qualidade`, do "Central de Qualidade.png") e o **e-mail semanal da MIA** (`dashboard-qualidade-email`, do "Central de Qualidade - email.png"), sem desfoque. A pilha mostra até 3 miniaturas; a galeria abre as 4. As imagens da galeria levam `?v=` com a versão do arquivo (o navegador mostrava a cópia antiga, desfocada).
 
-**Proposta nova (03/11/2026, a aprovar pelo Caio):** `/viu-agenciamento/roadmap-novo` (seção oculta; `roadmap_novo/template.html`, `static/roadmap_novo.css` escopado em `.rmn`, `tests/test_roadmap_novo.py`): mesmo painel claro e dados; 01–06 com nó cheio, 07 em destaque (amarelo, selo junto do número), 08 vazado, cartões de destino retos em duas colunas, miniaturas com lupa. Uma versão em painel marinho foi recusada pelo Caio ("cores pesadas"). Validado guardado em `_descartados/2026-11-03/roadmap_validado/`.
+**Desenho novo aplicado em `/viu-agenciamento/roadmap` (03/11/2026; a seção de proposta `/roadmap-novo` não existe mais):** `roadmap_novo/template.html`, `static/roadmap_novo.css` escopado em `.rmn`, `tests/test_roadmap_novo.py`: mesmo painel claro e dados; 01–06 com nó cheio, 07 em destaque (amarelo, selo junto do número), 08 vazado, cartões de destino retos em duas colunas, miniaturas com lupa. Uma versão em painel marinho foi recusada pelo Caio ("cores pesadas"). Validado guardado em `_descartados/2026-11-03/roadmap_validado/`.
 
 **Atualização de 03/11/2026 (Caio):** imagens **sem desfoque** (dados internos da equipe; `DESFOCAR = False` em
 `tools/gerar_imagens_roadmap.py`, caixas mantidas como registro). Fluxo regerado do "Viu Agenciamento - Fluxo 2.pdf" (o
-recorte do fluxo é igual ao do Fluxo 1); dashboards regerados dos prints originais; **Raio-X dos talentos** entrou como 3ª
-imagem dos dashboards (pilha de 3, `nth-child(3)` no CSS). Originais em `_descartados/2026-11-03/app/static/roadmap/`
+recorte do fluxo é igual ao do Fluxo 1); dashboards regerados dos prints originais. O **Raio-X dos talentos** chegou a
+entrar como 3ª imagem, mas saiu na 2ª rodada do mesmo dia (ver o 1º parágrafo; o teste confere que `dashboard-raiox`
+não aparece no Roadmap). Originais em `_descartados/2026-11-03/app/static/roadmap/`
 (fora de `static/`, que é público). Limite de peso das imagens no teste: 400 KB (a alta do fluxo tem ~345 KB).
 
 **Estado (31/10/2026, noite): 5ª versão, "a linha do tempo linear em Y", num painel flutuante.** O Roadmap é a tela
@@ -534,6 +535,11 @@ Capturas anteriores:
 
 ## Histórico
 
+- **03/11/2026 (revisão):** ficha alinhada ao estado: o desenho novo está em `/roadmap` (a proposta `/roadmap-novo` saiu), o
+  Raio-X saiu dos dashboards (Central de qualidade e e-mail da MIA no lugar). Painel da galeria no celular (≤ 600 px):
+  título na linha de cima e botões quebrando na de baixo, o "Fechar" não passa mais da borda
+  (`tests/test_roadmap_novo.py::test_painel_da_galeria_cabe_no_celular`). Gancho escondido fora da ordem do Tab
+  (`tabindex=-1`) e preso ao topo do palco pela regra geral `.palco > .proxima.so-leitor` (a regra própria do Roadmap saiu).
 - **31/10/2026 (auditoria do Codex, F10):** rodapé "Conteúdo editorial · não depende da carga de dados" no lugar da data da carga de entradas (a página não lê dados).
 - **31/10/2026, tarde:** 4ª versão, "a linha que desemboca nos destinos" (hub: história à esquerda, leque até os
   botões das páginas à direita; marcos como pontos; sem números, selos nem legendas soltas). Executiva guardada em

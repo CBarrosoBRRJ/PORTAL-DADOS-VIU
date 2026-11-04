@@ -1,5 +1,5 @@
-/* PROPOSTA de capa nova (Caio, 03/11/2026), só em /viu-agenciamento/capa-nova (templates/capa_nova.html). Não mexe
-   na capa validada: todas as classes têm o prefixo cn-. Medidas em em da lâmina (1em = 1/80 da largura; a lâmina tem
+/* Capa (Caio, 03/11/2026): a proposta de capa nova foi APLICADA e é a capa (/viu-agenciamento/capa, templates/capa.html;
+   /capa-nova responde 301 para ela). Todas as classes têm o prefixo cn-. Medidas em em da lâmina (1em = 1/80 da largura; a lâmina tem
    80 × 45em em 16:9 e 80 × 50em em 16:10).
    Composição: lado branco com o texto; plano marinho em diagonal (58% no topo, 47% no pé), mais largo que o da validada,
    com o filete azul no corte. O título atravessa o corte: duas camadas iguais (.cn-dia e .cn-noite) recortadas pelo
@@ -45,6 +45,9 @@
 .cn-sobre { font-weight: 500; color: var(--tinta); }
 .cn-data { font-weight: 400; color: var(--tinta-3); font-variant-numeric: lining-nums; }   /* #6b6b80 no branco: 5,3:1 */
 .cn ::selection { background: var(--azul); color: #fff; }
+
+/* validação de 03/11/2026: o gancho "Próxima pergunta" escondido (.so-leitor, margin -1px), preso ao pé do palco, descia
+   1px abaixo da janela e a capa rolava. A correção virou regra geral em estilo.css (.palco > .proxima.so-leitor). */
 
 .cn-tela-cheia { position: absolute; top: 1.6em; right: 1.6em; z-index: 2; color: rgba(255, 255, 255, 0.72); }
 .cn-tela-cheia:hover, .cn-tela-cheia:focus-visible { color: #fff; background: rgba(255, 255, 255, 0.1); }

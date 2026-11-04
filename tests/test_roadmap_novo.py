@@ -264,3 +264,16 @@ def test_imagens_da_galeria_levam_a_versao_do_arquivo(html):
         for x in json.loads(g):
             assert re.fullmatch(r"/static/roadmap/[a-z-]+\.webp\?v=[0-9a-f]+", x["src"]), x["src"]
             assert re.fullmatch(r"/static/roadmap/[a-z-]+\.webp\?v=[0-9a-f]+", x["alta"]), x["alta"]
+
+
+def test_painel_da_galeria_cabe_no_celular():
+    """Validação de 03/11/2026: em 390 px o título e os botões do topo do painel ficavam na mesma linha e o "Fechar"
+    passava da borda do painel (só o Esc fechava). Abaixo de 600 px o título ocupa a linha de cima e os botões quebram
+    na de baixo, sem tocar no painel de mesa."""
+    css = _css_sem_comentarios()
+    ini = css.index("@media (max-width: 600px)")
+    celular = css[ini:css.index("\n}", ini)]
+    assert ".rmn-dialogo .rm-dlg-topo { flex-wrap: wrap;" in celular
+    assert ".rmn-dialogo .rm-dlg-titulo { flex: 1 1 100%; }" in celular
+    assert re.search(r"\.rmn-dialogo \.rm-dlg-acoes \{ flex: 1 1 100%; flex-wrap: wrap;", celular)
+    assert "rm-dlg-topo" not in css[:ini]  # o topo do painel de mesa segue o do estilo.css

@@ -120,3 +120,11 @@
   .rmn .rm-atual .rm-titulo { font-size: 1.1em; }
   .rmn .rm-mini-img { width: 8em; height: 4.8em; }
 }
+/* ---------- painel da galeria no celular (validação de 03/11/2026): em 390 px os botões do topo passavam da borda e o
+   "Fechar" ficava fora do painel; o título ocupa a linha de cima e os botões quebram na de baixo ---------- */
+@media (max-width: 600px) {
+  .rmn-dialogo .rm-dlg-topo { flex-wrap: wrap; gap: 0.5em; }
+  .rmn-dialogo .rm-dlg-titulo { flex: 1 1 100%; }
+  .rmn-dialogo .rm-dlg-acoes { flex: 1 1 100%; flex-wrap: wrap; row-gap: 0.4em; }
+  .rmn-dialogo .rm-dlg-galeria { margin-right: auto; }
+}

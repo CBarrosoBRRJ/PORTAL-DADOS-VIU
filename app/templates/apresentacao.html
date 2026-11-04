@@ -94,8 +94,9 @@
     {# D59 (Caio, 27/10/2026): volta à tela como GANCHO para a próxima página (a pergunta dela, em itálico, como os ganchos
        do estudo); a sequência termina na Previsão. O rótulo "Próxima pergunta" fica só para o leitor de tela #}
     {# D61: na capa o "Começar" faz o papel do gancho (o link fica para o leitor de tela e para as setas) #}
+    {# revisão de 03/11/2026: escondido, o link sai da ordem do Tab (tabindex=-1; WCAG 2.4.7); o leitor e as setas seguem #}
     {% if proxima %}<nav class="proxima proxima-gancho{% if pagina_especial or gancho_oculto %} so-leitor{% endif %}" aria-label="Sequência das perguntas">
-      <a href="{{ proxima.href }}" rel="next" data-proxima-secao{% if proxima.filtro %} data-filtro-talentos{% endif %}><span class="proxima-rotulo so-leitor">{{ "Para encerrar" if proxima.slug == "encerramento" else "Para fechar" if proxima.slug == "o-que-falta" else "Próxima pergunta" }}</span>
+      <a href="{{ proxima.href }}" rel="next" data-proxima-secao{% if pagina_especial or gancho_oculto %} tabindex="-1"{% endif %}{% if proxima.filtro %} data-filtro-talentos{% endif %}><span class="proxima-rotulo so-leitor">{{ "Para encerrar" if proxima.slug == "encerramento" else "Para fechar" if proxima.slug == "o-que-falta" else "Próxima pergunta" }}</span>
         <span class="proxima-texto">{{ proxima.pergunta }}</span><span class="proxima-curto" aria-hidden="true">{{ proxima.rotulo }}</span>
         <svg aria-hidden="true" viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a>
     </nav>{% endif %}

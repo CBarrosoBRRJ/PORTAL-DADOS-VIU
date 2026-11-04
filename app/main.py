@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import mimetypes
 import secrets
 import threading
 import time
@@ -158,6 +159,10 @@ def _aquecer_paginas() -> None:
 
 app = FastAPI(title="Relatórios Agenciamento", docs_url=None, redoc_url=None, openapi_url=None, lifespan=ao_iniciar)
 app.add_middleware(GZipMiddleware, minimum_size=1000)
+# Caio, 03/11/2026 (bug do gerente): o Python do Windows e da imagem slim não conhece .webp/.woff2, e o StaticFiles servia
+# esses arquivos como application/octet-stream (com nosniff): o "Abrir em nova aba" das imagens baixava o arquivo
+for _tipo, _ext in (("image/webp", ".webp"), ("font/woff2", ".woff2"), ("text/vtt", ".vtt"), ("video/mp4", ".mp4")):
+    mimetypes.add_type(_tipo, _ext)
 app.mount("/static", StaticFiles(directory=PASTA / "static"), name="static")
 # Iniciativas com dados no servidor (30/10/2026): API JSON em /viu-agenciamento/iniciativas/api/... (antes das rotas
 # genéricas /{slug}/{secao})
@@ -183,9 +188,10 @@ def _chave_ok(request: Request):
     if not config.CHAVE_ACESSO:
         return True
     marca = hashlib.sha256(config.CHAVE_ACESSO.encode()).hexdigest()
-    if secrets.compare_digest(request.cookies.get(COOKIE_CHAVE, ""), marca):
+    # em bytes: compare_digest com str recusa caractere fora do ASCII (TypeError = 500); assim, chave errada = 403
+    if secrets.compare_digest(request.cookies.get(COOKIE_CHAVE, "").encode(), marca.encode()):
         return True
-    if secrets.compare_digest(request.query_params.get("k", ""), config.CHAVE_ACESSO):
+    if secrets.compare_digest(request.query_params.get("k", "").encode(), config.CHAVE_ACESSO.encode()):
         resto = [(c, v) for c, v in request.query_params.multi_items() if c != "k"]
         destino = request.url.path + (("?" + urlencode(resto)) if resto else "")
         r = RedirectResponse(destino, status_code=303)
@@ -227,9 +233,13 @@ async def cabecalhos(request: Request, call_next):
     # D59: só o próprio site pode se emoldurar (quadro da tela cheia); sites de fora continuam bloqueados
     resposta.headers["X-Frame-Options"] = "SAMEORIGIN"
     if request.url.path.startswith("/static/"):
-        # com ?v= o endereço muda quando o conteúdo muda: pode guardar por 1 ano; fontes e logo, por 1 dia
-        versionado = "v" in request.query_params
-        resposta.headers["Cache-Control"] = "public, max-age=31536000, immutable" if versionado else "public, max-age=86400"
+        # com ?v= o endereço muda quando o conteúdo muda: pode guardar por 1 ano; fontes e logo, por 1 dia. Só respostas
+        # boas vão para o cache: um 403 (sem a chave) ou um 404 guardado como immutable ficaria preso no navegador
+        if resposta.status_code in (200, 206, 304):  # 304: a cópia guardada continua válida
+            versionado = "v" in request.query_params
+            resposta.headers["Cache-Control"] = "public, max-age=31536000, immutable" if versionado else "public, max-age=86400"
+        else:
+            resposta.headers["Cache-Control"] = "no-store"
     else:
         resposta.headers["Cache-Control"] = "private, no-store"  # páginas com dados internos nunca ficam guardadas
         if resposta.headers.get("content-type", "").startswith("text/html"):
