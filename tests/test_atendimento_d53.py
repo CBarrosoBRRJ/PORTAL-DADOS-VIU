@@ -4,6 +4,7 @@ equipe (A27) —, ▲/▼ no que ficou (A28), dispersão com origem em 0 e "Pró
 páginas."""
 import re
 
+import gold_simulada  # views da gold sobre os dados sintéticos (D57)
 import pandas as pd
 import pytest
 from fastapi.testclient import TestClient
@@ -11,7 +12,6 @@ from fastapi.testclient import TestClient
 from app import dados
 from app.apresentacoes.gestao_orcamentos.atendimento import calculos as at
 from app.main import app
-import gold_simulada  # views da gold sobre os dados sintéticos (D57)
 
 
 @pytest.fixture
@@ -98,7 +98,7 @@ def test_pagina_atendimento_d53(cliente):
     assert re.search(r'<dt><span class="kpi-chave kpi-entregue" aria-hidden="true"></span>Entregues ao cliente</dt>', r.text)
     assert "kpi-selo" not in r.text and "dependia da equipe" not in r.text and "kpi-legenda" not in r.text  # D58b
     for bloco in ("Entrada", "Saída", "Saldo"):
-        assert f'<th scope="rowgroup" rowspan="' in r.text and f"<span>{bloco}</span></th>" in r.text
+        assert '<th scope="rowgroup" rowspan="' in r.text and f"<span>{bloco}</span></th>" in r.text
     # D58 (Caio, 27/10/2026): nomes das linhas da saída e % dos recebidos em cada número da faixa
     assert "Entregues no Mês</th>" in r.text and "Ficou para o mês seguinte</th>" in r.text
     assert "Saiu no mês" not in r.text and "Saíram sem entrega" not in r.text
@@ -120,9 +120,9 @@ def test_pagina_atendimento_d53(cliente):
 
 
 @pytest.mark.parametrize("rota, pergunta", [
-    ("/viu-agenciamento", "Como a demanda se divide entre talentos exclusivos e não exclusivos?"),
-    ("/viu-agenciamento/talentos", "Quanto tempo levamos para entregar um orçamento?"),  # V2: Atendimento fora
-    ("/viu-agenciamento/sla", "Quanto a LIA já leu e quanto deixou de chegar à equipe?")])  # V2: SLA → LIA; estudo pelo botão
+    ("/viu-agenciamento", "Quanto a LIA já leu e quanto deixou de chegar à equipe?"),  # 04/11: Talentos oculta
+    ("/viu-agenciamento/lia", "Quanto tempo levamos para entregar um orçamento?"),  # 04/11: LIA → SLA
+    ("/viu-agenciamento/sla", "Quais iniciativas de automação e IA estamos tocando?")])  # SLA → Iniciativas; estudo pelo botão
 def test_gancho_para_a_proxima_pagina(cliente, rota, pergunta):
     """D59 (27/10/2026): a pergunta da próxima página volta à tela como gancho (a D53 a deixava só para o leitor)."""
     html = cliente.get(rota).text

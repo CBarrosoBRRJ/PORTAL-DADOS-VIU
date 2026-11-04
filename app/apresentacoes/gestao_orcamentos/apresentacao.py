@@ -468,6 +468,7 @@ APRESENTACAO = Apresentacao(
             icone="pessoas",
             estado="pronta",
             filtro_talentos=True,  # D50 (T7): o seletor volta; abas e "Próxima pergunta" levam o recorte
+            oculta=True,  # Caio, 04/11/2026: fora da apresentação (navegação, sequência e Roadmap); código e endereço mantidos
             pergunta="Como a demanda se divide entre talentos exclusivos e não exclusivos?",
         ),
         Secao(
@@ -478,6 +479,16 @@ APRESENTACAO = Apresentacao(
             icone="grafico",
             oculta=True,  # V2 (Caio, 30/10/2026): fora deste relatório (navegação, capa e sequência); código e endereço mantidos
             pergunta="A equipe está dando conta da demanda?",
+        ),
+        Secao(  # Caio, 04/11/2026: a LIA vem logo depois da Demanda, antes do SLA
+            slug="lia",
+            titulo="LIA: e-mails lidos e filtrados",
+            montar=montar_lia,
+            tabelas=("entrada",),  # só para o rodapé datado (regra 9); o slide lê o retrato da LIA, não a gold
+            icone="envelope",
+            rotulo="LIA",
+            nota_estado="retrato do Cloud Storage da LIA, a conferir com a equipe",
+            pergunta="Quanto a LIA já leu e quanto deixou de chegar à equipe?",
         ),
         Secao(
             slug="sla",
@@ -490,16 +501,6 @@ APRESENTACAO = Apresentacao(
             nota_estado="meta a oficializar",  # G2-4: a meta de 2 dias de trabalho ainda é sugestão (PEDIDOS)
             filtro_talentos=True,
             pergunta="Quanto tempo levamos para entregar um orçamento?",
-        ),
-        Secao(
-            slug="lia",
-            titulo="LIA: e-mails lidos e filtrados",
-            montar=montar_lia,
-            tabelas=("entrada",),  # só para o rodapé datado (regra 9); o slide lê o retrato da LIA, não a gold
-            icone="envelope",
-            rotulo="LIA",
-            nota_estado="retrato do Cloud Storage da LIA, a conferir com a equipe",
-            pergunta="Quanto a LIA já leu e quanto deixou de chegar à equipe?",
         ),
         Secao(
             slug="lia-na-pratica",

@@ -1,5 +1,7 @@
 # LIA — e-mails lidos e filtrados (V2)
 
+**Ordem (Caio, 04/11/2026):** a LIA vem logo depois da Demanda e antes do SLA (Capa → Roadmap → Demanda → LIA → SLA (estudo pelo botão) → Iniciativas → Previsão → Encerramento).
+
 **Atualização de 03/11/2026 (Caio, D67; extrator corrigido na validação da tarde):** LIA extraída de novo até
 **31/10** (`tools/extrair_lia.py --fim 2026-10-31`, extraída em 03/11 16:44): **2.164** e-mails de 21/09 a 31/10; não
 lead 1.880 (86,9%), lead 200 (9,2%), validação 84 (3,9%); revisado (até 12/10) 946 / 112 / 43, sem revisão 934 / 88 /

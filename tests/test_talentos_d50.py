@@ -48,7 +48,7 @@ def test_top10_por_filtro_ordenado_e_com_soma_do_recorte():
                    "todos": sorted(_doze("Ex", 20) + _doze("Ne", 10), key=lambda t: -sum(t[1].values()))[:10]})
     top = tal.top_por_grupo(df, d)
     assert set(top) == {"exclusivo", "nao-exclusivo", "todos"}
-    for g, tg in top.items():
+    for tg in top.values():
         ns = [r["n"] for r in tg["linhas"]]
         assert len(ns) == 10 and ns == sorted(ns, reverse=True)
         assert [r["posicao"] for r in tg["linhas"]] == list(range(1, 11))
@@ -116,7 +116,7 @@ def test_barra_destaca_o_recorte():
 
 def test_seletor_tres_links_e_pagina_filtrada(cliente):
     r = cliente.get("/viu-agenciamento/talentos")
-    nav = re.search(r'<nav class="grupos talentos-grupos".*?</nav>', r.text, re.S).group(0)
+    nav = re.search(r'<nav class="grupos talentos-grupos".*?</nav>', r.text, re.DOTALL).group(0)
     links = re.findall(r'href="\?talentos=([\w-]+)#1"', nav)
     assert links == ["todos", "exclusivos", "nao-exclusivos"]
     assert 'data-navegador data-chave="talentos"' in nav and nav.count('aria-current="true"') == 1
@@ -127,12 +127,12 @@ def test_seletor_tres_links_e_pagina_filtrada(cliente):
     assert re.search(r'href="\?talentos=exclusivos#1" class="grupo" aria-current="true"', r.text)
     assert "Dos pedidos de talentos exclusivos," in r.text and 'f-numero">38%<' in r.text  # 5 de 13
     assert "divisao-destaque" in r.text and r.text.count("divisao-apagada") == 2
-    tabela = re.search(r'<table class="mapa-tabela[ "].*?</table>', r.text, re.S).group(0)
+    tabela = re.search(r'<table class="mapa-tabela[ "].*?</table>', r.text, re.DOTALL).group(0)
     assert "Talento A" in tabela and "Talento B" in tabela and "Talento C" not in tabela
     assert "(recorte escolhido)" in r.text
     # Não exclusivos
     r = cliente.get("/viu-agenciamento/talentos?talentos=nao-exclusivos")
-    tabela = re.search(r'<table class="mapa-tabela[ "].*?</table>', r.text, re.S).group(0)
+    tabela = re.search(r'<table class="mapa-tabela[ "].*?</table>', r.text, re.DOTALL).group(0)
     assert "Talento C" in tabela and "Talento A" not in tabela
     assert "Dos pedidos de talentos não exclusivos," in r.text
     # filtro desconhecido volta a "todos"
@@ -142,7 +142,7 @@ def test_seletor_tres_links_e_pagina_filtrada(cliente):
 
 def test_mapa_acessivel_e_com_numero_em_cada_celula(cliente):
     r = cliente.get("/viu-agenciamento/talentos")
-    tabela = re.search(r'<table class="mapa-tabela[ "].*?</table>', r.text, re.S).group(0)
+    tabela = re.search(r'<table class="mapa-tabela[ "].*?</table>', r.text, re.DOTALL).group(0)
     assert '<caption class="so-leitor">' in tabela and tabela.count('<th scope="col"') == 14  # talento + 12 meses + ano
     assert tabela.count('<th scope="row"') == 3
     # mês futuro: célula sem número, só "sem dado" para o leitor de tela; cabeçalho diz "(mês futuro)"
@@ -159,7 +159,8 @@ def test_mapa_acessivel_e_com_numero_em_cada_celula(cliente):
 
 def test_abas_levam_o_filtro_e_movimento_sem_esconder_numeros(cliente):
     html = cliente.get("/viu-agenciamento/sla?talentos=exclusivos").text
-    assert re.search(r'href="/viu-agenciamento/talentos#1"[^>]*data-filtro-talentos', html)  # T7: aba leva o recorte
+    assert re.search(r'href="/viu-agenciamento/previsao#1"[^>]*data-filtro-talentos', html)  # T7: aba leva o recorte
+    assert "/viu-agenciamento/talentos#1" not in html  # Caio, 04/11/2026: Talentos oculta da navegação
     from pathlib import Path
 
     css = (Path(__file__).resolve().parent.parent / "app" / "static" / "estilo.css").read_text(encoding="utf-8")

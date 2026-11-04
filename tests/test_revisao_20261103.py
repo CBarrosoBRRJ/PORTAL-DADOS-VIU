@@ -48,7 +48,7 @@ def test_gancho_escondido_sai_da_ordem_do_tab(cliente, pagina):
 
 
 def test_gancho_visivel_continua_no_tab(cliente):
-    html = cliente.get("/viu-agenciamento/talentos").text
+    html = cliente.get("/viu-agenciamento/lia").text  # 04/11: Talentos oculta (sem "próxima"); a LIA segue para o SLA
     assert re.search(r'<nav class="proxima proxima-gancho"', html)
     assert "tabindex" not in _gancho(html)
 

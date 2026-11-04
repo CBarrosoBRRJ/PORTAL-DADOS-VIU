@@ -20,20 +20,24 @@ def cliente():
 
 # D59 (27/10/2026): Resultado e Qualidade ocultos da navegação; a sequência termina na Previsão
 # V2 (Caio, 30/10/2026): Linha do tempo antes da Demanda; sem Atendimento; LIA e Vídeo depois do SLA; Previsão por último
-ORDEM = ["roadmap", "talentos", "sla", "lia", "iniciativas", "previsao"]  # V2: o Vídeo virou pop-up da LIA (oculta)
+# Caio, 04/11/2026: Talentos oculta; a LIA vem logo depois da Demanda, antes do SLA
+ORDEM = ["roadmap", "lia", "sla", "iniciativas", "previsao"]  # V2: o Vídeo virou pop-up da LIA (oculta)
 
 
 def test_ordem_e_proxima_pergunta(cliente):
     r = cliente.get("/viu-agenciamento")
     abas = re.findall(r'href="/viu-agenciamento/([a-z-]+)#1"', r.text.split('data-navegador')[1].split('</nav>')[0])
     assert abas == ORDEM
-    assert 'rel="next"' in r.text and "Como a demanda se divide entre talentos" in r.text  # Início → Talentos
+    assert 'rel="next"' in r.text and "Quanto a LIA já leu" in r.text  # Início → LIA (04/11)
+    assert "/viu-agenciamento/talentos" not in r.text.split("<main")[1]  # Talentos oculta, mas o endereço abre
+    assert cliente.get("/viu-agenciamento/talentos").status_code == 200
+    assert '<link rel="prev" href="/viu-agenciamento">' in cliente.get("/viu-agenciamento/lia").text
     r = cliente.get("/viu-agenciamento/previsao")  # V2: a Previsão é a última; depois dela, o encerramento
     assert 'href="/viu-agenciamento/encerramento" rel="next"' in r.text and "Para encerrar" in r.text
     assert "o-que-falta" not in r.text.split('<main')[1]
     assert '<link rel="prev" href="/viu-agenciamento/iniciativas#1">' in r.text
-    r = cliente.get("/viu-agenciamento/sla")  # SLA → LIA (o estudo abre pelo botão)
-    assert 'href="/viu-agenciamento/lia#1" rel="next"' in r.text
+    r = cliente.get("/viu-agenciamento/sla")  # SLA → Iniciativas (04/11; o estudo abre pelo botão)
+    assert 'href="/viu-agenciamento/iniciativas#1" rel="next"' in r.text
     for slug in ("negocios-fechados", "qualidade"):  # ocultas: fora do menu e das abas, mas o endereço abre
         assert f'/viu-agenciamento/{slug}' not in cliente.get("/viu-agenciamento/sla").text
         r = cliente.get(f"/viu-agenciamento/{slug}")
@@ -79,8 +83,8 @@ def test_capas_de_secao_desligadas(cliente, monkeypatch):
 
     from app.apresentacoes.gestao_orcamentos import apresentacao as ap
     religada = replace(ap.APRESENTACAO, capas_secao=ap.CAPAS_SECAO)
-    _, proxima = religada.vizinhas(religada.secao("talentos"))  # V2: Atendimento fora; Linha do tempo sem capa de seção
-    assert proxima["capa_secao"]["parte"] == 3 and proxima["rotulo"] == "SLA"
+    _, proxima = religada.vizinhas(religada.secao("lia"))  # 04/11: Demanda → LIA → SLA; Linha do tempo sem capa de seção
+    assert proxima["capa_secao"]["parte"] == 2 and proxima["rotulo"] == "SLA"
 
 
 def test_mascara_sem_numeros_e_com_pendencias(cliente):

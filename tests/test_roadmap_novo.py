@@ -20,7 +20,8 @@ JS_NOVO = RAIZ / "app" / "static" / "roadmap_novo.js"
 TEMPLATE = RAIZ / "app" / "apresentacoes" / "gestao_orcamentos" / "roadmap" / "template.html"  # aplicado em 03/11/2026
 URL = "/viu-agenciamento/roadmap"  # aplicado no lugar do validado (Caio, 03/11/2026)
 ORDEM = ["espalhados", "mapa", "dashboards", "ti", "liberada", "centralizar", "estudos", "evolucao"]
-DESTINOS = {"Demanda": "/viu-agenciamento", "Talentos": "/viu-agenciamento/talentos#1", "SLA": "/viu-agenciamento/sla#1",
+# Caio, 04/11/2026: Talentos oculta da sequência; o botão fica, por último nas Análises
+DESTINOS = {"Demanda": "/viu-agenciamento", "SLA": "/viu-agenciamento/sla#1", "Talentos": "/viu-agenciamento/talentos#1",
             "LIA": "/viu-agenciamento/lia#1", "Iniciativas": "/viu-agenciamento/iniciativas#1",
             "Previsão": "/viu-agenciamento/previsao#1"}
 
@@ -113,6 +114,7 @@ def test_seis_destinos_com_links_certos(cliente, html):
                          r'\s*<svg[^>]*>.*?</svg>\s*</span><span class="rm-destino-nome">([^<]+)</span>(?:<span class="rm-proximo">próximo</span>)?'
                          r'<span class="so-leitor">: ([^<]+)</span><span class="rmn-destino-seta" aria-hidden="true">', ol, re.DOTALL)
     assert {rot: href for _, href, rot, _ in achados} == DESTINOS
+    assert [rot for _, _, rot, _ in achados][:3] == ["Demanda", "SLA", "Talentos"]  # 04/11: Talentos por último
     assert [rot for p, _, rot, _ in achados if p] == ["Iniciativas", "Previsão"]
     assert all(len(linha) >= 10 for *_, linha in achados)  # a linha de apoio segue para o leitor de tela
     for href in DESTINOS.values():
