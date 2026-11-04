@@ -4,7 +4,9 @@
 // 1. Detalhe: um aberto por vez (RF5); fecha ao clicar fora, com Esc ou pelo botão Fechar, devolvendo o foco (RF6).
 // 2. Galeria: miniaturas em carrossel no detalhe (setas e rolagem); clicar abre o VISOR (<dialog>, showModal) com a
 //    imagem grande (ou o PDF num quadro do próprio site), anterior/próximo, ← →, contador "3 de 7", legenda e Esc.
-//    "Expandir" abre a VISÃO AMPLIADA (<dialog>) com descrição, responsável, status, próximo passo e a galeria grande.
+//    "Expandir" abre a VISÃO AMPLIADA (<dialog>) com descrição, status, próximo passo e a galeria grande.
+//    Caio, 04/11/2026: o campo Responsável saiu da tela (card, visão ampliada e formulário); o campo continua no servidor e
+//    o PUT sem ele mantém o valor guardado.
 // 3. Ferramenta do quadro (só com data-ini-edicao="on"): arrastar (Pointer Events), Alt + setas, lápis, ✕, "+ Nova" e
 //    anexos no pop-up. Tudo é gravado no SERVIDOR pela API (/viu-agenciamento/iniciativas/api; o endereço vem de data-ini-api), com o cabeçalho
 //    X-Requested-With (proteção mínima contra CSRF). Estados: "Salvando…", "Salvo" e erro (aviso flutuante em
@@ -21,7 +23,7 @@
   var EDICAO = raiz.getAttribute("data-ini-edicao") === "on";
   var MAX_MB = parseInt(raiz.getAttribute("data-ini-max-mb"), 10) || 10;
   var CHAVE_ANTIGA = "ini-quadro:v1";
-  var CAMPOS = ["sigla", "nome", "desc", "resp", "status", "prox"];
+  var CAMPOS = ["sigla", "nome", "desc", "status", "prox"];
   var MAX = { sigla: 40, nome: 120, desc: 400, resp: 80, status: 120, prox: 120 };
   var EXT_OK = /\.(png|jpe?g|webp|gif|pdf)$/i;
   var movimento = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: no-preference)") : null;
@@ -299,7 +301,6 @@
     ampliado.querySelector("[data-ini-a-desc]").textContent = d.desc || "Sem descrição.";
     var dl = ampliado.querySelector("[data-ini-a-meta]");
     dl.textContent = "";
-    meta(dl, "Responsável", d.resp || "a definir");
     if (d.status) meta(dl, "Status", d.status);
     if (d.prox) meta(dl, "Próximo passo", d.prox);
     var acoes = ampliado.querySelector("[data-ini-a-acoes]"), link = li.querySelector(".ini-caixa-acoes a.ini-botao");
@@ -384,7 +385,6 @@
     caixa.querySelector(".ini-caixa-desc").textContent = d.desc || "Sem descrição.";
     var dl = caixa.querySelector(".ini-caixa-meta");
     dl.textContent = "";
-    meta(dl, "Responsável", d.resp || "a definir");
     if (d.status) meta(dl, "Status", d.status);
     if (d.prox) meta(dl, "Próximo passo", d.prox);
     li.querySelector("[data-ini-editar]").setAttribute("aria-label", "Editar iniciativa: " + t);
@@ -632,7 +632,7 @@
       campo("sigla").focus();
       return;
     }
-    var corpo = { sigla: v.sigla, nome: v.nome, fase: campo("fase").value, responsavel: v.resp, descricao: v.desc,
+    var corpo = { sigla: v.sigla, nome: v.nome, fase: campo("fase").value, descricao: v.desc,
                   status: v.status, proximo: v.prox };
     bSalvar.disabled = true;
     estado("Salvando…", "salvando");

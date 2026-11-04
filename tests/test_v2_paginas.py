@@ -108,10 +108,11 @@ def test_iniciativas_ferramenta_grava_no_servidor(cliente, quadro_limpo):
     assert html.count('data-ini-nova hidden aria-label="Nova iniciativa em ') == 4
     assert "class=\"ini-edicao" not in html and "Restaurar o catálogo" not in html and "Copiar resumo" not in html
     assert "13</span> iniciativas" in html and "Clique em uma iniciativa para ver o que ela faz." in html
-    assert html.count("<dt>Responsável</dt><dd>a definir</dd>") == 13
+    # Caio, 04/11/2026: o "Responsável" saiu da tela (card, visão ampliada e formulário); o campo segue no servidor
+    assert "Responsável" not in html and 'id="ini-d-resp"' not in html
     # pop-ups: fechados sem JS; campos com rótulo; erro ligável; anexos com rótulo e dica; visor e visão ampliada
     assert '<dialog class="ini-dialogo" data-ini-dialogo aria-labelledby="ini-d-titulo">' in html and "<dialog open" not in html
-    for campo, rotulo in (("sigla", "Sigla"), ("nome", "Nome / título"), ("fase", "Fase"), ("resp", "Responsável")):
+    for campo, rotulo in (("sigla", "Sigla"), ("nome", "Nome / título"), ("fase", "Fase")):
         assert f'<label for="ini-d-{campo}">{rotulo}</label>' in html
     assert '<textarea id="ini-d-desc"' in html and 'id="ini-d-status"' in html and 'id="ini-d-prox"' in html
     assert 'id="ini-d-erro" hidden>Preencha a sigla ou o nome.' in html
@@ -126,6 +127,9 @@ def test_iniciativas_ferramenta_grava_no_servidor(cliente, quadro_limpo):
     from pathlib import Path
 
     js = (Path(__file__).resolve().parents[1] / "app" / "static" / "iniciativas.js").read_text(encoding="utf-8")
+    assert '"Responsável"' not in js and "responsavel: v.resp" not in js  # 04/11: o PUT sem o campo mantém o valor guardado
+    css = (Path(__file__).resolve().parents[1] / "app" / "static" / "estilo.css").read_text(encoding="utf-8")
+    assert ".ini-caixa-meta:not(:has(dd)) { display: none; }" in css  # lista vazia some (sem o fio solto)
     assert "fetch(" in js and '"X-Requested-With": "iniciativas"' in js and "showModal" in js
     assert '"ini-quadro:v1"' in js and "localStorage.setItem" not in js  # só lê (importação) e apaga a chave antiga
     assert "/mover" in js and "/anexos" in js and "/importar" in js
