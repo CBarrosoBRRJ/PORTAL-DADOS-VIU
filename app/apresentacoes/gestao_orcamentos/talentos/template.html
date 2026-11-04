@@ -77,7 +77,9 @@
           <span class="corrida-rotulo" aria-hidden="true"></span>
           <span class="mapa-legenda" aria-hidden="true"><span>menos</span>{% for k in range(1, 7) %}<span class="mapa-chave hm-n{{ k }}"></span>{% endfor %}<span>mais pedidos no mês</span></span>
         </figcaption>
-        <div class="mapa-rolagem">
+        {# validação de 03/11/2026: no celular o mapa rola para o lado dentro do quadro (T11) e o navegador torna a área
+           focável pelo teclado; com role="region" e nome, o leitor de tela diz o que é essa parada do Tab #}
+        <div class="mapa-rolagem" role="region" aria-label="Mapa dos {{ mp.linhas | length }} talentos com mais pedidos, mês a mês">
         {# D51 (26/10/2026): a contagem de abertura e a "corrida do ano" do botão play (apresentacao.js) leem
            data-corrida-meses (meses com dado), data-corrida-maior (maior mês, para os tons), data-corrida-extras (quem
            passou pelos 10 do acumulado sem fechar o ano entre eles: nome, lugar no ano, pedidos de jan até o corte) e,

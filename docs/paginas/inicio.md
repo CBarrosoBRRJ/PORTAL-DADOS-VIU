@@ -570,6 +570,7 @@ altura fixa) e cartão alinhado pelo pé.** Ver PRD, seções 8 e 9.
 
 | Data | Mudança |
 |---|---|
+| 03/11/2026 | Revisão: abrir ou fechar o extrato do mês registrava um erro de CSP no console (o `DOMParser` interpretava o `<style nonce>` da página buscada); os `<style>` da resposta viram `<template data-estilo>` antes da leitura e o CSS das barras é lido de lá. Números e regras sem mudança. |
 | 22/10/2026 | Página criada (entrada por mês e tipo) |
 | 23/10/2026 | Sem seletor de ano; comparação com 2025; extrato dos 6 meses; tabela de tipos com 2025 e variação |
 | 23/10/2026 | Título "Quantos pedidos de orçamento chegaram em 2026?"; comparação compacta ao lado do número (seta verde/vermelha); regras E8b e E4; base mínima 30 para toda variação |

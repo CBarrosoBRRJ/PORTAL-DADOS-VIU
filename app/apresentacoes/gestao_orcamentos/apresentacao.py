@@ -48,15 +48,6 @@ def montar_sla(params: dict) -> dict:
     }
 
 
-def medida_capa() -> float | None:
-    """D61: o número em que o relógio da capa para = o típico do SLA de todos os talentos (o mesmo "14 h" da página do
-    SLA, C6). Sem a base do SLA, None: a capa mostra a jornada sem o número."""
-    try:
-        return montar_sla({})["entrega"]["mediana_h_trabalho"]
-    except (dados.DadosIndisponiveis, KeyError, TypeError):
-        return None
-
-
 def _estudo_slides(mov: pd.DataFrame, parcial: str, grupo: str) -> dict:
     """Slides 2–8 do estudo (só dependem da carga, do mês parcial e do grupo). Guardados por carga e grupo (B-N7, batalha
     de agentes, 25/10/2026): o clique no seletor ou no passo não refaz as contas; a carga nova chega já aquecida."""
@@ -442,26 +433,9 @@ APRESENTACAO = Apresentacao(
         "sobre": "Relatório da área",
         "titulo_1": "ViU",
         "titulo_2": "Agenciamento",
-        # V2 (Caio, 30/10/2026): subtítulo discreto sob o título; o relatório reúne tudo o que a área analisa e faz
-        "subtitulo": "Tudo o que a área analisa, constrói e entrega, num só lugar.",
         "data": "Outubro de 2026",
-        "medida": medida_capa,  # típico do SLA (todos), lido na hora da página
-        # jornada de um pedido (ilustração): f = fração do típico do SLA no medidor; o relógio para na 1ª entrega (C1);
-        # frase = o que aparece ao lado das horas, trocando em roleta junto com a etapa (Caio, 27/10/2026)
-        "etapas": (
-            {"nome": "O pedido chega", "frase": "Chegou a demanda", "status": "Entrada", "cor": "azul", "icone": "envelope", "f": 0.0,
-             "nota": "O relógio começa a contar."},
-            {"nome": "Elaboração do orçamento", "frase": "Em elaboração", "status": "Elaboração", "cor": "ambar", "icone": "lapis", "f": 0.55,
-             "nota": "A equipe monta a proposta."},
-            {"nome": "Revisão", "frase": "Passou para revisão", "status": "Revisão", "cor": "lilas", "icone": "checks", "f": 0.75,
-             "nota": "Conferência antes de seguir."},
-            {"nome": "Validação do talento e cotação", "frase": "Validação do talento", "status": "Validação", "cor": "lilas", "icone": "checks", "f": 0.9,
-             "nota": "O talento confirma; o valor fecha."},
-            {"nome": "Proposta enviada ao cliente", "frase": "Proposta enviada ao cliente", "status": "Aguardando Feedback", "cor": "amarelo", "icone": "relogio",
-             "f": 1.0, "nota": "Agora conta o tempo do cliente."},
-            {"nome": "Desfecho", "frase": "Retorno do cliente", "status": "Negócio fechado", "cor": "neutro", "icone": "seta", "f": 1.0,
-             "nota": "Muda a cada pedido.", "variacoes": ("Negócio fechado", "Ajuste", "Declinado", "Sem retorno")},
-        ),
+        # 03/11/2026: a capa nova não usa subtítulo, o relógio do SLA nem a jornada do pedido (D61); esses dados saíram
+        # (cópia em _descartados/2026-11-03/capa_validada/)
     },
     encerramento={
         "gancho": "Encerramento",  # Caio, 31/10/2026: o gancho da última página só anuncia o encerramento

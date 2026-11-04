@@ -293,8 +293,11 @@
     // D59 (Caio, 27/10/2026): as setas também trocam de PÁGINA — numa página de um slide só, → / PageDown vão à próxima
     // da sequência e ← / PageUp à anterior; no estudo (vários slides), as setas trocam o slide e, nas pontas, voltam à
     // seção (o mesmo link do "Fechar"). Não age dentro de áreas que rolam para o lado (o quadro no celular)
+    // Revisão de 03/11/2026: com um pop-up (<dialog>) aberto, as setas não trocam de página nem de slide (na Previsão,
+    // a → com "Modelos comparados" aberto levava ao Encerramento)
+    var dialogoAberto = !!document.querySelector("dialog[open]");
     var paraFrente = ev.key === "ArrowRight" || ev.key === "PageDown", paraTras = ev.key === "ArrowLeft" || ev.key === "PageUp";
-    if ((paraFrente || paraTras) && !(ev.target.closest && ev.target.closest('[role="region"], .quadro-caixa'))) {
+    if ((paraFrente || paraTras) && !dialogoAberto && !(ev.target.closest && ev.target.closest('[role="region"], .quadro-caixa'))) {
       // V2 (30/10/2026): o slide 2 tem um passo só; as setas trocam de slide direto
       var pagina = null;
       if (paraFrente && slides.length < 2 && capaSecao) { ev.preventDefault(); abrirCapaSecao(); return; }  // D61
@@ -304,7 +307,7 @@
       }
       if (pagina) { ev.preventDefault(); location.assign(pagina.href); return; }
     }
-    if (slides.length < 2) return;
+    if (slides.length < 2 || dialogoAberto) return;
     if (paraFrente) { mostrar(atual + 1, true); ev.preventDefault(); }
     else if (paraTras) { mostrar(atual - 1, true); ev.preventDefault(); }
     else if (ev.key === "Home") { mostrar(0, true); ev.preventDefault(); }
@@ -373,7 +376,8 @@
         if (onde && onde !== location.href) { location.assign(onde); return; }  // fica na página em que estava
       }
       if (q) return;  // o quadro está em tela cheia; esta janela fica por baixo, como estava
-      var ativo = !!document.fullscreenElement;
+      // só a página em tela cheia conta (o vídeo da LIA em tela cheia pelo player não marca o portal; revisão de 03/11)
+      var ativo = document.fullscreenElement === raiz;
       raiz.classList.toggle("tela-cheia", ativo);
       rotularTelaCheia(ativo);
       setTimeout(reposicionar, 50);  // a lâmina muda de tamanho
@@ -524,6 +528,12 @@
     aviso.setAttribute("aria-live", "polite");
     caixa.parentNode.insertBefore(aviso, caixa.nextSibling);
 
+    // revisão de 03/11/2026: o DOMParser aplicava os <style nonce> da resposta buscada (nonce de outra resposta) e o
+    // console registrava um erro de CSP. Antes de interpretar, cada <style> vira <template data-estilo> (inerte); o CSS
+    // é lido de template.content em aplicar()
+    var neutralizarEstilos = function (html) {
+      return html.replace(/<style\b/gi, "<template data-estilo").replace(/<\/style>/gi, "</template>");
+    };
     var aplicar = function (doc, url, empilhar) {
       var nova = doc.querySelector("[data-caixa-troca]");
       if (!nova) throw new Error("caixa ausente");
@@ -533,11 +543,12 @@
       prepararDicas(caixa);
       // larguras das barras do extrato ficam no <style> do gráfico (CSP: só com nonce). Recria o bloco com o nonce
       // desta página; o nonce da resposta buscada não vale aqui
-      var estiloAtual = document.querySelector("figure.colunas style"), estiloNovo = doc.querySelector("figure.colunas style");
+      // (a resposta chega com os <style> trocados por <template data-estilo>: ver neutralizarEstilos)
+      var estiloAtual = document.querySelector("figure.colunas style"), estiloNovo = doc.querySelector("figure.colunas template[data-estilo]");
       if (estiloAtual && estiloNovo) {
         var bloco = document.createElement("style");
         bloco.nonce = estiloAtual.nonce;
-        bloco.textContent = estiloNovo.textContent;
+        bloco.textContent = estiloNovo.content.textContent;
         estiloAtual.replaceWith(bloco);
       }
       // estado dos meses (selecionado, destino e nome do link) vem da mesma página do servidor
@@ -580,7 +591,7 @@
       caixa.classList.toggle("caixa-volta", !/[?&]mes=/.test(url));
       if (!semMovimento) caixa.classList.add("caixa-saindo");
       Promise.all([pedido, semMovimento ? null : esperar(tempo("--dur-s", 180))]).then(function (res) {
-        var doc = new DOMParser().parseFromString(res[0], "text/html");
+        var doc = new DOMParser().parseFromString(neutralizarEstilos(res[0]), "text/html");
         var fotoAtual = document.querySelector('[data-fotografia]');
         var fotoNova = doc.querySelector('[data-fotografia]');
         if (fotoAtual && fotoNova && fotoAtual.dataset.fotografia !== fotoNova.dataset.fotografia) {
@@ -675,7 +686,7 @@
   // (o leitor de tela lê sempre os valores finais; nada é anunciado). Ao fim, a cópia sai e fica o HTML do servidor.
   // Só transform/opacidade/texto/classe por quadro; posições medidas uma vez. Sem JS: botão escondido. Movimento
   // reduzido: nada se mexe e o botão fica desabilitado, com o motivo. Interrompem (vão ao final): "Parar", Esc e outras
-  // teclas (menos Tab, modificadoras e as do próprio botão), clique/roda/toque na tabela ou na barra, troca de aba,
+  // teclas (menos Tab, modificadoras e Enter/Espaço no próprio botão), clique/roda/toque na tabela ou na barra, troca de aba,
   // mudança real de largura e impressão. O foco não é movido (o botão continua no lugar).
   (function talentosD51() {
     var corpo = document.querySelector(".talentos-corpo");
@@ -1019,7 +1030,10 @@
       parar();  // abertura em curso ou corrida: vai ao final
       if (!rodando) corrida();
     });
-    function interromper(ev) { if (modo && !(play && play.contains(ev.target))) parar(); }
+    // no próprio botão, só Enter e Espaço ficam com o click (que já alterna); o Esc e as outras teclas param (revisão de 03/11)
+    function interromper(ev) {
+      if (modo && !(play && play.contains(ev.target) && (ev.type !== "keydown" || ev.key === "Enter" || ev.key === " "))) parar();
+    }
     [barra, tabela && tabela.closest("figure")].forEach(function (el) {
       if (el) ["pointerdown", "wheel", "touchstart"].forEach(function (nome) { el.addEventListener(nome, interromper, { passive: true }); });
     });

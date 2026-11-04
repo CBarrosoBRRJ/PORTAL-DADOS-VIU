@@ -60,10 +60,23 @@ GRUPOS = (
     )},
 )
 
-# Caio, 03/11/2026: fotos fixas de um card (arquivo do site em app/static/iniciativas/, como as imagens do Roadmap; não
-# passam pelo banco). Chave = id do item (slug da sigla). Aparecem na galeria e no visor do card, sem botão de remover
+# Caio, 03/11/2026: fotos fixas de um card (arquivo do site em app/static/<pasta>/, padrão "iniciativas"; não passam pelo
+# banco). Chave = id do item (slug da sigla). Aparecem na galeria e no visor do card, sem botão de remover. A MIA usa as
+# mesmas imagens dos dashboards do Roadmap (pasta "roadmap"), sem cópia
 FOTOS = {
-    "raio-x": ({"arquivo": "raio-x.webp", "nome": "Painel Raio-X dos talentos"},),
+    # Caio, 03/11/2026 (noite): as abas do painel Raio-X, na ordem do menu do painel
+    "raio-x": ({"arquivo": "raio-x.webp", "nome": "Raio-X dos talentos: visão geral"},
+               {"arquivo": "raio-x-comercial.webp", "nome": "Raio-X: resultados comerciais"},
+               {"arquivo": "raio-x-valor.webp", "nome": "Raio-X: valor gerado pela ViU"},
+               {"arquivo": "raio-x-operacional.webp", "nome": "Raio-X: saúde operacional"},
+               {"arquivo": "raio-x-financeiro.webp", "nome": "Raio-X: financeiro"},
+               {"arquivo": "raio-x-bloqueios.webp", "nome": "Raio-X: bloqueios e restrições"},
+               {"arquivo": "raio-x-bloqueios-2.webp", "nome": "Raio-X: bloqueios e restrições (impacto nas vendas)"},
+               {"arquivo": "raio-x-audiencia.webp", "nome": "Raio-X: audiência"},
+               {"arquivo": "raio-x-satisfacao.webp", "nome": "Raio-X: satisfação e relacionamento"},
+               {"arquivo": "raio-x-alertas.webp", "nome": "Raio-X: alertas executivos"}),
+    "mia": ({"arquivo": "dashboard-qualidade.webp", "pasta": "roadmap", "nome": "Central de qualidade do Backlog"},
+            {"arquivo": "dashboard-qualidade-email.webp", "pasta": "roadmap", "nome": "E-mail semanal da MIA"}),
 }
 
 # nota no rodapé do slide (RF9); vazia = sem nota

@@ -1,5 +1,7 @@
 # Iniciativas de automação e IA (V2)
 
+**Fotos da MIA e tipo dos arquivos (Caio e gerente, 03/11/2026, noite):** o card MIA mostra as duas imagens da Central de qualidade (`catalogo.FOTOS["mia"]`, lidas de `app/static/roadmap/`, as mesmas dos dashboards do Roadmap, sem cópia; `pasta` opcional em cada foto). Bug visto pelo gerente: o "Abrir em nova aba" do visor **baixava** a imagem, porque o servidor mandava `.webp` como `application/octet-stream` (o Python do Windows e da imagem slim não conhece o tipo) com `nosniff`; corrigido registrando `.webp`, `.woff2`, `.vtt` e `.mp4` em `app/main.py` (teste `tests/test_tipos_estaticos.py`).
+
 **Foto fixa do Raio-X (Caio, 03/11/2026):** o print do painel Raio-X dos talentos saiu do Roadmap e virou foto do card Raio-X: arquivo do site (`app/static/iniciativas/raio-x.webp` e `-mini`), declarado em `catalogo.FOTOS` (chave = id do item), sem passar pelo banco, então aparece igual no computador, na VPS e no Cloud Run. Entra como 1º anexo na galeria e no visor (`api.fotos_fixas`, com `?v=` da versão do arquivo), marcado `fixo` (sem "Remover" na edição). Testes `tests/test_iniciativas_fotos.py`.
 
 **Atualização de 03/11/2026 (Caio):** 13 iniciativas. Em produção: **MIA** (Monitoramento Inteligente
@@ -297,6 +299,12 @@ aparece se `desc` estiver vazia); outras iniciativas com página ou resultados p
 
 ## Histórico
 
+- 04/11/2026 (revalidação): a seta "anterior" da galeria do detalhe ficava ligada já no início (o scroll-snap alinhava a 1ª miniatura à borda do padding, `scrollLeft` 3 a 5 px); `scroll-padding-inline: 0.2em` em `.ini-galeria-lista` (`estilo.css`). Teste `test_galeria_do_detalhe_comeca_no_zero_e_seta_anterior_desligada`. Conferido no Chrome headless: 13 cards nas 4 colunas, galeria do Raio-X (10) e da MIA (2) dentro da caixa em 1280, 1440, 1920 e 390 px, visor com as 10 fotos na ordem, "Abrir em nova aba" como `image/webp`.
+- 03/11/2026 (revisão): o visor cortava imagens altas (a Central de qualidade, 960×805, saía com 987 px numa área
+  de 740 px em 1440×900): `.ini-v-midia` com `grid-template: minmax(0, 1fr) / minmax(0, 1fr)`. Nos cards com galeria
+  (MIA, 2 fotos), a sigla vai a 1,7 em e, na mesa (> 900 px), o nome a 1 em e a descrição a 0,9 em (o detalhe passava
+  28–40 px da caixa em 1536–2560 px). As 10 fotos `raio-x-*.webp` (+ `-mini`) foram ligadas ao card Raio-X em
+  `catalogo.FOTOS` (originais em `_descartados/2026-11-03/app/static/iniciativas/`).
 - 31/10/2026 (auditoria do Codex, F10): rodapé "Conteúdo editorial · não depende da carga de dados" no lugar da data da carga de entradas.
 - 30/10/2026: criada na V2 a partir do PRD de @cris.
 - 30/10/2026 (noite): redesenho a pedido do Caio: faixas com caixinha flutuante → colunas por fase com contagem e

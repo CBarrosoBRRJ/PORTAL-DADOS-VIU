@@ -1391,7 +1391,8 @@ html:not(.js) .talentos-corpo .grupo[aria-current] { background: var(--marinho);
   transition: background-color var(--dur-xs) var(--ease-estado), border-color var(--dur-xs) var(--ease-estado), color var(--dur-xs) var(--ease-estado); }
 .corrida-play:hover:not(:disabled) { border-color: var(--azul); background: #f4f3ff; }
 .corrida-play:focus-visible { outline: 2px solid var(--azul); outline-offset: 3px; }
-.corrida-play.corrida-rodando { background: var(--azul); border-color: var(--azul); color: #fff; }
+/* revisão de 03/11/2026: o hover (0,3,0) vencia o estado rodando e o ■ branco sumia no lavanda logo depois do clique */
+.corrida-play.corrida-rodando, .corrida-play.corrida-rodando:hover:not(:disabled) { background: var(--azul); border-color: var(--azul); color: #fff; }
 .corrida-play:disabled { cursor: not-allowed; color: var(--tinta-3); background: var(--fundo-2); }
 .corrida-play[hidden] { display: none; }
 .corrida-icone { font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", system-ui, sans-serif; font-size: 0.68em; padding-left: 0.14em; } /* ▶ no centro óptico */
@@ -2721,6 +2722,9 @@ html:not(.js) .sla-corpo .grupo[aria-current] { background: var(--marinho); }
    ser só para o leitor de tela e para o passador (PageDown) */
 .proxima.so-leitor, .slide > .proxima.so-leitor { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+/* revisão de 03/11/2026: o gancho oculto preso ao pé do palco (bottom: 0, margin -1px) descia 1 px abaixo da janela e a
+   página rolava (capa, Roadmap, estudo). Regra única para todas as páginas: ele fica no topo */
+.palco > .proxima.so-leitor { top: 0; bottom: auto; }
 
 /* C3b (25/10/2026): exemplo da semana sob "N dias úteis para o cliente receber" */
 .f-apoio-ex { display: block; margin-top: 0.25em; font-size: 0.82em; font-style: italic; color: var(--tinta-3); }
@@ -2905,9 +2909,10 @@ html:not(.js) .estudo-grupos .grupo[aria-current] { background: var(--marinho); 
 .rg-seta { fill: var(--c-media); }
 .rg-alf { stroke: var(--tinta); stroke-width: 2; stroke-linecap: round; }
 .rg-alf.rg-alf-media { stroke: var(--c-media); stroke-dasharray: 3 2.5; stroke-linecap: butt; }
-.rg-t { font: 400 10.5px var(--sans); fill: var(--tinta-2); }
+/* revisão de 03/11/2026: 12/13 px no desenho dão 11,3 px em 1280 e 12,1 px em 1440 (regra de texto pequeno ≥ 11 px) */
+.rg-t { font: 400 12px var(--sans); fill: var(--tinta-2); }
 .rg-t-media { fill: var(--c-media); }
-.rg-t-puxao { font-weight: 600; font-size: 12px; fill: var(--c-media); }
+.rg-t-puxao { font-weight: 600; font-size: 13px; fill: var(--c-media); }
 .rg-t-fora { fill: #b8352b; }
 .el-baixo { padding-top: 1em; border-top: 1px solid var(--linha); }
 .el-fora dd { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 1.1em; align-items: center; }
@@ -3469,122 +3474,13 @@ html.js .slide.revisto:not(.slide-estudo) ::before, html.js .slide.revisto:not(.
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
-/* ---------- D59 (Caio, 27/10/2026): capa e encerramento da reunião; desenho D61 (relatório de referência do Caio) ----------
-   CAPA: lado branco (logo na caixa azul, sobretítulo, "Gestão de / orçamentos" com a 2ª linha em itálico, fio azul,
-   subtítulo, "Começar" de cantos retos, data) e um plano marinho em DIAGONAL (clip-path, de 63% no topo a 54% na base)
-   com um filete azul no corte. No plano, a jornada de um pedido: medidor de horas (Playfair amarelo, barra fina que
-   enche) e seis etapas em losango ligadas por uma linha; a etapa ativa abre e mostra o item do Monday com a pílula de
-   status (contorno na cor do status). Uma diagonal só; amarelo só no que está ativo; cantos retos.
-   ENCERRAMENTO e CAPAS DE SEÇÃO: o mesmo marinho, inteiro; sobretítulo lavanda espaçado, título Playfair branco, fio
-   lavanda, frase e pergunta. Medidas em em da lâmina (1em = 1/80 da largura). */
+/* ---------- D59 (Caio, 27/10/2026): encerramento e capas de seção (o mesmo marinho, inteiro; sobretítulo lavanda
+   espaçado, título Playfair branco, fio lavanda). Medidas em em da lâmina (1em = 1/80 da largura). A capa nova (03/11/2026)
+   tem o CSS próprio em capa_nova.css; o CSS da capa validada (jornada, roleta, partículas) saiu em 03/11/2026 e está em
+   _descartados/2026-11-03/capa_validada/app/static/estilo.css. As cores --capa-* seguem aqui porque o encerramento as usa */
 .capa, .fim { --capa-marinho: linear-gradient(160deg, #0b1220 0%, #121a35 55%, #1a2748 100%); --capa-amarelo: #f8fd0b;
   --capa-lavanda: #a9b1ff; position: relative; padding: 0; display: block; }
-.capa-plano { position: absolute; inset: 0; background: var(--capa-marinho); clip-path: polygon(63.1% 0, 100% 0, 100% 100%, 53.75% 100%); }
-.capa-filete { position: absolute; inset: 0; background: var(--azul); clip-path: polygon(calc(63.1% - 0.55em) 0, 63.1% 0, 53.75% 100%, calc(53.75% - 0.55em) 100%); }
-.capa-branca { position: absolute; left: 5.2em; top: 3.6em; bottom: 4.4em; width: 36em; display: flex; flex-direction: column; }
-.capa-logo { width: 6.6em; height: 4.2em; object-fit: cover; display: block; }
-.capa-abertura { margin: auto 0; }
-.capa-sobre { margin: 0 0 1.1em; font: 500 0.85em/1 var(--sans); letter-spacing: 0.3em; text-transform: uppercase; color: var(--tinta-2); }
-.capa-titulo { margin: 0; font: 400 5.4em/1.02 var(--serifa); letter-spacing: -0.015em; color: var(--tinta); }
-.capa-titulo-2 { display: block; font-style: italic; }
-.capa-titulo::after { content: ""; display: block; width: 0.82em; height: 3px; margin-top: 0.3em; background: var(--azul); }
-.capa-sub { margin: 1.4em 0 0; max-width: 25em; font: 300 1.35em/1.45 var(--sans); color: var(--tinta-2); text-wrap: pretty; }
-.capa-data { margin: 0; font: 500 0.8em/1 var(--sans); letter-spacing: 0.22em; text-transform: uppercase; color: var(--tinta-3); }
-/* V2 (Caio, 30/10/2026): capa sem o menu dos temas (o Roadmap faz a navegação). Lado branco: o subtítulo "Tudo o que a
-   área analisa, constrói e entrega, num só lugar." (capa.subtitulo) sob o título. Plano marinho: só a ilustração
-   decorativa "dados → área" e o "Começar". Pontos de origem espalhados (dados de muitos lugares) cujas linhas convergem
-   num nó amarelo e seguem como uma linha única; sob ela, o "Começar" centralizado (amarelo VIU sobre o marinho, no
-   padrão dos botões do Roadmap: cantos de 6 px, sombra em camadas, sobe 1 px no hover, afunda ao pressionar).
-   Entrada uma vez, até 1,2 s (pontos, linhas, nó, linha única e botão). Depois, o FLUXO CONTÍNUO: itens brancos saem
-   dos pontos, seguem as linhas e, no nó, viram quadradinhos amarelos iguais (padronizados) que correm pela linha
-   única. Animação contínua por decisão do Caio (30/10/2026; botão de pausa retirado no mesmo dia), feita com SMIL no
-   SVG (capa.html), sem loop no CSS; capa_fluxo.js para com a aba oculta e com movimento reduzido. Sem JS ou com
-   movimento reduzido, a composição fica parada e sem as partículas */
-.capa-sub { text-wrap: balance; }  /* o subtítulo quebra em duas linhas parecidas, sem palavra sozinha */
-.capa-desenho { flex: 1; min-height: 0; display: flex; align-items: center; margin: 0.6em -0.6em 0 -0.4em; }
-.capa-desenho svg { display: block; width: 100%; height: 100%; max-height: 33em; overflow: visible; }
-.capa-ponto { fill: #c9ceff; }
-.capa-fio { fill: none; stroke: #b6bdff; stroke-width: 1.5; stroke-linecap: round; }
-.capa-saida { fill: none; stroke: var(--capa-amarelo); stroke-opacity: 0.5; stroke-width: 3; stroke-linecap: round; }
-.capa-no { fill: var(--capa-amarelo); }
-.capa-no-anel { fill: none; stroke: var(--capa-amarelo); stroke-opacity: 0.45; stroke-width: 1.2; }
-.capa-particulas { display: none; }
-.capa-cartao { fill: #fff; }
-.capa-padrao { fill: var(--capa-amarelo); }
-.capa-fecho { display: flex; justify-content: center; margin-top: 0.8em; }
-.capa-comecar { display: inline-flex; align-items: center; gap: 0.55em; padding: 0.52em 1.3em 0.52em 1.45em; border-radius: 6px;
-  font: 600 1.05em/1 var(--sans); color: #0b1220; background: var(--capa-amarelo); border: 1px solid var(--capa-amarelo); text-decoration: none;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.35), 0 4px 12px -4px rgba(0, 0, 0, 0.5); }
-.capa-comecar svg { width: 1.1em; height: 1.1em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.capa-comecar:hover, .capa-comecar:focus-visible { background: #fbfe5c; border-color: #fbfe5c;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 22px -6px rgba(248, 253, 11, 0.32); }
-.capa-comecar:active { box-shadow: 0 1px 1px rgba(0, 0, 0, 0.45); }
-.capa-comecar:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-@media (prefers-reduced-motion: no-preference) {
-  html.js .capa-comecar { transition: transform var(--dur-s) var(--ease-entra), box-shadow var(--dur-s) var(--ease-entra), background-color var(--dur-s), border-color var(--dur-s); }
-  html.js .capa-comecar:hover, html.js .capa-comecar:focus-visible { transform: translateY(-1px); }
-  html.js .capa-comecar:active { transform: translateY(1px); transition-duration: 60ms; }
-  html.js .slide-capa:not(.entrou) :is(.capa-desenho, .capa-fecho) { opacity: 0; }
-  html.js .capa-particulas { display: inline; }
-  html.js .slide-capa.entrou:not(.revisto) .capa-particulas { animation: capa-ponto 300ms var(--ease-entra) 900ms backwards; }
-  html.js .slide-capa.entrou:not(.revisto) .capa-ponto { animation: capa-ponto 360ms var(--ease-entra) backwards; }
-  html.js .slide-capa.entrou:not(.revisto) .capa-fio { animation: capa-traca 620ms var(--ease-entra) 120ms backwards; }
-  html.js .slide-capa.entrou:not(.revisto) .capa-pontos > :nth-child(3n+2) { animation-delay: 70ms; }
-  html.js .slide-capa.entrou:not(.revisto) .capa-pontos > :nth-child(3n) { animation-delay: 140ms; }
-  html.js .slide-capa.entrou:not(.revisto) .capa-fios > :nth-child(3n+2) { animation-delay: 190ms; }
-  html.js .slide-capa.entrou:not(.revisto) .capa-fios > :nth-child(3n) { animation-delay: 260ms; }
-  html.js .slide-capa.entrou:not(.revisto) .capa-no-grupo { transform-box: fill-box; transform-origin: center; animation: capa-no 300ms var(--ease-entra) 760ms backwards; }
-  html.js .slide-capa.entrou:not(.revisto) .capa-saida { animation: capa-traca 320ms var(--ease-entra) 860ms backwards; }
-  html.js .slide-capa.entrou:not(.revisto) .capa-fecho { animation: capa-fecho 320ms var(--ease-entra) 880ms backwards; }
-}
-@keyframes capa-ponto { from { opacity: 0; } }
-@keyframes capa-traca { from { stroke-dasharray: 1; stroke-dashoffset: 1; } to { stroke-dasharray: 1; stroke-dashoffset: 0; } }
-@keyframes capa-no { from { opacity: 0; transform: scale(0.4); } }
-@keyframes capa-fecho { from { opacity: 0; transform: translateY(0.5em); } }
-@container palco (width < 860px) or (aspect-ratio < 1.2) {
-  .capa-desenho { margin-top: 0; }
-  .capa-desenho svg { max-height: 13em; }
-}
-
-.capa-direita { position: absolute; top: 3.2em; bottom: 3.6em; right: 2.4em; width: 28.5em; display: flex; flex-direction: column; color: #fff; }
-.capa-tela-cheia { position: absolute; top: -1.6em; right: -1.2em; color: rgba(255, 255, 255, 0.72); }
-.capa-tela-cheia:hover, .capa-tela-cheia:focus-visible { color: #fff; background: rgba(255, 255, 255, 0.1); }
-.capa-jornada { margin: 1.6em 0 0; flex: 1; min-height: 0; display: flex; flex-direction: column; }
-/* Caio, 27/10/2026: as etapas ocupam toda a altura do plano marinho (distribuídas do medidor até o pé) */
-.capa-jornada .capa-etapas { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-.capa-medidor { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 0 1em; }
-/* roleta (Caio, 27/10/2026): a frase da etapa ativa, ao lado das horas; a antiga e a nova dividem a mesma célula */
-.capa-roleta { display: grid; align-self: end; overflow: hidden; padding-bottom: 0.32em; font: italic 400 1.45em/1.2 var(--serifa); color: rgba(255, 255, 255, 0.9); }
-.capa-roleta-texto { grid-area: 1 / 1; align-self: end; }
-.capa-roleta-palavra { display: inline-block; white-space: nowrap; }
-.capa-roleta-letra { display: inline-block; }
-.capa-medidor-n { font: 400 3.3em/1 var(--serifa); color: #fff; font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
-.capa-medidor-barra { grid-column: 1 / -1; height: 4px; margin-top: 0.45em; background: rgba(255, 255, 255, 0.12); }
-.capa-medidor-barra span { display: block; height: 100%; width: 100%; background: var(--capa-amarelo); transition: width 600ms var(--ease-entra); }
-.capa-etapas { position: relative; list-style: none; margin: 2em 0 0; padding: 0; }
-.capa-etapas::before { content: ""; position: absolute; left: 0.62em; top: 1.2em; bottom: 1.2em; width: 1px; background: rgba(255, 255, 255, 0.28); }
-.capa-etapa-botao { position: relative; display: grid; grid-template-columns: 2.6em 2.7em 1fr; align-items: center; width: 100%;
-  padding: 0.62em 0; border: 0; background: none; color: rgba(255, 255, 255, 0.86); text-align: left; cursor: pointer; font: inherit; }
-.capa-etapa-botao:focus-visible { outline: 2px solid var(--capa-amarelo); outline-offset: 2px; }
-.capa-losango { width: 0.8em; height: 0.8em; margin-left: 0.24em; transform: rotate(45deg); background: rgba(255, 255, 255, 0.85); }
-.capa-etapa:last-child .capa-losango { background: transparent; border: 1px solid rgba(255, 255, 255, 0.7); }
-.capa-etapa-n { font: 400 1.6em/1 var(--serifa); color: rgba(255, 255, 255, 0.8); font-variant-numeric: lining-nums; }
-.capa-etapa-nome { font: 400 1.32em/1.2 var(--sans); }
-.capa-etapa.ativa .capa-losango { width: 1.05em; height: 1.05em; margin-left: 0.12em; background: var(--capa-amarelo); border: 0; }
-.capa-etapa.ativa .capa-etapa-n { color: var(--capa-amarelo); }
-.capa-etapa.ativa .capa-etapa-nome { font-weight: 600; color: #fff; }
-.capa-cena { display: grid; grid-template-rows: 0fr; margin-left: 2.6em; transition: grid-template-rows var(--dur-m) var(--ease-entra); }
-.capa-etapa.ativa .capa-cena { grid-template-rows: 1fr; }
-.capa-cena-dentro { overflow: hidden; }
-.capa-item { display: flex; align-items: center; justify-content: space-between; gap: 1em; margin-top: 0.2em; padding: 0.75em 1em;
-  border-left: 2px solid var(--capa-amarelo); background: rgba(255, 255, 255, 0.07); }
-.capa-item-nome { font-size: 1.05em; color: rgba(255, 255, 255, 0.9); }
-.capa-pilula { --cor: #8f9bff; display: inline-flex; align-items: center; gap: 0.45em; padding: 0.4em 0.8em; border: 1px solid var(--cor);
-  background: color-mix(in srgb, var(--cor) 16%, transparent); color: var(--cor); font: 600 0.85em/1 var(--sans); white-space: nowrap; }
-.capa-pilula-azul { --cor: #8f9bff; } .capa-pilula-ambar { --cor: #f2b84b; } .capa-pilula-lilas { --cor: #c9b6ff; }
-.capa-pilula-amarelo { --cor: var(--capa-amarelo); } .capa-pilula-neutro { --cor: rgba(255, 255, 255, 0.85); }
-.capa-ic { width: 1.15em; height: 1.15em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.capa-cena-nota { margin: 0.65em 0 0.5em; font-size: 0.95em; color: rgba(255, 255, 255, 0.75); }
+@keyframes capa-fecho { from { opacity: 0; transform: translateY(0.5em); } }  /* entrada do "Voltar ao início" do encerramento */
 
 .fim-sobre, .capa-secao-sobre { margin: 0 0 1.2em; font: 500 0.85em/1 var(--sans); letter-spacing: 0.3em; text-transform: uppercase; color: var(--capa-lavanda, #a9b1ff); }
 .fim-titulo::after, .capa-secao-titulo::after { content: ""; display: block; width: 0.66em; height: 3px; margin-top: 0.32em; background: var(--capa-lavanda, #a9b1ff); }
@@ -3663,29 +3559,12 @@ html.js .slide.revisto:not(.slide-estudo) ::before, html.js .slide.revisto:not(.
 .capa-secao-pergunta { margin: 0.7em 0 0; font: 600 1.35em/1.35 var(--sans); }
 .capa-secao-n { position: absolute; left: 7vw; bottom: 2.4em; margin: 0; font: 400 1.1em/1 var(--serifa); color: rgba(255, 255, 255, 0.55); }
 @media (prefers-reduced-motion: no-preference) {
-  html.js .capa-titulo::after, html.js .fim-titulo::after { transform: scaleX(0); transform-origin: left center; transition: transform var(--dur-l) var(--ease-entra) 0.1s; }
-  html.js .slide.entrou .capa-titulo::after, html.js .slide.entrou .fim-titulo::after { transform: none; }
+  html.js .fim-titulo::after { transform: scaleX(0); transform-origin: left center; transition: transform var(--dur-l) var(--ease-entra) 0.1s; }
+  html.js .slide.entrou .fim-titulo::after { transform: none; }
   .capa-secao { opacity: 0; transition: opacity var(--dur-m) var(--ease-entra); }
   .capa-secao.aberta { opacity: 1; }
   .capa-secao .capa-secao-corpo { transform: translateY(0.6em); transition: transform var(--dur-l) var(--ease-entra); }
   .capa-secao.aberta .capa-secao-corpo { transform: none; }
-  .capa-etapa.ativa .capa-ic-envelope { animation: capa-pousa 520ms var(--ease-entra) backwards; }
-  .capa-etapa.ativa .capa-check-1 { animation: capa-risca 360ms ease-out 120ms backwards; }
-  .capa-etapa.ativa .capa-check-2 { animation: capa-risca 360ms ease-out 420ms backwards; }
-  .capa-etapa.ativa .capa-ponteiro { transform-origin: 12px 12px; animation: capa-gira 1100ms var(--ease-entra) backwards; }
-}
-@keyframes capa-pousa { from { transform: translateY(-0.5em); opacity: 0; } }
-@keyframes capa-risca { from { stroke-dasharray: 16; stroke-dashoffset: 16; } to { stroke-dasharray: 16; stroke-dashoffset: 0; } }
-@keyframes capa-gira { from { transform: rotate(-360deg); } }
-@container palco (width < 860px) or (aspect-ratio < 1.2) {
-  .capa-plano, .capa-filete { display: none; }
-  .capa-branca, .capa-direita { position: static; width: auto; }
-  .capa-jornada .capa-etapas { justify-content: flex-start; }
-  .capa-branca { padding: 0.4em 0 1.6em; }
-  .capa-abertura { margin: 2.4em 0; }
-  .capa-titulo { font-size: 3.2em; }
-  .capa-direita { padding: 1.6em 1.3em 1.2em; background: linear-gradient(160deg, #0b1220, #1a2748); border-top: 0.4em solid var(--azul); }
-  .capa-tela-cheia { display: none; }
 }
 
 /* Iniciativas (PRD @cris; redesenho de 30/10/2026): uma coluna por fase, da mais madura à próxima, e um painel fixo à
@@ -3965,8 +3844,8 @@ html.ini-arrastando, html.ini-arrastando * { cursor: grabbing !important; }
 .rm-palco { --Y: 9.3em; --D: 2.9em; --R: 1.15em; --ambar: #c98a2b;
   --topo-baixo: calc(var(--Y) + var(--D) + var(--R) + 0.8em); --base-cima: calc(var(--Y) - var(--D) - var(--R) - 0.8em);
   position: relative; flex: none; width: 73em; max-width: 100%; height: 28em; color: var(--tinta); }
-/* o gancho oculto (só para o leitor de tela e a seta →) ficava 1 px abaixo da tela e criava rolagem: aqui ele sobe ao topo */
-.palco:has(.rm-palco) > .proxima.so-leitor { top: 0; bottom: auto; }
+/* o gancho oculto ficava 1 px abaixo da tela e criava rolagem: a regra geral .palco > .proxima.so-leitor (junto do
+   .so-leitor do gancho) o sobe ao topo em todas as páginas */
 
 /* linhas: cheia em marinho até o "Você está aqui", âmbar tracejado na espera, tracejada clara depois (até a borda, com
    a seta do segmento contínuo); o pulso corre por cima */
@@ -4612,7 +4491,7 @@ svg.lia-botao-ic { fill: currentColor; }
 .ini-galeria-tit { font-size: 0.74em; color: var(--tinta-2); }
 .ini-galeria-n { display: inline-block; min-width: 1.4em; margin-left: 0.2em; padding: 0 0.4em; border-radius: 99px; background: var(--fundo-2); color: var(--tinta); text-align: center; font-variant-numeric: tabular-nums; }
 .ini-galeria-trilho { display: flex; align-items: center; gap: 0.3em; margin-top: 0.5em; }
-.ini-galeria-lista { flex: 1 1 auto; min-width: 0; display: flex; gap: 0.45em; margin: 0; padding: 0.2em; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #c4c7da transparent; }
+.ini-galeria-lista { flex: 1 1 auto; min-width: 0; display: flex; gap: 0.45em; margin: 0; padding: 0.2em; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 0.2em; scrollbar-width: thin; scrollbar-color: #c4c7da transparent; }
 .ini-galeria-lista li { flex: none; scroll-snap-align: start; }
 .ini-mini, .ini-a-mini { display: grid; place-items: center; overflow: hidden; border-radius: 8px; border: 1px solid #d9dcea; background: var(--fundo-2); color: var(--tinta-2); text-decoration: none; cursor: zoom-in; }
 .ini-mini { width: 4.6em; height: 3.4em; }
@@ -4633,7 +4512,12 @@ svg.lia-botao-ic { fill: currentColor; }
 .ini-caixa .ini-galeria { margin-top: 1.1em; }
 /* com anexos, o detalhe fica mais compacto para a galeria caber no painel (o resto rola por dentro, como antes) */
 .ini-caixa:has(.ini-galeria:not([hidden])) { padding-top: 1.3em; padding-bottom: 1.1em; }
-.ini-caixa:has(.ini-galeria:not([hidden])) .ini-caixa-sigla { font-size: 2em; }
+/* revisão de 03/11/2026: com 2 fotos (MIA), o detalhe passava 28–40 px da caixa em telas largas; letra um pouco menor */
+.ini-caixa:has(.ini-galeria:not([hidden])) .ini-caixa-sigla { font-size: 1.7em; }
+@media (min-width: 901px) {
+  .ini-caixa:has(.ini-galeria:not([hidden])) .ini-caixa-nome { font-size: 1em; }
+  .ini-caixa:has(.ini-galeria:not([hidden])) .ini-caixa-desc { font-size: 0.9em; line-height: 1.45; }
+}
 .ini-caixa:has(.ini-galeria:not([hidden])) .ini-caixa-desc { margin-top: 0.75em !important; padding-top: 0.75em; }
 .ini-caixa:has(.ini-galeria:not([hidden])) .ini-caixa-meta { margin-top: 0.75em; padding-top: 0.65em; gap: 0.3em; }
 .ini-caixa:has(.ini-galeria:not([hidden])) .ini-caixa-acoes { padding-top: 0.8em; }
@@ -4675,7 +4559,9 @@ svg.lia-botao-ic { fill: currentColor; }
 .ini-visor .ini-botao:hover, .ini-visor .ini-botao:focus-visible { color: #fff; background: rgba(255, 255, 255, 0.16); border-color: #fff; }
 .ini-visor .ini-botao:focus-visible { outline-color: #fff; }
 .ini-v-palco { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0.6em; min-height: 0; padding: 0 0.7em 0.9em; }
-.ini-v-midia { display: grid; place-items: center; height: 100%; min-height: 0; }
+/* revisão de 03/11/2026: a linha implícita da grade era auto e o height: 100% não limitava a imagem alta (Central de
+   qualidade saía com 987 px numa área de 740); a linha e a coluna minmax(0, 1fr) prendem a imagem à área */
+.ini-v-midia { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; height: 100%; min-height: 0; }
 .ini-v-img { max-width: 100%; max-height: 100%; width: 100%; height: 100%; object-fit: contain; display: block; }
 .ini-v-pdf { width: 100%; height: 100%; border: 0; border-radius: 8px; background: #fff; }
 .ini-v-seta { display: grid; place-items: center; width: 2.8em; height: 2.8em; padding: 0; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.08); color: #fff; cursor: pointer; font: inherit; }
@@ -4781,6 +4667,9 @@ html:not(.js) .ef-lupa { display: none; }
 @media (max-width: 860px) {
   .ef-dlg { width: 94vw; height: 86vh; }
   .ef-tabela td:nth-child(2), .ef-tabela td:nth-child(3), .ef-tabela thead th:nth-child(2), .ef-tabela thead th:nth-child(3) { display: none; }
+  /* revisão de 03/11/2026: em 390 px a lista passava da largura (334 × 323 px) e cortava a coluna monday */
+  .ef-tabela td, .ef-tabela tbody th { padding: 0.55em 0.5em; }
+  .ef-tabela td.ef-num { white-space: normal; }
 }
 /* ---------- D46 (25/10/2026): movimento do estudo "Como medimos" (debate entre três linhas de movimento) ----------
    Síntese: um gesto de dado por slide, na ordem de leitura (régua → dado → cor de alerta); títulos, textos e números

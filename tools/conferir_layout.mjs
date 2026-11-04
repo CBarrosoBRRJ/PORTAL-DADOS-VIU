@@ -100,7 +100,11 @@ for (const [w, h, celular] of (SO_MOVIMENTO ? [] : TAMANHOS)) {
 // ---------- movimento das páginas (D46 no portal) ----------
 const PAGINAS = ["/viu-agenciamento", "/viu-agenciamento/talentos", "/viu-agenciamento/atendimento",
   "/viu-agenciamento/sla", "/viu-agenciamento/sla?talentos=exclusivos", "/viu-agenciamento/previsao"];
-const NUMEROS = `[...document.querySelectorAll('.resposta-numero, .hero-numero, .kpi-num, .pv-num-valor')].map((e) => e.textContent.trim()).join(' | ')`;
+// o número lido é o do leitor de tela: sem os nós aria-hidden (a contagem do herói da Talentos, D51, é uma cópia
+// .d51-conta aria-hidden dentro de .hero-numero; revisão de 03/11/2026 — antes, o --movimento falhava sempre ali)
+const NUMEROS = `[...document.querySelectorAll('.resposta-numero, .hero-numero, .kpi-num, .pv-num-valor')].map((e) => {
+  const c = e.cloneNode(true); c.querySelectorAll('[aria-hidden="true"]').forEach((x) => x.remove()); return c.textContent.trim();
+}).join(' | ')`;
 await cmd("Emulation.setDeviceMetricsOverride", { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
 await cmd("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "no-preference" }] });
 let falhasMov = 0;

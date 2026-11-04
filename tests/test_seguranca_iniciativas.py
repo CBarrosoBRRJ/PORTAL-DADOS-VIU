@@ -348,6 +348,35 @@ def test_d66b_chave_no_link(monkeypatch, quadro_limpo):
         assert r.status_code == 200 and r.headers["x-robots-tag"] == "noindex, nofollow"
 
 
+def test_d66b_chave_fora_do_ascii_da_403_e_nao_500(monkeypatch, quadro_limpo):
+    """Revisão de 03/11/2026: compare_digest com str recusa não-ASCII (TypeError); ?k=é ou cookie com acento derrubava a
+    requisição com 500. Agora a comparação é em bytes e a resposta é 403."""
+    from app.main import COOKIE_CHAVE, app
+
+    monkeypatch.setattr(config, "CHAVE_ACESSO", "chave-de-teste")
+    with TestClient(app, follow_redirects=False, raise_server_exceptions=False) as c:
+        assert c.get("/static/estilo.css?k=%C3%A9").status_code == 403
+        # o cliente de teste só manda cabeçalho não-ASCII em bytes (o servidor lê como latin-1: "Ã§Ã©")
+        assert c.get("/static/estilo.css", headers={"cookie": f"{COOKIE_CHAVE}=çé".encode()}).status_code == 403
+
+
+def test_estatico_com_erro_nao_fica_no_cache(monkeypatch, quadro_limpo):
+    """Revisão de 03/11/2026: o cache longo (immutable) vale só para 200/206/304; um 403 sem a chave ou um 404 com ?v=
+    ficaria preso no navegador por 1 ano."""
+    from app.main import app
+
+    monkeypatch.setattr(config, "CHAVE_ACESSO", "chave-de-teste")
+    with TestClient(app, follow_redirects=False) as c:
+        r = c.get("/static/estilo.css?v=1")
+        assert r.status_code == 403 and "immutable" not in r.headers["cache-control"]
+        assert r.headers["cache-control"] == "no-store"
+        c.get("/static/estilo.css?k=chave-de-teste&v=1")  # grava o cookie
+        r = c.get("/static/nao-existe.css?v=1")
+        assert r.status_code == 404 and "immutable" not in r.headers["cache-control"]
+        r = c.get("/static/estilo.css?v=1")
+        assert r.status_code == 200 and r.headers["cache-control"] == "public, max-age=31536000, immutable"
+
+
 def test_d66b_espelho_le_arquivos_sem_bigquery(monkeypatch, tmp_path):
     import pandas as pd
 

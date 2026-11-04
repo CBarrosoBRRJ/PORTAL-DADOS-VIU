@@ -22,8 +22,13 @@ def limpar_cache() -> None:
 
 
 def mes_parcial(mov: pd.DataFrame) -> str:
-    """Mês da última atualização da tabela (AAAA-MM): incompleto e sem os projetos ainda com a equipe."""
-    versao = dados.versao_de(mov)
+    """Mês da última atualização da tabela (AAAA-MM): incompleto e sem os projetos ainda com a equipe.
+
+    D68 na virada do ano (revisão de 03/11/2026): com o recorte do mês fechado, uma carga de janeiro mostra até 31/12 do
+    ano anterior, e Demanda e Talentos exibem esse ano. Para o SLA e o estudo seguirem o mesmo ano (jan a dez completos),
+    o mês de referência passa a ser "AAAA-13" do ano mostrado: as comparações por texto ("< AAAA-13") e as contas com o
+    número do mês (13 - 1 = 12 meses completos) continuam valendo sem outra mudança."""
+    versao = (dados.versao_de(mov), config.RECORTE_EXIBICAO)
     with _trava:
         guardado = _cache.get("parcial")
     if guardado is not None and guardado[0] == versao:
@@ -32,6 +37,12 @@ def mes_parcial(mov: pd.DataFrame) -> str:
     if pd.isna(processado):
         raise dados.DadosIndisponiveis("tabela sem _processado_em")
     parcial = processado.tz_convert(config.FUSO).strftime("%Y-%m")
+    from app import corte
+
+    if corte.mes_fechado_ligado():
+        mostrado = data_corte(mov)
+        if mostrado is not None and mostrado.year < int(parcial[:4]):
+            parcial = f"{mostrado.year}-13"
     with _trava:
         _cache["parcial"] = (versao, parcial)
     return parcial

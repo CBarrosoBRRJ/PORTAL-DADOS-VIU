@@ -600,6 +600,15 @@ hora de recebimento do e-mail (`recebido_em`), e a gold levar `h_email_ate_regis
 
 ## Histórico
 
+- 03/11/2026 (revisão, tela cheia do vídeo): com o vídeo em tela cheia pelo próprio player, o portal deixava de se marcar
+  como em tela cheia (`html.tela-cheia`, rótulo "Sair da tela cheia"); só a página inteira em tela cheia conta
+  (`document.fullscreenElement === raiz` em `apresentacao.js`). Vídeo com **faststart**: o índice do MP4 (moov) ficava no
+  fim do arquivo (o navegador pedia o fim dos 42,5 MB antes de tocar e o player ficava preto); refeito com
+  `ffmpeg -c copy -map 0 -movflags +faststart`, sem recodificar (ffprobe: 106,13 s, H.264 1920×1080 + AAC, 3.184 quadros,
+  iguais ao original; 42.536.010 bytes). Original em `_descartados/2026-11-03/app/static/video/`. Teste:
+  `tests/test_revisao_20261103.py::test_video_da_lia_tem_o_indice_antes_dos_dados`. Pendente (Caio, em produção): conferir
+  com `curl -s -D - -o NUL -H "Range: bytes=0-" <url>/static/video/lia-na-pratica.mp4` se o Cloud Run entrega a resposta
+  inteira (limite de resposta HTTP/1 não confirmado).
 - 03/11/2026 (validação, extrator): `tools/extrair_lia.py::meses` passa a ler o mês anterior a `--inicio` e o seguinte a `--fim` (arquivos gravados em UTC; 4 e-mails de 31/10 à noite estavam em `extracted_emails_2026-11.json`); filtro pela data em São Paulo mantido; dedup pelo último processamento dentro da janela (`ultimos_na_janela`); contagem separada em `montar_retrato()` (sem rede). Testes sintéticos em `tests/test_lia_extrator.py`.
 - 03/11/2026 (validação, retrato): retrato regerado com `--fim 2026-10-31`: 2.164 = 1.880 / 200 / 84 (antes 2.160 = 1.876 / 200 / 84; cópia em `_descartados/2026-11-03/app/apresentacoes/gestao_orcamentos/lia/retrato_2160.json`). `tools/congelar_base.py --conferir` "Tudo certo" e `python -m app.conferir_base` "Pacote conferido".
 - 03/11/2026 (validação, percentuais): partes pelo maior resto (`lia._maior_resto`, `_pct_partes`, `_pct_lados`): quadrantes dentro × fora e faixas (leads 74% + 26%, antes 74% + 27%), fração e semanas (1 casa, fecham em 100,0%), turnos e períodos; o "fora do expediente" do bloco de cima é o mesmo número do par. Teste `test_lia_percentuais_das_partes_fecham_em_100`.

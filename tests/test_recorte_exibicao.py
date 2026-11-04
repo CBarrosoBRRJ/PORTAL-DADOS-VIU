@@ -317,3 +317,28 @@ def test_cache_das_telas_separa_o_recorte(monkeypatch, entrada_diaria):
     monkeypatch.setattr(config, "RECORTE_EXIBICAO", "mes_fechado")
     assert ap.montar_inicio({})["entrada"]["total"] == 22
     assert ap._ambiente_calculo()[1] == "mes_fechado"
+
+def test_sla_na_virada_do_ano_segue_o_ano_mostrado(recorte, movimentos):
+    """Revisão de 03/11/2026 (A3): carga de 04/01/2027 com o recorte mostra até 31/12/2026, e Demanda e Talentos exibem
+    2026. O SLA e o estudo seguem o mesmo ano, com jan a dez completos (antes: 2027 vazio, nenhum mês completo)."""
+    jan = movimentos.copy()
+    jan.attrs = {"versao": "virada-2027"}
+    jan["_processado_em"] = pd.Timestamp("2027-01-04 12:00", tz="UTC")
+    assert sla.data_corte(jan) == date(2026, 12, 31)
+    parcial = sla.mes_parcial(jan)
+    assert parcial == "2026-13"
+    e = calc_sla.entrega(jan, parcial)
+    assert e["ano_num"] == "2026" and e["periodo"] == "jan a dez"
+    assert not any(m["parcial"] or m["futuro"] for m in e["meses"])
+    assert e["n_ano"] == 5  # as 4 entregas de jan–set + a de outubro (P6), todas em meses completos de 2026
+    r = calc_sla.recorte(jan, parcial)
+    assert r["periodo"] == "jan a dez de 2026" and r["proximo"] == "janeiro"
+    assert ap._estudo_slides(jan, parcial, "todos")["recorte"]["n"] == 5  # o estudo inteiro roda com o ano mostrado
+
+
+def test_sla_na_virada_do_ano_sem_recorte_fica_no_ano_da_carga(monkeypatch, movimentos):
+    monkeypatch.setattr(config, "RECORTE_EXIBICAO", "off")
+    jan = movimentos.copy()
+    jan.attrs = {"versao": "virada-2027-off"}
+    jan["_processado_em"] = pd.Timestamp("2027-01-04 12:00", tz="UTC")
+    assert sla.mes_parcial(jan) == "2027-01"  # E3: janeiro de 2027 é o mês parcial

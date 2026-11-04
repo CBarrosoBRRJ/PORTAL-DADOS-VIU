@@ -53,6 +53,7 @@ A capa não lê dados (sem números ao vivo); o rodapé datado continua.
 
 | Data | Mudança |
 |---|---|
+| 03/11/2026 | Revisão: o remendo do 1 px de rolagem da capa (`capa_nova.css`) virou a regra geral `.palco > .proxima.so-leitor { top: 0; bottom: auto; }` em `estilo.css` (vale para capa, Roadmap, estudo e encerramento); o gancho escondido sai da ordem do Tab (`tabindex="-1"`; o leitor de tela e as setas seguem). |
 | 27/10/2026 | D59–D61: capa da reunião; desenho de referência do Caio com a jornada animada de um pedido (`static/capa.js`), cujo relógio parava no típico do SLA. |
 | 30/10/2026 | Caio e gerente: o plano marinho vira o menu dos temas (o "Começar" e a jornada saem). Cópia da capa anterior em `_congelado/2026-10-30_capa_antes/` (projeto original). |
 | 30/10/2026 | V2: capa "ViU *Agenciamento*", sem subtítulo; menu no modo denso a partir de 6 temas (PRD da capa, RF5). |

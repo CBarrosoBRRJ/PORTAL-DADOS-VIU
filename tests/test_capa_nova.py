@@ -102,3 +102,14 @@ def test_capa_nova_aplicada_e_validada_guardada(cliente):
     assert "rodape-dados" not in capa and "Dados até" not in capa  # sem o rodapé datado na capa
     guardada = Path(__file__).resolve().parents[1] / "_descartados" / "2026-11-03" / "capa_validada" / "app" / "templates" / "capa.html"
     assert '<a class="capa-comecar"' in guardada.read_text(encoding="utf-8")
+
+
+def test_gancho_so_leitor_nao_cria_rolagem_na_capa(html):
+    """Validação de 03/11/2026: o gancho escondido (.so-leitor, margin -1px) preso ao pé do palco descia 1px abaixo da
+    janela e a capa ganhava uma barra de rolagem (visível no quadro da tela cheia, no Windows). Fica no topo — desde a
+    revisão de 03/11/2026, pela regra geral de estilo.css (capa, Roadmap, estudo e encerramento), não mais só na capa."""
+    assert re.search(r'<nav class="proxima proxima-gancho so-leitor"', html)  # a capa usa o gancho só para o leitor
+    geral = (RAIZ / "app" / "static" / "estilo.css").read_text(encoding="utf-8")
+    regra = re.search(r"^\.palco > \.proxima\.so-leitor \{([^}]*)\}", geral, re.MULTILINE)
+    assert regra and "top: 0" in regra.group(1) and "bottom: auto" in regra.group(1)
+    assert "proxima-gancho.so-leitor {" not in CSS  # o remendo próprio da capa saiu

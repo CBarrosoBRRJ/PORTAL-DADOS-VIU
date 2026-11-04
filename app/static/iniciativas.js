@@ -62,8 +62,10 @@
     var b = e.target.closest && e.target.closest("[data-ini-fechar]");
     if (b) fechar(b.closest("details.ini-quadro"));
   });
+  // clique dentro de um pop-up (inclusive no botão Fechar ou no fundo dele) não fecha o detalhe: o pop-up já se fechou
+  // quando o clique chega aqui, e o foco precisa voltar ao que estava no detalhe (validação de 03/11/2026)
   document.addEventListener("click", function (e) {
-    if (algumDialogo()) return;
+    if (algumDialogo() || (e.target.closest && e.target.closest("dialog"))) return;
     if (!e.target.closest("details.ini-quadro")) fecharOutros(null);
   });
   document.addEventListener("keydown", function (e) {

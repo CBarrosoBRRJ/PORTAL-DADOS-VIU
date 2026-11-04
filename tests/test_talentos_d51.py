@@ -40,7 +40,7 @@ def cliente():
 
 
 def _tabela(html: str) -> str:
-    return re.search(r'<table class="mapa-tabela[ "].*?</table>', html, re.S).group(0)
+    return re.search(r'<table class="mapa-tabela[ "].*?</table>', html, re.DOTALL).group(0)
 
 
 def _num(txt: str) -> int:
@@ -53,11 +53,11 @@ def _num(txt: str) -> int:
 def test_dados_da_corrida_fecham_com_a_tabela_final(cliente, filtro):
     tabela = _tabela(cliente.get(f"/viu-agenciamento/talentos?talentos={filtro}").text)
     meses = int(re.search(r'data-corrida-meses="(\d+)"', tabela).group(1))
-    cabecalho = re.search(r"<thead>.*?</thead>", tabela, re.S).group(0)
+    cabecalho = re.search(r"<thead>.*?</thead>", tabela, re.DOTALL).group(0)
     assert meses == cabecalho.count('class="mapa-mes') - cabecalho.count("mapa-futuro")
     assert int(re.search(r'data-corrida-maior="(\d+)"', tabela).group(1)) > 0
     json.loads(unescape(re.search(r"data-corrida-extras='([^']*)'", tabela).group(1)))  # JSON válido no atributo
-    linhas = re.findall(r'<tr data-corrida-pedidos="([\d,]*)">(.*?)</tr>', tabela, re.S)
+    linhas = re.findall(r'<tr data-corrida-pedidos="([\d,]*)">(.*?)</tr>', tabela, re.DOTALL)
     assert len(linhas) == tabela.count('<th scope="row"') > 0
     totais = []
     for pedidos, corpo in linhas:
@@ -78,12 +78,23 @@ def test_estado_final_intacto_sem_style_e_com_tons(cliente):
     assert 'class="mapa-total">3<' in tabela
 
 
+@pytest.mark.parametrize("filtro", ["todos", "exclusivos", "nao-exclusivos"])
+def test_area_de_rolagem_do_mapa_tem_nome(cliente, filtro):
+    # validação de 03/11/2026: no celular o mapa rola para o lado (T11) e o navegador põe a área no Tab; sem nome, o
+    # leitor de tela anunciava uma parada vazia
+    html = cliente.get(f"/viu-agenciamento/talentos?talentos={filtro}").text
+    area = re.search(r'<div class="mapa-rolagem"[^>]*>', html).group(0)
+    assert 'role="region"' in area
+    linhas = len(re.findall(r"<tr data-corrida-pedidos=", html))
+    assert f'aria-label="Mapa dos {linhas} talentos com mais pedidos, mês a mês"' in area
+
+
 NOME_PLAY = "Ver a subida e descida das posições ao longo do ano"
 
 
 def test_botao_play_so_icone_com_nome_escondido_sem_js_e_sem_pular(cliente):
     html = cliente.get("/viu-agenciamento/talentos").text
-    botao = re.search(r"<button[^>]*data-corrida-play[^>]*>(.*?)</button>", html, re.S)
+    botao = re.search(r"<button[^>]*data-corrida-play[^>]*>(.*?)</button>", html, re.DOTALL)
     assert botao
     tag, dentro = botao.group(0), botao.group(1)
     assert 'type="button"' in tag and " hidden" in tag  # sem JS não aparece
@@ -96,10 +107,10 @@ def test_botao_play_so_icone_com_nome_escondido_sem_js_e_sem_pular(cliente):
 
 def test_botao_fora_do_cartao_na_linha_da_legenda(cliente):
     html = cliente.get("/viu-agenciamento/talentos").text
-    linha = re.search(r'<div class="talentos-legenda-linha">(.*?)</div>', html, re.S).group(1)
+    linha = re.search(r'<div class="talentos-legenda-linha">(.*?)</div>', html, re.DOTALL).group(1)
     assert 'class="talentos-lista talentos-legenda" aria-hidden="true"' in linha  # legenda decorativa…
     assert "data-corrida-play" in linha.split("</ul>", 1)[1]  # …e o botão depois dela, fora do aria-hidden
-    cartao = re.search(r'<figure class="talentos-mapa">.*?</figure>', html, re.S).group(0)
+    cartao = re.search(r'<figure class="talentos-mapa">.*?</figure>', html, re.DOTALL).group(0)
     assert "data-corrida-play" not in cartao and '<span class="corrida-rotulo" aria-hidden="true">' in cartao
     assert html.index("data-corrida-play") < html.index('<table class="mapa-tabela')  # ordem do Tab: botão antes da tabela
     regra = re.search(r"\.corrida-play \{([^}]*)\}", BLOCO_CSS).group(1)
@@ -213,7 +224,7 @@ def test_js_respeita_movimento_reduzido_e_acessibilidade():
 
 
 def test_js_continuo_tempos_num_lugar_e_sem_layout_por_quadro():
-    tempos = dict((k, int(v)) for k, v in re.findall(r"(\w+): (\d+)", re.search(r"var TEMPOS = \{([^}]*)\}", BLOCO_JS).group(1)))
+    tempos = {k: int(v) for k, v in re.findall(r"(\w+): (\d+)", re.search(r"var TEMPOS = \{([^}]*)\}", BLOCO_JS).group(1))}
     assert tempos["barra"] <= 700 and tempos["numeros"] <= 1000
     assert 9000 <= 10 * (tempos["mes"] + tempos["respiro"]) <= 12000  # corrida de 10 meses entre 9 e 12 s (pedido do Caio)
     assert tempos["respiro"] > 0 and tempos["histerese"] > 0 and tempos["deslize"] > 0
